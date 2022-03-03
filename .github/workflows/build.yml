@@ -68,7 +68,7 @@ jobs:
         ctest --config RelWithDebInfo .
 
     - name: Install
-      run: cmake --install . --prefix  ${{ github.workspace }}/out/install
+      run: cmake --install . --prefix  ${{ github.workspace }}\out\install
       working-directory: ${{ github.workspace }}/out/build
 
     - name: Pack
