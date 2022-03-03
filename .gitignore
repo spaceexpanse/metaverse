@@ -18,3 +18,4 @@ Sound/XRSound/**/x64/
 Sound/XRSound/**/dist/
 Sound/XRSound/**/Debug-with-OrbiterRelease/
 Sound/XRSound/**/Release-with-OrbiterRelease/
+*.~yml
