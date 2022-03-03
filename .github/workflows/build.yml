@@ -38,7 +38,7 @@ jobs:
     - name: Cache irrKlang package
       uses: actions/cache@v2
       with:
-        path: ${{ github.workspace }}/out/build/Extern/irrKlang/${{ matrix.architecture }}
+        path: ${{ github.workspace }}\out\build\Extern\irrKlang\${{ matrix.architecture }}
         key: irrKlang-${{ matrix.architecture }}
         
     - name: Cache DirectX SDK
@@ -69,13 +69,13 @@ jobs:
 
     - name: Install
       run: cmake --install . --prefix  ${{ github.workspace }}\out\install
-      working-directory: ${{ github.workspace }}/out/build
+      working-directory: ${{ github.workspace }}\out\build
 
     - name: Pack
 #      if: ${{ github.ref == 'refs/heads/main' }}
-      working-directory: ${{ github.workspace }}/out/install/Orbiter
+      working-directory: ${{ github.workspace }}\out\install\Orbiter
       shell: cmd
-      run: '7z a "${{ github.workspace }}/out/spxp-rtss-${{ matrix.architecture }}.zip" .'
+      run: '7z a "${{ github.workspace }}\out\spxp-rtss-${{ matrix.architecture }}.zip" .'
 
     - name: Upload Build Artifact
 #      if: ${{ github.ref == 'refs/heads/main' }}
@@ -83,7 +83,7 @@ jobs:
       with:
         name: Orbiter-${{ matrix.architecture }}
         # A file, directory or wildcard pattern that describes what to upload
-        path: ${{ github.workspace }}/out/spxp-rtss-${{ matrix.architecture }}.zip
+        path: ${{ github.workspace }}\out\spxp-rtss-${{ matrix.architecture }}.zip
         retention-days: 60
 
     - name: Create Release
