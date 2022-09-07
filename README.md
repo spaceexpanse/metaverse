@@ -1,5 +1,5 @@
 ![Orbiter logo](./Src/Orbiter/Bitmaps/banner.png)
-
+ 
 # Orbiter Space Flight Simulator
 
 Orbiter is a spaceflight simulator based on Newtonian mechanics. Its playground
