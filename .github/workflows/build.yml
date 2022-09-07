@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - d3d9client
     paths-ignore: [ 'Doc/**', 'Flights/**', 'Html/**', 'Images/**', 'Localdoc/**', 'Scenarios/**', 'Textures/**', 'Textures2/**']
   pull_request:
     branches:
