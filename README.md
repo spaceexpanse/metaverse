@@ -27,7 +27,7 @@ Get the Orbiter source repository from github
 git clone git@github.com:orbitersim/orbiter.git
 ```
 or
-```bash
+```bash  
 git clone https://github.com/orbitersim/orbiter.git
 ```
 
