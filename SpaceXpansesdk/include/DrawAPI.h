@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // DrawAPI.h
 // 2-D surface drawing support interface.
 // This API defines an abstraction layer for providing drawing support
