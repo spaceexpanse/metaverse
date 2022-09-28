@@ -83,13 +83,13 @@ jobs:
 
     - name: Install
       working-directory: ${{ github.workspace }}\out\build
-      run: cmake --install . --prefix  ${{ github.workspace }}/out/install
+      run: cmake --install . --prefix  ${{ github.workspace }}\out\install
 
     - name: Pack
 #      if: ${{ github.ref == 'refs/heads/0.1.1' }}
-      working-directory: ${{ github.workspace }}\out\install\SpaceXpanse
+      working-directory: ${{ github.workspace }}\out\install\Orbiter
       shell: cmd
-      run: '7z a "${{ github.workspace }}\out\Orbiter-${{ matrix.architecture }}.zip" .'
+      run: '7z a "${{ github.workspace }}\out\SpaceXpanse-${{ matrix.architecture }}.zip" .'
 
     - name: Upload Build Artifact
 #      if: ${{ github.ref == 'refs/heads/0.1.1' }}
