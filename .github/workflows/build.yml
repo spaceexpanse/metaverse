@@ -76,9 +76,9 @@ jobs:
       working-directory: ${{ github.workspace }}/out/build
       run: ctest --config RelWithDebInfo .
 
-   # - name: Install
-   #   working-directory: ${{ github.workspace }}/out/build
-   #   run: cmake --install . --prefix  ${{ github.workspace }}/out/install
+    - name: Install
+      working-directory: ${{ github.workspace }}/out/build
+      run: cmake --install . --prefix  ${{ github.workspace }}/out/install
 
     - name: Pack
       if: ${{ github.ref == 'refs/heads/0.1.1' }}
