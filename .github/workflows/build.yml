@@ -76,21 +76,21 @@ jobs:
       working-directory: ${{ github.workspace }}/out/build
       run: ctest --config RelWithDebInfo .
 
-    - name: Install
-      working-directory: ${{ github.workspace }}/out/build
-      run: cmake --install . --prefix  ${{ github.workspace }}/out/install
+   # - name: Install
+   #   working-directory: ${{ github.workspace }}/out/build
+   #   run: cmake --install . --prefix  ${{ github.workspace }}/out/install
 
     - name: Pack
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == 'refs/heads/0.1.1' }}
       working-directory: ${{ github.workspace }}/out/install/Orbiter
       shell: cmd
-      run: '7z a "${{ github.workspace }}/out/Orbiter.zip" .'
+      run: '7z a "${{ github.workspace }}/out/Orbiter-${{ matrix.architecture }}.zip" .'
 
     - name: Upload Build Artifact
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == 'refs/heads/0.1.1' }}
       uses: actions/upload-artifact@v2.2.4
       with:
         name: Orbiter-${{ matrix.architecture }}
         # A file, directory or wildcard pattern that describes what to upload
-        path: ${{ github.workspace }}/out/Orbiter.zip
+        path: ${{ github.workspace }}/out/Orbiter-${{ matrix.architecture }}.zip
         retention-days: 60
