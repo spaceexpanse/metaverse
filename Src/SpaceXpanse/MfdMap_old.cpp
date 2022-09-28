@@ -11,7 +11,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern InputBox *g_input;
 extern Select *g_select;
@@ -342,15 +342,15 @@ void Instrument_MapOld::UpdateDraw (oapi::Sketchpad *skp)
 			strcpy (datastr[0]+13, btgt->Name());
 			skp->Text (x1, y+dy, datastr[0], strlen(datastr[0]));
 			btgt->EquPos (blng, blat);
-			sprintf (cbuf, "  Pos: %6.2fº%c %6.2fº%c",
+			sprintf (cbuf, "  Pos: %6.2fï¿½%c %6.2fï¿½%c",
 				Deg(fabs(blng)), blng >= 0.0 ? 'E':'W', Deg(fabs(blat)), blat >= 0.0 ? 'N':'S');
 			skp->Text (x1, y+2*dy, cbuf, strlen (cbuf));
 			if (sp) {
 				rad	= refplanet->Size();
 				Orthodome (sp->lng, sp->lat, blng, blat, adist, hdg);
-				sprintf (cbuf, "  Dst: %s (%0.2fº)", DistStr (adist*rad), Deg(adist));
+				sprintf (cbuf, "  Dst: %s (%0.2fï¿½)", DistStr (adist*rad), Deg(adist));
 				skp->Text (x1, y+3*dy, cbuf, strlen (cbuf));
-				sprintf (cbuf, "  Dir: %6.2fº", Deg(hdg));
+				sprintf (cbuf, "  Dir: %6.2fï¿½", Deg(hdg));
 				skp->Text (x1, y+4*dy, cbuf, strlen (cbuf));
 			}
 		} else {
@@ -367,7 +367,7 @@ void Instrument_MapOld::UpdateDraw (oapi::Sketchpad *skp)
 			if (tel && otgt->ElRef() == refplanet) {
 				double lng, lat, r;
 				refplanet->GlobalToEquatorial (otgt->GPos(), lng, lat, r);
-				sprintf (cbuf, "  Pos: %6.2fº%c %6.2fº%c",
+				sprintf (cbuf, "  Pos: %6.2fï¿½%c %6.2fï¿½%c",
 					Deg(fabs(lng)), lng >= 0.0 ? 'E':'W', Deg(fabs(lat)), lat >= 0.0 ? 'N':'S');
 				skp->Text (x1, y, cbuf, strlen (cbuf)); y += dy;
 				sprintf (cbuf, "  Alt: %s", DistStr (r - refplanet->Size()));
@@ -474,7 +474,7 @@ SURFHANDLE Instrument_MapOld::LoadBitmap (const char *cbuf, int *w, int *h)
 	if (!gc) return NULL;
 
 	// Load bitmap
-	char *path = g_pOrbiter->TexPath (cbuf, ".bmp");
+	char *path = g_pSpaceXpanse->TexPath (cbuf, ".bmp");
 	HBITMAP hbm = (HBITMAP)LoadImage (GetModuleHandle(NULL), path, IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION);
 	if (!hbm)
 		hbm = (HBITMAP)LoadImage (NULL, path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
@@ -558,7 +558,7 @@ void Instrument_MapOld::CalcOrbitProj (const Elements *el, const Planet *planet,
 	for (i = 0; i < npt05; i++) {
 		rl.Set (mul (R, Vector(cosp[i],0,sinp[i])));
 		x = rl.x, y = rl.y, z = rl.z;
-		lng = atan2 (z,x) + Pi;  // maps start at -Pi (180°W)
+		lng = atan2 (z,x) + Pi;  // maps start at -Pi (180ï¿½W)
 		lat = atan(y/_hypot(x,z));
 		sp[i].x = (int)(lng*f1);
 		if ((sp[i+npt05].x = sp[i].x + mapw05) >= mapw) sp[i+npt05].x -= mapw;
