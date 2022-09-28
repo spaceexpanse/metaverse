@@ -7,7 +7,7 @@
 // ==============================================================
 
 #include "FileList.h"
-#include "Orbitersdk.h"   // for oapiRand
+#include "SpaceXpansesdk.h"   // for oapiRand
 
 // Convenience constructor for when you want to accept all file types
 FileList::FileList(const char *pRootPath, const bool bRecurseSubfolders) :

@@ -9,7 +9,7 @@
 #include <commctrl.h>
 #include <io.h>
 #include <direct.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "TabScenario.h"
 #include "Log.h"
 #include "Help.h"
@@ -23,7 +23,7 @@ const char *htmlstyle = "<style type=""text/css"">body{font-family:Arial;font-si
 
 //-----------------------------------------------------------------------------
 
-orbiter::ScenarioTab::ScenarioTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::ScenarioTab::ScenarioTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 	imglist = ImageList_Create (16, 16, ILC_COLOR8, 4, 0);
 	treeicon_idx[0] = ImageList_Add (imglist, LoadBitmap (AppInstance(), MAKEINTRESOURCE (IDB_TREEICON_FOLDER1)), 0);
@@ -36,7 +36,7 @@ orbiter::ScenarioTab::ScenarioTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 
 //-----------------------------------------------------------------------------
 
-orbiter::ScenarioTab::~ScenarioTab ()
+spacexpanse::ScenarioTab::~ScenarioTab ()
 {
 	ImageList_Destroy (imglist);
 	TerminateThread (hThread, 0);
@@ -44,7 +44,7 @@ orbiter::ScenarioTab::~ScenarioTab ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::Create ()
+void spacexpanse::ScenarioTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_SCN);
 
@@ -79,7 +79,7 @@ void orbiter::ScenarioTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::GetConfig (const Config *cfg)
+void spacexpanse::ScenarioTab::GetConfig (const Config *cfg)
 {
 	SendDlgItemMessage (hTab, IDC_SCN_PAUSED, BM_SETCHECK,
 		cfg->CfgLogicPrm.bStartPaused ? BST_CHECKED : BST_UNCHECKED, 0);
@@ -94,7 +94,7 @@ void orbiter::ScenarioTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::SetConfig (Config *cfg)
+void spacexpanse::ScenarioTab::SetConfig (Config *cfg)
 {
 	cfg->CfgLogicPrm.bStartPaused = (SendDlgItemMessage (hTab, IDC_SCN_PAUSED, BM_GETCHECK, 0, 0) == BST_CHECKED);
 	cfg->CfgWindowPos.LaunchpadScnListWidth = splitListDesc.GetPaneWidth (SplitterCtrl::PANE1);
@@ -102,7 +102,7 @@ void orbiter::ScenarioTab::SetConfig (Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::ScenarioTab::OpenHelp ()
+bool spacexpanse::ScenarioTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_scenario");
 	return true;
@@ -110,7 +110,7 @@ bool orbiter::ScenarioTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::ScenarioTab::Size (int w, int h)
+BOOL spacexpanse::ScenarioTab::Size (int w, int h)
 {
 	int dw = w - (int)(pos0.right-pos0.left);
 	int dh = h - (int)(pos0.bottom-pos0.top);
@@ -158,7 +158,7 @@ BOOL orbiter::ScenarioTab::Size (int w, int h)
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::ScenarioTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::ScenarioTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NM_TREEVIEW *pnmtv;
 
@@ -197,7 +197,7 @@ INT_PTR orbiter::ScenarioTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::RefreshList (bool preserveSelection)
+void spacexpanse::ScenarioTab::RefreshList (bool preserveSelection)
 {
 	if (Launchpad()->Visible()) {
 		char cbuf[256], ch[256], * pc, * c;
@@ -246,7 +246,7 @@ void orbiter::ScenarioTab::RefreshList (bool preserveSelection)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::LaunchpadShowing(bool show)
+void spacexpanse::ScenarioTab::LaunchpadShowing(bool show)
 {
 	if (show) {
 		RefreshList(false);
@@ -254,7 +254,7 @@ void orbiter::ScenarioTab::LaunchpadShowing(bool show)
 }
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::ScanDirectory (const char *ppath, HTREEITEM hti)
+void spacexpanse::ScenarioTab::ScanDirectory (const char *ppath, HTREEITEM hti)
 {
 	TV_INSERTSTRUCT tvis;
 	HTREEITEM ht, hts0, ht0;
@@ -450,7 +450,7 @@ void Text2Html(std::string& str)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::ScenarioChanged ()
+void spacexpanse::ScenarioTab::ScenarioChanged ()
 {
 	const int linelen = 256;
 	bool have_info = false;
@@ -547,7 +547,7 @@ void orbiter::ScenarioTab::ScenarioChanged ()
 
 //-----------------------------------------------------------------------------
 
-int orbiter::ScenarioTab::GetSelScenario (char *scn, int len)
+int spacexpanse::ScenarioTab::GetSelScenario (char *scn, int len)
 {
 	TV_ITEM tvi;
 	char cbuf[256];
@@ -576,7 +576,7 @@ int orbiter::ScenarioTab::GetSelScenario (char *scn, int len)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ScenarioTab::SaveCurScenario ()
+void spacexpanse::ScenarioTab::SaveCurScenario ()
 {
 	extern TCHAR* CurrentScenario;
 	ifstream ifs (pLp->App()->ScnPath (CurrentScenario), ios::in);
@@ -592,7 +592,7 @@ void orbiter::ScenarioTab::SaveCurScenario ()
 // Desc: copy current scenario file into 'name', replacing description with 'desc'.
 //		 return value: 0=ok, 1=failed, 2=file exists (only checked if replace=false)
 //-----------------------------------------------------------------------------
-int orbiter::ScenarioTab::SaveCurScenarioAs (const char *name, char *desc, bool replace)
+int spacexpanse::ScenarioTab::SaveCurScenarioAs (const char *name, char *desc, bool replace)
 {
 	extern TCHAR* CurrentScenario;
 	char cbuf[256];
@@ -627,7 +627,7 @@ int orbiter::ScenarioTab::SaveCurScenarioAs (const char *name, char *desc, bool 
 // Name: SaveProc()
 // Desc: Scenario save dialog message proc
 //-----------------------------------------------------------------------------
-INT_PTR CALLBACK orbiter::ScenarioTab::SaveProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK spacexpanse::ScenarioTab::SaveProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static ScenarioTab *pTab;
 	int res, name_len, desc_len;
@@ -674,7 +674,7 @@ INT_PTR CALLBACK orbiter::ScenarioTab::SaveProc (HWND hWnd, UINT uMsg, WPARAM wP
 // Name: ClearQSFolder()
 // Desc: Delete all scenarios in the Quicksave folder
 //-----------------------------------------------------------------------------
-void orbiter::ScenarioTab::ClearQSFolder()
+void spacexpanse::ScenarioTab::ClearQSFolder()
 {
 	char filespec[256], fname[256] = "Quicksave\\";
 	strcpy (filespec, pLp->App()->ScnPath ("Quicksave\\*"));
@@ -692,7 +692,7 @@ void orbiter::ScenarioTab::ClearQSFolder()
 // Name: OpenScenarioHelp()
 // Desc: Opens the help file associated with the scenario
 //-----------------------------------------------------------------------------
-void orbiter::ScenarioTab::OpenScenarioHelp ()
+void spacexpanse::ScenarioTab::OpenScenarioHelp ()
 {
 	if (!scnhelp[0]) return;
 	char str[256], path[256], *scenario, *topic;
@@ -706,7 +706,7 @@ void orbiter::ScenarioTab::OpenScenarioHelp ()
 //-----------------------------------------------------------------------------
 // Thread function for scenario directory tree watcher
 //-----------------------------------------------------------------------------
-DWORD WINAPI orbiter::ScenarioTab::threadWatchScnList (LPVOID pPrm)
+DWORD WINAPI spacexpanse::ScenarioTab::threadWatchScnList (LPVOID pPrm)
 {
 	ScenarioTab *tab = (ScenarioTab*)pPrm;
 	HANDLE dwChangeHandle;

@@ -10,7 +10,7 @@
 #include <list>
 
 /***
-Module oapi: General Orbiter API interface functions
+Module oapi: General SpaceXpanse API interface functions
 @module oapi
 */
 
@@ -553,8 +553,8 @@ void Interpreter::lua_pushsketchpad (lua_State *L, oapi::Sketchpad *skp)
 
 void Interpreter::WaitExec (DWORD timeout)
 {
-	// Called by orbiter thread or interpreter thread to wait its turn
-	// Orbiter waits for the script for 1 second to return
+	// Called by spacexpanse thread or interpreter thread to wait its turn
+	// SpaceXpanse waits for the script for 1 second to return
 	WaitForSingleObject (hWaitMutex, timeout); // wait for synchronisation mutex
 	WaitForSingleObject (hExecMutex, timeout); // wait for execution mutex
 	ReleaseMutex (hWaitMutex);              // release synchronisation mutex
@@ -562,7 +562,7 @@ void Interpreter::WaitExec (DWORD timeout)
 
 void Interpreter::EndExec ()
 {
-	// called by orbiter thread or interpreter thread to hand over control
+	// called by spacexpanse thread or interpreter thread to hand over control
 	ReleaseMutex (hExecMutex);
 }
 
@@ -677,7 +677,7 @@ void Interpreter::LoadAPI ()
 
 	// Load the oapi library
 	static const struct luaL_reg oapiLib[] = {
-		{"get_orbiter_version", oapi_get_orbiter_version},
+		{"get_spacexpanse_version", oapi_get_spacexpanse_version},
 		{"get_viewport_size", oapi_get_viewport_size},
 
 		{"get_objhandle", oapiGetObjectHandle},
@@ -1245,13 +1245,13 @@ int Interpreter::help (lua_State *L)
 		if (!interp->is_term) return 0; // no terminal help without terminal - sorry
 		static const int nline = 10;
 		static char *stdhelp[nline] = {
-			"Orbiter script interpreter",
+			"SpaceXpanse script interpreter",
 			"Based on Lua script language (" LUA_RELEASE ")",
 			"  " LUA_COPYRIGHT,
 			"  " LUA_AUTHORS,
-			"For general orbiter-related help,",
-			"  type: help(orbiter).",
-			"For Orbiter-specific script extensions",
+			"For general spacexpanse-related help,",
+			"  type: help(spacexpanse).",
+			"For SpaceXpanse-specific script extensions",
 			"  type: help(api).",
 			"For general help on the Lua language,",
 			"  see the resources at www.lua.org."
@@ -1260,10 +1260,10 @@ int Interpreter::help (lua_State *L)
 			interp->term_strout (stdhelp[i]);
 		}
 	} else if (lua_isstring (L,1)) {
-		// call a help page from the main Orbiter help file
+		// call a help page from the main SpaceXpanse help file
 		char topic[256];
 		strncpy (topic, lua_tostring (L, 1), 255); lua_pop (L, 1);
-		lua_pushstring (L, "html/orbiter.chm");
+		lua_pushstring (L, "html/spacexpanse.chm");
 		lua_pushstring (L, topic);
 		interp->oapiOpenHelp (L);
 	} else if (lua_istable (L,1)) {
@@ -1537,7 +1537,7 @@ int Interpreter::mat_mmul (lua_State *L)
 
 int Interpreter::procFrameskip (lua_State *L)
 {
-	// return control to the orbiter core for execution of one time step
+	// return control to the spacexpanse core for execution of one time step
 	// This should be called in the loop of any "wait"-type function
 
 	Interpreter *interp = GetInterpreter(L);
@@ -1606,7 +1606,7 @@ int Interpreter::oapi_get_sysstep (lua_State *L)
 /***
 Returns the Modified Julian Data (MJD) of the current simulation state.
 The MJD is the number of days that have elapsed since midnight of November 17, 1858.
-The MJD is used as an absolute time reference in Orbiter.
+The MJD is used as an absolute time reference in SpaceXpanse.
 @function get_simmjd
 @treturn number current Modified Julian Date [days]
 @see get_simtime, set_simmjd
@@ -1648,7 +1648,7 @@ Retrieve the current computer system time in Modified Julian Date (MJD) format.
 
 The returned value is the UTC time obtained from the computer system clock,
    plus dt=66.184 seconds to map from UTC to TDB (Barycentric Dynamical Time) used
-   internally by Orbiter. The dt offset was not added in previous Orbiter releases.
+   internally by SpaceXpanse. The dt offset was not added in previous SpaceXpanse releases.
 
 @function get_sysmjd
 @treturn number Computer system time in MJD format
@@ -1743,19 +1743,19 @@ Object access functions
 */
 
 /***
-Returns the version number of the Orbiter core system.
+Returns the version number of the SpaceXpanse core system.
 
-Orbiter version numbers are derived from the build date.
+SpaceXpanse version numbers are derived from the build date.
    The version number is constructed as
    (year%100)*10000 + month*100 + day, resulting in a decimal
    version number of the form YYMMDD
 
-@function get_orbiter_version
+@function get_spacexpanse_version
 @treturn int version number
 */
-int Interpreter::oapi_get_orbiter_version (lua_State *L)
+int Interpreter::oapi_get_spacexpanse_version (lua_State *L)
 {
-	lua_pushnumber(L, oapiGetOrbiterVersion());
+	lua_pushnumber(L, oapiGetSpaceXpanseVersion());
 	return 1;
 }
 
@@ -2924,7 +2924,7 @@ This function uses the system call rand(), so the quality of the random
    sequence depends on the system implementation. If you need high-quality
    random sequences you may need to implement your own generator.
 
-Orbiter seeds the generator with the system time on startup, so the
+SpaceXpanse seeds the generator with the system time on startup, so the
    generated sequences are not reproducible.
 
 @function rand
@@ -2971,7 +2971,7 @@ int Interpreter::oapi_deflate (lua_State *L)
 
 /***
 Inflates (or unpacks) a packed string that was packed by @{deflate} or by the
-according Orbiter core function.
+according SpaceXpanse core function.
 
 The new tree-data files for example are packed this way.
 

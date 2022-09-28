@@ -12,7 +12,7 @@
 // ==============================================================
 
 #define ORBITER_MODULE
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "DlgCtrl.h"
 #include "resource.h"
 

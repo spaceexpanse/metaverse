@@ -11,7 +11,7 @@
 
 #define ORBITER_MODULE
 #include <windows.h>
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "Dialog\Graph.h"
 #include "resource.h"
 

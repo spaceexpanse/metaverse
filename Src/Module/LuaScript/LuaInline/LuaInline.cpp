@@ -8,21 +8,21 @@
 //                   All rights reserved
 //
 // LuaInline.cpp
-// This library is loaded by the Orbiter core on demand to provide
+// This library is loaded by the SpaceXpanse core on demand to provide
 // interpreter instances to modules via API requests.
 //
 // Notes:
-// * LuaInline.dll must be placed in the Orbiter root directory
+// * LuaInline.dll must be placed in the SpaceXpanse root directory
 //   (not in the Modules subdirectory). It is loaded automatically
-//   by Orbiter when required. It must not be loaded manually via
+//   by SpaceXpanse when required. It must not be loaded manually via
 //   the Launchpad "Modules" tab.
 // * LuaInline.dll depends on LuaInterpreter.dll and Lua5.1.dll
-//   which must also be present in the Orbiter root directory.
+//   which must also be present in the SpaceXpanse root directory.
 // ==============================================================
 
 #define STRICT
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "LuaInline.h"
 #include <direct.h>
 #include <process.h>

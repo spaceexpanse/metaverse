@@ -29,8 +29,8 @@ target_link_libraries(HST
 )
 
 add_dependencies(HST
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 if(ADD_SCRIPT_SUPPORT)

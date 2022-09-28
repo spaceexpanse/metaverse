@@ -10,14 +10,14 @@
 
 #include <vector>
 #include "ConfigFileParser.h"
-#include "Orbitersdk.h"   // for VESSEL
+#include "SpaceXpansesdk.h"   // for VESSEL
 #include "AnimationState.h"
 #include "XRSound.h"    // for PlaybackType
 #include <unordered_map>
 
 static const char *XRSOUND_CONFIG_FILE = "XRSound\\XRSound.cfg";
 
-// XRSound.log always resides in the Orbiter root folder, alongside Orbiter.log and the XR vessel log files
+// XRSound.log always resides in the SpaceXpanse root folder, alongside SpaceXpanse.log and the XR vessel log files
 static const char *XRSOUND_LOG_FILE = "XRSound.log";
 
 // A vessel has multiple animation IDs, and each animation has multiple sounds.

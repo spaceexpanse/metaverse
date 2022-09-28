@@ -24,7 +24,7 @@
 #include <cstdio>
 #include <cmath>
 #include <string>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 #include "mfd.h"
 #include "graph.h"
@@ -64,7 +64,7 @@ TransxMFD::~TransxMFD()
 	--MfdCount;
 }
 
-// Called by Orbiter when a screen update is needed
+// Called by SpaceXpanse when a screen update is needed
 bool TransxMFD::Update (oapi::Sketchpad *sketchpad)
 {
     Title (sketchpad, "TransX MFD");
@@ -90,7 +90,7 @@ bool TransxMFD::Update (oapi::Sketchpad *sketchpad)
 	varpointer->show(sketchpad,W,linespacing);
 
 	return true;
-	// From Martins (http://www.orbiter-forum.com/project.php?issueid=210#note1142):
+	// From Martins (http://www.spacexpanse-forum.com/project.php?issueid=210#note1142):
 	// The return value is currently ignored.
 	// It may be used in the future to indicate if the surface was redrawn, for optimisation purposes (removal of unneccesary surface copies).
 }
@@ -106,7 +106,7 @@ int TransxMFD::getheight()
 }
 
 OAPI_MSGTYPE TransxMFD::MsgProc (UINT msg, UINT mfd, WPARAM wparam, LPARAM lparam)
-// Standard message parser for messages passed from Orbiter
+// Standard message parser for messages passed from SpaceXpanse
 {
 	switch (msg) {
 	case OAPI_MSG_MFD_OPENED:
@@ -116,14 +116,14 @@ OAPI_MSGTYPE TransxMFD::MsgProc (UINT msg, UINT mfd, WPARAM wparam, LPARAM lpara
 }
 
 char *TransxMFD::ButtonLabel (int bt)
-// Routine to pass button label back to Orbiter. Called by Orbiter
+// Routine to pass button label back to SpaceXpanse. Called by SpaceXpanse
 {
 	char *label[] = {"HLP","FWD","BCK", "VW","VAR","-VR", "ADJ", "-AJ","++", "--","EXE","ENT"};
 	return (bt < sizeof(label) / sizeof(char*) ? label[bt] : 0);
 }
 
 int TransxMFD::ButtonMenu (const MFDBUTTONMENU **menu) const
-// Routine to pass menu description for buttons back to Orbiter. Called by Orbiter
+// Routine to pass menu description for buttons back to SpaceXpanse. Called by SpaceXpanse
 {
 	static const MFDBUTTONMENU mnu[] = {
 		{"Toggle Help","On/Off",'H'},

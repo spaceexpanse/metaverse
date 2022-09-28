@@ -22,7 +22,7 @@
 #define PG_NET2 10
 #define PG_NET3 11
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class LaunchpadDialog;
 

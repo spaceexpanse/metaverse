@@ -9,11 +9,11 @@
 #include "D3D9Util.h"
 #include "OapiExtension.h"
 #include "D3D9Config.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include <psapi.h>
 
 // ===========================================================================
-// Orbiter [v110830] up to [v111105]
+// SpaceXpanse [v110830] up to [v111105]
 #define IDC_BODYFORCE_PAGE           231
 #define IDC_BODYFORCE_ENABLE        1194
 #define IDC_BODYFORCE_WEIGHT        1195
@@ -46,11 +46,11 @@ DWORD OapiExtension::elevationMode = 0;
 DWORD OapiExtension::showBodyForceVectorsFlags = (BFV_WEIGHT | BFV_THRUST | BFV_LIFT | BFV_DRAG);
 float OapiExtension::bodyForceScale = 1.0;
 float OapiExtension::bodyForceOpacity = 1.0;
-// Orbiters default here: "CoordinateAxes = 4 1 1"
+// SpaceXpanses default here: "CoordinateAxes = 4 1 1"
 DWORD OapiExtension::showCoordinateAxesFlags = SCA_VESSEL;
 float OapiExtension::coordinateAxesScale = 1.0;
 float OapiExtension::coordinateAxesOpacity = 1.0;
-// Orbiters default directories
+// SpaceXpanses default directories
 std::string OapiExtension::configDir(".\\Config\\");
 std::string OapiExtension::meshDir(".\\Meshes\\");
 std::string OapiExtension::textureDir(".\\Textures\\");
@@ -65,9 +65,9 @@ bool OapiExtension::configParameterRead = OapiExtension::GetConfigParameter();
 // 2010-P1    100830
 // 2010-P2    110822
 // 2010-P2.1  110824
-bool OapiExtension::isOrbiter2010 = (oapiGetOrbiterVersion() <= 110824 && oapiGetOrbiterVersion() >= 100606);
+bool OapiExtension::isSpaceXpanse2010 = (oapiGetSpaceXpanseVersion() <= 110824 && oapiGetSpaceXpanseVersion() >= 100606);
 
-bool OapiExtension::orbiterSound40 = false;
+bool OapiExtension::spacexpanseSound40 = false;
 bool OapiExtension::tileLoadThread = true;
 bool OapiExtension::runsUnderWINE = false;
 bool OapiExtension::runsSpacecraftDll = false;
@@ -172,7 +172,7 @@ void OapiExtension::HandlePopupWindows (const HWND *hPopupWnd, DWORD count)
 */
 
 // ===========================================================================
-// Logs loaded D3D9 DLLs and their versions to Orbiter.log
+// Logs loaded D3D9 DLLs and their versions to SpaceXpanse.log
 //
 void OapiExtension::LogD3D9Modules(void)
 {
@@ -261,23 +261,23 @@ void OapiExtension::LogD3D9Modules(void)
 
 
 // ===========================================================================
-// Tries to get the initial settings from Orbiter_NG.cfg file
+// Tries to get the initial settings from SpaceXpanse_NG.cfg file
 //
 bool OapiExtension::GetConfigParameter(void)
 {
 	char *pLine;
-	bool orbiterSoundModuleEnabled = false;
+	bool spacexpanseSoundModuleEnabled = false;
 
-	FILEHANDLE f = oapiOpenFile("Orbiter_NG.cfg", FILE_IN_ZEROONFAIL, ROOT);
+	FILEHANDLE f = oapiOpenFile("SpaceXpanse_NG.cfg", FILE_IN_ZEROONFAIL, ROOT);
 	if (f) {
 		char  string[MAX_PATH];
 		DWORD flags;
 		float scale, opacity;
 
-		// General check for OrbiterSound module enabled
+		// General check for SpaceXpanseSound module enabled
 		while (oapiReadScenario_nextline(f, pLine)) {
-			if (NULL != strstr(pLine, "OrbiterSound")) {
-				orbiterSoundModuleEnabled = true;
+			if (NULL != strstr(pLine, "SpaceXpanseSound")) {
+				spacexpanseSoundModuleEnabled = true;
 				break;
 			}
 		}
@@ -348,14 +348,14 @@ bool OapiExtension::GetConfigParameter(void)
 
 	}
 
-	// Check for the OrbiterSound version
-	if (orbiterSoundModuleEnabled)  {
-		orbiterSound40 = false;
+	// Check for the SpaceXpanseSound version
+	if (spacexpanseSoundModuleEnabled)  {
+		spacexpanseSound40 = false;
 
 		f = oapiOpenFile("Sound\\version.txt", FILE_IN_ZEROONFAIL, ROOT);
 		while (f && oapiReadScenario_nextline(f, pLine)) {
-			if (NULL != strstr(pLine, "OrbiterSound 4.0 (3D)")) {
-				orbiterSound40 = true;
+			if (NULL != strstr(pLine, "SpaceXpanseSound 4.0 (3D)")) {
+				spacexpanseSound40 = true;
 				break;
 			}
 		}
@@ -443,7 +443,7 @@ const void OapiExtension::RemoveHook(LPHOOKINFO lpHookInfo)
 }
 
 // ===========================================================================
-// Check helper to avoid hooking 'Orbiter: Configure menu bars' dialog, or
+// Check helper to avoid hooking 'SpaceXpanse: Configure menu bars' dialog, or
 // any other addon-dialog which might use some of the same IDCs as the
 // 'Visual helpers' dialog.
 //

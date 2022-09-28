@@ -19,8 +19,8 @@ target_link_libraries(AtmConfig
 )
 
 add_dependencies(AtmConfig
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(AtmConfig

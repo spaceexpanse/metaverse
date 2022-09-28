@@ -10,12 +10,12 @@ add_library(GDIClient SHARED
 )
 
 target_include_directories(GDIClient
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 add_dependencies(GDIClient
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_link_libraries(GDIClient

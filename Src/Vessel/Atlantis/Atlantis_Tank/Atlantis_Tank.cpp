@@ -8,7 +8,7 @@
 // Atlantis_Tank.cpp
 // Reference implementation of Atlantis Tank vessel class module
 // Note: This module takes control of the tank after separation
-// from the orbiter.
+// from the spacexpanse.
 // ==============================================================
 
 #define ORBITER_MODULE
@@ -47,17 +47,17 @@ Atlantis_Tank::Atlantis_Tank (OBJHANDLE hObj)
 	// preload mesh
 	hTankMesh = oapiLoadMeshGlobal ("Atlantis\\Atlantis_tank");
 
-	// The fuel tank. Note that this is accessed remotely by the orbiter
+	// The fuel tank. Note that this is accessed remotely by the spacexpanse
 	// while it is connected
 	hProp = CreatePropellantResource (TANK_MAX_PROPELLANT_MASS);
 
 	// docking ports
-	CreateDock (_V(0,5.5,-5), _V(0,1,0), _V(0,0,1));      // orbiter attachment
+	CreateDock (_V(0,5.5,-5), _V(0,1,0), _V(0,0,1));      // spacexpanse attachment
 	CreateDock (_V(-4.25,0,-6.4), _V(-1,0,0), _V(0,0,1)); // left SRB attachment
 	CreateDock (_V( 4.25,0,-6.4), _V( 1,0,0), _V(0,0,1)); // right SRB attachment
 
-	// by default, disable orbiter and SRB connectors
-	hDockOrbiter = NULL;
+	// by default, disable spacexpanse and SRB connectors
+	hDockSpaceXpanse = NULL;
 
 	pAtlantis = NULL;
 	pSRB[0] = NULL;
@@ -79,7 +79,7 @@ void Atlantis_Tank::clbkSetClassCaps (FILEHANDLE cfg)
 
 	//SetMaxFuelMass (TANK_MAX_PROPELLANT_MASS);
 	// Note that the Tank instance is only created after separation from
-	// the orbiter, so the actual fuel mass will always be much smaller
+	// the spacexpanse, so the actual fuel mass will always be much smaller
 
 	SetISP (5000.0);
 
@@ -147,10 +147,10 @@ Atlantis_SRB *Atlantis_Tank::GetSRB (int which) const
 	return (strcmp (pV->GetClassName(), "Atlantis_SRB") ? NULL : (Atlantis_SRB*)pV);
 }
 
-void Atlantis_Tank::EnableOrbiterConnector ()
+void Atlantis_Tank::EnableSpaceXpanseConnector ()
 {
-	//if (!hDockOrbiter) {
-	//	hDockOrbiter = CreateDock (_V(0.0, 4.64, -9.285), _V(0,1,0), _V(1,0,0));
+	//if (!hDockSpaceXpanse) {
+	//	hDockSpaceXpanse = CreateDock (_V(0.0, 4.64, -9.285), _V(0,1,0), _V(1,0,0));
 	//}
 }
 

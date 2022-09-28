@@ -2,12 +2,12 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS" />
 <title>Mission scripts</title>
 </head>
 <body BGCOLOR=#FFFFFF TEXT=#000000>
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; Mission scripts</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; Mission scripts</p>
 
 <h1>Mission scripts</h1>
 <p>Mission or tutorial scripts can be used to monitor the progress of a player
@@ -27,7 +27,7 @@ END_ENVIRONMENT
 </div>
 <p>The entry points to the script file, with path relative to the "Script" sub-directory.</p>
 <p>The script file extension must be omitted, but extension .lua is assumed.</p>
-<p>Orbiter loads and executes the script when launching the scenario. No additional
+<p>SpaceXpanse loads and executes the script when launching the scenario. No additional
 plugins need to be activated to enable the script interpreter.</p>
 
 <h2>Step 2: A simple mission script</h2>
@@ -61,8 +61,8 @@ t0 = <a href="api_oapi.htm#oapi_get_simtime">oapi.get_simtime</a>()
 </div>
 <p>This code fragment waits until the propellant mass begins change, and then
 sets the reference time t0. Calling the skip function during the wait loop is
-important, because hands back control to Orbiter to progress the simulation.
-Without it, the script (and Orbiter with it) would get stuck in an infinite loop.</p>
+important, because hands back control to SpaceXpanse to progress the simulation.
+Without it, the script (and SpaceXpanse with it) would get stuck in an infinite loop.</p>
 <p>Now we have to wait until the mission objective is satisfied.</p>
 <div class="code">
 while v:<a href="mtd_vessel.htm#get_altitude">get_altitude</a>() < 100e3 do<br />

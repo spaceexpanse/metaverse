@@ -4,11 +4,11 @@
 #ifndef __SCRIPT_H
 #define __SCRIPT_H
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
 class ScriptInterface {
 public:
-	ScriptInterface (Orbiter *pOrbiter);
+	ScriptInterface (SpaceXpanse *pSpaceXpanse);
 	INTERPRETERHANDLE NewInterpreter();
 	int DelInterpreter (INTERPRETERHANDLE);
 	INTERPRETERHANDLE RunInterpreter (const char *cmd);
@@ -20,7 +20,7 @@ protected:
 	HINSTANCE LoadInterpreterLib();
 	
 private:
-	Orbiter *orbiter;
+	SpaceXpanse *spacexpanse;
 	HINSTANCE hLib;
 };
 

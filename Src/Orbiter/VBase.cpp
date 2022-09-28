@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #include "OGraphics.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "VBase.h"
 #include "Psys.h"
 #include "Mesh.h"
@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
@@ -34,8 +34,8 @@ VBase::VBase (const Base *_base): VObject (_base), base(_base)
 	CheckLightT = td.SimT0-1.0;
 	BlinkT = 0.0;
 	lght = *scene->GetLight();
-	std_ambient = g_pOrbiter->Cfg()->AmbientColour;
-	enable_shadows = g_pOrbiter->Cfg()->CfgVisualPrm.bShadows;
+	std_ambient = g_pSpaceXpanse->Cfg()->AmbientColour;
+	enable_shadows = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bShadows;
 	have_shadows = false;
 	surftile_alpha = false;
 	mod_sunlight = false;
@@ -722,11 +722,11 @@ void VBase::RenderGroundShadow (LPDIRECT3DDEVICE7 dev)
 
 void VBase::SetupRenderVectorList ()
 {
-	DWORD flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagCrdAxes;
+	DWORD flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagCrdAxes;
 	if ((flag & CA_ENABLE) && (flag & CA_BASE)) {
-		double scale = base->size * g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleCrdAxes;
+		double scale = base->size * g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleCrdAxes;
 		double rad   = base->size*0.02;
-		float alpha = g_pOrbiter->Cfg()->CfgVisHelpPrm.opacCrdAxes;
+		float alpha = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacCrdAxes;
 		Vector cam (tmul (base->GRot(), g_camera->GPos()-base->GPos()));
 		AddVec (cam, Vector(scale,0,0), Vector(0,0,0), rad, Vector(0.5,0.5,0.5), alpha, LABEL_PX, D3DRGB(1,1,1));
 		AddVec (cam, Vector(0,scale,0), Vector(0,0,0), rad, Vector(0.5,0.5,0.5), alpha, LABEL_PY, D3DRGB(1,1,1));

@@ -53,8 +53,8 @@ struct Sample {
 	*  sophisticated analytic ephemerides solutions which take into account perturbations from other
 	*  celestial objects.
 	*
-	*  Planets which are not controlled via a DLL module are updated directly by Orbiter. Depending
-	*  on the settings in the definition file, Orbiter either uses an unperturbed 2-body approximation,
+	*  Planets which are not controlled via a DLL module are updated directly by SpaceXpanse. Depending
+	*  on the settings in the definition file, SpaceXpanse either uses an unperturbed 2-body approximation,
 	*  resulting in a conic section trajectory (e.g. an ellipse), or uses a dynamic update procedure
 	*  based on the gravitational forces acting on the planet. Both methods have limitations: the 2-
 	*  body approach ignores perturbations and is only valid if no massive bodies other than the
@@ -65,7 +65,7 @@ struct Sample {
 	*  of the methods described above. Perturbation solutions typically describe the perturbed
 	*  orbit of a planet by expressing the state vectors as a trigonometric series. These series
 	*  are valid over a limited period of time, after which they start to diverge. Examples of perturbation
-	*  solutions used in Orbiter are the VSOP87 solution for the 8 major planets and the sun, or
+	*  solutions used in SpaceXpanse are the VSOP87 solution for the 8 major planets and the sun, or
 	*  the ELP2000 solution for the moon.
 	*
 	*  Planet modules have one additional function: They can be used to define some atmospheric
@@ -74,13 +74,13 @@ struct Sample {
 	*
 	* \section first_steps First Steps:
 	*  To start on your planet module, you should create a new "dynamic link library" project with
-	*  your C++ compiler. Add the \e Orbiter.lib and \e Orbitersdk.lib files to the project (<i>found in
-	*  Orbitersdk\\lib</i>). Add <i>Orbitersdk\\include</i> to your include path. Create a C++ source 
+	*  your C++ compiler. Add the \e SpaceXpanse.lib and \e SpaceXpansesdk.lib files to the project (<i>found in
+	*  SpaceXpansesdk\\lib</i>). Add <i>SpaceXpansesdk\\include</i> to your include path. Create a C++ source 
 	*  file for your project, and add the essential API interface functions:
 	*
 	* \code
 	*  #define ORBITER_MODULE
-	*  #include "OrbiterAPI.h"
+	*  #include "SpaceXpanseAPI.h"
 	*  #include "CelbodyAPI.h"
 	*
 	*  DLLCLBK void InitModule (HINSTANCE hModule)
@@ -107,12 +107,12 @@ struct Sample {
 	* \endcode
 	*
 	* The first line defining \c ORBITER_MODULE is required to ensure that all initialisation functions
-	* are properly called by Orbiter.
+	* are properly called by SpaceXpanse.
 	*
-	* OrbiterAPI.h contains the general API interface, and CelBodyAPI.h contains the planet module-
+	* SpaceXpanseAPI.h contains the general API interface, and CelBodyAPI.h contains the planet module-
 	* specific interface, in particular the \c CELBODY class, which will be discussed below.
 	*
-	* The \e InitModule() and \e ExitModule() methods are called only once per Orbiter session, when the
+	* The \e InitModule() and \e ExitModule() methods are called only once per SpaceXpanse session, when the
 	* DLL module is loaded or unloaded, respectively. They can be used to set up global parameters.
 	* You can omit them if your module doesn't need any such initialisation.
 	*
@@ -122,7 +122,7 @@ struct Sample {
     *
 	* \section class_interface The CELBODY interface class
 	*
-	* All communication between Orbiter and your planet module will be conducted via the methods
+	* All communication between SpaceXpanse and your planet module will be conducted via the methods
 	* of the derived planet class. You overload the various callback functions of the \c CELBODY
 	* class to add the required functionality. Check the API Reference manual for a complete list of
 	* class methods. A typical implementation might look like this:
@@ -168,8 +168,8 @@ struct Sample {
 	*
 	* \e clbkEphemeris() and \e clbkFastEphemeris() are the functions which will contain the actual
 	* ephemeris calculations for the planet at the requested time. \e clbkEphemeris() is only called by
-	* Orbiter if the planet's state at an arbitrary time is required (for example by an instrument
-	* calculating the position at some future time). When Orbiter updates the planet's position for
+	* SpaceXpanse if the planet's state at an arbitrary time is required (for example by an instrument
+	* calculating the position at some future time). When SpaceXpanse updates the planet's position for
 	* the next simulation time frame, the \e clbkFastEphemeris() function will be called instead. This
 	* means that \e clbkFastEphemeris() will be called at each frame, each time advancing the time by
 	* a small amount. This can be used for a more efficient calculation. Instead of performing a full
@@ -215,7 +215,7 @@ struct Sample {
 /**
 * \class CELBODY
 * \brief This is the base class for celestial body classes.
-* \details CELBODY defines callback methods which Orbiter will call whenever it requires
+* \details CELBODY defines callback methods which SpaceXpanse will call whenever it requires
 *  information from your planet module. You define the behaviour of the planet by overloading
 *  the relevant methods. Below is a list of public CELBODY methods:
 * \sa \ref planetmod
@@ -252,7 +252,7 @@ public:
 	virtual void clbkInit (FILEHANDLE cfg);
 	
 	/**
-	* \brief Called when Orbiter requires (non-sequential) ephemeris data from the planet
+	* \brief Called when SpaceXpanse requires (non-sequential) ephemeris data from the planet
 	*  for a given time.
 	* \param mjd ephemeris date (days, in Modified Julian Date format)
 	* \param req data request bitflags (see notes)
@@ -294,17 +294,17 @@ public:
 	*  child objects) the return value should contain the additional flag \c EPHEM_BARYISTRUE.
 	* \note If both true and barycentric data are requested, but are computationally
 	*  expensive to compute (for example, if they require two separate series
-	*  evaluations), the module can return true positions only. Orbiter will then
+	*  evaluations), the module can return true positions only. SpaceXpanse will then
 	*  calculate the barycentric data directly, after evaluating the child object positions.
 	* \note If a request can't be satisfied at all (e.g. if barycentric data were requested,
 	*  but the module can only compute true positions), the module should
-	*  calculate whatever data it can, and signal so via the return value. Orbiter will
+	*  calculate whatever data it can, and signal so via the return value. SpaceXpanse will
 	*  then try to convert these data to the required ones.
 	* \note If the returned ephemerides are computed in terms of the barycentre of the
 	*  parent body's system, the return value should include the
 	*  \c EPHEM_PARENTBARY flag. If the ephemerides are computed in terms of the
 	*  parent body's true position, this flag should not be included.
-	* \note This function is not called by Orbiter to update the planet's position during
+	* \note This function is not called by SpaceXpanse to update the planet's position during
 	*  the normal simulation frame update. (For that purpose, clbkFastEphemeris() is
 	*  called instead). clbkEphemeris() is only called if the planet state at some
 	*  arbitrary time point is required, e.g. by an instrument calculating a transfer orbit.
@@ -312,7 +312,7 @@ public:
 	virtual int clbkEphemeris (double mjd, int req, double *ret);
 	
 	/**
-	* \brief Called by Orbiter to update the body's state to the next simulation frame.
+	* \brief Called by SpaceXpanse to update the body's state to the next simulation frame.
 	* \param simt simulation time (seconds)
 	* \param req data request bitflags (see notes)
 	* \param ret pointer to result vector
@@ -332,7 +332,7 @@ public:
 	virtual int clbkFastEphemeris (double simt, int req, double *ret);
 	
 	/**
-	* \brief Called by Orbiter to obtain atmospheric parameters at a given altitude.
+	* \brief Called by SpaceXpanse to obtain atmospheric parameters at a given altitude.
 	* \param alt altitude over planet mean radius
 	* \param prm pointer to ATMPARAM structure receiving results
 	* \return \e true if parameters have been retrieved sucessfully, \e false to indicate 
@@ -443,9 +443,9 @@ public:
 
 	/**
 	 * \brief Flags the atmosphere interface version.
-	 * \return \e false indicates that Orbiter should use the \ref ATMOSPHERE
+	 * \return \e false indicates that SpaceXpanse should use the \ref ATMOSPHERE
 	 *   object returned by \ref GetAtmosphere to query atmospheric parameters.
-	 *   \e true indicates that Orbiter should use the CELBODY::clbkAtmParam
+	 *   \e true indicates that SpaceXpanse should use the CELBODY::clbkAtmParam
 	 *   method instead.
 	 * \note If the body does not have an atmosphere, this method should return
 	 *   \e false, and \ref GetAtmosphere should return \e NULL.
@@ -608,7 +608,7 @@ public:
 	virtual bool clbkConstants (ATMCONST *atmc) const;
 
 	/**
-	 * \brief Called by Orbiter to obtain atmospheric parameters for a given set
+	 * \brief Called by SpaceXpanse to obtain atmospheric parameters for a given set
 	 *   of input parameters at the current simulation time.
 	 * \param prm_in input parameters for atmospheric data calculation (see \ref PRM_IN)
 	 * \param prm_out returned data (see \ref PRM_OUT)

@@ -11,12 +11,12 @@ add_library(${CELBODY} SHARED
 )
 
 add_dependencies(${CELBODY}
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(${CELBODY}
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 target_link_libraries(${CELBODY}

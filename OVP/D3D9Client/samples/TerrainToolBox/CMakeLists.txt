@@ -19,8 +19,8 @@ add_dependencies(TerrainToolBox
 )
 
 target_link_libraries(TerrainToolBox
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	Msimg32.lib
 	Comctl32.lib
 )

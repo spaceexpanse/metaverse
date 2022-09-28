@@ -176,8 +176,8 @@ target_link_directories(D3D9Client PUBLIC
 )
 
 target_link_libraries(D3D9Client
-	orbiter.lib
-	orbitersdk.lib
+	spacexpanse.lib
+	spacexpansesdk.lib
 	d3d9.lib
 	debug d3dx9d.lib
 	optimized d3dx9.lib
@@ -222,8 +222,8 @@ add_custom_target(D3D9Client_Interface
 )
 
 add_dependencies(D3D9Client
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	D3D9Client_Interface
 )
 
@@ -238,10 +238,10 @@ add_subdirectory(samples/GenericCamera)
 add_subdirectory(samples/TerrainToolBox)
 
 install(DIRECTORY ${D3D9_SOURCE_DIR}/shaders/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Modules/D3D9Client)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DrawOrbits/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/samples/DrawOrbits)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DX9ExtMFD/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/samples/DX9ExtMFD)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/GenericCamera/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/samples/GenericCamera)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/TerrainToolBox/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/samples/TerrainToolBox)
-install(FILES ${INCLUDE_TARGET_DIR}/gcCoreAPI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/include)
-install(FILES ${INCLUDE_TARGET_DIR}/gcGUI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk/include)
-install(FILES ${ORBITER_SOURCE_SDK_DIR}/doc/Orbiter2DGraphics.pdf DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DrawOrbits/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DrawOrbits)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DX9ExtMFD/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DX9ExtMFD)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/GenericCamera/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/GenericCamera)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/TerrainToolBox/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/TerrainToolBox)
+install(FILES ${INCLUDE_TARGET_DIR}/gcCoreAPI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
+install(FILES ${INCLUDE_TARGET_DIR}/gcGUI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
+install(FILES ${ORBITER_SOURCE_SDK_DIR}/doc/SpaceXpanse2DGraphics.pdf DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc)

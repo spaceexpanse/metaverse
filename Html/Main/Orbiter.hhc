@@ -17,7 +17,7 @@
 		<param name="Local" value="help.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="The Orbiter Launchpad">
+		<param name="Name" value="The SpaceXpanse Launchpad">
 		<param name="Local" value="launchpad.htm">
 		</OBJECT>
 	<UL>
@@ -88,7 +88,7 @@
 				</OBJECT>
 		</UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="About Orbiter">
+			<param name="Name" value="About SpaceXpanse">
 			<param name="Local" value="tab_about.htm">
 			</OBJECT>
 	</UL>
@@ -233,7 +233,7 @@
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Orbiter Scripting">
+		<param name="Name" value="SpaceXpanse Scripting">
 		<param name="Local" value="Script\ScriptRef.htm">
 		</OBJECT>
 	<UL>
@@ -288,7 +288,7 @@
 					<param name="Local" value="Script\api_proc.htm">
 					</OBJECT>
 				<LI> <OBJECT type="text/sitemap">
-					<param name="Name" value="General Orbiter API functions">
+					<param name="Name" value="General SpaceXpanse API functions">
 					<param name="Local" value="Script\api_oapi.htm">
 					</OBJECT>
 				<LI> <OBJECT type="text/sitemap">

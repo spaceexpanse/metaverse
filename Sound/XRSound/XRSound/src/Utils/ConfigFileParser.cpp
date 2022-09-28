@@ -24,7 +24,7 @@
 #include <atlstr.h>
 
 // Constructor
-// pDefaultFilename = path to default config file; may be relative to Orbiter root or absolute
+// pDefaultFilename = path to default config file; may be relative to SpaceXpanse root or absolute
 // pLogFilename = path to optional (but highly recommended) log file; may be null
 ConfigFileParser::ConfigFileParser(const char *pDefaultFilename, const char *pLogFilename) :
     m_pLogFile(nullptr), m_parseFailed(false) 

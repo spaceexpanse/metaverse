@@ -9,7 +9,7 @@
 #include <fstream>
 #include <commctrl.h>
 #include "Resource.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Launchpad.h"
 #include "TabScenario.h"
 #include "TabParam.h"
@@ -33,7 +33,7 @@ using namespace std;
 // Desc: Handles the startup dialog ("Launchpad")
 //=============================================================================
 
-static orbiter::LaunchpadDialog *g_pDlg = 0;
+static spacexpanse::LaunchpadDialog *g_pDlg = 0;
 static time_t time0 = 0;
 static UINT timerid = 0;
 
@@ -48,7 +48,7 @@ static int mnubt[] = {
 // Name: LaunchpadDialog()
 // Desc: This is the constructor for LaunchpadDialog
 //-----------------------------------------------------------------------------
-orbiter::LaunchpadDialog::LaunchpadDialog (Orbiter *app)
+spacexpanse::LaunchpadDialog::LaunchpadDialog (SpaceXpanse *app)
 {
 	hDlg    = NULL;
 	hInst   = app->GetInstance();
@@ -68,7 +68,7 @@ orbiter::LaunchpadDialog::LaunchpadDialog (Orbiter *app)
 // Name: ~LaunchpadDialog()
 // Desc: This is the destructor for LaunchpadDialog
 //-----------------------------------------------------------------------------
-orbiter::LaunchpadDialog::~LaunchpadDialog ()
+spacexpanse::LaunchpadDialog::~LaunchpadDialog ()
 {
 	int i;
 
@@ -90,7 +90,7 @@ orbiter::LaunchpadDialog::~LaunchpadDialog ()
 // Name: Create()
 // Desc: Creates the main application dialog
 //-----------------------------------------------------------------------------
-bool orbiter::LaunchpadDialog::Create (bool startvideotab)
+bool spacexpanse::LaunchpadDialog::Create (bool startvideotab)
 {
 	if (!hDlg) {
 		CreateDialog (hInst, MAKEINTRESOURCE(IDD_MAIN), NULL, AppDlgProc);
@@ -147,7 +147,7 @@ bool orbiter::LaunchpadDialog::Create (bool startvideotab)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::LaunchpadDialog::Show()
+void spacexpanse::LaunchpadDialog::Show()
 {
 	ShowWindow(hDlg, SW_SHOW);
 	m_bVisible = true;
@@ -157,7 +157,7 @@ void orbiter::LaunchpadDialog::Show()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::LaunchpadDialog::Hide()
+void spacexpanse::LaunchpadDialog::Hide()
 {
 	ShowWindow(hDlg, SW_HIDE);
 	m_bVisible = false;
@@ -167,12 +167,12 @@ void orbiter::LaunchpadDialog::Hide()
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::LaunchpadDialog::ConsumeMessage(LPMSG pmsg)
+bool spacexpanse::LaunchpadDialog::ConsumeMessage(LPMSG pmsg)
 {
 	return (bool)IsDialogMessage(hDlg, pmsg);
 }
 
-orbiter::LaunchpadTab* orbiter::LaunchpadDialog::GetTab(UINT i) const
+spacexpanse::LaunchpadTab* spacexpanse::LaunchpadDialog::GetTab(UINT i) const
 {
 	if (i < ntab)
 		return Tab[i];
@@ -184,7 +184,7 @@ orbiter::LaunchpadTab* orbiter::LaunchpadDialog::GetTab(UINT i) const
 // Name: AddTab()
 // Desc: Inserts a new tab into the list
 //-----------------------------------------------------------------------------
-void orbiter::LaunchpadDialog::AddTab (LaunchpadTab *tab)
+void spacexpanse::LaunchpadDialog::AddTab (LaunchpadTab *tab)
 {
 	LaunchpadTab **tmp = new LaunchpadTab*[ntab+1]; TRACENEW
 	if (ntab) {
@@ -197,7 +197,7 @@ void orbiter::LaunchpadDialog::AddTab (LaunchpadTab *tab)
 
 //-----------------------------------------------------------------------------
 
-const HWND orbiter::LaunchpadDialog::GetTabWindow (int i) const
+const HWND spacexpanse::LaunchpadDialog::GetTabWindow (int i) const
 {
 	return (i < ntab ? Tab[i]->TabWnd() : NULL);
 }
@@ -206,7 +206,7 @@ const HWND orbiter::LaunchpadDialog::GetTabWindow (int i) const
 // Name: InitTabControl()
 // Desc: Sets up the tabs for the tab control interface
 //-----------------------------------------------------------------------------
-void orbiter::LaunchpadDialog::InitTabControl (HWND hWnd)
+void spacexpanse::LaunchpadDialog::InitTabControl (HWND hWnd)
 {
 	for (int i = 0; i < ntab; i++) {
 		Tab[i]->Create();
@@ -217,16 +217,16 @@ void orbiter::LaunchpadDialog::InitTabControl (HWND hWnd)
 
 //-----------------------------------------------------------------------------
 // Name: EnableLaunchButton()
-// Desc: Enable/disable "Launch Orbiter" button
+// Desc: Enable/disable "Launch SpaceXpanse" button
 //-----------------------------------------------------------------------------
-void orbiter::LaunchpadDialog::EnableLaunchButton (bool enable) const
+void spacexpanse::LaunchpadDialog::EnableLaunchButton (bool enable) const
 {
 	EnableWindow (GetDlgItem (hDlg, IDLAUNCH), enable ? TRUE:FALSE);
 }
 
 //-----------------------------------------------------------------------------
 
-void orbiter::LaunchpadDialog::InitSize (HWND hWnd)
+void spacexpanse::LaunchpadDialog::InitSize (HWND hWnd)
 {
 	RECT r, rl;
 	GetClientRect (hWnd, &client0);
@@ -255,7 +255,7 @@ void orbiter::LaunchpadDialog::InitSize (HWND hWnd)
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::LaunchpadDialog::Resize (HWND hWnd, DWORD w, DWORD h, DWORD mode)
+BOOL spacexpanse::LaunchpadDialog::Resize (HWND hWnd, DWORD w, DWORD h, DWORD mode)
 {
 	if (mode == SIZE_MINIMIZED) return TRUE;
 
@@ -317,7 +317,7 @@ BOOL orbiter::LaunchpadDialog::Resize (HWND hWnd, DWORD w, DWORD h, DWORD mode)
 // Desc: Set launchpad controls into demo mode
 //-----------------------------------------------------------------------------
 
-void orbiter::LaunchpadDialog::SetDemoMode ()
+void spacexpanse::LaunchpadDialog::SetDemoMode ()
 {
 	//EnableWindow (GetDlgItem (hDlg, IDC_MAINTAB), FALSE);
 	//ShowWindow (GetDlgItem (hDlg, IDC_MAINTAB), FALSE);
@@ -334,7 +334,7 @@ void orbiter::LaunchpadDialog::SetDemoMode ()
 // Name: UpdateConfig()
 // Desc: Save current dialog settings in configuration
 //-----------------------------------------------------------------------------
-void orbiter::LaunchpadDialog::UpdateConfig ()
+void spacexpanse::LaunchpadDialog::UpdateConfig ()
 {
 	for (int i = 0; i < ntab; i++)
 		Tab[i]->SetConfig (pCfg);
@@ -348,7 +348,7 @@ void orbiter::LaunchpadDialog::UpdateConfig ()
 // Name: DlgProc()
 // Desc: Message callback function for main dialog
 //-----------------------------------------------------------------------------
-INT_PTR orbiter::LaunchpadDialog::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::LaunchpadDialog::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	char cbuf[256];
 
@@ -466,7 +466,7 @@ INT_PTR orbiter::LaunchpadDialog::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, 
 // Name: WaitProc()
 // Desc: Message callback function for wait page
 //-----------------------------------------------------------------------------
-INT_PTR orbiter::LaunchpadDialog::WaitProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::LaunchpadDialog::WaitProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_INITDIALOG:
@@ -490,7 +490,7 @@ INT_PTR orbiter::LaunchpadDialog::WaitProc (HWND hWnd, UINT uMsg, WPARAM wParam,
 // Name: SwitchTabPage()
 // Desc: Display a new page
 //-----------------------------------------------------------------------------
-void orbiter::LaunchpadDialog::SwitchTabPage (HWND hWnd, int cpg)
+void spacexpanse::LaunchpadDialog::SwitchTabPage (HWND hWnd, int cpg)
 {
 	int idx = cpg;
 	for (int pg = 0; pg < ntab; pg++)
@@ -501,7 +501,7 @@ void orbiter::LaunchpadDialog::SwitchTabPage (HWND hWnd, int cpg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::LaunchpadDialog::ShowWaitPage (bool show, long mem_committed)
+void spacexpanse::LaunchpadDialog::ShowWaitPage (bool show, long mem_committed)
 {
 	int pg, i;
 	int showtab = (show ? SW_HIDE:SW_SHOW);
@@ -530,7 +530,7 @@ void orbiter::LaunchpadDialog::ShowWaitPage (bool show, long mem_committed)
 	RedrawWindow(hDlg, NULL, NULL, RDW_UPDATENOW | RDW_ALLCHILDREN);
 }
 
-void orbiter::LaunchpadDialog::UpdateWaitProgress ()
+void spacexpanse::LaunchpadDialog::UpdateWaitProgress ()
 {
 	if (mem_wait) {
 		long mem = pApp->memstat->HeapUsage();
@@ -538,7 +538,7 @@ void orbiter::LaunchpadDialog::UpdateWaitProgress ()
 	}
 }
 
-void orbiter::LaunchpadDialog::HidePage (int idx)
+void spacexpanse::LaunchpadDialog::HidePage (int idx)
 {
 	if (tabidx[idx] < 0) return; // already hidden
 
@@ -561,7 +561,7 @@ void orbiter::LaunchpadDialog::HidePage (int idx)
 	InvalidateRect (hDlg, NULL, TRUE);
 }
 
-void orbiter::LaunchpadDialog::UnhidePage (int idx, char *tab)
+void spacexpanse::LaunchpadDialog::UnhidePage (int idx, char *tab)
 {
 	int i, j;
 	RECT r;
@@ -598,7 +598,7 @@ void orbiter::LaunchpadDialog::UnhidePage (int idx, char *tab)
 // Name: GetDemoScenario()
 // Desc: returns the name of an arbitrary scenario in the demo folder
 //-----------------------------------------------------------------------------
-int orbiter::LaunchpadDialog::SelectDemoScenario ()
+int spacexpanse::LaunchpadDialog::SelectDemoScenario ()
 {
 	char cbuf[256];
 	HWND hTree = GetDlgItem (GetTabWindow(PG_SCN), IDC_SCN_LIST);
@@ -645,26 +645,26 @@ int orbiter::LaunchpadDialog::SelectDemoScenario ()
 // "Extra Parameters" page
 // ****************************************************************************
 
-static char *desc_fixedstep = "Force Orbiter to advance the simulation by a fixed time interval in each frame.";
+static char *desc_fixedstep = "Force SpaceXpanse to advance the simulation by a fixed time interval in each frame.";
 
 void OpenDynamics (HINSTANCE, HWND);
 
-HTREEITEM orbiter::LaunchpadDialog::RegisterExtraParam (LaunchpadItem *item, HTREEITEM parent)
+HTREEITEM spacexpanse::LaunchpadDialog::RegisterExtraParam (LaunchpadItem *item, HTREEITEM parent)
 {
 	return pExtra->RegisterExtraParam (item, parent);
 }
 
-bool orbiter::LaunchpadDialog::UnregisterExtraParam (LaunchpadItem *item)
+bool spacexpanse::LaunchpadDialog::UnregisterExtraParam (LaunchpadItem *item)
 {
 	return pExtra->UnregisterExtraParam (item);
 }
 
-HTREEITEM orbiter::LaunchpadDialog::FindExtraParam (const char *name, const HTREEITEM parent)
+HTREEITEM spacexpanse::LaunchpadDialog::FindExtraParam (const char *name, const HTREEITEM parent)
 {
 	return pExtra->FindExtraParam (name, parent);
 }
 
-void orbiter::LaunchpadDialog::WriteExtraParams ()
+void spacexpanse::LaunchpadDialog::WriteExtraParams ()
 {
 	pExtra->WriteExtraParams ();
 }

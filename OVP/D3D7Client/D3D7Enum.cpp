@@ -13,8 +13,8 @@
 
 #define STRICT
 
-// Must include OrbiterAPI.h *first* to fix compiler warnings on VS2003+
-#include "OrbiterAPI.h"
+// Must include SpaceXpanseAPI.h *first* to fix compiler warnings on VS2003+
+#include "SpaceXpanseAPI.h"
 #include <stdio.h>
 #include "D3D7Enum.h"
 #include "D3D7Util.h"

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TimeData td;
 extern char DBG_MSG[256];
@@ -759,12 +759,12 @@ INT_PTR CALLBACK NotesizeEvent::EditProc (HWND hDlg, UINT uMsg, WPARAM wParam, L
 // =========================================================
 // =========================================================
 
-PlaybackEditor::PlaybackEditor (Orbiter *ob, const char *ScnName)
+PlaybackEditor::PlaybackEditor (SpaceXpanse *ob, const char *ScnName)
 {
 	int i;
 	char fname[1024];
 
-	orbiter = ob;
+	spacexpanse = ob;
 	Efirst = Elast = 0;
 	timer = 0;
 
@@ -795,13 +795,13 @@ PlaybackEditor::~PlaybackEditor ()
 
 HWND PlaybackEditor::OpenDialog ()
 {
-	return orbiter->OpenDialogEx (IDD_RECPLAY_ANNOTATE, RecPlayAnn_DlgProc,  DLG_CAPTIONCLOSE | DLG_CAPTIONHELP, this);
+	return spacexpanse->OpenDialogEx (IDD_RECPLAY_ANNOTATE, RecPlayAnn_DlgProc,  DLG_CAPTIONCLOSE | DLG_CAPTIONHELP, this);
 }
 
 void PlaybackEditor::CloseDialog ()
 {
 	if (hDlg) {
-		orbiter->CloseDialog (hDlg);
+		spacexpanse->CloseDialog (hDlg);
 		hDlg = 0;
 	}
 }
@@ -813,7 +813,7 @@ HWND PlaybackEditor::OpenEditTab (PlaybackEvent *event, int resid, DLGPROC tabpr
 		DestroyWindow (hEdit); // remove current edit tab
 	}
 	if (resid) {
-		hEdit = CreateDialogParam (orbiter->GetInstance(), MAKEINTRESOURCE(resid), hDlg, tabproc, (LPARAM)event);
+		hEdit = CreateDialogParam (spacexpanse->GetInstance(), MAKEINTRESOURCE(resid), hDlg, tabproc, (LPARAM)event);
 		SetWindowLongPtr (hEdit, GWLP_USERDATA, (LONG_PTR)event);
 	} else {
 		hEdit = NULL;
@@ -850,11 +850,11 @@ INT_PTR PlaybackEditor::DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		case IDHELP: {
 			extern HELPCONTEXT DefHelpContext;
 			DefHelpContext.topic = "/playbackedit.htm";
-			orbiter->OpenHelp (&DefHelpContext);
+			spacexpanse->OpenHelp (&DefHelpContext);
 			} return TRUE;
 		case IDCANCEL:
-			orbiter->CloseDialog (hDlg);
-			orbiter->FRecorder_ToggleEditor();
+			spacexpanse->CloseDialog (hDlg);
+			spacexpanse->FRecorder_ToggleEditor();
 			return FALSE;
 		case IDC_BUTTON1: // delete event
 			DeleteEvent();
@@ -879,7 +879,7 @@ INT_PTR PlaybackEditor::DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		}
 		break;
 	}
-	return OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam);
+	return SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam);
 }
 
 void PlaybackEditor::CreateInsertEventList (HWND hDlg)
@@ -920,14 +920,14 @@ void PlaybackEditor::ScanEventFile ()
 void PlaybackEditor::SaveEventFile ()
 {
 	CommitEdit(); // commit last edits
-	orbiter->FRecorder_SuspendPlayback();
+	spacexpanse->FRecorder_SuspendPlayback();
 	ofstream ofs (sysfname);
 	Event *ev;
 	for (ev = Efirst; ev; ev = ev->next) {
 		ev->e->Write (ofs);
 	}
 	ofs.close();
-	orbiter->FRecorder_RescanPlayback();
+	spacexpanse->FRecorder_RescanPlayback();
 }
 
 void PlaybackEditor::CommitEdit ()
@@ -985,7 +985,7 @@ void PlaybackEditor::RefreshTMarker ()
 	char cbuf[1024];
 	char tstr[1024];
 	double t, dummy;
-	if (orbiter->IsRunning()) {
+	if (spacexpanse->IsRunning()) {
 		bool blink = (modf (td.SysT0, &dummy) > 0.5);
 		if (blink) sprintf (tstr, "%0.0f", td.SimT0);
 		else sprintf (tstr, "%0.0f\t< < < < < < < < < < < < < < < < < < <", td.SimT0);
@@ -1010,7 +1010,7 @@ void PlaybackEditor::RefreshTMarker ()
 		SendDlgItemMessage (hDlg, IDC_LIST1, LB_INSERTSTRING, tmarkidx = i-1, (LPARAM)tstr);
 		SendDlgItemMessage (hDlg, IDC_LIST1, LB_SETTOPINDEX, topidx, 0);
 	}
-	if (orbiter->IsRunning()) {
+	if (spacexpanse->IsRunning()) {
 		topidx = SendDlgItemMessage (hDlg, IDC_LIST1, LB_GETTOPINDEX, 0, 0);
 		if (topidx < max (tmarkidx-14, 0)) {
 			SendDlgItemMessage (hDlg, IDC_LIST1, LB_SETTOPINDEX, max (0, tmarkidx-14), 0);
@@ -1140,11 +1140,11 @@ void PlaybackEditor::SortEvent (PlaybackEvent *e)
 
 INT_PTR CALLBACK RecPlayAnn_DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	PlaybackEditor *pe = g_pOrbiter->FReditor;
+	PlaybackEditor *pe = g_pSpaceXpanse->FReditor;
 	if (uMsg == WM_INITDIALOG) {
 		pe = (PlaybackEditor*)lParam;
 	}
 	if (pe) return pe->DlgProc (hDlg, uMsg, wParam, lParam);
-	else return OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam);
+	else return SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam);
 }
 

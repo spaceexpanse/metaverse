@@ -1,18 +1,18 @@
 [OPTIONS]
 Auto Index=Yes
 Compatibility=1.1 or later
-Compiled file=orbiter.chm
-Contents file=Orbiter.hhc
+Compiled file=spacexpanse.chm
+Contents file=SpaceXpanse.hhc
 Default Window=LaunchpadHelp
 Default topic=intro.htm
 Display compile progress=Yes
 Full-text search=Yes
-Index file=Orbiter.hhk
+Index file=SpaceXpanse.hhk
 Language=0x809 English (United Kingdom)
-Title=Orbiter Help
+Title=SpaceXpanse Help
 
 [WINDOWS]
-LaunchpadHelp=,"Orbiter.hhc","Orbiter.hhk","intro.htm","intro.htm",,,,,0x2520,,0x3046,,,,,,,,0
+LaunchpadHelp=,"SpaceXpanse.hhc","SpaceXpanse.hhk","intro.htm","intro.htm",,,,,0x2520,,0x3046,,,,,,,,0
 
 
 [FILES]
@@ -42,7 +42,7 @@ mfd_map.htm
 mfd_map_ctrl.htm
 mfd_map_disp.htm
 banner.jpg
-..\Orbiter.css
+..\SpaceXpanse.css
 ..\master.js
 mfd_com.htm
 mfd_com_ctrl.htm
@@ -97,7 +97,7 @@ Script\api_proc.htm
 Script\api_vessel.htm
 Script\mtd_note.htm
 Script\mtd_vessel.htm
-Script\OrbiterAPI.css
+Script\SpaceXpanseAPI.css
 Script\Invoking.htm
 Script\Datatypes.htm
 Script\function.htm

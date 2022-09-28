@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ORBITER_ROOT)\Orbitersdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ORBITER_ROOT)\SpaceXpansesdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -118,7 +118,7 @@
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
     </Lib>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT)\Orbitersdk\XRSound\XRSoundD.lib /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT)\Orbitersdk\XRSound\* /y</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT)\SpaceXpansesdk\XRSound\XRSoundD.lib /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT)\SpaceXpansesdk\XRSound\* /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,7 +129,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ORBITER_ROOT_X64)\Orbitersdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ORBITER_ROOT_X64)\SpaceXpansesdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -138,7 +138,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_X64)\Orbitersdk\XRSound\XRSoundD.lib /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_X64)\Orbitersdk\XRSound\* /y</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_X64)\SpaceXpansesdk\XRSound\XRSoundD.lib /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_X64)\SpaceXpansesdk\XRSound\* /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,7 +150,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ORBITER_ROOT)\Orbitersdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ORBITER_ROOT)\SpaceXpansesdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -168,7 +168,7 @@
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
     </Lib>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_RELEASE)\Orbitersdk\XRSound\* /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_RELEASE)\Orbitersdk\XRSound\* /y</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_RELEASE)\SpaceXpansesdk\XRSound\* /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_RELEASE)\SpaceXpansesdk\XRSound\* /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -181,7 +181,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ORBITER_ROOT_RELEASE_X64)\Orbitersdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ORBITER_ROOT_RELEASE_X64)\SpaceXpansesdk\include;..\XRSoundDLL</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -194,7 +194,7 @@
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
     </Lib>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_RELEASE_X64)\Orbitersdk\XRSound\* /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_RELEASE_X64)\Orbitersdk\XRSound\* /y</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(ORBITER_ROOT_RELEASE_X64)\SpaceXpansesdk\XRSound\* /y &amp;&amp; copy XRSound.h $(ORBITER_ROOT_RELEASE_X64)\SpaceXpansesdk\XRSound\* /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

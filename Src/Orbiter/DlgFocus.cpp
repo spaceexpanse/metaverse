@@ -9,7 +9,7 @@
 
 #include "DlgFocus.h"
 #include "Resource.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Psys.h"
 #include "SuperVessel.h"
 #include "Pane.h"
@@ -18,7 +18,7 @@
 #include "Uxtheme.h"
 #include <iomanip>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern Vessel *g_focusobj, *g_pfocusobj;
 extern Camera *g_camera;
@@ -30,18 +30,18 @@ extern char DBG_MSG[256];
 DlgFocus::DlgFocus (HINSTANCE hInstance, HWND hParent, void *context)
 : DialogWin (hInstance, hParent, IDD_JUMPVESSEL, 0, 0, context)
 {
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgFocus;
-	irange = g_pOrbiter->Cfg()->CfgUIPrm.SelVesselRange;
-	unroll_assemblies = g_pOrbiter->Cfg()->CfgUIPrm.bSelVesselFlat;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgFocus;
+	irange = g_pSpaceXpanse->Cfg()->CfgUIPrm.SelVesselRange;
+	unroll_assemblies = g_pSpaceXpanse->Cfg()->CfgUIPrm.bSelVesselFlat;
 }
 
 // ======================================================================
 
 DlgFocus::~DlgFocus ()
 {
-	g_pOrbiter->Cfg()->CfgUIPrm.SelVesselTab = ctab;
-	g_pOrbiter->Cfg()->CfgUIPrm.SelVesselRange = irange;
-	g_pOrbiter->Cfg()->CfgUIPrm.bSelVesselFlat = unroll_assemblies;
+	g_pSpaceXpanse->Cfg()->CfgUIPrm.SelVesselTab = ctab;
+	g_pSpaceXpanse->Cfg()->CfgUIPrm.SelVesselRange = irange;
+	g_pSpaceXpanse->Cfg()->CfgUIPrm.bSelVesselFlat = unroll_assemblies;
 }
 
 // ======================================================================
@@ -59,7 +59,7 @@ BOOL DlgFocus::OnInitDialog (HWND hWnd, WPARAM wParam, LPARAM lParam)
 		tie.pszText = label[i];
 		SendDlgItemMessage (hWnd, IDC_TAB1, TCM_INSERTITEM, i, (LPARAM)&tie);
 	}
-	ctab = g_pOrbiter->Cfg()->CfgUIPrm.SelVesselTab;
+	ctab = g_pSpaceXpanse->Cfg()->CfgUIPrm.SelVesselTab;
 
 	GetClientRect (hWnd, &rClient);
 	rTab  = GetClientPos (hWnd, GetDlgItem (hWnd, IDC_TAB1));
@@ -149,7 +149,7 @@ BOOL DlgFocus::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 		return TRUE;
 	case IDHELP:
 		DefHelpContext.topic = "/selvessel.htm";
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	case IDOK:
 		return SelectVessel (hDlg);
@@ -509,7 +509,7 @@ BOOL DlgFocus::SelectVessel (HWND hDlg)
 	Vessel *vessel = g_psys->GetVessel (cbuf, true);
 	if (vessel) {
 		SetWindowText (GetDlgItem (hDlg, IDC_EDIT1), vessel->Name());
-		g_pOrbiter->SetFocusObject (vessel);
+		g_pSpaceXpanse->SetFocusObject (vessel);
 		HTREEITEM hti = FindItem (hDlg, vessel->Name(), 0);
 		if (hti)
 			PostMessage (GetDlgItem (hDlg, IDC_TREE1), TVM_SELECTITEM, TVGN_CARET, (LPARAM)hti);

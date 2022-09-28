@@ -9,7 +9,7 @@
 
 #include <time.h>
 #include "vecmat.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 const double iAU = 1.0/AU;
 // inverse of AU

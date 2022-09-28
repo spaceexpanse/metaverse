@@ -4,7 +4,7 @@
 #ifndef __VSOP_H
 #define __VSOP_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 #define VSOP_MAXALPHA 5		// max power of time

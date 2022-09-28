@@ -121,7 +121,7 @@ public:
 	/**
 	 * \brief Saves the contents of a surface to a formatted image file or to the clipboard
 	 * \param surf surface handle (0 for primary render surface)
-	 * \param fname image file path relative to orbiter root directory (excluding file extension), or NULL to save to clipboard
+	 * \param fname image file path relative to spacexpanse root directory (excluding file extension), or NULL to save to clipboard
 	 * \param fmt output file format
 	 * \return \e true on success
 	 */

@@ -15,7 +15,7 @@
 // Externs
 
 extern char DBG_MSG[256];
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern DWORD g_vtxcount;
 extern DWORD g_tilecount;
@@ -403,16 +403,16 @@ MenuInfoBar::MenuInfoBar (const Pane *_pane)
 	infoW = 200;
 
 	scrollzone = (gc->clbkFullscreenMode() ? 0:16);
-	scrollspeed = g_pOrbiter->Cfg()->CfgUIPrm.MenuScrollspeed;
-	scrollrange = (g_pOrbiter->Cfg()->CfgUIPrm.bMenuLabelOnly ? 17 : menuH);
-	opacity = g_pOrbiter->Cfg()->CfgUIPrm.MenuOpacity;
-	opacity_info = g_pOrbiter->Cfg()->CfgUIPrm.InfoOpacity;
-	menumode = g_pOrbiter->Cfg()->CfgUIPrm.MenuMode;
-	infomode = g_pOrbiter->Cfg()->CfgUIPrm.InfoMode;
-	pausemode = g_pOrbiter->Cfg()->CfgUIPrm.PauseIndMode;
+	scrollspeed = g_pSpaceXpanse->Cfg()->CfgUIPrm.MenuScrollspeed;
+	scrollrange = (g_pSpaceXpanse->Cfg()->CfgUIPrm.bMenuLabelOnly ? 17 : menuH);
+	opacity = g_pSpaceXpanse->Cfg()->CfgUIPrm.MenuOpacity;
+	opacity_info = g_pSpaceXpanse->Cfg()->CfgUIPrm.InfoOpacity;
+	menumode = g_pSpaceXpanse->Cfg()->CfgUIPrm.MenuMode;
+	infomode = g_pSpaceXpanse->Cfg()->CfgUIPrm.InfoMode;
+	pausemode = g_pSpaceXpanse->Cfg()->CfgUIPrm.PauseIndMode;
 	fixedstep = (td.FixedStep() > 0.0);
-	warp_always = g_pOrbiter->Cfg()->CfgUIPrm.bWarpAlways;
-	warp_scientific = g_pOrbiter->Cfg()->CfgUIPrm.bWarpScientific;
+	warp_always = g_pSpaceXpanse->Cfg()->CfgUIPrm.bWarpAlways;
+	warp_scientific = g_pSpaceXpanse->Cfg()->CfgUIPrm.bWarpScientific;
 	menustate = (menumode == 0 ? 1:0);
 	infostate = (infomode == 0 ? 1:0);
 	scrollpos = (menumode == 0 ? scrollrange : 0.0);
@@ -486,7 +486,7 @@ MenuInfoBar::MenuInfoBar (const Pane *_pane)
 	eibar[0] = eibar[1] = NULL;
 	UpdateMeshVertices();
 	for (int i = 0; i < 2; i++)
-		SetAuxInfobar (i, g_pOrbiter->Cfg()->CfgUIPrm.InfoAuxIdx[i]);
+		SetAuxInfobar (i, g_pSpaceXpanse->Cfg()->CfgUIPrm.InfoAuxIdx[i]);
 
 	// Add a mesh for the pause/run indicator
 	int tw = 1024, th = 128;
@@ -663,48 +663,48 @@ bool MenuInfoBar::ProcessMouse (UINT event, DWORD state, DWORD x, DWORD y)
 	if (event == WM_LBUTTONDOWN && itemHighlight >= 0) {
 		switch (itemHighlight) {
 		case 0:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgFocus> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgFocus> ();
 			return true;
 		case 1:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgCamera> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgCamera> ();
 			return true;
 		case 2:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgTacc> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgTacc> ();
 			return true;
 		case 3:
-			g_pOrbiter->TogglePause();
+			g_pSpaceXpanse->TogglePause();
 			return true;
 		case 4:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgInfo> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgInfo> ();
 			return true;
 		case 5:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgFunction> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgFunction> ();
 			return true;
 		case 6:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgVishelper> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgVishelper> ();
 			return true;
 		case 7:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgMap> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgMap> ();
 			return true;
 		case 8:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgRecorder> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgRecorder> ();
 			return true;
 		case 9:
 			extern HELPCONTEXT DefHelpContext;
 			DefHelpContext.topic = "/mainmenu.htm";
-			g_pOrbiter->OpenHelp (&DefHelpContext);
+			g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 			return true;
 		case 10:
-			g_pOrbiter->Quicksave ();
+			g_pSpaceXpanse->Quicksave ();
 			return true;
 		case 11:
-			g_pOrbiter->PreCloseSession();
-			DestroyWindow (g_pOrbiter->GetRenderWnd());
+			g_pSpaceXpanse->PreCloseSession();
+			DestroyWindow (g_pSpaceXpanse->GetRenderWnd());
 			return true;
 		}
 	}
 	if (event == WM_RBUTTONDOWN && y <= scrollpos && x >= menuX && x < menuX+menuW) {
-		g_pOrbiter->DlgMgr()->EnsureEntry<DlgMenuCfg> ();
+		g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgMenuCfg> ();
 		return true;
 	}
 	return false;
@@ -837,7 +837,7 @@ void MenuInfoBar::SetMenuMode (DWORD mode)
 		} else if (mode != 1) {
 			if (menustate != 1) scrolldir = 1;
 		}
-		g_pOrbiter->Cfg()->CfgUIPrm.MenuMode = mode;
+		g_pSpaceXpanse->Cfg()->CfgUIPrm.MenuMode = mode;
 	}
 }
 
@@ -850,7 +850,7 @@ void MenuInfoBar::SetInfoMode (DWORD mode)
 		} else if (mode != 1) {
 			if (infostate != 1) scrolldir_info = 1;
 		}
-		g_pOrbiter->Cfg()->CfgUIPrm.InfoMode = mode;
+		g_pSpaceXpanse->Cfg()->CfgUIPrm.InfoMode = mode;
 	}
 }
 

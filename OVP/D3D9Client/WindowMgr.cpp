@@ -1071,7 +1071,7 @@ SideBar *WindowManager::FindDestination()
 
 
 // ===============================================================================================
-// Orbiter Application Main Window Proc
+// SpaceXpanse Application Main Window Proc
 //
 bool WindowManager::MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

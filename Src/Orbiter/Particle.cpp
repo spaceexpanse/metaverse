@@ -6,7 +6,7 @@
 
 #define STRICT 1
 #include "Particle.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Camera.h"
 #include "Planet.h"
 #include "Vessel.h"
@@ -16,7 +16,7 @@
 #include "Util.h"
 #include <stdio.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TimeData td;
 extern DWORD g_vtxcount;
@@ -110,7 +110,7 @@ void D3D7ParticleStream::SetSpecs (PARTICLESTREAMSPEC *pss)
 	case PARTICLESTREAMSPEC::ATM_PLOG: afac = 1.0/log(pss->amax/amin); break;
 	}
 	tex = pss->tex ? (LPDIRECTDRAWSURFACE7)pss->tex :
-		g_pOrbiter->GetInlineGraphicsClient()->GetScene()->GetDefaultParticleTexture();
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->GetDefaultParticleTexture();
 }
 
 void D3D7ParticleStream::SetParticleHalflife (double pht)
@@ -624,7 +624,7 @@ void ExhaustStream::Update ()
 					vv + vr+dv, size0, alpha0);
 				p->size += alpha * dt;
 
-				if (diffuse && hPlanet && g_pOrbiter->Cfg()->CfgVisualPrm.bVesselShadows) { // check for shadow render
+				if (diffuse && hPlanet && g_pSpaceXpanse->Cfg()->CfgVisualPrm.bVesselShadows) { // check for shadow render
 					double lng, lat, alt;
 					static const double eps = 1e-2;
 					oapiGlobalToEqu (hPlanet, p->pos, &lng, &lat, &alt);

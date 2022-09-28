@@ -15,7 +15,7 @@
 #define ORBITER_MODULE
 #include <windows.h>
 #include <commctrl.h>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 #include <cstdio>
 
@@ -54,7 +54,7 @@ INT_PTR CALLBACK MsgProc (HWND, UINT, WPARAM, LPARAM);
 // ==============================================================
 
 // ==============================================================
-// This function is called when Orbiter starts or when the module
+// This function is called when SpaceXpanse starts or when the module
 // is activated.
 
 DLLCLBK void InitModule (HINSTANCE hModule)
@@ -67,13 +67,13 @@ DLLCLBK void InitModule (HINSTANCE hModule)
 
 
 // ==============================================================
-// This function is called when Orbiter shuts down or when the
+// This function is called when SpaceXpanse shuts down or when the
 // module is deactivated
 
 DLLCLBK void ExitModule (HINSTANCE hModule)
 {
 	oapiUnregisterCustomCmd (g_dwCmd);
-	// Unregister the custom function in Orbiter
+	// Unregister the custom function in SpaceXpanse
 }
 
 

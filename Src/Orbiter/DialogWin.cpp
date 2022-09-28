@@ -3,14 +3,14 @@
 
 #include "DialogWin.h"
 #include "DlgMgr.h"
-#include "OrbiterAPI.h"
-#include "Orbiter.h"
+#include "SpaceXpanseAPI.h"
+#include "SpaceXpanse.h"
 #include "Resource.h"
 #include "Log.h"
 
 #define DLG_CAPTIONBUTTON (DLG_CAPTIONCLOSE|DLG_CAPTIONHELP)
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 
 static int x_sizeframe = GetSystemMetrics (SM_CXSIZEFRAME);
 static int y_sizeframe = GetSystemMetrics (SM_CYSIZEFRAME);
@@ -24,7 +24,7 @@ DialogWin *DialogWin::dlg_create = 0;
 DialogWin::DialogWin (HINSTANCE hInstance, HWND hParent, int resourceId,
 					  DLGPROC pDlg, DWORD flags, void *pContext)
 {
-	gc      = g_pOrbiter->GetGraphicsClient();
+	gc      = g_pSpaceXpanse->GetGraphicsClient();
 	hInst   = hInstance;
 	resId   = resourceId;
 	flag    = flags;
@@ -44,7 +44,7 @@ DialogWin::DialogWin (HINSTANCE hInstance, HWND hParent, int resourceId,
 
 DialogWin::DialogWin (HINSTANCE hInstance, HWND hWindow, HWND hParent, DWORD flags)
 {
-	gc      = g_pOrbiter->GetGraphicsClient();
+	gc      = g_pSpaceXpanse->GetGraphicsClient();
 	hInst   = hInstance;
 	resId   = 0;
 	flag    = flags;
@@ -147,7 +147,7 @@ INT_PTR CALLBACK DialogWin::DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
 		res = GetDialogWin (hDlg)->OnUserMessage (hDlg, wParam, lParam);
 		break;
 	}
-	return (res != MSG_DEFAULT ? res : OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam));
+	return (res != MSG_DEFAULT ? res : SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam));
 }
 
 // ======================================================================
@@ -156,7 +156,7 @@ BOOL DialogWin::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 {
 	switch (id) {
 	case IDCANCEL:
-		g_pOrbiter->CloseDialog (hDlg);
+		g_pSpaceXpanse->CloseDialog (hDlg);
 		return TRUE;
 	}
 	return MSG_DEFAULT;
@@ -273,7 +273,7 @@ void DialogWin::PaintTitleButtons ()
 	x0 += r.right-r.left-15;
 	HDC hDC = GetWindowDC (hWnd);
 	HDC hDCsrc = CreateCompatibleDC (hDC);
-	HBITMAP hBmp = (HBITMAP)LoadImage (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(IDB_DEFBUTTON), IMAGE_BITMAP, 15, 30, 0);
+	HBITMAP hBmp = (HBITMAP)LoadImage (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(IDB_DEFBUTTON), IMAGE_BITMAP, 15, 30, 0);
 	SelectObject (hDCsrc, hBmp);
 	int i = 0;
 	if (flag & DLG_CAPTIONCLOSE) {

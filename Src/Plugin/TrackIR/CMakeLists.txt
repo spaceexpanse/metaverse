@@ -20,8 +20,8 @@ target_link_libraries(TrackIR
 )
 
 add_dependencies(TrackIR
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(TrackIR

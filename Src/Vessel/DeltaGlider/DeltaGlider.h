@@ -21,7 +21,7 @@
 
 #define STRICT 1
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "..\Common\Instrument.h"
 
 // ==============================================================

@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text-html; charset=Windows-1252" />
-<link rel="stylesheet" href="../Orbiter.css" type="TEXT/CSS" />
-<link rel="stylesheet" href="OrbiterAPI.css" type="TEXT/CSS" />
-<title>Script API: oapi (General Orbiter API interface functions)</title>
+<link rel="stylesheet" href="../SpaceXpanse.css" type="TEXT/CSS" />
+<link rel="stylesheet" href="SpaceXpanseAPI.css" type="TEXT/CSS" />
+<title>Script API: oapi (General SpaceXpanse API interface functions)</title>
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
 
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; oapi</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; oapi</p>
 
-<h1>oapi: General Orbiter API interface functions</h1>
+<h1>oapi: General SpaceXpanse API interface functions</h1>
 <p>The <i>oapi</i> library contains a collection of functions to retrieve
 general simulation parameters.</p>
 
@@ -353,11 +353,11 @@ general simulation parameters.</p>
 </tr>
 <tr>
 <td><a href="#oapi_simulatebufferedkey">oapi.simulatebufferedkey</a></td>
-<td>Send a simulated keyboard event to Orbiter for processing.</td>
+<td>Send a simulated keyboard event to SpaceXpanse for processing.</td>
 </tr>
 <tr>
 <td><a href="#oapi_simulateimmediatekey">oapi.simulateimmediatekey</a></td>
-<td>Send a simulated key state to Orbiter for processing.</td>
+<td>Send a simulated key state to SpaceXpanse for processing.</td>
 </tr>
 </table>
 
@@ -413,7 +413,7 @@ oapi.open_help(file,topic)<br /></h3>
 
 <h4>Notes:</h4>
 <p><i>file</i> can point either to a html file, or a compiled help file (.chm).
-If the file name contains a path, it is interpreted relative to the Orbiter
+If the file name contains a path, it is interpreted relative to the SpaceXpanse
 main directory.
 Example:</p>
 <div class="code">
@@ -518,7 +518,7 @@ end
 </table>
 
 <h4>Notes:</h4>
-<p>"Objects" in an Orbiter simulation are:</p>
+<p>"Objects" in an SpaceXpanse simulation are:</p>
 <ul>
 <li>vessels (spacecraft, space stations, etc.)</li>
 <li>planets and moons</li>
@@ -637,7 +637,7 @@ the session).</p>
 <h3>mjd = oapi.get_simmjd()</h3>
 <p>Returns the Modified Julian Date (MJD) of the current simulation state.
  The MJD is the number of days that have elapsed since midnight of November 17,
- 1858. The MJD is used as an absolute time reference in Orbiter.</p>
+ 1858. The MJD is used as an absolute time reference in SpaceXpanse.</p>
 
 <h4>Return values:</h4>
 <table>
@@ -688,7 +688,7 @@ oapi.set_simmjd(mjd,pmode)</h3>
 <h4>Notes:</h4>
 <p>The returned value is the UTC time obtained from the computer system
  clock, plus dt=66.184 seconds to map from UTC to TDB (Barycentric Dynamical
- Time) used internally by Orbiter.</p>
+ Time) used internally by SpaceXpanse.</p>
  
 <h4>See also:</h4>
 <p>
@@ -786,7 +786,7 @@ to simt.</td></tr>
 
 <div class="func"><a name="oapi_get_mainmenuvisibilitymode"></a>
 <h3>mode = oapi.get_mainmenuvisibilitymode ()</h3>
-<p>Returns the visibility mode (show, hide, auto-hide) of the main menu in the Orbiter simulation window.</p>
+<p>Returns the visibility mode (show, hide, auto-hide) of the main menu in the SpaceXpanse simulation window.</p>
 
 <h4>Return values:</h4>
 <table>
@@ -802,7 +802,7 @@ to simt.</td></tr>
 
 <div class="func"><a name="oapi_set_mainmenuvisibilitymode"></a>
 <h3>oapi.set_mainmenuvisibilitymode (mode)</h3>
-<p>Sets the visibility mode (show, hide, auto-hide) of the main menu in the Orbiter simulation window.</p>
+<p>Sets the visibility mode (show, hide, auto-hide) of the main menu in the SpaceXpanse simulation window.</p>
 
 <h4>Parameters:</h4>
 <table>
@@ -818,7 +818,7 @@ to simt.</td></tr>
 
 <div class="func"><a name="oapi_get_maininfovisibilitymode"></a>
 <h3>mode = oapi.get_maininfovisibilitymode ()</h3>
-<p>Returns the visibility mode (show, hide, auto-hide) of the left and right info bars in the Orbiter simulation window.</p>
+<p>Returns the visibility mode (show, hide, auto-hide) of the left and right info bars in the SpaceXpanse simulation window.</p>
 
 <h4>Return values:</h4>
 <table>
@@ -834,7 +834,7 @@ to simt.</td></tr>
 
 <div class="func"><a name="oapi_set_maininfovisibilitymode"></a>
 <h3>oapi.set_maininfovisibilitymode (mode)</h3>
-<p>Sets the visibility mode (show, hide, auto-hide) of the left and right info bars in the Orbiter simulation window.</p>
+<p>Sets the visibility mode (show, hide, auto-hide) of the left and right info bars in the SpaceXpanse simulation window.</p>
 
 <h4>Parameters:</h4>
 <table>
@@ -1903,7 +1903,7 @@ oapi.set_cameratarget(hObj,mode)</h3>
 </table>
 
 <h4>Notes:</h4>
-<p>Orbiter defines the the aperture as 1/2 of the vertical field of view,
+<p>SpaceXpanse defines the the aperture as 1/2 of the vertical field of view,
  between the viewport centre and the top edge of the viewport.</p>
  
 <h4>See also:</h4>
@@ -1923,11 +1923,11 @@ oapi.set_cameratarget(hObj,mode)</h3>
 </table>
 
 <h4>Notes:</h4>
-<p>Orbiter restricts the aperture to the range from RAD*5 to RAD*80 (i. e.
+<p>SpaceXpanse restricts the aperture to the range from RAD*5 to RAD*80 (i. e.
  field of view between 10 and 160 deg. Very wide angles (&gt; 90 deg) should
  only be used to implement specific optical devices, e.g. wide-angle
  cameras, not for standard observer views.</p>
-<p>The Orbiter user interface does not accept fields of view &gt; 90 deg.
+<p>The SpaceXpanse user interface does not accept fields of view &gt; 90 deg.
  As soon as the user manipulates the aperture manually, it will be clamped
  back to the range from 10 to 90 deg.</p>
  
@@ -2083,7 +2083,7 @@ longer referenced by any animations.</p>
 <div class="func">
 <h3><a name="oapi_simulatebufferedkey"></a>oapi.simulatebufferedkey(key)<br />
 oapi.simulatebufferedkey(key,[modifier1, modifier2, ...])</h3>
-<p>Sends a simulated buffered keyboard event to Orbiter, to be processed like
+<p>Sends a simulated buffered keyboard event to SpaceXpanse, to be processed like
 a user keypress.</p>
 
 <h4>Parameters:</h4>
@@ -2097,7 +2097,7 @@ a user keypress.</p>
 
 <div class="func">
 <h3><a name="oapi_simulateimmediatekey"></a>oapi.simulateimmediatekey(key1 [, key2, ...])</h3>
-<p>Sends a simulated key state to Orbiter for processing in the next frame. To simulate a 
+<p>Sends a simulated key state to SpaceXpanse for processing in the next frame. To simulate a 
 continued key press, the function must be called for multiple frames</p>
 
 <h4>Parameters:</h4>

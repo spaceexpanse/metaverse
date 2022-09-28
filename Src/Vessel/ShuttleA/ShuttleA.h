@@ -12,7 +12,7 @@
 #ifndef __SHUTTLEA_H
 #define __SHUTTLEA_H
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 // ==========================================================
 // Some vessel class caps

@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <strstream>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 static COLORREF plotcol[MAXPLOT] = { 0x0000ff, 0xff0000, 0x00ff00 };
 

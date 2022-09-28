@@ -631,7 +631,7 @@ void Interpreter::LoadVesselAPI ()
 	lua_pushnumber (L, ALLDOCKS); lua_setfield (L, LUA_GLOBALSINDEX, "ALLDOCKS");
 
 	// predefined help contexts
-	lua_pushstring (L, "intro.htm"); lua_setfield (L, LUA_GLOBALSINDEX, "orbiter");
+	lua_pushstring (L, "intro.htm"); lua_setfield (L, LUA_GLOBALSINDEX, "spacexpanse");
 	lua_pushstring (L, "script/ScriptRef.htm"); lua_setfield (L, LUA_GLOBALSINDEX, "api");
 }
 
@@ -853,7 +853,7 @@ Set the vessel's mean radius.
 The size should correspond to the vessel's visual representation, for example the
 mesh used to show the vessel in the simulation window.
 
-The size parameter is used by Orbiter to determine the camera distance at which
+The size parameter is used by SpaceXpanse to determine the camera distance at which
 the vessel is within visual range of the observer camera. It is also used for
 calculating various physical parameters.
 
@@ -898,7 +898,7 @@ The empty mass combines all parts of the vessel except propellant resources
 defined via @{vessel:create_propellantresource}.
 
 Use set_emptymass to account for structural changes such as stage or booster
-separation, but not for fuel consumption, which is done directly by Orbiter.
+separation, but not for fuel consumption, which is done directly by SpaceXpanse.
 
 @function set_emptymass
 @tparam number emass vessel dry mass [kg]
@@ -923,10 +923,10 @@ acceleration. It is the analog of the body's mass in the linear case.
 The values returned by this function are the diagonal elements of the inertia
 tensor, in the local vessel frame of reference.
 
-Orbiter's definition of PMI is mass-normalised, that is, the values are divided
+SpaceXpanse's definition of PMI is mass-normalised, that is, the values are divided
 by the total vessel mass.
 
-Orbiter assumes that off-diagonal elements can be neglected, that is, that the
+SpaceXpanse assumes that off-diagonal elements can be neglected, that is, that the
 diagonal elements are the principal moments of inertia. This is usually a good
 approximation when the vessel is sufficiently symmetric with respect to its
 coordinate frame. Otherwise, a diagonalisation by rotating the local frame may be
@@ -1433,7 +1433,7 @@ int Interpreter::v_get_mass (lua_State *L)
 /***
 Returns the vessel's position vector in global coordinates.
 
-Orbiter's global reference frame is the solar system's barycentric
+SpaceXpanse's global reference frame is the solar system's barycentric
 ecliptic frame at epoch J2000.0.
 
 @function get_globalpos
@@ -1454,7 +1454,7 @@ int Interpreter::v_get_globalpos (lua_State *L)
 /***
 Returns the vessel's velocity vector in global coordinates.
 
-Orbiter's global reference frame is the solar system's barycentric
+SpaceXpanse's global reference frame is the solar system's barycentric
 ecliptic frame at epoch J2000.0.
 
 @function get_globalvel
@@ -2046,7 +2046,7 @@ This function will always return false if the user has disabled
 If the user has enabled orbit stabilisation in the Launchpad,
    this function may sometimes return false during high time
    compression, even if the nonspherical option has been selected. In
-   such situations Orbiter can exclude nonspherical perturbations to
+   such situations SpaceXpanse can exclude nonspherical perturbations to
    avoid numerical instabilities.
 
 @function is_nonsphericalgravityenabled
@@ -2978,7 +2978,7 @@ that aoa can range over the full circle (-pi to pi). For vertical lift component
 aoa is the pitch angle of attack (a), while for horizontal components it is the
 yaw angle of attack (b).
 
-If the wing area S is set to 0, then Orbiter uses the projected vessel cross
+If the wing area S is set to 0, then SpaceXpanse uses the projected vessel cross
 sections to define a reference area. Let (vx, vy, vz) be the unit vector of
 freestream air flow in vessel coordinates. Then the reference area is calculated
 as S = vz Cz + vy Cy for a LIFT.VERTICAL airfoil, and as S = vz Cz + vx Cx for a
@@ -2987,7 +2987,7 @@ and z direction, respectively.
 
 The wing aspect ratio is defined as defined as A = b&sup2;/S with wing span b.
 
-If no airfoils are defined, Orbiter will fall back to its legacy drag
+If no airfoils are defined, SpaceXpanse will fall back to its legacy drag
 calculation, using the cw coefficients defined in @{vessel:set_cw}. The legacy model does
 not support lift forces.
 
@@ -3049,7 +3049,7 @@ int Interpreter::v_edit_airfoil (lua_State *L)
 /***
 Deletes a previously defined airfoil.
 
-If all the vessel's airfoils are deleted without creating new ones, Orbiter reverts to
+If all the vessel's airfoils are deleted without creating new ones, SpaceXpanse reverts to
 the obsolete legacy atmospheric flight model.
 
 @function del_airfoil
@@ -3822,7 +3822,7 @@ This function can be used to implement custom forces (braking
    chutes, tethers, etc.). It should not be used for standard forces
    such as engine thrust or aerodynamic forces which are handled
    internally (although in theory this function makes it possible to
-   bypass Orbiter's built-in thrust and aerodynamics model completely
+   bypass SpaceXpanse's built-in thrust and aerodynamics model completely
    and replace it by a user-defined model).
 
 The force is applied only for the next time step. add_force will
@@ -3854,7 +3854,7 @@ Fuel management
 /***
 Creates a new propellant resource.
 
-Orbiter doesn't distinguish between propellant and oxidant. A "propellant resource" is
+SpaceXpanse doesn't distinguish between propellant and oxidant. A "propellant resource" is
 assumed to be a combination of fuel and oxidant resources.
 
 The interpretation of a propellant resource (liquid or solid propulsion system, ion
@@ -4045,7 +4045,7 @@ propellant resource.
 
 This method should be used to simulate refuelling, fuel leaks, cross-feeding between
 tanks, etc. but not for normal fuel consumption by thrusters (which is handled
-internally by the Orbiter core).
+internally by the SpaceXpanse core).
 
 @function set_propellantmass
 @tparam handle hProp propellant resource handle
@@ -4674,7 +4674,7 @@ Sets the thrust level for a thruster.
 
 At level 1, the thruster generates maximum force, as defined by its maxth parameter.
 
-Certain thrusters are controlled directly by Orbiter via primary input controls (e.g.
+Certain thrusters are controlled directly by SpaceXpanse via primary input controls (e.g.
 joystick throttle control for main thrusters), which may override this function.
 
 @function set_thrusterlevel
@@ -5112,7 +5112,7 @@ linear velocity (in RCSMODE.LIN mode).
 
 RCSMODE.OFF indicates that the RCS is disabled or not available.
 
-Currently Orbiter doesn't allow simultaneous linear and rotational RCS
+Currently SpaceXpanse doesn't allow simultaneous linear and rotational RCS
 control via keyboard or joystick. The user has to switch between the two.
 However, simultaneous operation is possible via the "RControl" plugin
 module.
@@ -6426,10 +6426,10 @@ Meshes
 /***
 Loads a mesh definition for the vessel from a file or from a pre-loaded mesh template.
 
-_meshName_ defines a path to an existing mesh file. The mesh must be in Orbiter's MSH format
+_meshName_ defines a path to an existing mesh file. The mesh must be in SpaceXpanse's MSH format
 (see 3DModel.pdf).
 
-The file name (including optional directory path) is relative to Orbiter's mesh directory
+The file name (including optional directory path) is relative to SpaceXpanse's mesh directory
 (usually ".\Meshes"). The file extension must not be specified (.msh is assumed.)
 
 _hMesh_ is a handle to a mesh previously loaded with oapi.load_meshglobal.
@@ -6480,10 +6480,10 @@ int Interpreter::v_add_mesh (lua_State *L)
 /***
 Inserts or replaces a mesh at a specific index location of the vessel's mesh list.
 
-_meshName_ defines a path to an existing mesh file. The mesh must be in Orbiter's MSH format
+_meshName_ defines a path to an existing mesh file. The mesh must be in SpaceXpanse's MSH format
 (see 3DModel.pdf).
 
-The file name (including optional directory path) is relative to Orbiter's mesh directory
+The file name (including optional directory path) is relative to SpaceXpanse's mesh directory
 (usually ".\Meshes"). The file extension must not be specified (.msh is assumed.)
 
 _hMesh_ is a handle to a mesh previously loaded with @{oapi.load_meshglobal}.
@@ -6747,7 +6747,7 @@ int Interpreter::v_del_animation (lua_State *L)
 Sets the state of an animation.
 
 Each animation is defined by its state, with extreme points state=0 and state=1. When
-setting a state between 0 and 1, Orbiter carries out the appropriate transformations to
+setting a state between 0 and 1, SpaceXpanse carries out the appropriate transformations to
 advance the animation to that state. It is the responsibility of the code developer to call
 SetAnimation in such a way as to provide a smooth movement of the animated parts.
 
@@ -6862,7 +6862,7 @@ Use @{unregister_animation} to stop further calls to
    %VESSEL2::clbkAnimate.
 
 Each call to @{register_animation} increments a reference counter, while
-   each call to @{unregister_animation} decrements the counter. Orbiter
+   each call to @{unregister_animation} decrements the counter. SpaceXpanse
    continues calling %VESSEL2::clbkAnimate as long as the counter is greater
    than 0.
 
@@ -6873,7 +6873,7 @@ The @{register_animation} mechanism leaves the actual implementation of
    the animation (transformation of mesh groups, etc.) entirely to the
    module. The @{create_animation} / @{add_animationcomponent}
    mechanism is an alternative way to define animations where the
-   transformations are managed by the Orbiter core.
+   transformations are managed by the SpaceXpanse core.
 
 @function register_animation
 @see VESSEL2::clbkAnimate, unregister_animation, create_animation,
@@ -6922,7 +6922,7 @@ separation).
 
 This function should be called after a vessel has undergone a
    structural change which resulted in a shift of the vessel's centre of
-   gravity (CG). Note that in Orbiter, a vessel's CG coincides by definition
+   gravity (CG). Note that in SpaceXpanse, a vessel's CG coincides by definition
    always with the origin (0,0,0) of its local reference frame.
    Therefore, in order to achieve a shift of the CG by a vector <b>S</b>,
    this function shifts the vessel's global position by +<b>S</b>.
@@ -6960,7 +6960,7 @@ Shift the centre of gravity of a vessel.
 
 This function should be called after a vessel has undergone a
    structural change which resulted in a shift of the vessel's centre of
-   gravity (CG). Note that in Orbiter, a vessel's CG coincides by definition
+   gravity (CG). Note that in SpaceXpanse, a vessel's CG coincides by definition
    always with the origin (0,0,0) of its local reference frame.
    Therefore, in order to achieve a shift of the CG by \a shift,
    this function performs the following actions:
@@ -7539,7 +7539,7 @@ This function can either be called during VESSEL2::clbkSetClassCaps,
    to define different default directions for different instrument panels or
    virtual cockpit positions.
 
-In Orbiter, the user can return to the default direction by pressing the
+In SpaceXpanse, the user can return to the default direction by pressing the
    \e Home key on the cursor key pad.
 
 @function set_cameradefaultdirection
@@ -7670,7 +7670,7 @@ The movement vectors are taken relative to the default cockpit position defined
    via SetCameraOffset.
 
 This function should be called when initialising a cockpit mode (e.g. in
-   clbkLoadPanel or clbkLoadVC). By default, Orbiter resets the linear movement range
+   clbkLoadPanel or clbkLoadVC). By default, SpaceXpanse resets the linear movement range
    to zero whenever the cockpit mode changes.
 
 In addition to the linear movement, the camera also turns left when leaning left,
@@ -7776,7 +7776,7 @@ Triggers a redraw notification to either a 2D panel or a virtual cockpit.
 
 This function can be used to combine the functionality of the
    TriggerPanelRedrawArea() and VCTriggerRedrawArea() methods.
-   Depending on the current cockpit mode, Orbiter sends the redraw request to
+   Depending on the current cockpit mode, SpaceXpanse sends the redraw request to
    either ovcPanelRedrawEvent() or ovcVCRedrawEvent().
 
 This method can only be used if the panel and virtual cockpit areas share a
@@ -7812,7 +7812,7 @@ User interface
 /***
 Sends a keycode message to the vessel.
 
-The key codes correspond to the values for the OAPI_KEY_xxx constants defined in OrbiterAPI.h.
+The key codes correspond to the values for the OAPI_KEY_xxx constants defined in SpaceXpanseAPI.h.
 A convenient way to pick a keycode is via the _ktable_ table. For example, ktable.A has value 0x1E,
 which represents the keycode for A. Only a subset of keycodes is currently defined in the ktable
 table.

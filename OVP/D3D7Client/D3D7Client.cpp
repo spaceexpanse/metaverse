@@ -10,13 +10,13 @@
 // D3D7Client.h
 // Class D3D7Client
 //
-// DX7 version of a graphics subsystem for Orbiter, derived from
-// the GraphicsClient class in the Orbiter API.
+// DX7 version of a graphics subsystem for SpaceXpanse, derived from
+// the GraphicsClient class in the SpaceXpanse API.
 // --------------------------------------------------------------
 
 #define STRICT 1
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "D3D7Client.h"
 #include "D3D7Config.h"
 #include "D3D7Extra.h"
@@ -174,7 +174,7 @@ bool D3D7Client::clbkInitialise ()
         return false;
     }
 
-	// Output driver info to the Orbiter.log file
+	// Output driver info to the SpaceXpanse.log file
 	D3D7Enum_DeviceInfo *pDevices;
 	DWORD nDevices;
 	D3D7Enum_GetDevices (&pDevices, &nDevices);
@@ -186,7 +186,7 @@ bool D3D7Client::clbkInitialise ()
 	}
 
 	// Create the Launchpad video tab interface
-	vtab = new VideoTab (this, ModuleInstance(), OrbiterInstance(), LaunchpadVideoTab());
+	vtab = new VideoTab (this, ModuleInstance(), SpaceXpanseInstance(), LaunchpadVideoTab());
 
 	return true;
 }
@@ -454,7 +454,7 @@ HRESULT D3D7Client::Initialise3DEnvironment ()
 	HRESULT hr;
 	VIDEODATA *data = GetVideoData();
 	DWORD dwFrameworkFlags = D3DFW_ZBUFFER;
-	dwFrameworkFlags |= D3DFW_NO_FPUSETUP; // Orbiter needs double-precision FPU
+	dwFrameworkFlags |= D3DFW_NO_FPUSETUP; // SpaceXpanse needs double-precision FPU
 	if (data->fullscreen) dwFrameworkFlags |= D3DFW_FULLSCREEN;
 	if (data->novsync)    dwFrameworkFlags |= D3DFW_NOVSYNC;
 	if (data->pageflip)   dwFrameworkFlags |= D3DFW_PAGEFLIP;
@@ -699,7 +699,7 @@ bool D3D7Client::OutputLoadStatus (const char *msg, int line)
 
 void D3D7Client::Output2DOverlay ()
 {
-	// Write out the orbiter debug string
+	// Write out the spacexpanse debug string
 	const char *msg = oapiDebugString();
 	if (msg[0]) {
 		HDC hDC;

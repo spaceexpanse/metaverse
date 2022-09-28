@@ -54,8 +54,8 @@ add_dependencies(Solarsail_Prerequisites
 )
 
 add_dependencies(Solarsail
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	Solarsail_Prerequisites
 )
 

@@ -24,7 +24,7 @@ add_custom_command(
 add_custom_target(DynsurfTechnote
 	DEPENDS ${out_path}
 )
-add_dependencies(Orbiter
+add_dependencies(SpaceXpanse
 	DynsurfTechnote
 )
 set_target_properties(DynsurfTechnote

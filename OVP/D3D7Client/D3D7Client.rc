@@ -133,12 +133,12 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_STRING1             "D3D7Client: A DirectX7 Orbiter Graphics Client Plugin.\r\n\r\nDeveloped by Martin Schweiger\r\n\r\nD3D7Client is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\r\n\r\nThe D3D7Client sources can be obtained at http://sourceforge.net/projects/orbitervis.\r\n\r\nD3D7Client is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
+    IDS_STRING1             "D3D7Client: A DirectX7 SpaceXpanse Graphics Client Plugin.\r\n\r\nDeveloped by Martin Schweiger\r\n\r\nD3D7Client is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\r\n\r\nThe D3D7Client sources can be obtained at http://sourceforge.net/projects/spacexpansevis.\r\n\r\nD3D7Client is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
 END
 
 STRINGTABLE 
 BEGIN
-    IDS_INFO                "D3D7 Graphics Client:\r\n\r\nA render engine plugin for Orbiter_ng. This is a reference implementation that provides roughly the same functionality as the engine built into Orbiter.exe."
+    IDS_INFO                "D3D7 Graphics Client:\r\n\r\nA render engine plugin for SpaceXpanse_ng. This is a reference implementation that provides roughly the same functionality as the engine built into SpaceXpanse.exe."
     IDS_TYPE                "Graphics engines"
 END
 

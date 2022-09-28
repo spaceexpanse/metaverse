@@ -3,7 +3,7 @@
 
 #define OAPI_IMPLEMENTATION
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "MfdUser.h"
 #include "Config.h"
 #include "Astro.h"
@@ -25,7 +25,7 @@ extern InputBox *g_input;
 extern Select *g_select;
 extern PlanetarySystem *g_psys;
 extern Instrument *g_instr_passkey;
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern char Key2Char[256];
 extern char DBG_MSG[256];
@@ -220,7 +220,7 @@ DWORD MFD2::GetDefaultColour (DWORD colidx, DWORD intens) const
 // =======================================================================
 // Impementation of module interface class GraphMFD
 // This class is used for defining MFD modes containing 2D graphs
-// See orbitersdk.h for interface
+// See spacexpansesdk.h for interface
 // =======================================================================
 
 GraphMFD::GraphMFD (DWORD w, DWORD h, VESSEL *vessel)

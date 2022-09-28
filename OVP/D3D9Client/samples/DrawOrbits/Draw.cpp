@@ -7,7 +7,7 @@
 #define STRICT 1
 #define ORBITER_MODULE
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "VesselAPI.h"
 #include "ModuleAPI.h"
 #include "DrawAPI.h"
@@ -113,7 +113,7 @@ DLLCLBK void ExitModule(HINSTANCE  hModule)
 
 
 // =================================================================================================
-// Orbiter Module
+// SpaceXpanse Module
 // =================================================================================================
 //
 Orbits::Orbits(HINSTANCE hInst) : Module(hInst), pCore(NULL), Ref(NULL), pBody(NULL)

@@ -1,6 +1,6 @@
-project='Orbiter'
-title='Orbiter Lua Script interface'
-description='Orbiter interface for Lua scripts'
+project='SpaceXpanse'
+title='SpaceXpanse Lua Script interface'
+description='SpaceXpanse interface for Lua scripts'
 format='markdown'
 backtick_references=false
 readme='intro.md'

@@ -16,7 +16,7 @@
 #define __MFDAPI_H
 
 #ifndef SKIP_MFD_API
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 class Instrument;
 
@@ -32,7 +32,7 @@ class Instrument;
  * allows the module to draw the %MFD display. The %MFD class is a pure virtual class. Each userdefined
  * %MFD mode requires the definition of a specialised class derived from %MFD. An
  * example for a generic %MFD mode implemented as a plugin module can be found in
- * orbitersdk\\samples\\CustomMFD.
+ * spacexpansesdk\\samples\\CustomMFD.
  */
 // ======================================================================
 
@@ -48,10 +48,10 @@ public:
 	 * \note MFD is a pure virtual function, so it can't be instantiated directly. It is used as
      *	a base class for specialised MFD modes.
 	 * \note New MFD modes are registered by a call to oapiRegisterMFDMode().
-     *	Whenever the new mode is selected by the user, Orbiter sends a
+     *	Whenever the new mode is selected by the user, SpaceXpanse sends a
  	 *	OAPI_MSG_MFD_OPENED signal to the message handler, to which the
  	 *	module should respond by creating the MFD mode and returning a pointer to
-	 *	it. Orbiter will automatically destroy the MFD mode when it is turned off.
+	 *	it. SpaceXpanse will automatically destroy the MFD mode when it is turned off.
 	 */
 	MFD (DWORD w, DWORD h, VESSEL *vessel);
 
@@ -61,10 +61,10 @@ public:
 	virtual ~MFD();
 
 	/**
-	 * \brief Callback function: Orbiter calls this method when the MFD needs to update its display.
+	 * \brief Callback function: SpaceXpanse calls this method when the MFD needs to update its display.
 	 * \param hDC Windows device context for drawing on the MFD display surface.
 	 * \note The frequency at which this function is called corresponds to the "MFD
-	 *	refresh rate" setting in Orbiter's parameter settings, unless a redraw is forced
+	 *	refresh rate" setting in SpaceXpanse's parameter settings, unless a redraw is forced
 	 *	by InvalidateDisplay().
 	 * \deprecated This method is deprecated. %MFD implementations should derive from MFD2
 	 *   and use the device-independent \ref MFD2::Update(oapi::Sketchpad*) method instead.
@@ -74,7 +74,7 @@ public:
 	/**	
 	 * \brief Force a display update in the next frame.
 	 *
-	 * Force a display update in the next frame. This function causes Orbiter to call the
+	 * Force a display update in the next frame. This function causes SpaceXpanse to call the
 	 * MFD's Update method in the next frame.
 	 */
 	void InvalidateDisplay ();
@@ -82,16 +82,16 @@ public:
 	/**
 	 * \brief Force the MFD buttons to be redrawn. 
 	 *  
-	 * Force the MFD buttons to be redrawn. This is useful to alert Orbiter
+	 * Force the MFD buttons to be redrawn. This is useful to alert SpaceXpanse
 	 * that the MFD mode has dynamically modified its button labels.
-	 * \note Orbiter will call the MFD::ButtonLabel method to retrieve the new button
+	 * \note SpaceXpanse will call the MFD::ButtonLabel method to retrieve the new button
 	 *	 labels. Therefore this must have been updated to return the new labels
   	 *	 before calling InvalidateButtons().
-	 * \note If the MFD is part of a 2-D panel view or 3-D virtual cockpit view, Orbiter
+	 * \note If the MFD is part of a 2-D panel view or 3-D virtual cockpit view, SpaceXpanse
 	 *	 calls the VESSEL2::clbkMFDMode() method to allow the vessel to update its
 	 *	 button labels. If the MFD is one of the two glass cockpit MFD displays, the
 	 *	 buttons are updated internally.
-	 * \note If the MFD is displayed in an external window, Orbiter calls the
+	 * \note If the MFD is displayed in an external window, SpaceXpanse calls the
 	 *	 ExternMFD::clbkRefreshButtons() method to refresh the buttons. 
 	 */
 	void InvalidateButtons ();
@@ -150,7 +150,7 @@ public:
 
 	/** 
 	 * \brief MFD keyboard handler for buffered keys.
-	 * \param key key code (<i>see OAPI_KEY_xxx constants in orbitersdk.h</i>)
+	 * \param key key code (<i>see OAPI_KEY_xxx constants in spacexpansesdk.h</i>)
 	 * \return The function should return true if it recognises and processes the key, false otherwise.
 	 */ 
 	virtual bool ConsumeKeyBuffered (DWORD key) { return false; }
@@ -158,7 +158,7 @@ public:
 	/**
 	 * \brief MFD keyboard handler for immediate (unbuffered) keys.
 	 * \param kstate keyboard state.
-	 * \return The function should return true only if it wants to inhibit Orbiter's default
+	 * \return The function should return true only if it wants to inhibit SpaceXpanse's default
 	 * immediate key handler for this time step completely.
 	 * \note The state of single keys can be queried by the KEYDOWN macro.
      * \note The immediate key handler is useful where an action should take place while a key is pressed.
@@ -171,7 +171,7 @@ public:
 	 * MFD button handler. This function is called when the user performs a mouse click on 
 	 * a panel button associated with the MFD.
  	 * \param bt button identifier.
-	 * \param event mouse event (<i>see PANEL_MOUSE_xxx constants in orbitersdk.h</i>)
+	 * \param event mouse event (<i>see PANEL_MOUSE_xxx constants in spacexpansesdk.h</i>)
 	 * \return The function should return true if it processes the button event, false otherwise.
 	 * \note This function is invoked as a response to a call to oapiProcessMFDButton() in a vessel module.
 	 * \note Typically, ConsumeButton() will call ConsumeKeyBuffered() or ConsumeKeyImmediate() to emulate a keyboard event.
@@ -262,7 +262,7 @@ protected:
 	VESSEL *pV;   //!< pointer to vessel interface
 
 private:
-	friend class Instrument_User;  // Orbiter private class
+	friend class Instrument_User;  // SpaceXpanse private class
 	Instrument_User *instr;
 };
 
@@ -288,10 +288,10 @@ public:
 	 * \note MFD is a pure virtual function, so it can't be instantiated directly. It is used as
      *	a base class for specialised MFD modes.
 	 * \note New MFD modes are registered by a call to oapiRegisterMFDMode().
-     *	Whenever the new mode is selected by the user, Orbiter sends a
+     *	Whenever the new mode is selected by the user, SpaceXpanse sends a
  	 *	OAPI_MSG_MFD_OPENED signal to the message handler, to which the
  	 *	module should respond by creating the MFD mode and returning a pointer to
-	 *	it. Orbiter will automatically destroy the MFD mode when it is turned off.
+	 *	it. SpaceXpanse will automatically destroy the MFD mode when it is turned off.
 	 */
 	MFD2 (DWORD w, DWORD h, VESSEL *vessel): MFD (w, h, vessel) {}
 
@@ -321,10 +321,10 @@ public:
 	void Update (HDC hDC) {}
 
 	/**
-	 * \brief Callback function: Orbiter calls this method when the MFD needs to update its display.
+	 * \brief Callback function: SpaceXpanse calls this method when the MFD needs to update its display.
 	 * \param skp Drawing context for drawing on the MFD display surface.
 	 * \note The frequency at which this function is called corresponds to the "MFD
-	 *	refresh rate" setting in Orbiter's parameter settings, unless a redraw is forced
+	 *	refresh rate" setting in SpaceXpanse's parameter settings, unless a redraw is forced
 	 *	by InvalidateDisplay().
 	 * \note This function must be overwritten by derived classes.
 	 */
@@ -549,8 +549,8 @@ protected:
  * and associated push buttons.\n
  * A plugin module should derive its own MFD class from ExternMFD and overload the virtual
  * notification callback methods.\n
- * The class interface is defined in Orbitersdk\\include\\MFDAPI.h.\n
- * For an example using the ExternMFD class, see project Orbitersdk\\samples\\ExtMFD.
+ * The class interface is defined in SpaceXpansesdk\\include\\MFDAPI.h.\n
+ * For an example using the ExternMFD class, see project SpaceXpansesdk\\samples\\ExtMFD.
  */
 
 class OAPIFUNC ExternMFD {
@@ -558,7 +558,7 @@ public:
 	/**
 	 * \brief Constructor. Creates a new instance of ExternMFD.
 	 * \param spec structure containing MFD layout geometry data
-	 * \note To use a new MFD instance, it must be registered with Orbiter via a call to 
+	 * \note To use a new MFD instance, it must be registered with SpaceXpanse via a call to 
 	 *   oapiRegisterExternMFD(), e.g. with oapiRegisterExternMFD(new ExternMFD (spec));
 	 * \note To unregister an MFD instance, use oapiUnregisterExternMFD(). Note that
 	 *   oapiUnregisterExternMFD() automatically calls the ~ExternMFD() destructor, so
@@ -571,7 +571,7 @@ public:
 	 * \note The destructor should not be called directly by the module. Instead, a call to
 	 *	 oapiUnregisterExternMFD() will invoke the ~ExternMFD() destructor (or the
 	 *	 overloaded destructor of a derived class), as well as remove the MFD
-	 *	 instance from Orbiter's internal list of MFDs.
+	 *	 instance from SpaceXpanse's internal list of MFDs.
 	 */
 	virtual ~ExternMFD ();
 

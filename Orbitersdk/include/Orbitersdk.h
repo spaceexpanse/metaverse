@@ -3,7 +3,7 @@
 
 // ======================================================================
 //                     ORBITER SOFTWARE DEVELOPMENT KIT
-// Orbitersdk.h
+// SpaceXpansesdk.h
 // ORBITER Application Programming Interface (OAPI)
 // ======================================================================
 
@@ -11,7 +11,7 @@
 #define __ORBITERSDK_H
 
 #include "DrawAPI.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "ModuleAPI.h"
 #include "DrawAPI.h"
 #include "CelBodyAPI.h"

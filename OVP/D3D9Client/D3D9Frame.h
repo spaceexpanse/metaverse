@@ -27,7 +27,7 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "D3D9Client.h"
 
 class SurfNative;

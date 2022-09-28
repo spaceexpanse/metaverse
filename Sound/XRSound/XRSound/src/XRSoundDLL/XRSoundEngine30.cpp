@@ -21,7 +21,7 @@ bool XRSoundEngine::SetPan(const int soundID, const float pan)
         ISound *pISound = pContext->pISound;
         if (pISound)   // was sound ever started via PlayWav?
         {
-            // irrKlang has pan direction inverted with Orbiter's X coordinate system, so flip it
+            // irrKlang has pan direction inverted with SpaceXpanse's X coordinate system, so flip it
             pISound->setPan(-pan);
             retVal = true;
         }
@@ -41,7 +41,7 @@ float XRSoundEngine::GetPan(const int soundID)
         ISound *pISound = pContext->pISound;
         if (pISound)   // was sound ever started via PlayWav?
         {
-            // irrKlang has pan direction inverted with Orbiter's X coordinate system, so flip it
+            // irrKlang has pan direction inverted with SpaceXpanse's X coordinate system, so flip it
             retVal = -(pISound->getPan());
         }
     }

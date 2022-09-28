@@ -28,7 +28,7 @@ add_custom_command(
 add_custom_target(copy_sdk_include
 	DEPENDS ${output}
 )
-add_dependencies(Orbitersdk
+add_dependencies(SpaceXpansesdk
 	copy_sdk_include
 )
 

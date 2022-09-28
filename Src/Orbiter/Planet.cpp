@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "State.h"
 #include "Astro.h"
@@ -37,7 +37,7 @@ extern TextureManager2 *g_texmanager2;
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern Camera *g_camera;
 extern char DBG_MSG[256];
@@ -226,7 +226,7 @@ Planet::Planet (char *fname)
 	maxelev = 0.0;
 	labelLegend  = NULL;
 	nLabelLegend = 0;
-	ifstream ifs (g_pOrbiter->ConfigPath (fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath (fname));
 	if (!ifs) return;
 
 	AtmInterface = 0;
@@ -318,9 +318,9 @@ Planet::Planet (char *fname)
 	else
 		max_patch_level = 8;
 	max_patch_level = min (max_patch_level, SURF_MAX_PATCHLEVEL2);
-	max_patch_level = min (max_patch_level, g_pOrbiter->Cfg()->CfgVisualPrm.PlanetMaxLevel);
+	max_patch_level = min (max_patch_level, g_pSpaceXpanse->Cfg()->CfgVisualPrm.PlanetMaxLevel);
 
-	bHasCloudlayer = g_pOrbiter->Cfg()->CfgVisualPrm.bClouds &&
+	bHasCloudlayer = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bClouds &&
 		GetItemInt (ifs, "MinCloudResolution", min_cloud_level) && min_cloud_level >= 1;
 	if (bHasCloudlayer) {
 		if (!GetItemInt (ifs, "MaxCloudResolution", max_cloud_level))
@@ -332,7 +332,7 @@ Planet::Planet (char *fname)
 			cloud_micro_alt0 >= 0 && cloud_micro_alt1 >= cloud_micro_alt0)
 				bCloudMicrotex = true;
 		if (!GetItemReal (ifs, "CloudAlt", cloudalt)) cloudalt = size * 0.001;
-		if (g_pOrbiter->Cfg()->CfgVisualPrm.bCloudShadows && GetItemReal (ifs, "CloudShadowDepth", d))
+		if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bCloudShadows && GetItemReal (ifs, "CloudShadowDepth", d))
 			cloudshadowcol = (float)d;
 		else
 			cloudshadowcol = 1.0f;
@@ -476,7 +476,7 @@ Planet::~Planet ()
 		delete []labelLegend;
 		labelLegend = NULL;
 	}
-	g_pOrbiter->UpdateDeallocationProgress();
+	g_pSpaceXpanse->UpdateDeallocationProgress();
 }
 
 intptr_t Planet::FindFirst (int type, _finddata_t *fdata, char *path, char *fname)
@@ -487,7 +487,7 @@ intptr_t Planet::FindFirst (int type, _finddata_t *fdata, char *path, char *fnam
 	switch (type) {
 	case FILETYPE_MARKER:
 		if (labelpath) strcpy (path, labelpath);
-		else           sprintf (path, "%s%s\\Marker\\", g_pOrbiter->Cfg()->CfgDirPrm.ConfigDir, name);
+		else           sprintf (path, "%s%s\\Marker\\", g_pSpaceXpanse->Cfg()->CfgDirPrm.ConfigDir, name);
 		break;
 	}
 	sprintf (cbuf, "%s*.mkr", path);
@@ -524,7 +524,7 @@ void Planet::ScanBases (char *path)
 	// check for context limiter
 	if ((pc = strstr (path, "CONTEXT")) != NULL) {
 		if (sscanf (pc+7, "%s", cbuf) == 1) {
-			const char *context = g_pOrbiter->PState()->Context();
+			const char *context = g_pSpaceXpanse->PState()->Context();
 			if (!context) return;
 			if (_stricmp (cbuf, context)) return;
 		}
@@ -538,12 +538,12 @@ void Planet::ScanBases (char *path)
 	intptr_t fh;
 	_finddata_t fdata;
 	sprintf (spath, "%s\\*", path);
-	strcpy (cbuf, g_pOrbiter->ConfigPath(spath));
+	strcpy (cbuf, g_pSpaceXpanse->ConfigPath(spath));
 	if ((fh = _findfirst (cbuf, &fdata)) != -1) {
 		do {
 			sprintf (spath, "%s\\%s", path, fdata.name);
 			spath[strlen(spath)-4] = '\0'; // strip 'cfg' extension
-			ifstream ifs (g_pOrbiter->ConfigPath (spath));
+			ifstream ifs (g_pSpaceXpanse->ConfigPath (spath));
 			if (!ifs) continue;
 			do {
 				if (!ifs.getline (cbuf, 256)) break;
@@ -692,7 +692,7 @@ void Planet::ScanLabelLegend()
 {
 	char path[256];
 	if (labelpath) strncpy (path, labelpath, 256);
-	else           sprintf (path, "%s%s\\", g_pOrbiter->Cfg()->CfgDirPrm.ConfigDir, name);
+	else           sprintf (path, "%s%s\\", g_pSpaceXpanse->Cfg()->CfgDirPrm.ConfigDir, name);
 	strcat (path, "Label.cfg");
 	std::ifstream ifs(path);
 	while (ifs.good()) {
@@ -738,7 +738,7 @@ void Planet::Setup ()
 		atm.radlimit = atm.altlimit + size;
 	}
 
-	bEnableWind = g_pOrbiter->Cfg()->CfgPhysicsPrm.bAtmWind;
+	bEnableWind = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.bAtmWind;
 	// should be done only once rather than for every planet
 
 #ifdef INLINEGRAPHICS
@@ -746,7 +746,7 @@ void Planet::Setup ()
 	InitDeviceObjects ();
 
 	if (tmgr_version == 2) {
-		int patchlvl = 2 << g_pOrbiter->Cfg()->CfgPRenderPrm.PatchRes;
+		int patchlvl = 2 << g_pSpaceXpanse->Cfg()->CfgPRenderPrm.PatchRes;
 		smgr2 = new TileManager2<SurfTile> (this, max_patch_level, patchlvl);
 	} else {
 		tmgr = new TileManager (this); TRACENEW
@@ -833,7 +833,7 @@ void Planet::InitDeviceObjects ()
 {
 	//char cbuf[256];
 	//strcpy (cbuf, name); strcat (cbuf, ": Textures");
-	//g_pOrbiter->OutputLoadStatus (cbuf, 0);
+	//g_pSpaceXpanse->OutputLoadStatus (cbuf, 0);
 
 #ifdef INLINEGRAPHICS
 	FILE *file = 0;
@@ -858,7 +858,7 @@ void Planet::InitDeviceObjects ()
 	if (bHasRings) { // load ring textures
 		char cbuf[256];
 		strcpy (cbuf, name); strcat (cbuf, "_ring");
-		if (file = fopen (g_pOrbiter->TexPath (cbuf, ".tex"), "rb")) {
+		if (file = fopen (g_pSpaceXpanse->TexPath (cbuf, ".tex"), "rb")) {
 			ringtex = new LPDIRECTDRAWSURFACE7[3]; TRACENEW
 			nringtex = g_texmanager2->ReadTextures (file, ringtex, 3);
 			fclose (file);

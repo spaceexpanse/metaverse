@@ -14,8 +14,8 @@
 #ifndef __D3DUTIL_H
 #define __D3DUTIL_H
 
-// Note: must include OrbiterAPI.h *before* d3d.h to prevent compile warnings under VS 2003 or newer
-#include "OrbiterAPI.h"
+// Note: must include SpaceXpanseAPI.h *before* d3d.h to prevent compile warnings under VS 2003 or newer
+#include "SpaceXpanseAPI.h"
 #include <d3d.h>
 
 // ------------------------------------------------------------------------------------

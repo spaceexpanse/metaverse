@@ -6,7 +6,7 @@
 #include < GL\gl.h >
 #include <math.h>
 #include <stdio.h>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 
 HFONT hFNT_Panel;

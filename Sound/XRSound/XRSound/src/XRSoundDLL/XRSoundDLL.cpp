@@ -1,12 +1,12 @@
 // ==============================================================
-// XRSoundDLL.cpp : Main class file for XRSound Orbiter module.
+// XRSoundDLL.cpp : Main class file for XRSound SpaceXpanse module.
 //
 // Copyright (c) 2018-2021 Douglas Beachy
 // Licensed under the MIT License
 // ==============================================================
 
 #define ORBITER_MODULE
-#include "OrbiterSDK.h"
+#include "SpaceXpanseSDK.h"
 #include "XRSoundDLL.h"
 #include "VesselXRSoundEngine.h"
 #include "ModuleXRSoundEngine.h"
@@ -92,7 +92,7 @@ VesselXRSoundEngine *XRSoundDLL::GetXRSoundEngineInstance(const OBJHANDLE hVesse
 // only playable manually via the XRSound C++ API.
 //
 // You must use XRSoundEngine::DestroyInstance to destroy all XRSoundEngine objects created here; they are not 
-// destroyed automatically when Orbiter exits to the launch pad.
+// destroyed automatically when SpaceXpanse exits to the launch pad.
 //
 // Params:
 //   pUniqueModuleName: module to which this engine instance pertains
@@ -134,7 +134,7 @@ ModuleXRSoundEngine *XRSoundDLL::GetXRSoundEngineInstance(const char *pUniqueMod
 }
 
 //==============================================================
-// This function is called when Orbiter starts or when the module
+// This function is called when SpaceXpanse starts or when the module
 // is activated.
 //==============================================================
 DLLCLBK void InitModule(HINSTANCE hDLL)
@@ -172,12 +172,12 @@ void XRSoundDLL::ParseGlobalConfigFile()
 }
 
 //==============================================================
-// This function is called when Orbiter shuts down or when the
+// This function is called when SpaceXpanse shuts down or when the
 // module is deactivated.
 //==============================================================
 DLLCLBK void ExitModule(HINSTANCE hDLL)
 {
-    // Note: do not delete XRSoundDLL::s_pInstance here; per the Orbiter docs, the Orbiter core automatically
+    // Note: do not delete XRSoundDLL::s_pInstance here; per the SpaceXpanse docs, the SpaceXpanse core automatically
     // destroys all modules when required.
 }
 
@@ -225,7 +225,7 @@ void XRSoundDLL::clbkSimulationEnd()
     s_pInstance->UpdateAllVesselsMap();  // in case any vessels were added or deleted since the last time we checked
 
     // Note: *modules* are not loaded or unloaded when the simulation starts or ends: they are only loaded or unloaded via
-    // the Orbiter launch pad, either when 1) the launch pad loads or exits, or 2) when a module is manually loaded or unloaded via its checkbox
+    // the SpaceXpanse launch pad, either when 1) the launch pad loads or exits, or 2) when a module is manually loaded or unloaded via its checkbox
     // in the Modules tab.  Each module that uses XRSound must initialize its own sounds in clbkSimulationStart and delete its XRSoundImpl proxy object 
     // in its clbkSimulationEnd handler.  However, since we own each engine object's lifecycle, we must free up any XRSoundEngine objects for each module
     // here as well.  (See comments in XRSoundImpl::~XRSoundImpl() for details about why this is so.)
@@ -242,8 +242,8 @@ void XRSoundDLL::clbkSimulationEnd()
     XRSoundEngine::DestroyIrrKlangEngine();
 }
 
-// Returns a list of all Orbiter vessel handles that exist during this frame
-vector<OBJHANDLE> XRSoundDLL::GetAllActiveVesselsFromOrbiter()
+// Returns a list of all SpaceXpanse vessel handles that exist during this frame
+vector<OBJHANDLE> XRSoundDLL::GetAllActiveVesselsFromSpaceXpanse()
 {
     vector<OBJHANDLE> vector;
 
@@ -328,7 +328,7 @@ void XRSoundDLL::UpdateAllVesselsMap()
     }
 
     // 2) add any new vessels to our m_allVesselsMap, creating a new (default) XRSoundEngine instance for each 
-    vector<OBJHANDLE> allVesselHandles = GetAllActiveVesselsFromOrbiter();
+    vector<OBJHANDLE> allVesselHandles = GetAllActiveVesselsFromSpaceXpanse();
     for (unsigned int i = 0; i < allVesselHandles.size(); i++)
     {
         OBJHANDLE hVessel = allVesselHandles[i];
@@ -352,7 +352,7 @@ void XRSoundDLL::UpdateAllVesselsMap()
 }
 
 
-// Invoked every timestep before Orbiter state update.  This is not called if the simulation is paused, even if 
+// Invoked every timestep before SpaceXpanse state update.  This is not called if the simulation is paused, even if 
 // the user moves the camera.
 // Params:
 //   simt simulation time after the currently processed step  [DO NOT USE -- SEE NOTE]
@@ -364,7 +364,7 @@ void XRSoundDLL::clbkPreStep(double simtDoNotUse, double simdt, double mjd)
 
     //**************************************************************************************************************
     // Update our absolute sim time counter: it is simt that always counts *up*, ignoring MDJ changes both positive and negative.
-    // (The Orbiter core does not invoke clkbPreStep for MJD edits: it adjusts simt but not *simdt* on the next call, so that makes it easy.)
+    // (The SpaceXpanse core does not invoke clkbPreStep for MJD edits: it adjusts simt but not *simdt* on the next call, so that makes it easy.)
     //
     // Note: do NOT use simt in any way for this: simt adjusts with MJD, but simdt does not.
     // WARNING: XRSOUND CODE SHOULD *NEVER* INVOKE oapiGetSimTime(): it varies by MJD and so is unreliable for time deltas (which 
@@ -412,7 +412,7 @@ void XRSoundDLL::clbkPreStep(double simtDoNotUse, double simdt, double mjd)
 
 // Returns the number of seconds since the system booted (realtime); typically has 10-16 millisecond accuracy (16 ms = 1/60th second),
 // which should suffice for normal realtime deltas.
-// Note: it is OK for this method to be static without a mutex because Orbiter is single-threaded
+// Note: it is OK for this method to be static without a mutex because SpaceXpanse is single-threaded
 // This code was cloned from Vessel3Ext.h.
 double XRSoundDLL::GetSystemUptime()
 {

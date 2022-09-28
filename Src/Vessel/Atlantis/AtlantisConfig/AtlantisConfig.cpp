@@ -3,7 +3,7 @@
 
 #define STRICT 1
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "AC_resource.h"
 #include <stdio.h>
 #include <io.h>
@@ -64,7 +64,7 @@ void AtlantisConfig::TexEnableHires (bool enable)
 		rename (tex_hires_disabled, tex_hires_enabled);
 	} else {
 		// to disable the highres textures, we simply rename the directory
-		// so that orbiter's texture manager can't find it
+		// so that spacexpanse's texture manager can't find it
 		rename (tex_hires_enabled, tex_hires_disabled);
 	}
 }
@@ -142,7 +142,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 	gParams.item = new AtlantisConfig;
 	// create the new config item
 	LAUNCHPADITEM_HANDLE root = oapiFindLaunchpadItem ("Vessel configuration");
-	// find the config root entry provided by orbiter
+	// find the config root entry provided by spacexpanse
 	oapiRegisterLaunchpadItem (gParams.item, root);
 	// register the DG config entry
 }

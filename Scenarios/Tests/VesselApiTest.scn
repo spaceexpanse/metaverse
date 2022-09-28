@@ -1,6 +1,6 @@
 BEGIN_HYPERDESC
 <h1>Lua script unit tests</h1>
-A test suite for Orbiter's Lua script interface.
+A test suite for SpaceXpanse's Lua script interface.
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT

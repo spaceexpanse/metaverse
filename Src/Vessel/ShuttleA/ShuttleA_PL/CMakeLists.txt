@@ -26,8 +26,8 @@ target_link_libraries(ShuttleA_PL
 )
 
 add_dependencies(ShuttleA_PL
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 add_custom_command(

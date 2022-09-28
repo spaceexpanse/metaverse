@@ -10,7 +10,7 @@
 #define __CELBODY_H
 
 #include "RigidBody.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 // Module interface methods - OBSOLETE
 typedef void   (*OPLANET_SetPrecision)(double prec);

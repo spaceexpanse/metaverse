@@ -1,7 +1,7 @@
 0 NOTECOL 0.8 0.6 0
 0 NOTESIZE 1.1
 0 NOTEPOS 0.02 0.2 0.4 0.9
-0 NOTE This tutorial demonstrates the use of Orbiter's flight recording and playback facility.
+0 NOTE This tutorial demonstrates the use of SpaceXpanse's flight recording and playback facility.
 7 CAMERA SET Track:GL-01:30.00:GLOBAL 19.548 1.335 0.667
 7 NOTE (And to make it a bit more entertaining, we have a Delta-glider lined up to pull a few stunts around the Kennedy Space Center.)
 24.7463 CAMERA SET Track:GL-01:30.00:GLOBAL 19.548 1.452 -0.638

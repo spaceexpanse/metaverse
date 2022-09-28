@@ -5,7 +5,7 @@
 
 #include <fstream>
 #include <stdio.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Star.h"
 #include "Camera.h"
@@ -21,7 +21,7 @@ extern TextureManager2 *g_texmanager2;
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern char DBG_MSG[256];
 
@@ -40,13 +40,13 @@ Star::Star (char *fname)
 {
 	psys  = 0;
 	upd_t = 0.0;
-	ifstream ifs (g_pOrbiter->ConfigPath (fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath (fname));
 	if (!ifs) return;
 	bDynamicPosVel = false;
 	// read star-specific parameters here
 	InitDeviceObjects ();
 #ifdef INLINEGRAPHICS
-	g_pOrbiter->GetInlineGraphicsClient()->GetScene()->AddStarlight (this);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->AddStarlight (this);
 #endif // INLINEGRAPHICS
 	Setup ();
 }
@@ -87,9 +87,9 @@ void Star::InitDeviceObjects ()
 #ifdef INLINEGRAPHICS
 	if (!texrefcount) { // not loaded yet
 		FILE *file;
-		if (file = fopen (g_pOrbiter->TexPath ("Star"), "rb")) {
+		if (file = fopen (g_pSpaceXpanse->TexPath ("Star"), "rb")) {
 			if (FAILED (g_texmanager2->ReadTexture (file, &tex)))
-				LOGOUT_ERR (g_pOrbiter->TexPath ("Star"));
+				LOGOUT_ERR (g_pSpaceXpanse->TexPath ("Star"));
 			fclose (file);
 		} else {
 			tex = 0;

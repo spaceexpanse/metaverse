@@ -1,4 +1,4 @@
-# Orbiter integration and unit tests
+# SpaceXpanse integration and unit tests
 
 ## Unit tests
 

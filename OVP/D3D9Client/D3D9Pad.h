@@ -6,7 +6,7 @@
 #ifndef __D3D9PAD_H
 #define __D3D9PAD_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "D3D9Client.h"
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -227,7 +227,7 @@ public:
 	 * \brief Set up global parameters shared by all instances
 	 * \param gclient client instance pointer
 	 * \param pDev direct 3D device instance pointer
-	 * \param folder shader folder (based on Orbiter's "Modules" path).
+	 * \param folder shader folder (based on SpaceXpanse's "Modules" path).
 	 *   Usually this should be set to "D3D9Client")
 	 */
 	static void D3D9TechInit(D3D9Client *gc, LPDIRECT3DDEVICE9 pDev);

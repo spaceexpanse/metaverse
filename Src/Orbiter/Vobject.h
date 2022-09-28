@@ -14,7 +14,7 @@
 
 class Body;
 class Scene;
-class OrbiterGraphics;
+class SpaceXpanseGraphics;
 
 const unsigned long VOCAPS_HASENGINES = 1;
 
@@ -27,7 +27,7 @@ public:
 
 	virtual ~VObject() {}
 
-	static void CreateDeviceObjects (OrbiterGraphics *gclient);
+	static void CreateDeviceObjects (SpaceXpanseGraphics *gclient);
 	static void DestroyDeviceObjects ();
 
 	virtual unsigned long GetCaps () const
@@ -78,7 +78,7 @@ public:
 	// Notification of visual event (e.g. mesh addition/deletion)
 
 protected:
-	static OrbiterGraphics *gc;
+	static SpaceXpanseGraphics *gc;
 	// inline graphics client instance
 
 	void RenderAsPixel (LPDIRECT3DDEVICE7 dev);

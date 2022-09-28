@@ -5,7 +5,7 @@
 #define __SATSAT_H
 
 #define SKIP_MFD_API
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 #define SAT_MIMAS     0

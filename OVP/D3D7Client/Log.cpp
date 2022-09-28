@@ -20,7 +20,7 @@
 #include <dx7\dplay.h>
 #include <dinput.h>
 #include "Log.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 using namespace std;
 
@@ -260,7 +260,7 @@ void LogOut_Obsolete (char *func, char *msg)
 	else {
 		LogOut ("At least one active module is accessing an obsolete interface function.");
 		LogOut ("Addons which rely on obsolete functions may not be compatible with");
-		LogOut ("future versions of Orbiter.");
+		LogOut ("future versions of SpaceXpanse.");
 	}
 	LogOut ("---------------------------------------------------------------");
 }

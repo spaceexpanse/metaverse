@@ -19,8 +19,8 @@ target_link_libraries(MFDTemplate
 )
 
 add_dependencies(MFDTemplate
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(LaunchpadParamTemplate

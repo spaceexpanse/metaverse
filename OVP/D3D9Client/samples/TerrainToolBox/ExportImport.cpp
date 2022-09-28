@@ -5,7 +5,7 @@
 
 #include <Windows.h>
 #include <windowsx.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "VesselAPI.h"
 #include "ModuleAPI.h"
 #include "DrawAPI.h"
@@ -151,7 +151,7 @@ void ToolKit::ExportElev()
 void ToolKit::BakeImport()
 {
 
-	if (MessageBox(pCore->GetRenderWindow(), "Bake and Write the tiles in 'OrbiterRoot/TerrainToolBox/' Folder ?", "Are you sure", MB_YESNO | MB_ICONEXCLAMATION) != IDYES) return;
+	if (MessageBox(pCore->GetRenderWindow(), "Bake and Write the tiles in 'SpaceXpanseRoot/TerrainToolBox/' Folder ?", "Are you sure", MB_YESNO | MB_ICONEXCLAMATION) != IDYES) return;
 
 	bool bWater = IsLayerValid(Layer::LayerType::WATER);
 	bool bNight = IsLayerValid(Layer::LayerType::NIGHT);

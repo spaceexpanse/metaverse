@@ -36,7 +36,7 @@ bool XRSoundEngine::InitializeIrrKlangEngine()
             ESEO_LOAD_PLUGINS | ESEO_PRINT_DEBUG_INFO_TO_DEBUGGER
         );
 
-        char logMsg[256];   // can't use CString easily here b/c Orbiter's oapiWriteLog takes a char * instead of const char * for some bizarre reason.
+        char logMsg[256];   // can't use CString easily here b/c SpaceXpanse's oapiWriteLog takes a char * instead of const char * for some bizarre reason.
         if (s_pKlangEngine)
             sprintf_s(logMsg, "%s initialized using sound driver %s; irrKlang version = %s.  XRSound UpdateInterval = %.03lf (%.1lf updates per second)", 
                 GetVersionStr(), XRSoundEngine::GetSoundDriverName(), IRR_KLANG_VERSION, 
@@ -63,7 +63,7 @@ bool XRSoundEngine::InitializeIrrKlangEngine()
 // Perform one-time static cleanup of our irrKlang singleton.
 void XRSoundEngine::DestroyIrrKlangEngine()
 {
-    char logMsg[256];   // can't use CString easily here b/c Orbiter's oapiWriteLog takes a char * instead of const char * for some bizarre reason.
+    char logMsg[256];   // can't use CString easily here b/c SpaceXpanse's oapiWriteLog takes a char * instead of const char * for some bizarre reason.
     sprintf_s(logMsg, "%s terminating.", GetVersionStr());
 
     oapiWriteLog(logMsg);
@@ -76,7 +76,7 @@ void XRSoundEngine::DestroyIrrKlangEngine()
         if (s_pMusicFolderWavContext)
         {
             StopWavImpl(s_pMusicFolderWavContext, nullptr);
-            s_pMusicFolderWavContext = nullptr;        // so we will recreate it when the Orbiter relaunches
+            s_pMusicFolderWavContext = nullptr;        // so we will recreate it when the SpaceXpanse relaunches
         }
 
         // free and reset the engine
@@ -107,7 +107,7 @@ const char *XRSoundEngine::GetSoundDriverName()
 // ------------------------------------------------------------------------
 
 // Static method to free any resources associated with pInst and then free it.
-// WARNING: is is possible that Orbiter already deleted our vessel associated with pInst, so do not reference any vessel fields 
+// WARNING: is is possible that SpaceXpanse already deleted our vessel associated with pInst, so do not reference any vessel fields 
 // in this method chain.
 void XRSoundEngine::DestroyInstance(XRSoundEngine *pInst)
 {
@@ -273,7 +273,7 @@ bool XRSoundEngine::PlayWav(const int soundID, const bool bLoop, const float vol
 }
 
 // Stop all wav sounds currently playing for this vessel.
-// WARNING: is is possible that Orbiter already deleted our vessel associated with pInst, so do not reference any vessel fields 
+// WARNING: is is possible that SpaceXpanse already deleted our vessel associated with pInst, so do not reference any vessel fields 
 // in this method chain.
 void XRSoundEngine::StopAllWav()
 {
@@ -296,9 +296,9 @@ void XRSoundEngine::SetAllWavPaused(const bool bPaused)
         ISound *pISound = context.pISound;
         if (pISound)
         {
-            // Don't change the state in the WavContext of the sounds here: 1) we don't need to because Orbiter will no longer call our PreStep while it
+            // Don't change the state in the WavContext of the sounds here: 1) we don't need to because SpaceXpanse will no longer call our PreStep while it
             // is paused, and 2) We want to preserve the current state of each sounds's bPaused flag anyway so that each will be unpaused or remain paused 
-            // as desired when Orbiter unpauses.
+            // as desired when SpaceXpanse unpauses.
             pISound->setIsPaused(bPaused);
         }
     }
@@ -365,7 +365,7 @@ bool XRSoundEngine::IsWavPlaying(const int soundID)
 }
 
 // Returns pointer to the sound filename loaded for soundID, or nullptr if no wav file loaded for that sound ID.
-// NOTE: the pointer returned is only guaranteed to be valid for the remainder of this Orbiter frame, since LoadWav may replace it
+// NOTE: the pointer returned is only guaranteed to be valid for the remainder of this SpaceXpanse frame, since LoadWav may replace it
 // at any frame.
 const char *XRSoundEngine::GetWavFilename(const int soundID)
 {
@@ -546,7 +546,7 @@ vector<CString> XRSoundEngine::GetValidSoundFileExtensions()
 void XRSoundEngine::UpdateIrrKlangEngine()
 {
     if (!XRSoundEngine::IsKlangEngineInitialized())
-        return;     // edge case: there are no sound-enabled vessels in Orbiter yet, so nothing to do
+        return;     // edge case: there are no sound-enabled vessels in SpaceXpanse yet, so nothing to do
 
     s_pKlangEngine->update();
 }
@@ -572,9 +572,9 @@ bool XRSoundEngine::PauseOrReumseMusic(const bool bPause)
         {
             bRetVal = true;
 
-            // If *pausing*, don't change the state in the WavContext of the sound here: 1) we don't need to because Orbiter will no longer call our PreStep while it
+            // If *pausing*, don't change the state in the WavContext of the sound here: 1) we don't need to because SpaceXpanse will no longer call our PreStep while it
             // is paused, and 2) We want to preserve the current state of each sounds's bPaused flag anyway so that each will be unpaused or remain paused 
-            // as desired when Orbiter unpauses and this method is called again.
+            // as desired when SpaceXpanse unpauses and this method is called again.
             CString msg;
             if (bPause)
             {

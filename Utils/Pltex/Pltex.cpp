@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // =========================================================================
-// pltex for Orbiter:
+// pltex for SpaceXpanse:
 // Create texture files for planetary surfaces and cloud layers
 // =========================================================================
 
@@ -796,9 +796,9 @@ void CreateGlobalSurface ()
 		cout << "Land-water mask texture map written to " << fname << "_lmask.tex" << endl;
 		cout << "Surface descriptor file written to " << fname << "_lmask.bin" << endl;
 	}
-	cout << "\nTo use the new surface in Orbiter:\n";
+	cout << "\nTo use the new surface in SpaceXpanse:\n";
 	cout << "Rename all output files by replacing '" << fname << "' with the\n";
-	cout << "planet name, and move them to the Orbiter\\Textures2 folder" << endl;
+	cout << "planet name, and move them to the SpaceXpanse\\Textures2 folder" << endl;
 }
 
 void CreateLocalArea ()
@@ -912,8 +912,8 @@ void CreateLocalArea ()
 	if (patchflag != 1) {
 		cout << "\nWater surfaces usually contain less detail and can be rendered at a lower\n";
 		cout << "resolution than land surfaces. To decrease the texture file sizes and\n";
-		cout << "improve Orbiter performance, tiles that contain only water surfaces can be\n";
-		cout << "excluded from the high-resolution tiles, forcing Orbiter to render them at\n";
+		cout << "improve SpaceXpanse performance, tiles that contain only water surfaces can be\n";
+		cout << "excluded from the high-resolution tiles, forcing SpaceXpanse to render them at\n";
 		cout << "resolution level 8. [Recommended value: Y]\n";
 		cout << "\n>> Exclude water-only tiles (yes|no)? [Y|N]: ";
 		cin >> c;
@@ -1175,13 +1175,13 @@ void CreateLocalArea ()
 	cout << endl << "Wrote " << ntile << " tile descriptors for level 8 and higher." << endl;
 	cout << "Wrote " << sout << " surface textures and " << mout << " mask textures." << endl << endl;
 
-	cout << "To use the new surface in Orbiter:\n";
+	cout << "To use the new surface in SpaceXpanse:\n";
 	cout << "* rename " << fname << "_tile.bin to <planet>_tile.bin\n";
 	cout << "* rename " << fname << "_tile.tex to <planet>_tile.tex\n";
 	if (mixed)
 		cout << "* rename " << fname << "_tile_lmask.tex to <planet>_tile_lmask.tex\n";
 	cout << "(where <planet> is the name of the planet), and move both files to\n";
-	cout << "the Orbiter\\Textures2 folder" << endl;
+	cout << "the SpaceXpanse\\Textures2 folder" << endl;
 	
 }
 
@@ -1492,11 +1492,11 @@ void MergeTextures ()
 	cout << endl << "Wrote " << md.ns << " surface tiles and " << md.nm << " mask tiles." << endl;
 	cout << "Created files merge_tile.bin and merge_tile.tex." << endl << endl;
 
-	cout << "To use the merged surface in Orbiter:\n";
+	cout << "To use the merged surface in SpaceXpanse:\n";
 	cout << "* rename merge_tile.bin to <planet>_tile.bin\n";
 	cout << "* rename merge_tile.tex to <planet>_tile.tex\n";
 	cout << "(where <planet> is the name of the planet), and overwrite the original\n";
-	cout << "files in the Orbiter\\Textures2 folder." << endl;
+	cout << "files in the SpaceXpanse\\Textures2 folder." << endl;
 
 }
 
@@ -1878,8 +1878,8 @@ void CreateCloudMap ()
 	if (apatch) delete []apatch;
 
 	cout << endl << "Cloud map written to " << fname << ".tex" << endl;
-	cout << "\nTo use the new cloud map in Orbiter:\n";
-	cout << "Rename to <planet>_cloud.tex and move to Orbiter\\Textures2 folder" << endl;
+	cout << "\nTo use the new cloud map in SpaceXpanse:\n";
+	cout << "Rename to <planet>_cloud.tex and move to SpaceXpanse\\Textures2 folder" << endl;
 }
 
 void SetOutputHeader (BITMAPFILEHEADER &bmfh, BITMAPINFOHEADER &bmih, LONG w, LONG h)

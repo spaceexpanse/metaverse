@@ -12,7 +12,7 @@
 //
 // A "Scene" represents the 3-D world as seen from a specific
 // viewpoint ("camera"). Each scene therefore has a camera object
-// associated with it. The Orbiter core supports a single
+// associated with it. The SpaceXpanse core supports a single
 // camera, but in principle a graphics client could define
 // multiple scenes and render them simultaneously into separate
 // windows (or into MFD display surfaces, etc.)

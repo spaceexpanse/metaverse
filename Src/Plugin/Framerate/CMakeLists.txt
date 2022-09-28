@@ -20,8 +20,8 @@ target_link_libraries(Framerate
 )
 
 add_dependencies(Framerate
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(Framerate

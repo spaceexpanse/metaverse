@@ -2,18 +2,18 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS" />
 <title>Vessel scripts</title>
 </head>
 <body BGCOLOR=#FFFFFF TEXT=#000000>
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; Vessel scripts</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; Vessel scripts</p>
 
 <h1>Vessel scripts</h1>
-<p>Vessel scripts are a quick and easy way to define new vessel types in Orbiter.
+<p>Vessel scripts are a quick and easy way to define new vessel types in SpaceXpanse.
 Unlike vessel DLL modules, they don't require the compilation of a C++ file, but just a text
 file containing the script.</p>
-<p>Compared to DLL modules using the Orbiter API, scripted vessels haven't quite the
+<p>Compared to DLL modules using the SpaceXpanse API, scripted vessels haven't quite the
 same range of functions, and the script interpretation carries a performance penalty.
 Therefore, vessel scripts are mainly useful for simple vessel implementations, or rapid
 prototyping as a pre-step to a full DLL implementation.</p>
@@ -22,8 +22,8 @@ interface. ScriptVessel is a generic vessel module that loads a script to obtain
 parameters (physical specifications, aerodynamic properties, engine layout, meshes,
 animations, etc.). The script can contain callback functions that are called by the
 ScriptVessel module to signal events such as vessel initialisation, time steps or docking.</p>
-<p>The C++ sources for the ScriptVessel module are contained in the Orbiter SDK, at
-Orbitersdk\samples\ScriptVessel.</p>
+<p>The C++ sources for the ScriptVessel module are contained in the SpaceXpanse SDK, at
+SpaceXpansesdk\samples\ScriptVessel.</p>
 <p>The <i>ScriptPB</i> vessel class is an example for a scripted vessel definition. It can
 be found in Config\Vessels\ScriptPB.cfg.</p>
 
@@ -60,7 +60,7 @@ END_PARSE<br />
 --]]
 </div>
 so that the "Script" entry now points to the configuration file itself. The "END_PARSE"
-entry prevents Orbiter's configuration parser from scanning the following script, while the
+entry prevents SpaceXpanse's configuration parser from scanning the following script, while the
 "--[[" and "--]]" lines define the entire configuration block as a Lua comment, so it
 doesn't interfere with the script interpreter.</p>
 <p>You are now ready to add the vessel script.</p>
@@ -71,7 +71,7 @@ The ScriptVessel module calls this function whenever a vessel of this class is c
 The function should contain the vessel's general physical properties (mass, size, airfoil
 definitions), load any required meshes, define animations and engine layout, etc.</p>
 <p>The clbk_setclasscaps function is the equivalent of the VESSEL2::clbkSetClassCaps method
-of Orbiter's C++ API interface.</p>
+of SpaceXpanse's C++ API interface.</p>
 <p>clbk_setclasscaps has a single parameter: a handle to the vessel's configuration file.</p>
 <div class="code">
 function clbk_setclasscaps(cfg)<br />
@@ -90,11 +90,11 @@ function clbk_setclasscaps(cfg)<br />
 end
 </div>
 <p>where "vi" is a predefined interface to the vessel object.</p>
-<p>You can try this vessel class in Orbiter. Launch Orbiter, open the scenario editor, and
+<p>You can try this vessel class in SpaceXpanse. Launch SpaceXpanse, open the scenario editor, and
 click "New" to create a new vessel. You should see your new vessel class in the list. It
 isn't very useful yet as it stands (for starters, it doesn't have any engines), but you can
 complete it by adding more parameters and functions, and see the effect directly in
-Orbiter. You can even edit the script file while Orbiter is running. Any subsequently
+SpaceXpanse. You can even edit the script file while SpaceXpanse is running. Any subsequently
 created instance of the vessel class will immediately incorporate the latest changes.</p>
 
 <h2>Step 4: Adding engines</h2>
@@ -158,7 +158,7 @@ end
 </div>
 <p>where 'vlift' and 'hlift' are the names of callback functions defined in the script.
 These functions must return the lift, drag and moment coefficients of the airfoil as a
-function of angle of attack, Mach number and Reynolds number, and are called by Orbiter 
+function of angle of attack, Mach number and Reynolds number, and are called by SpaceXpanse 
 whenever the aerodynamic forces must be calculated. Here is an example for a coefficient
 callback function:</p>
 <div class="code">
@@ -218,7 +218,7 @@ trans1 = {<br />
 </div>
 to define a rotation around the x-axis over 50 degrees for mesh groups 2 and 5 of mesh 0.</p>
 <p>For a full list of fields for different animation types, see <a href="Datatypes.htm#animationcomponent">Mesh animation components</a>.</p>
-<p>To register the animation component with Orbiter, call the <a href="api_oapi.htm#oapi_create_animationcomponent">oapi.create_animationcomponent</a>
+<p>To register the animation component with SpaceXpanse, call the <a href="api_oapi.htm#oapi_create_animationcomponent">oapi.create_animationcomponent</a>
 function:
 <div class="code">
 animcomp1 = oapi.create_animationcomponent(trans1)

@@ -311,10 +311,10 @@ bool VectorMap::SetCBody (const CelestialBody *body)
 		if (planet) {
 			char path[MAX_PATH], relpath[MAX_PATH];
 			sprintf (relpath, "%s\\data\\coast.vec", cbody->Name());
-			strcpy (path, g_pOrbiter->Cfg()->ConfigPathNoext (relpath));
+			strcpy (path, g_pSpaceXpanse->Cfg()->ConfigPathNoext (relpath));
 			coast.Load (path, OUTLINE_COAST);
 			sprintf (relpath, "%s\\data\\contour.vec", cbody->Name());
-			strcpy (path, g_pOrbiter->Cfg()->ConfigPathNoext (relpath));
+			strcpy (path, g_pSpaceXpanse->Cfg()->ConfigPathNoext (relpath));
 			contour.Load (path, OUTLINE_CONTOUR);
 			gt_this.Reset (cbody, g_focusobj->Els());
 			mkrlist = planet->LabelList (&nmkrlist);
@@ -758,7 +758,7 @@ void VectorMap::DrawMap_engine ()
 			DrawVessels ();
 	}
 
-	// target orbiter
+	// target spacexpanse
 	if (drawdata.tgtv_disp) {
 		if (dispflag & DISP_HORIZONLINE)
 			DrawHorizon (drawdata.tgtvlng, drawdata.tgtvlat, drawdata.tgtvrad, false);

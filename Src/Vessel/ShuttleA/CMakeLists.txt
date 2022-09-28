@@ -88,8 +88,8 @@ add_custom_command(
 )
 
 add_dependencies(ShuttleA
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	DlgCtrl
 	ShuttleA_Prerequisites
 )

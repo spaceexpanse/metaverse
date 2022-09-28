@@ -38,7 +38,7 @@ public:
 		const Vector *gpos;
 	};
 
-	Scene (OrbiterGraphics *og);
+	Scene (SpaceXpanseGraphics *og);
 	~Scene();
 
 	void UnregisterDevices ();
@@ -134,7 +134,7 @@ public:
 	// return the minimum distance between the camera and any particle in the scene
 
 private:
-	OrbiterGraphics *gc;      // graphics client instance
+	SpaceXpanseGraphics *gc;      // graphics client instance
 
 	DWORD viewW, viewH;       // viewport dimensions
 

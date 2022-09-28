@@ -7,7 +7,7 @@
 //
 // MFDTemplate.h
 //
-// This module demonstrates how to build an Orbiter plugin which
+// This module demonstrates how to build an SpaceXpanse plugin which
 // inserts a new MFD (multi-functional display) mode. The code
 // is not very useful in itself, but it can be used as a starting
 // point for your own MFD developments.

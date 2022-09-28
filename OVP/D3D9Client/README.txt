@@ -7,8 +7,8 @@ but it should be very similar with Visual Studio 2017. As new versions will
 appear (Visual Studio 2019) and time goes by there might be some difference in
 the procedures.
 In case your current Visual Studio versions needs some changed procedures,
-please notify the developers at the orbiter-forums "D3D9Client Development"
-thread (https://www.orbiter-forum.com/showthread.php?t=18431).
+please notify the developers at the spacexpanse-forums "D3D9Client Development"
+thread (https://www.spacexpanse-forum.com/showthread.php?t=18431).
 
 
 1. Required components
@@ -26,20 +26,20 @@ To be able to compile D3D9 graphics client from the sources, you need:
   [1] Strictly speaking, subversion is not *absolutely* needed to build the
       client; and getting the needed headers, libraries and resources can be
       done "by hand" as well. In this case the required files must be obtained
-      from Orbiter 2016 (ZIP package) rsp. the Orbiter BETA install.
+      from SpaceXpanse 2016 (ZIP package) rsp. the SpaceXpanse BETA install.
 
-* The fitting Orbiter libraries and headers.
+* The fitting SpaceXpanse libraries and headers.
   As a minimal build environment you only need the files from
-  - Orbitersdk/include
-  - Orbitersdk/lib
-  - Orbitersdk/resources (Orbiter 2016)
+  - SpaceXpansesdk/include
+  - SpaceXpansesdk/lib
+  - SpaceXpansesdk/resources (SpaceXpanse 2016)
     rsp.
-    Orbitersdk/VS2015    (Orbiter BETA)
+    SpaceXpansesdk/VS2015    (SpaceXpanse BETA)
 
-  The easiest way to get these directories is to run the get_orbiter_libs.bat
+  The easiest way to get these directories is to run the get_spacexpanse_libs.bat
   script from Utils/D3D9Client.
 
-  Another option is just to install the complete Orbiter installation, which
+  Another option is just to install the complete SpaceXpanse installation, which
   will also have the benefits of being able to instantly debug the client.
 
 * A Windows C++ compiler (Visual Studio 2015 Community Edition is ok, later
@@ -74,10 +74,10 @@ To be able to compile D3D9 graphics client from the sources, you need:
   option should not be available in the client), you do not need to do
   anything.
   During the build process (pre compiling) a dummy header "nvapi.h" will be
-  generated into the main source directory (Orbitersdk/D3D9Client)
+  generated into the main source directory (SpaceXpansesdk/D3D9Client)
   automatically if it does not yet exist.
   This also means that if you *have* installed the NVIDIA API and copied the
-  header file into the main source directory (Orbitersdk/D3D9Client) it will
+  header file into the main source directory (SpaceXpansesdk/D3D9Client) it will
   *not* be touched or overwritten by any further build process.
 
 * OPTIONAL (Documentation)
@@ -86,7 +86,7 @@ To be able to compile D3D9 graphics client from the sources, you need:
 
   There is a doxygen configuration file in D3D9Client/doc/Doxyfile which
   can be used to generate the compressed html help file
-  Orbitersdk/D3D9Client/doc/D3D9Client.chm included in the repository.
+  SpaceXpansesdk/D3D9Client/doc/D3D9Client.chm included in the repository.
   Additionally to doxygen itself some other packets might be needed (depending
   on the output format you would like to generate) to create the 'chm' file
   you need:
@@ -113,10 +113,10 @@ To compile the sources of the D3D9 graphics client, you have two options:
 
 * Via IDE
   Just start the solution file that fits your compiler version.
-  - Orbitersdk\D3D9Client\D3D9ClientVS2010.sln (Visual Studio 2010)
-  - Orbitersdk\D3D9Client\D3D9ClientVS2012.sln (Visual Studio 2012)
-  - Orbitersdk\D3D9Client\D3D9ClientVS2015.sln (Visual Studio 2015)
-  - Orbitersdk\D3D9Client\D3D9ClientVS2017.sln (Visual Studio 2017)
+  - SpaceXpansesdk\D3D9Client\D3D9ClientVS2010.sln (Visual Studio 2010)
+  - SpaceXpansesdk\D3D9Client\D3D9ClientVS2012.sln (Visual Studio 2012)
+  - SpaceXpansesdk\D3D9Client\D3D9ClientVS2015.sln (Visual Studio 2015)
+  - SpaceXpansesdk\D3D9Client\D3D9ClientVS2017.sln (Visual Studio 2017)
 
   In case you have a more recent version of Visual Studio (like Visual Studio
   2019 for example), you should take the solution file with the highest number.
@@ -138,7 +138,7 @@ To compile the sources of the D3D9 graphics client, you have two options:
 * If the compilation of the D3D9 client was successful, it has created a
   plugin in Modules/Plugin/D3D9Client.dll.
 
-* Run the "no-graphics" version of orbiter (orbiter_ng) and activate
+* Run the "no-graphics" version of spacexpanse (spacexpanse_ng) and activate
   the D3D9Client plugin from the Modules tab.
 
 * You should now get a video tab in the Launchpad dialog. Configure your
@@ -146,5 +146,5 @@ To compile the sources of the D3D9 graphics client, you have two options:
 
 * The Visual Studio project files should all be able to just run the Debug-
   Button. This however always starts with the "(Current state)" Scenario, so
-  you might need to start at least once via orbiter_ng.exe to setup a fitting
+  you might need to start at least once via spacexpanse_ng.exe to setup a fitting
   scenario to work with when debugging.

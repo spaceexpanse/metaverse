@@ -16,7 +16,7 @@
 #define ORBITER_MODULE
 #include <windows.h>
 #include "MFDWindow.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 #include <stdio.h>
 
@@ -42,7 +42,7 @@ extern LRESULT FAR PASCAL MFD_BtnProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 // ==============================================================
 
 // ==============================================================
-// This function is called when Orbiter starts or when the module
+// This function is called when SpaceXpanse starts or when the module
 // is activated.
 
 DLLCLBK void InitModule (HINSTANCE hDLL)
@@ -51,7 +51,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 
 	// To allow the user to open our new dialog box, we create
 	// an entry in the "Custom Functions" list which is accessed
-	// in Orbiter via Ctrl-F4.
+	// in SpaceXpanse via Ctrl-F4.
 	g_dwCmd = oapiRegisterCustomCmd ("External MFD",
 		"Opens a multifunctional display in an external window",
 		OpenDlgClbk, NULL);
@@ -80,7 +80,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 }
 
 // ==============================================================
-// This function is called when Orbiter shuts down or when the
+// This function is called when SpaceXpanse shuts down or when the
 // module is deactivated
 
 DLLCLBK void ExitModule (HINSTANCE hDLL)
@@ -92,7 +92,7 @@ DLLCLBK void ExitModule (HINSTANCE hDLL)
 	// Free bitmap resources
 	DeleteObject (g_hPin);
 
-	// Unregister the custom function in Orbiter
+	// Unregister the custom function in SpaceXpanse
 	oapiUnregisterCustomCmd (g_dwCmd);
 }
 

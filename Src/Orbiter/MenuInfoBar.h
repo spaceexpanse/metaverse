@@ -11,7 +11,7 @@
 #define STRICT 1
 #define FPSMAXSAMPLE 60
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "GraphicsAPI.h"
 #include "Mesh.h"
 

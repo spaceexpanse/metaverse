@@ -7,7 +7,7 @@
 //
 // DialogTemplate.cpp
 //
-// This module demonstrates how to build an Orbiter plugin which
+// This module demonstrates how to build an SpaceXpanse plugin which
 // opens a Windows dialog box. This is a good starting point for
 // your own dialog-based addons.
 // ==============================================================
@@ -15,7 +15,7 @@
 #define STRICT
 #define ORBITER_MODULE
 #include "windows.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 #include <stdio.h>
 
@@ -39,7 +39,7 @@ INT_PTR CALLBACK MsgProc (HWND, UINT, WPARAM, LPARAM);
 // ==============================================================
 
 // ==============================================================
-// This function is called when Orbiter starts or when the module
+// This function is called when SpaceXpanse starts or when the module
 // is activated.
 
 DLLCLBK void InitModule (HINSTANCE hDLL)
@@ -48,19 +48,19 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 
 	// To allow the user to open our new dialog box, we create
 	// an entry in the "Custom Functions" list which is accessed
-	// in Orbiter via Ctrl-F4.
+	// in SpaceXpanse via Ctrl-F4.
 	g_dwCmd = oapiRegisterCustomCmd ("My dialog",
 		"Opens a test dialog box which doesn't do much.",
 		OpenDlgClbk, NULL);
 }
 
 // ==============================================================
-// This function is called when Orbiter shuts down or when the
+// This function is called when SpaceXpanse shuts down or when the
 // module is deactivated
 
 DLLCLBK void ExitModule (HINSTANCE hDLL)
 {
-	// Unregister the custom function in Orbiter
+	// Unregister the custom function in SpaceXpanse
 	oapiUnregisterCustomCmd (g_dwCmd);
 }
 

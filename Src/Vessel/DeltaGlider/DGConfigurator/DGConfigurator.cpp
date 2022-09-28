@@ -3,7 +3,7 @@
 
 #define STRICT 1
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "DGC_resource.h"
 #include <stdio.h>
 #include <io.h>
@@ -58,7 +58,7 @@ void DGConfig::EnableHires (bool enable)
 		rename (hires_disabled, hires_enabled);
 	} else {
 		// to disable the highres textures, we simply rename the directory
-		// so that orbiter's texture manager can't find it
+		// so that spacexpanse's texture manager can't find it
 		rename (hires_enabled, hires_disabled);
 	}
 }
@@ -107,7 +107,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 	gParams.item = new DGConfig;
 	// create the new config item
 	LAUNCHPADITEM_HANDLE root = oapiFindLaunchpadItem ("Vessel configuration");
-	// find the config root entry provided by orbiter
+	// find the config root entry provided by spacexpanse
 	oapiRegisterLaunchpadItem (gParams.item, root);
 	// register the DG config entry
 }

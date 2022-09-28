@@ -4,12 +4,12 @@
 #ifndef __MARSATM2006_H
 #define __MARSATM2006_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ======================================================================
 // class MarsAtmosphere_2006
-// Mars atmosphere model, as used in Orbiter 2006
+// Mars atmosphere model, as used in SpaceXpanse 2006
 // ======================================================================
 
 class MarsAtmosphere_2006: public ATMOSPHERE {

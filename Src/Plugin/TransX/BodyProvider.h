@@ -28,7 +28,7 @@
 
 #include <vector>
 #include <map>
-#include <Orbitersdk.h>
+#include <SpaceXpansesdk.h>
 
 struct GBODY{
 	OBJHANDLE bodyhandle;

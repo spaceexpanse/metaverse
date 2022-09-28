@@ -3,7 +3,7 @@
 
 // ======================================================================
 // class MarsAtmosphere_2006
-// Mars atmosphere model, as used in Orbiter 2006
+// Mars atmosphere model, as used in SpaceXpanse 2006
 // ======================================================================
 
 #define ORBITER_MODULE
@@ -101,12 +101,12 @@ DLLCLBK void DeleteAtmosphere (ATMOSPHERE *atm)
 
 DLLCLBK char *ModelName ()
 {
-	static char *name = "Orbiter 2006 Mars atmosphere model";
+	static char *name = "SpaceXpanse 2006 Mars atmosphere model";
 	return name;
 }
 
 DLLCLBK char *ModelDesc ()
 {
-	static char *desc = "A simple static Mars atmosphere model. This is the model used in Orbiter 2006.";
+	static char *desc = "A simple static Mars atmosphere model. This is the model used in SpaceXpanse 2006.";
 	return desc;
 }

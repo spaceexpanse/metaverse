@@ -7,7 +7,7 @@
 //
 // MFDTemplate.cpp
 //
-// This module demonstrates how to build an Orbiter plugin which
+// This module demonstrates how to build an SpaceXpanse plugin which
 // inserts a new MFD (multi-functional display) mode. The code
 // is not very useful in itself, but it can be used as a starting
 // point for your own MFD developments.
@@ -16,7 +16,7 @@
 #define STRICT
 #define ORBITER_MODULE
 #include "windows.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "MFDTemplate.h"
 
 // ==============================================================
@@ -36,7 +36,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 	spec.context = NULL;
 	spec.msgproc = MFDTemplate::MsgProc;  // MFD mode callback function
 
-	// Register the new MFD mode with Orbiter
+	// Register the new MFD mode with SpaceXpanse
 	g_MFDmode = oapiRegisterMFDMode (spec);
 }
 

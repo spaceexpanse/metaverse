@@ -4,7 +4,7 @@
 // =============================================================
 // Config.cpp
 // Implementation of class Config
-// Load configuration settings for Orbiter
+// Load configuration settings for SpaceXpanse
 // =============================================================
 
 #define __CONFIG_CPP

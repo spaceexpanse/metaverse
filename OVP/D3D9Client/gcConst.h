@@ -4,7 +4,7 @@
 // ===================================================
 
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "DrawAPI.h"
 #include "gcCore.h"
 #include <assert.h>
@@ -605,7 +605,7 @@ public:
 	virtual HSURFNATIVE		obsolete_CompressSurface(HSURFNATIVE hSurface, DWORD flags) { return NULL; }
 
 	/**
-	* \brief Get device specific mesh from Orbiter mesh template
+	* \brief Get device specific mesh from SpaceXpanse mesh template
 	* \param hMesh handle to a mesh acquired from oapiLoadMeshGlobal()
 	* \param pBox a pointer to an array of 8 FVECTOR3s
 	*/

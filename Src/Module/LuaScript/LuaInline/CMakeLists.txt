@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-# Core library to go to the Orbiter main directory
+# Core library to go to the SpaceXpanse main directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_ROOT_DIR})
 
 add_library(LuaInline SHARED
@@ -21,8 +21,8 @@ target_link_libraries(LuaInline
 )
 
 add_dependencies(LuaInline
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	LuaInterpreter
 )
 

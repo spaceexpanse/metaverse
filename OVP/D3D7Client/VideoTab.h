@@ -9,7 +9,7 @@
 // ==============================================================
 // VideoTab.h
 // Class VideoTab (interface)
-// Manages the user selections in the "Video" tab of the Orbiter
+// Manages the user selections in the "Video" tab of the SpaceXpanse
 // Launchpad dialog.
 // ==============================================================
 
@@ -24,7 +24,7 @@ namespace oapi { class D3D7Client; }
 
 class VideoTab {
 public:
-	VideoTab (oapi::D3D7Client *gc, HINSTANCE _hInst, HINSTANCE _hOrbiterInst, HWND hVideoTab);
+	VideoTab (oapi::D3D7Client *gc, HINSTANCE _hInst, HINSTANCE _hSpaceXpanseInst, HWND hVideoTab);
 
 	INT_PTR WndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	// Video tab message handler
@@ -64,7 +64,7 @@ private:
 	static INT_PTR CALLBACK AboutDlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	oapi::D3D7Client *gclient;
-	HINSTANCE hOrbiterInst; // orbiter instance handle
+	HINSTANCE hSpaceXpanseInst; // spacexpanse instance handle
 	HINSTANCE hInst;        // module instance handle
 	HWND hTab;              // window handle of the video tab
 	int aspect_idx;         // fixed aspect ratio index

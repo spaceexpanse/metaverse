@@ -8,7 +8,7 @@
 #include <d3d.h>
 #include "Util.h"
 #include "D3dmath.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Vecmat.h"
 #include "Camera.h"
@@ -27,7 +27,7 @@
 #include <fstream>
 #include <iomanip>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern double g_farplane;
 extern Camera *g_camera;
@@ -49,7 +49,7 @@ int VPlanet::aniso_mode = 1;
 VPlanet::VPlanet (const Planet *_planet): VObject (_planet)
 {
 	planet         = _planet;
-	pprf           = g_pOrbiter->Cfg()->CfgVisualPrm.PlanetPatchRes;
+	pprf           = g_pSpaceXpanse->Cfg()->CfgVisualPrm.PlanetPatchRes;
 	dist_scale     = 1.0;
 	tCheckRes      = -1.0;
 	tCheckRingSh   = -1.0;
@@ -60,7 +60,7 @@ VPlanet::VPlanet (const Planet *_planet): VObject (_planet)
 	}
 	prm.bCloud = planet->bHasCloudlayer;
 	if (prm.bCloud) {
-		prm.bCloudShadow = g_pOrbiter->Cfg()->CfgVisualPrm.bCloudShadows;
+		prm.bCloudShadow = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bCloudShadows;
 		prm.bBrightClouds = planet->bBrightClouds;
 		prm.cloudalt = planet->cloudalt;
 		cloudformat = (planet->CloudMgr2() ? 2 : 1);
@@ -72,8 +72,8 @@ VPlanet::VPlanet (const Planet *_planet): VObject (_planet)
 	}
 	prm.horizon_excess = planet->horizon_excess;
 	prm.horizon_minrad = min (1.0+planet->minelev/planet->size, 1.0-1e-4);
-	hashaze        = g_pOrbiter->Cfg()->CfgVisualPrm.bHaze && planet->HasAtmosphere();
-	hasfog         = g_pOrbiter->Cfg()->CfgVisualPrm.bFog && planet->HasAtmosphere() && (planet->fog.dens_0 > 0.0);
+	hashaze        = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bHaze && planet->HasAtmosphere();
+	hasfog         = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bFog && planet->HasAtmosphere() && (planet->fog.dens_0 > 0.0);
 	hasrings       = planet->bHasRings;
 	maxdist        = max_surf_dist + planet->Size();
 	if (max_centre_dist > maxdist)
@@ -88,9 +88,9 @@ VPlanet::VPlanet (const Planet *_planet): VObject (_planet)
 	nshvtx         = 0;
 	mesh           = 0;
 	shadowalpha    = (float)planet->shadowalpha;
-	bstencil       = (g_pOrbiter->Cfg()->CfgDevPrm.bTryStencil && gc->GetStencilDepth() > 0);
-	mipmap_mode    = g_pOrbiter->Cfg()->CfgPRenderPrm.MipmapMode;
-	aniso_mode     = g_pOrbiter->Cfg()->CfgPRenderPrm.AnisoMode;
+	bstencil       = (g_pSpaceXpanse->Cfg()->CfgDevPrm.bTryStencil && gc->GetStencilDepth() > 0);
+	mipmap_mode    = g_pSpaceXpanse->Cfg()->CfgPRenderPrm.MipmapMode;
+	aniso_mode     = g_pSpaceXpanse->Cfg()->CfgPRenderPrm.AnisoMode;
 	if (max_patchres == 0) { // check for explicit mesh
 		mesh = new Mesh; TRACENEW
 		if (!LoadMesh (planet->Name(), *mesh)) {
@@ -189,7 +189,7 @@ void VPlanet::Update (bool moving, bool force)
 void VPlanet::CheckResolution (double iar)
 {
 	double alt = max (1.0, cdist-planet->Size());
-	double apr = planet->Size() * g_pOrbiter->ViewH()*0.5 / (alt * g_camera->TanAperture());
+	double apr = planet->Size() * g_pSpaceXpanse->ViewH()*0.5 / (alt * g_camera->TanAperture());
 	// apparent planet radius in units of screen pixels
 
 	int new_patchres, new_cloudres, new_ringres;
@@ -403,7 +403,7 @@ void VPlanet::Render (LPDIRECT3DDEVICE7 dev)
 		} else {
 			prm.bAddBkg = (bkgcol && planet != g_camera->ProxyPlanet());
 			if (mipmap_mode) {
-				float fBias = (float)g_pOrbiter->Cfg()->CfgPRenderPrm.MipmapBias;
+				float fBias = (float)g_pSpaceXpanse->Cfg()->CfgPRenderPrm.MipmapBias;
 				dev->SetTextureStageState (0, D3DTSS_MIPFILTER, mipmap_mode == 1 ? D3DTFP_POINT:D3DTFP_LINEAR);
 				dev->SetTextureStageState (0, D3DTSS_MIPMAPLODBIAS, *((LPDWORD) (&fBias)) );
 			}
@@ -444,7 +444,7 @@ void VPlanet::Render (LPDIRECT3DDEVICE7 dev)
 				dev->SetTextureStageState (0, D3DTSS_MAXANISOTROPY, 1);
 			}
 
-			if (g_pOrbiter->Cfg()->CfgVisualPrm.bVesselShadows && planet == g_camera->ProxyPlanet()) {
+			if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bVesselShadows && planet == g_camera->ProxyPlanet()) {
 				scene->RenderVesselShadows();
 				dev->SetTransform (D3DTRANSFORMSTATE_WORLD, &mWorld);
 			}
@@ -455,7 +455,7 @@ void VPlanet::Render (LPDIRECT3DDEVICE7 dev)
 		RenderBaseStructures (dev);
 
 		if (bModAmbient)
-			dev->SetRenderState (D3DRENDERSTATE_AMBIENT, g_pOrbiter->Cfg()->AmbientColour);
+			dev->SetRenderState (D3DRENDERSTATE_AMBIENT, g_pSpaceXpanse->Cfg()->AmbientColour);
 
 		if (prm.bFog) { // turn off fog
 			dev->SetRenderState (D3DRENDERSTATE_FOGENABLE, FALSE);
@@ -622,8 +622,8 @@ inline void Map (VERTEX_XYZC *vtx, double x, double y, double cosp, double sinp)
 
 void VPlanet::RenderRing (LPDIRECT3DDEVICE7 dev, bool addbkg)
 {
-	DWORD amb = g_pOrbiter->Cfg()->AmbientColour;
-	DWORD bpp = g_pOrbiter->ViewBPP();
+	DWORD amb = g_pSpaceXpanse->Cfg()->AmbientColour;
+	DWORD bpp = g_pSpaceXpanse->ViewBPP();
 	Vector ppos (tmul (planet->GRot(), -cpos)); // camera pos in planet coords
 	Vector spos (tmul (planet->GRot(), -planet->GPos()));                 // sun pos in planet coords
 	bool islit = (ppos.y*spos.y >= 0.0); // we are facing the lit side of the rings
@@ -767,12 +767,12 @@ int VPlanet::ShadowPlanetOnRing (VERTEX_XYZC *&vtx, DWORD &nvtx)
 
 void VPlanet::SetupRenderVectorList ()
 {
-	DWORD flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagCrdAxes;
+	DWORD flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagCrdAxes;
 	if ((flag & CA_ENABLE) && (flag & CA_CBODY)) {
 		double psize = planet->Size();
-		double scale = g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleCrdAxes * psize*1.3;
+		double scale = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleCrdAxes * psize*1.3;
 		double rad   = 0.02 * psize;
-		float alpha  = g_pOrbiter->Cfg()->CfgVisHelpPrm.opacCrdAxes;
+		float alpha  = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacCrdAxes;
 		Vector cam (tmul (planet->GRot(), g_camera->GPos()-planet->GPos()));
 		AddVec (cam, Vector(scale,0,0), Vector(0,0,0), rad, Vector(0.5,0.5,0.5), alpha, LABEL_PX, D3DRGB(1,1,1));
 		AddVec (cam, Vector(0,scale,0), Vector(0,0,0), rad, Vector(0.5,0.5,0.5), alpha, LABEL_PY, D3DRGB(1,1,1));
@@ -807,7 +807,7 @@ bool VPlanet::ModLighting (DWORD &ambient)
 	amb = max (0, amb-0.05);
 
 	DWORD addamb = (DWORD)(amb*rscale*256);
-	DWORD baseamb = g_pOrbiter->Cfg()->AmbientColour;
+	DWORD baseamb = g_pSpaceXpanse->Cfg()->AmbientColour;
 	ambient = 0;
 	for (int i = 0; i < 4; i++)
 		ambient |= min (255, ((baseamb >> (i*8)) & 0xff) + addamb) << (i*8);

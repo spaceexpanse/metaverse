@@ -143,7 +143,7 @@ void ShuttleA_PL::clbkLoadStateEx (FILEHANDLE scn, void *vs)
 		
 		} else {
 			ParseScenarioLineEx (line, vs);
-			// unrecognised option - pass to Orbiter's generic parser
+			// unrecognised option - pass to SpaceXpanse's generic parser
 		}
 	}
 

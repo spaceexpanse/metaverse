@@ -21,15 +21,15 @@ class Body;
 class Vessel;
 class ScreenNote;
 class DialogManager;
-class OrbiterGraphics;
-class OrbiterConnect;
-class OrbiterServer;
-class OrbiterClient;
+class SpaceXpanseGraphics;
+class SpaceXpanseConnect;
+class SpaceXpanseServer;
+class SpaceXpanseClient;
 class PlaybackEditor;
 class MemStat;
 class DDEServer;
 class ImageIO;
-namespace orbiter {
+namespace spacexpanse {
 	class ConsoleNG;
 	class LaunchpadDialog;
 }
@@ -106,17 +106,17 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-// Name: class Orbiter
+// Name: class SpaceXpanse
 // Desc: Main application class
 //-----------------------------------------------------------------------------
-class Orbiter {
+class SpaceXpanse {
 	friend class ScriptInterface;
 	friend class oapi::GraphicsClient;
-	friend class OrbiterGraphics;
+	friend class SpaceXpanseGraphics;
 
 public:
-	Orbiter ();
-	~Orbiter ();
+	SpaceXpanse ();
+	~SpaceXpanse ();
 
     HRESULT Create (HINSTANCE);
 	VOID Launch (const char *scenario);
@@ -157,7 +157,7 @@ public:
 	const char *KeyState() const;
 
 	// dialog box processing
-	HWND OpenDialog (int id, DLGPROC pDlg, void *context = 0); // This version expects the dialog resource in the Orbiter instance
+	HWND OpenDialog (int id, DLGPROC pDlg, void *context = 0); // This version expects the dialog resource in the SpaceXpanse instance
 	HWND OpenDialog (HINSTANCE hInst, int id, DLGPROC pDlg, void *context = 0); // use this version for for calls from external dlls
 	HWND OpenDialogEx (int id, DLGPROC pDlg, DWORD flag = 0, void *context = 0); // extended version
 	HWND OpenDialogEx (HINSTANCE hInst, int id, DLGPROC pDlg, DWORD flag = 0, void *context = 0); // extended version
@@ -227,7 +227,7 @@ public:
 	inline Config* Cfg() const { return pConfig; }
 	inline ScriptInterface *Script() const { return script; }
 	inline DialogManager *DlgMgr() const { return pDlgMgr; }
-	inline orbiter::LaunchpadDialog *Launchpad() const { return m_pLaunchpad; }
+	inline spacexpanse::LaunchpadDialog *Launchpad() const { return m_pLaunchpad; }
 	inline State*  PState() const { return pState; }
 	inline bool    IsActive() const { return bActive; } // temporary
 	inline bool    IsRunning() const { return bRunning; }
@@ -412,11 +412,11 @@ protected:
 private:
 	Config         *pConfig;
 	State          *pState;
-	orbiter::LaunchpadDialog *m_pLaunchpad;
+	spacexpanse::LaunchpadDialog *m_pLaunchpad;
 	DialogManager  *pDlgMgr;
-	orbiter::ConsoleNG* m_pConsole;    // The console window opened when Orbiter server is launched without a graphics client
+	spacexpanse::ConsoleNG* m_pConsole;    // The console window opened when SpaceXpanse server is launched without a graphics client
 	DInput         *pDI;
-	HINSTANCE       hInst;         // orbiter instance handle
+	HINSTANCE       hInst;         // spacexpanse instance handle
 	HWND            hRenderWnd;    // render window handle (NULL if no render support)
 	HWND            hBk;           // background window handle (demo mode only)
 	BOOL            bRenderOnce;   // flag for single frame render request
@@ -472,7 +472,7 @@ private:
 		HINSTANCE hDLL;        // DLL instance handle
 		oapi::Module* pModule; // pointer to module instance, if the plugin registered one
 		std::string sName;     // DLL name
-		bool bLocalAlloc;      // locally allocated; should be freed by Orbiter core
+		bool bLocalAlloc;      // locally allocated; should be freed by SpaceXpanse core
 	};
 	std::list<DLLModule> m_Plugin;
 
@@ -499,10 +499,10 @@ public:
 
 private:
 	oapi::GraphicsClient *gclient;       // external graphics client (renderer)
-	OrbiterGraphics *oclient;            // inline graphics client
+	SpaceXpanseGraphics *oclient;            // inline graphics client
 
 public:
-	inline OrbiterGraphics *GetInlineGraphicsClient() { return oclient; }
+	inline SpaceXpanseGraphics *GetInlineGraphicsClient() { return oclient; }
 	// (to access special inline graphics features. Eventually this should no longer
 	// be necessary)
 

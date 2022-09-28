@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #include "console_ng.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "DlgMgr.h"
 #include "Psys.h"
 #include "Vessel.h"
@@ -28,15 +28,15 @@ static void ConsoleOut(const char* msg);
 static HANDLE hMutex = 0;
 static HANDLE s_hStdO = NULL;
 static char cConsoleCmd[1024] = "\0";
-static orbiter::ConsoleNG* s_console = NULL; // access to console instance from message callback functions
+static spacexpanse::ConsoleNG* s_console = NULL; // access to console instance from message callback functions
 
-orbiter::ConsoleNG::ConsoleNG(Orbiter* pOrbiter)
-    : m_pOrbiter(pOrbiter)
+spacexpanse::ConsoleNG::ConsoleNG(SpaceXpanse* pSpaceXpanse)
+    : m_pSpaceXpanse(pSpaceXpanse)
     , m_hWnd(NULL)
     , m_hStatWnd(NULL)
     , m_hThread(NULL)
 {
-    static const PSTR title = "Orbiter Server Console";
+    static const PSTR title = "SpaceXpanse Server Console";
     static SIZE_T stackSize = 4096;
 
     s_console = this;
@@ -52,7 +52,7 @@ orbiter::ConsoleNG::ConsoleNG(Orbiter* pOrbiter)
     SetLogOutFunc(&ConsoleOut); // clone log output to console
 }
 
-orbiter::ConsoleNG::~ConsoleNG()
+spacexpanse::ConsoleNG::~ConsoleNG()
 {
 	DestroyStatDlg();
 	SetLogOutFunc(0);
@@ -67,7 +67,7 @@ orbiter::ConsoleNG::~ConsoleNG()
 	s_hStdO = NULL;
 }
 
-bool orbiter::ConsoleNG::ParseCmd()
+bool spacexpanse::ConsoleNG::ParseCmd()
 {
 	if (!cConsoleCmd[0]) return false;
 	char cmd[1024], cbuf[256], * pc, * ppc;
@@ -151,7 +151,7 @@ bool orbiter::ConsoleNG::ParseCmd()
 		}
 	}
 	else if (!_strnicmp(cmd, "exit", 4)) {
-		m_pOrbiter->CloseSession();
+		m_pSpaceXpanse->CloseSession();
 		return true;
 	}
 	else if (!_strnicmp(cmd, "vessel", 6)) {
@@ -176,7 +176,7 @@ bool orbiter::ConsoleNG::ParseCmd()
 	else if (!_strnicmp(cmd, "tacc", 4)) {
 		double w;
 		if (sscanf(trim_string(cmd + 4), "%lf", &w) == 1)
-			m_pOrbiter->SetWarpFactor(w);
+			m_pSpaceXpanse->SetWarpFactor(w);
 		else {
 			sprintf(cbuf, "Time acceleration is %0.1f", td.Warp());
 			Echo(cbuf);
@@ -203,10 +203,10 @@ bool orbiter::ConsoleNG::ParseCmd()
 	}
 	else if (!_strnicmp(cmd, "pause", 5)) {
 		pc = trim_string(cmd + 5);
-		if (!_strnicmp(pc, "on", 2)) m_pOrbiter->Pause(true);
-		else if (!_strnicmp(pc, "off", 3)) m_pOrbiter->Pause(false);
-		else if (!_strnicmp(pc, "toggle", 6)) m_pOrbiter->TogglePause();
-		sprintf_s(cbuf, 256, "Simulation %s", m_pOrbiter->IsRunning() ? "running" : "paused");
+		if (!_strnicmp(pc, "on", 2)) m_pSpaceXpanse->Pause(true);
+		else if (!_strnicmp(pc, "off", 3)) m_pSpaceXpanse->Pause(false);
+		else if (!_strnicmp(pc, "toggle", 6)) m_pSpaceXpanse->TogglePause();
+		sprintf_s(cbuf, 256, "Simulation %s", m_pSpaceXpanse->IsRunning() ? "running" : "paused");
 		Echo(cbuf);
 	}
 	else if (!_strnicmp(cmd, "step", 4)) {
@@ -215,10 +215,10 @@ bool orbiter::ConsoleNG::ParseCmd()
 	}
 	else if (!_strnicmp(cmd, "gui", 3)) {
 		if (!DestroyStatDlg())
-			m_hStatWnd = CreateDialog(m_pOrbiter->GetInstance(), MAKEINTRESOURCE(IDD_SERVER), m_hWnd, ServerDlgProc);
+			m_hStatWnd = CreateDialog(m_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(IDD_SERVER), m_hWnd, ServerDlgProc);
 	}
 	else if (!_strnicmp(cmd, "dlg", 3)) {
-		DialogManager* pDlgMgr = m_pOrbiter->DlgMgr();
+		DialogManager* pDlgMgr = m_pSpaceXpanse->DlgMgr();
 		if (pDlgMgr) {
 			pc = trim_string(cmd + 3);
 			if (!_strnicmp(pc, "focus", 5))
@@ -240,20 +240,20 @@ bool orbiter::ConsoleNG::ParseCmd()
 	return false;
 }
 
-void orbiter::ConsoleNG::Echo(const char* str) const
+void spacexpanse::ConsoleNG::Echo(const char* str) const
 {
 	ConsoleOut(str);
 }
 
-void orbiter::ConsoleNG::EchoIntro() const
+void spacexpanse::ConsoleNG::EchoIntro() const
 {
-	Echo("-----------------\nOrbiter NG (no graphics)");
+	Echo("-----------------\nSpaceXpanse NG (no graphics)");
 	Echo("Running in server mode (no graphics client attached).");
 	Echo("Type \"help\" for a list of commands.");
 	Echo("Type \"exit\" to return to the Launchpad dialog.\n");
 }
 
-bool orbiter::ConsoleNG::DestroyStatDlg()
+bool spacexpanse::ConsoleNG::DestroyStatDlg()
 {
 	if (m_hStatWnd) {
 		DestroyWindow(m_hStatWnd);
@@ -271,7 +271,7 @@ DWORD WINAPI InputProc(LPVOID context)
 	char cbuf[1024];
 	HANDLE hStdI = GetStdHandle(STD_INPUT_HANDLE);
 	HANDLE hStdO = GetStdHandle(STD_OUTPUT_HANDLE);
-	orbiter::ConsoleNG* console = (orbiter::ConsoleNG*)context;
+	spacexpanse::ConsoleNG* console = (spacexpanse::ConsoleNG*)context;
 	SetConsoleMode(hStdI, ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT | ENABLE_PROCESSED_INPUT);
 	SetConsoleTextAttribute(hStdI, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 	hMutex = CreateMutex(NULL, FALSE, NULL);
@@ -304,13 +304,13 @@ INT_PTR CALLBACK ServerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 		return TRUE;
 	case WM_TIMER:
 		if (s_console)
-			s_console->GetOrbiter()->UpdateServerWnd(hDlg);
+			s_console->GetSpaceXpanse()->UpdateServerWnd(hDlg);
 		return 0;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case IDOK:
 			if (s_console)
-				s_console->GetOrbiter()->CloseSession();
+				s_console->GetSpaceXpanse()->CloseSession();
 		}
 		break;
 	case WM_CLOSE:

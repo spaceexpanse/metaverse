@@ -6,7 +6,7 @@
 #include "Util.h"
 #include "Vessel.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern char DBG_MSG[256];
 
@@ -66,8 +66,8 @@ DefaultPanel::DefaultPanel (Pane *_pane, int cidx): pane(_pane)
 	shRenderTarget = NULL; // should be queried from graphics client
 	surf = NULL;
 	activemfd = activebtn = -1;
-	transpmfd = g_pOrbiter->Cfg()->CfgLogicPrm.bMfdTransparent;
-	compact_layout = g_pOrbiter->Cfg()->CfgLogicPrm.bGlasspitCompact;
+	transpmfd = g_pSpaceXpanse->Cfg()->CfgLogicPrm.bMfdTransparent;
+	compact_layout = g_pSpaceXpanse->Cfg()->CfgLogicPrm.bGlasspitCompact;
 	colidx = cidx;
 
 	fuel = engmain = enghovr = -2; // invalidate
@@ -112,7 +112,7 @@ void DefaultPanel::SetGeometry ()
 	scale = max(0.625f,viewH/800.0f); //viewW/1280.0f;
 
 	// MFD display dimensions
-	mfdw = mfdh = (int)(scale*35.0*(g_pOrbiter->Cfg()->CfgLogicPrm.MFDSize+5));//(viewH*(g_pOrbiter->Cfg()->CfgLogicPrm.MFDSize+5))/23;
+	mfdw = mfdh = (int)(scale*35.0*(g_pSpaceXpanse->Cfg()->CfgLogicPrm.MFDSize+5));//(viewH*(g_pSpaceXpanse->Cfg()->CfgLogicPrm.MFDSize+5))/23;
 	btnw = max(28,viewH/18) /*viewW/28*/, btnh = (33*btnw)/44;
 	gapw = btnw/20;
 	float mfdy0 = (float)(viewH-mfdh-btnh-2*gapw);
@@ -363,7 +363,7 @@ void DefaultPanel::SetGeometry ()
 
 void DefaultPanel::InitDeviceObjects ()
 {
-	gc = g_pOrbiter->GetGraphicsClient();
+	gc = g_pSpaceXpanse->GetGraphicsClient();
 	if (!gc) return;
 
 	surf = LoadTexture (colidx);
@@ -688,7 +688,7 @@ void DefaultPanel::GetButtonState (int &state, int &mfd, int &btn)
 	if (activemfd >= 0 && mstate & PANEL_MOUSE_PRESSED) {
 		POINT pt;
 		GetCursorPos (&pt);
-		g_pOrbiter->ScreenToClient (&pt);
+		g_pSpaceXpanse->ScreenToClient (&pt);
 		if (GetMFDButton (pt.x, pt.y, mfd, btn) && mfd == activemfd && btn == activebtn) {
 			if (btn < 12) {
 				state = mstate;

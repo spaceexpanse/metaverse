@@ -11,7 +11,7 @@
 #ifndef __CAMAPI_H
 #define __CAMAPI_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 #define CAMDATA_X              0x01
 #define CAMDATA_Y              0x02

@@ -11,7 +11,7 @@
 
 #include "LpadTab.h"
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class VisualTab : public LaunchpadTab {
 	public:

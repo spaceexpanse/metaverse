@@ -11,7 +11,7 @@
 #define __DEFPANEL_H
 
 #define STRICT 1
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Mfd.h"
 
 // =======================================================================

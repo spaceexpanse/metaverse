@@ -3,11 +3,11 @@
 
 //-----------------------------------------------------------------------------
 // class LightEmitter: Logical (device-independent) definition of light-emitting objects
-// Interface in OrbiterAPI.h
+// Interface in SpaceXpanseAPI.h
 //-----------------------------------------------------------------------------
 
 #define OAPI_IMPLEMENTATION
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "Vessel.h"
 
 extern char DBG_MSG[256];

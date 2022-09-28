@@ -20,7 +20,7 @@
 
 #define STRICT
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include <deque>
 #include "mfd.h"
 #include "intercept.h"
@@ -137,7 +137,7 @@ void transxstate::dolowpriaction()
 {
 	if (!initflag) return;//do not attempt to run if initialisation incomplete
 	if (checkdelete()) return;
-	//Do nothing most of the time, to reduce system load on orbiter
+	//Do nothing most of the time, to reduce system load on spacexpanse
 	if (actionframe>0)
 	{
 		actionframe--;

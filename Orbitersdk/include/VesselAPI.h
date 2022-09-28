@@ -22,8 +22,8 @@
 #define FRAME_ECL 0
 #define FRAME_EQU 1
 
-class Vessel; // Orbiter internal vessel class
-class SuperVessel; // Orbiter internal supervessel class
+class Vessel; // SpaceXpanse internal vessel class
+class SuperVessel; // SpaceXpanse internal supervessel class
 
 /**
  * \brief Collision vertex definition
@@ -43,26 +43,26 @@ typedef struct {
  * %VESSEL is the base class for addon modules of 'vessel' type (spacecraft,
  * space stations, satellites, deep space probes, etc.)
  * This class defines the interface between the module's vessel definition
- * and the parameters maintained internally by Orbiter to define the vessel
+ * and the parameters maintained internally by SpaceXpanse to define the vessel
  * state.
  * It provides access to the various status parameters and methods of
  * individual spacecraft.
  *
  * It is important to note that a %VESSEL instance represents an \e interface
- * to an existing vessel in Orbiter, rather than the vessel itself. Vessels
+ * to an existing vessel in SpaceXpanse, rather than the vessel itself. Vessels
  * can exist without a corresponding %VESSEL instance, and deleting a
  * %VESSEL instance does not delete the vessel.
  *
  * Most of the methods provided by the %VESSEL class are of 'get' and 'set'
  * type, i.e. for retrieving vessel parameter states, or modifying them.
- * It does \e not define any callback functions that Orbiter uses to notify
+ * It does \e not define any callback functions that SpaceXpanse uses to notify
  * the vessel of events. These are implemented in the VESSEL2 class (derived
  * from %VESSEL). The latest version of the interface is VESSEL3, which
  * implements additional functions. User-defined vessel casses should therefore
  * be derived from %VESSEL3 instead of %VESSEL.
  *
  * For complete vessel module implementations, see the examples in
- * Orbitersdk\\samples, for example Orbitersdk\\samples\\ShuttlePB.
+ * SpaceXpansesdk\\samples, for example SpaceXpansesdk\\samples\\ShuttlePB.
  * \nosubgrouping
  */
 //  ======================================================================
@@ -250,7 +250,7 @@ public:
 	 * \note The size should correspond to the vessel's visual representation,
 	 *   for example the mesh used to show the vessel in the simulation
 	 *   window.
-	 * \note The size parameter is used by Orbiter to determine the camera
+	 * \note The size parameter is used by SpaceXpanse to determine the camera
 	 *   distance at which the vessel is within visual range of the
 	 *   observer camera. It is also used for calculating various physical
 	 *   parameters.
@@ -384,7 +384,7 @@ public:
 	 *   resources defined via CreatePropellantResource.
 	 * \note Use SetEmptyMass to account for structural changes such as stage
 	 *   or booster separation, but not for fuel consumption, which is done
-	 *   directly by Orbiter.
+	 *   directly by SpaceXpanse.
 	 * \sa GetEmptyMass, SetMassDistribution, oapiSetEmptyMass,
 	 *   CreatePropellantResource 
 	 */
@@ -490,7 +490,7 @@ public:
 	 *   the linear case.
 	 * \note The values returned by this function are the diagonal elements
 	 *   of the inertia tensor, in the local vessel frame of reference.
-	 * \note Orbiter's definition of PMI is mass-normalised, that is, the
+	 * \note SpaceXpanse's definition of PMI is mass-normalised, that is, the
 	 *   values are divided by the total vessel mass. The elements of pmi
 	 *   have the following meaning:   
 	 *   \f{eqnarray*}
@@ -498,7 +498,7 @@ public:
 	 *   \mathrm{pmi}_2 &=& M^{-1} \int \rho(\vec{r})(\vec{r}_z^2 + \vec{r}_x^2) d\vec{r}\\
 	 *   \mathrm{pmi}_3 &=& M^{-1} \int \rho(\vec{r})(\vec{r}_x^2 + \vec{r}_y^2) d\vec{r}
 	 *   \f}
-	 * \note Orbiter assumes that off-diagonal elements can be neglected,
+	 * \note SpaceXpanse assumes that off-diagonal elements can be neglected,
 	 *   that is, that the diagonal elements are the principal moments of
 	 *   inertia. This is usually a good approximation when the vessel is
 	 *   sufficiently symmetric with respect to its coordinate frame.
@@ -529,7 +529,7 @@ public:
 	 *   gradient-induced torque.
 	 * \return Torque damping coefficient (>= 0)
 	 * \note A nonspherical object in an inhomogeneous gravitational field
-	 *   experiences a torque. Orbiter calculates this torque with
+	 *   experiences a torque. SpaceXpanse calculates this torque with
 	 * \f[
 	 *   \vec{M}_G = \frac{3\mu m}{R^3} (\vec{R}_0 \times \vec{L}\vec{R}_0)
 	 * \f]
@@ -540,7 +540,7 @@ public:
 	 * \note This generates an undamped attitude oscillation in the vessel
 	 *   orbiting the reference body.
 	 * \note Damping may occur due to tidal deformation of the vessel,
-	 *   movement of liquids (fuel) etc. Orbiter allows to introduce a
+	 *   movement of liquids (fuel) etc. SpaceXpanse allows to introduce a
 	 *   damping term of the form
 	 * \f[
 	 *   \vec{M}_D = -\alpha\omega_G
@@ -588,17 +588,17 @@ public:
 	 *   VESSELSTATUSx structure (version x >= 2).
 	 * \param status pointer to a VESSELSTATUSx structure
 	 * \note This method can be used with any VESSELSTATUSx interface
-	 *   version supported by Orbiter. Currently only VESSELSTATUS2 is
+	 *   version supported by SpaceXpanse. Currently only VESSELSTATUS2 is
 	 *	 supported.
 	 * \note The version field of the VESSELSTATUSx structure must be set
-	 *   by the caller prior to calling the method, to tell Orbiter which
+	 *   by the caller prior to calling the method, to tell SpaceXpanse which
 	 *   interface version is required.
 	 * \note In addition, the caller must set the VS_FUELLIST, VS_THRUSTLIST
 	 *   and VS_DOCKINFOLIST bits in the flag field, if the corresponding
-	 *   lists are required. Otherwise Orbiter will not produce these lists.
-	 * \note If VS_FUELLIST is specified and the fuel field is NULL, Orbiter
+	 *   lists are required. Otherwise SpaceXpanse will not produce these lists.
+	 * \note If VS_FUELLIST is specified and the fuel field is NULL, SpaceXpanse
 	 *   will allocate memory for the list. The caller is responsible for
-	 *   deleting the list after use. If the fuel field is not NULL, Orbiter
+	 *   deleting the list after use. If the fuel field is not NULL, SpaceXpanse
 	 *   assumes that a list of sufficient length to store all propellant
 	 *   resources has been allocated by the caller.
 	 * \note The same applies to the thruster and dockinfo lists.
@@ -609,7 +609,7 @@ public:
 	/**
 	 * \brief Set default vessel status parameters.
 	 *
-	 * Invokes Orbiter's vessel state initialisation with the standard
+	 * Invokes SpaceXpanse's vessel state initialisation with the standard
 	 * status parameters provided via a VESSELSTATUS structure.
 	 * \param status structure containing vessel status parameters
 	 * \note The VESSELSTATUS structure contains only a limited set of
@@ -622,11 +622,11 @@ public:
 	/**
 	 * \brief Set default vessel status parameters.
 	 *
-	 * Invokes Orbiter's vessel state initialisation with the standard
+	 * Invokes SpaceXpanse's vessel state initialisation with the standard
 	 * status parameters provided in a VESSELSTATUSx structure.
 	 * \param status pointer to a VESSELSTATUSx structure (x >= 2).
 	 * \note status must point to a VESSELSTATUSx structure. Currently only
-	 *   VESSELSTATUS2 is supported, but future Orbiter versions may
+	 *   VESSELSTATUS2 is supported, but future SpaceXpanse versions may
 	 *   introduce new interfaces.
 	 * \note Typically, this function will be called in the body of an
 	 *   overloaded VESSEL2::clbkSetStateEx to enable default state
@@ -835,7 +835,7 @@ public:
 	 * \note If the user has enabled orbit stabilisation in the Launchpad,
 	 *   this function may sometimes return false during high time
 	 *   compression, even if the nonspherical option has been selected. In
-	 *   such situations Orbiter can exclude nonspherical perturbations to
+	 *   such situations SpaceXpanse can exclude nonspherical perturbations to
 	 *   avoid numerical instabilities.
 	 * \sa GetWeightVector
 	 */
@@ -1150,7 +1150,7 @@ public:
 	 * \note For mode==ALTMODE_MEANRAD, this method is equivalent to \ref GetAltitude().
 	 * \note For mode==ALTMODE_GROUND, if reslvl is set, on return the int variable
 	 *   it points to will be filled with the planet surface resolution level at
-	 *   which the altitude was calculated. At higher altitudes, Orbiter may use a
+	 *   which the altitude was calculated. At higher altitudes, SpaceXpanse may use a
 	 *   lower resolution setting.
 	 * \note For mode==ALTMODE_MEANRAD, the resolution level has no meaning, and
 	 *  always returns 0.
@@ -1422,7 +1422,7 @@ public:
 	 *   that aoa can range over the full circle (-pi to pi). For vertical
 	 *   lift components, aoa is the pitch angle of attack (a), while for
 	 *   horizontal components it is the yaw angle of attack (b).
-	 * \note If the wing area S is set to 0, then Orbiter uses the
+	 * \note If the wing area S is set to 0, then SpaceXpanse uses the
 	 *   projected vessel cross sections to define a reference area. Let
 	 *   (v<sub>x</sub>, v<sub>y</sub>, v<sub>z</sub>) be the unit vector
 	 *   of freestream air flow in vessel coordinates. Then the reference
@@ -1434,7 +1434,7 @@ public:
 	 *   with wing span b.
 	 * \note A vessel should typically define its airfoils in the
 	 *   \ref VESSEL2::clbkSetClassCaps callback function. If no airfoils
-	 *   are defined, Orbiter will fall back to its legacy drag
+	 *   are defined, SpaceXpanse will fall back to its legacy drag
 	 *   calculation, using the cw coefficients defined in \ref SetCW.
 	 *   Legacy lift calculation is no longer supported.
 	 * \note For more details, see the Programmer's Guide.
@@ -1542,7 +1542,7 @@ public:
 	 * \param hAirfoil airfoil handle
 	 * \return \e false indicates failure (invalid handle)
 	 * \note If all the vessel's airfoils are deleted without creating
-	 *   new ones, Orbiter reverts to the obsolete legacy atmospheric
+	 *   new ones, SpaceXpanse reverts to the obsolete legacy atmospheric
 	 *   flight model.
 	 * \sa CreateAirfoil2, CreateAirfoil3, ClearAirfoilDefinitions
 	 */
@@ -1950,7 +1950,7 @@ public:
 	 * \note The callback function must be able to process input aoa values in the
 	 *   range -Pi ... +Pi.
 	 * \note The preferred method for defining lift and drag characteristics is via
-	 *   the CreateAirfoil method, which is much more versatile. Orbiter ignores the
+	 *   the CreateAirfoil method, which is much more versatile. SpaceXpanse ignores the
 	 *   SetLiftCoeffFunc function if any airfoils have been created.
      * \note If neither airfoils are defined, nor this method is called, then the
 	 *   default behaviour is not to generate any aerodynamic lift.
@@ -2069,7 +2069,7 @@ public:
 	 *   chutes, tethers, etc.). It should not be used for standard forces
 	 *   such as engine thrust or aerodynamic forces which are handled
 	 *   internally (although in theory this function makes it possible to
-	 *   bypass Orbiter's built-in thrust and aerodynamics model completely
+	 *   bypass SpaceXpanse's built-in thrust and aerodynamics model completely
 	 *   and replace it by a user-defined model).
 	 * \note The force is applied only for the next time step. AddForce will
 	 *   therefore usually be used inside the VESSEL2::clbkPreStep callback
@@ -2092,7 +2092,7 @@ public:
 	 * \param mass initial propellant mass of the resource [kg]
 	 * \param efficiency fuel efficiency factor (>0)
 	 * \return propellant resource handle
-	 * \note Orbiter doesn't distinguish between propellant and oxidant. A
+	 * \note SpaceXpanse doesn't distinguish between propellant and oxidant. A
 	 *   "propellant resource" is assumed to be a combination of fuel and
 	 *   oxidant resources.
 	 * \note The interpretation of a propellant resource (liquid or solid
@@ -2189,7 +2189,7 @@ public:
 	 * \note This method should be used to simulate refuelling, fuel leaks,
 	 *   cross-feeding between tanks, etc. but not for normal fuel
 	 *   consumption by thrusters (which is handled internally by the
-	 *   Orbiter core).
+	 *   SpaceXpanse core).
 	 * \sa GetPropellantMass, SetPropellantMaxMass, GetTotalPropellantMass,
 	 *   GetFuelMass, SetPropellantEfficiency
 	 */
@@ -2632,7 +2632,7 @@ public:
 	 * \param level thrust level (0...1)
 	 * \note At level 1 the thruster generates maximum force, as defined by
 	 *   its maxth parameter.
-	 * \note Certain thrusters are controlled directly by Orbiter via
+	 * \note Certain thrusters are controlled directly by SpaceXpanse via
 	 *   primary input controls (e.g. joystick throttle control for main
 	 *   thrusters), which may override this function.
 	 * \sa IncThrusterLevel, GetThrusterLevel
@@ -2730,7 +2730,7 @@ public:
 	 * \param thgt thruster group type (see \ref thrusterparam)
 	 * \return thruster group handle
 	 * \note Thruster groups (except for user-defined groups) are engaged by
-	 *   Orbiter as a result of user input. For example, pushing the stick backward
+	 *   SpaceXpanse as a result of user input. For example, pushing the stick backward
 	 *   in rotational attitude mode will engage the thrusters in the
 	 *   THGROUP_ATT_PITCHUP group.
 	 * \note It is the responsibility of the vessel designer to make sure that the
@@ -2998,7 +2998,7 @@ public:
 	 *   pre-defined configurations to provide either a change in angular
 	 *   velocity (in RCS_ROT mode) or in linear velocity (in RCS_LIN mode).
 	 * \note RCS_NONE indicates that the RCS is disabled or not available.
-	 * \note Currently Orbiter doesn't allow simultaneous linear and
+	 * \note Currently SpaceXpanse doesn't allow simultaneous linear and
 	 *   rotational RCS control via keyboard or joystick. The user has to
 	 *   switch between the two. However, simultaneous operation is possible
 	 *   via the "RControl" plugin module.
@@ -3346,7 +3346,7 @@ public:
 	 *   VESSEL2::clbkLoadGenericCockpit, VESSEL2::clbkLoadPanel and VESSEL2::clbkLoadVC,
 	 *   to define different default directions for different instrument panels or
 	 *   virtual cockpit positions.
-	 * \note In Orbiter, the user can return to the default direction by pressing the
+	 * \note In SpaceXpanse, the user can return to the default direction by pressing the
 	 *   \e Home key on the cursor key pad.
 	 * \sa SetCameraDefaultDirection(const VECTOR3&,double)const,
 	 *   GetCameraDefaultDirection, VESSEL2::clbkSetClassCaps,
@@ -3437,7 +3437,7 @@ public:
 	 * \note The movement vectors are taken relative to the default cockpit position defined
 	 *   via SetCameraOffset.
 	 * \note This function should be called when initialising a cockpit mode (e.g. in
-	 *   clbkLoadPanel or clbkLoadVC). By default, Orbiter resets the linear movement range
+	 *   clbkLoadPanel or clbkLoadVC). By default, SpaceXpanse resets the linear movement range
 	 *   to zero whenever the cockpit mode changes.
 	 * \note In addition to the linear movement, the camera also turns left when leaning left,
 	 *   turns right when leaning right, and returns to default direction when leaning forward.
@@ -3488,7 +3488,7 @@ public:
 	 * \param area_id area identifier
 	 * \note This function can be used to combine the functionality of the
 	 *  TriggerPanelRedrawArea() and VCTriggerRedrawArea() methods.
-	 *  Depending on the current cockpit mode, Orbiter sends the redraw request to
+	 *  Depending on the current cockpit mode, SpaceXpanse sends the redraw request to
 	 *  either ovcPanelRedrawEvent() or ovcVCRedrawEvent().
 	 * \note This method can only be used if the panel and virtual cockpit areas share a
 	 *  common area identifier.
@@ -3521,8 +3521,8 @@ public:
 	 *   mesh origin against the vessel origin [<b>m</b>].
 	 * \return mesh index
 	 * \note \a meshname defines a path to an existing mesh file. The mesh must be in
-	 *   Orbiter's MSH format (see 3DModel.pdf).
-	 * \note The file name (including optional directory path) is relative to Orbiter's mesh
+	 *   SpaceXpanse's MSH format (see 3DModel.pdf).
+	 * \note The file name (including optional directory path) is relative to SpaceXpanse's mesh
 	 *   directory (usually ".\\Meshes"). The file extension must not be specified (.msh is assumed.)
 	 * \note The mesh is either appended to the end of the vessel's mesh list, or inserted at the
 	 *   location of a previously deleted mesh (see VESSEL::DelMesh)
@@ -3557,8 +3557,8 @@ public:
 	 *   mesh origin against the vessel origin [<b>m</b>].
 	 * \return mesh index
 	 * \note \a meshname defines a path to an existing mesh file. The mesh must be in
-	 *   Orbiter's MSH format.
-	 * \note The file name (including optional directory path) is relative to Orbiter's mesh
+	 *   SpaceXpanse's MSH format.
+	 * \note The file name (including optional directory path) is relative to SpaceXpanse's mesh
 	 *   directory (usually ".\\Meshes"). The file extension should not be specified (.msh is
 	 *   assumed.)
 	 * \note \a idx is a zero-based index which specifies at which point the mesh reference
@@ -3667,7 +3667,7 @@ public:
 	 * \param vis identifies the visual for which the mesh was created
 	 * \param idx mesh index (0 <= idx < GetMeshCount())
 	 * \return mesh handle
-	 * \ng The non-graphics version of Orbiter returns always NULL, even if
+	 * \ng The non-graphics version of SpaceXpanse returns always NULL, even if
 	 *   a graphics client is attached. To obtain a client-specific mesh handle,
 	 *   use \ref GetDevMesh .
 	 * \sa GetMeshTemplate, GetMeshCount, GetDevMesh
@@ -3679,7 +3679,7 @@ public:
 	 * \param vis identifies the visual for which the mesh was created.
 	 * \param idx mesh index (0 <= idx < GetMeshCount())
 	 * \return device mesh handle
-	 * \note For Orbiter_ng, this method returns a handle for a mesh instance managed
+	 * \note For SpaceXpanse_ng, this method returns a handle for a mesh instance managed
 	 *   by the external graphics client. Graphics clients may implement their own
 	 *   mesh formats, so the object pointed to by the handle is client-specific.
 	 * \note For inline graphics version, the returned handle points to the same object
@@ -3698,7 +3698,7 @@ public:
 	 *   oapiLoadMeshGlobal(). For all other (load-on-demand) meshes this
 	 *   method returns NULL.
 	 * \note Mesh templates are resources shared between all vessels and should
-	 *   never be modified by individual vessels. Orbiter creates individual
+	 *   never be modified by individual vessels. SpaceXpanse creates individual
 	 *   copies of the templates whenever a vessel is rendered.
 	 */
 	const MESHHANDLE GetMeshTemplate (UINT idx) const;
@@ -3706,12 +3706,12 @@ public:
 	/**
 	 * \brief Obtain mesh file name for an on-demand mesh.
 	 *
-	 * Returns the mesh file name (with path relative to Orbiter's main mesh
+	 * Returns the mesh file name (with path relative to SpaceXpanse's main mesh
 	 * directory) for a vessel mesh that is loaded on demand (i.e. not
 	 * pre-loaded).
 	 * \param idx mesh index (0 <= idx < GetMeshCount())
 	 * \return mesh file name, or NULL if mesh is pre-loaded
-	 * \note The file names for pre-loaded meshes are not retained by Orbiter.
+	 * \note The file names for pre-loaded meshes are not retained by SpaceXpanse.
 	 * \note Graphics clients can obtain pre-loaded mesh file names by
 	 *   intercepting the oapi::GraphicsClient::clbkStoreMeshPersistent() method.
 	 */
@@ -3751,7 +3751,7 @@ public:
 	 * \note The default mode after adding a mesh is MESHVIS_EXTERNAL.
 	 * \note MESHVIS_EXTPASS can't be used on its own, but as a modifier to any of the
 	 *   other visibility modes. If specified, it forces the mesh to be rendered in
-	 *   Orbiter's external render pass, even if it is labelled as internal (e.g.
+	 *   SpaceXpanse's external render pass, even if it is labelled as internal (e.g.
 	 *   MESHVIS_COCKPIT or MESHVIS_VC). The significance of the external render pass
 	 *   is that it allows the mesh to be obscured by other objects in front of it.
 	 *   However, objects in the external render pass are clipped at a camera distance
@@ -3770,19 +3770,19 @@ public:
 	 * \param vis vessel visual handle
 	 * \param mt transformation parameter structure
 	 * \return \e true on success, \e false on failure (group index out of range)
-	 * \ng This function is not yet supported in orbiter_ng and
+	 * \ng This function is not yet supported in spacexpanse_ng and
 	 *   always returns \e false.
 	 */
 	bool MeshgroupTransform (VISHANDLE vis, const MESHGROUP_TRANSFORM &mt) const;
 
 	/**
-	 * \brief Notifies Orbiter of a change in a mesh group.
+	 * \brief Notifies SpaceXpanse of a change in a mesh group.
 	 * \param hMesh mesh handle
 	 * \param grp group index (>= 0)
 	 * \param modflag type of modification (currently ignored)
 	 * \return error code (0=ok)
 	 * \note This method should be called if the components of a mesh group
-	 *   (vertices or indices) have been modified, to allow Orbiter to propagate
+	 *   (vertices or indices) have been modified, to allow SpaceXpanse to propagate
 	 *   the changes to the render object.
 	 * \note For the built-in renderer, this registration is not strictly necessary,
 	 *   because it uses the mesh directly as the render object, so any changes to
@@ -3810,7 +3810,7 @@ public:
 	 * \note Use \ref UnregisterAnimation to stop further calls to
 	 *   %VESSEL2::clbkAnimate.
 	 * \note Each call to RegisterAnimation increments a reference counter, while
-	 *   each call to UnregisterAnimation decrements the counter. Orbiter
+	 *   each call to UnregisterAnimation decrements the counter. SpaceXpanse
 	 *   continues calling %VESSEL2::clbkAnimate as long as the counter is greater
 	 *   than 0.
 	 * \note If %VESSEL2::clbkAnimate is not overloaded by the module,
@@ -3819,7 +3819,7 @@ public:
 	 *   the animation (transformation of mesh groups, etc.) entirely to the
 	 *   module. The VESSEL::CreateAnimation / VESSEL::AddAnimationComponent
 	 *   mechanism is an alternative way to define animations where the
-	 *   transformations are managed by the Orbiter core.
+	 *   transformations are managed by the SpaceXpanse core.
      * \sa VESSEL2::clbkAnimate, UnregisterAnimation, CreateAnimation,
 	 *   AddAnimationComponent
 	 */
@@ -3951,7 +3951,7 @@ public:
 	 * \param state animation state (0 ... 1)
 	 * \return \e false indicates failure (animation identifier out of range)
 	 * \note Each animation is defined by its state, with extreme points state=0 and
-	 *   state=1. When setting a state between 0 and 1, Orbiter carries out the
+	 *   state=1. When setting a state between 0 and 1, SpaceXpanse carries out the
 	 *   appropriate transformations to advance the animation to that state. It is
 	 *   the responsibility of the code developer to call SetAnimation in such a way
 	 *   as to provide a smooth movement of the animated parts.
@@ -4044,7 +4044,7 @@ public:
 	 * \param shift centre of mass displacement vector [<b>m</b>]
 	 * \note This function should be called after a vessel has undergone a
 	 *   structural change which resulted in a shift of the vessel's centre of
-	 *   gravity (CG). Note that in Orbiter, a vessel's CG coincides by definition
+	 *   gravity (CG). Note that in SpaceXpanse, a vessel's CG coincides by definition
 	 *   always with the origin (0,0,0) of its local reference frame.
 	 *   Therefore, in order to achieve a shift of the CG by a vector <b>S</b>,
 	 *   this function shifts the vessel's global position by +<b>S</b>.
@@ -4069,7 +4069,7 @@ public:
 	 * \param shift centre of gravity displacement vector [<b>m</b>]
 	 * \note This function should be called after a vessel has undergone a
 	 *   structural change which resulted in a shift of the vessel's centre of
-	 *   gravity (CG). Note that in Orbiter, a vessel's CG coincides by definition
+	 *   gravity (CG). Note that in SpaceXpanse, a vessel's CG coincides by definition
 	 *   always with the origin (0,0,0) of its local reference frame.
 	 *   Therefore, in order to achieve a shift of the CG by \a shift,
 	 *   this function performs the following actions:
@@ -4358,7 +4358,7 @@ public:
 	 *   running simulation, because it can lead to unphysical situations:
 	 *   it allows to dock two vessels regardless of their current
 	 *   separation, by teleporting one of them to the location of the other.
-	 * \note During a simulation, Orbiter will dock two vessels automatically
+	 * \note During a simulation, SpaceXpanse will dock two vessels automatically
 	 *   when their docking ports are brought into close proximity.
 	 * \note The mode parameter determines how the vessels are connected. The
 	 *   following settings are supported:
@@ -4389,7 +4389,7 @@ public:
 	/**
 	 * \brief Set the docking approach mode for all docking ports.
 	 * \param mode docking mode (see notes)
-	 * \note Defines the method Orbiter applies to establish a docking
+	 * \note Defines the method SpaceXpanse applies to establish a docking
 	 *   connection between two vessels. Supported values are:
 	 *   - 0: use legacy (2006) method: snap to dock as soon as two docking
 	 *     ports are within 0.5m and closing.
@@ -4687,7 +4687,7 @@ public:
 	 * \note An exeption is the definition of a constant parameter. For example, if the
 	 *  exhaust position is to be set to a fixed position, set the spec->flags
 	 *  field to EXHAUST_CONSTANTPOS. In this case, the value pointed to by spec->lpos 
-	 *  is copied by Orbiter, and the variable can be discarded after the call to
+	 *  is copied by SpaceXpanse, and the variable can be discarded after the call to
 	 *  AddExhaust. In a similar fashion, the bit flags EXHAUST_CONSTANTDIR and
 	 *  EXHAUST_CONSTANTLEVEL can be added to indicate fixed direction and exhaust
 	 *  level, respectively.
@@ -4760,7 +4760,7 @@ public:
 	 * \param lscale texture length scaling factor
 	 * \param wscale texture width scaling factor
 	 * \note The texture handle is obtained by a previous call to \ref oapiRegisterReentryTexture.
-	 * \note If a custom texture is not explicitly set, Orbiter uses a default
+	 * \note If a custom texture is not explicitly set, SpaceXpanse uses a default
 	 *   texture (reentry.dds) for rendering reentry flames. To suppress reentry
 	 *   flames altogether for a vessel, call SetReentryTexture(NULL).
 	 * \sa oapiRegisterReentryTexture
@@ -5049,12 +5049,12 @@ public:
 	/// \name File I/O
 	//@{
 	/**
-	 * \brief Pass a line read from a scenario file to Orbiter for default processing.
+	 * \brief Pass a line read from a scenario file to SpaceXpanse for default processing.
 	 * \param line line to be interpreted
 	 * \param status status parameters (points to a VESSELSTATUSx variable).
 	 * \note This function should be used within the body of \ref VESSEL2::clbkLoadStateEx.
 	 * \note The parser clbkLoadStateEx should forward all lines not recognised
-	 *   by the module to Orbiter via ParseScenarioLineEx to allow processing of
+	 *   by the module to SpaceXpanse via ParseScenarioLineEx to allow processing of
 	 *   standard vessel settings.
 	 * \note clbkLoadStateEx currently provides a VESSELSTATUS2 status definition.
 	 *   This may change in future versions, so status should not be used within
@@ -5241,7 +5241,7 @@ public:
 	bool   SetAnimState (UINT seq, double state); // obsolete
 
 	/**
-	 * \brief Causes Orbiter to write default vessel parameters to a scenario file.
+	 * \brief Causes SpaceXpanse to write default vessel parameters to a scenario file.
 	 * \deprecated Use a call to the base class VESSEL2::clbkSaveState from within
 	 *   the overloaded callback function instead.
 	 * \param scn scenario file handle
@@ -5250,13 +5250,13 @@ public:
 	 * \note This functionality is now included in the default implementation of
 	 *   VESSEL2::clbkSaveState. Therefore, vessel classes which overload this
 	 *   method to save custom vessel parameters should call the base class method
-	 *   to allow Orbiter to save the default vessel parameters.
+	 *   to allow SpaceXpanse to save the default vessel parameters.
 	 * \sa VESSEL2::clbkSaveState
 	 */
 	void SaveDefaultState (FILEHANDLE scn) const;
 
 	/**
-	 * \brief Pass a line read from a scenario file to Orbiter for default
+	 * \brief Pass a line read from a scenario file to SpaceXpanse for default
 	 *   processing.
 	 * \deprecated This function is retained for backward compatibility only.
 	 *   New modules should overload the \ref VESSEL2::clbkLoadStateEx function and
@@ -5283,7 +5283,7 @@ public:
 	//@}
 
 protected:
-	Vessel *vessel;     ///< Orbiter internal vessel class
+	Vessel *vessel;     ///< SpaceXpanse internal vessel class
 	short  flightmodel; ///< realism level
 	short  version;     ///< interface version
 };
@@ -5295,7 +5295,7 @@ protected:
  * \brief Callback extensions to the VESSEL class
  *
  * The VESSEL2 class adds a variety of callback functions to the VESSEL
- * interface (clbk*). These are called by Orbiter to notify the vessel
+ * interface (clbk*). These are called by SpaceXpanse to notify the vessel
  * about different types of events and allow it to react to them. The
  * VESSEL2 class implements these as virtual functions which act as
  * placeholders to be overwritten by derived classes whenever a non-default
@@ -5347,7 +5347,7 @@ public:
 	 *   this point.
 	 * \note Use this function to set vessel class capabilities, not vessel
 	 *   state parameters.
-	 * \note Orbiter will scan the vessel class configuration file for generic
+	 * \note SpaceXpanse will scan the vessel class configuration file for generic
 	 *   parameters (like mass or size) after clbkSetClassCaps returns.
 	 *   This allows to override generic caps defined in the module by
 	 *   editing the configuration file.
@@ -5362,7 +5362,7 @@ public:
 	 *   scenario file.
 	 * \param scn scenario file handle
 	 * \default Saves the generic vessel state parameters.
-	 * \note clbkSaveState is called by Orbiter at the end of a simulation
+	 * \note clbkSaveState is called by SpaceXpanse at the end of a simulation
 	 *   session while creating the save scenario for the current
 	 *   simulation state.
 	 * \note This function only needs to be overloaded if the vessel must
@@ -5388,7 +5388,7 @@ public:
 	 * \note You should not call the base class clbkLoadStateEx to parse
 	 *   generic parameters, because this will skip over any custom
 	 *   scenario entries. Instead, any lines which the module parser does
-	 *   not recognise should be forwarded to Orbiter's default scenario
+	 *   not recognise should be forwarded to SpaceXpanse's default scenario
 	 *   parser via VESSEL::ParseScenarioLineEx.
 	 * \sa VESSELSTATUS2, ParseScenarioLineEx, oapiReadScenario_nextline,
 	 *   \ref progflow1
@@ -5398,7 +5398,7 @@ public:
 	/**
 	 * \brief Set state parameters during vessel creation
 	 * \param status pointer to a VESSELSTATUSx structure
-	 * \default Invokes Orbiter's default state initialisation.
+	 * \default Invokes SpaceXpanse's default state initialisation.
 	 * \par Calling sequence:
 	 *   This function is called when the vessel is being created with
 	 *   oapiCreateVesselEx, after its clbkSetClassCaps has been invoked and
@@ -5408,7 +5408,7 @@ public:
 	 * \note This callback function receives the VESSELSTATUSx structure
 	 *   passed to oapiCreateVesselEx. It must therefore be able to process
 	 *   the interface version used by those functions.
-	 * \note This function remains valid even if future versions of Orbiter
+	 * \note This function remains valid even if future versions of SpaceXpanse
 	 *   introduce new VESSELSTATUSx interfaces.
 	 * \note If an overloaded method does not call VESSEL2::clbkSetStateEx,
 	 *   no default state initialisation is performed. Default state
@@ -5521,11 +5521,11 @@ public:
 	 * \default None.
 	 * \note The logical interface to a vessel exists as long as the vessel is
 	 *   present in the simulation. However, the visual interface exists
-	 *   only when the vessel is within visual range of the camera. Orbiter
+	 *   only when the vessel is within visual range of the camera. SpaceXpanse
 	 *   creates and destroys visuals as required. This enhances simulation
 	 *   performance in the presence of a large number of objects in the
 	 *   simulation.
-	 * \note Whenever Orbiter creates a vessel's visual it reverts to its
+	 * \note Whenever SpaceXpanse creates a vessel's visual it reverts to its
 	 *   initial configuration (e.g. as defined in the mesh file). The
 	 *   module can use this function to update the visual to the current
 	 *   state, wherever dynamic changes are required.
@@ -5541,7 +5541,7 @@ public:
 	 * \param vis handle for the visual to be destroyed
 	 * \param refcount visual reference count
 	 * \default None.
-	 * \note Orbiter calls this function before it destroys a visual
+	 * \note SpaceXpanse calls this function before it destroys a visual
 	 *   representation of the vessel. This may be in response to the
 	 *   destruction of the actual vessel, but in general simply means that
 	 *   the vessel has moved out of visual range of the current camera
@@ -5557,15 +5557,15 @@ public:
 	 * (usually at each time step, unless the HUD is turned off).
 	 * Overwriting this function allows to implement vessel-specific
 	 * modifications of the HUD display (or to suppress the HUD altogether).
-	 * \param mode HUD mode (see HUD_* constants in OrbiterAPI.h)
+	 * \param mode HUD mode (see HUD_* constants in SpaceXpanseAPI.h)
 	 * \param hps pointer to a HUDPAINTSPEC structure
 	 * \param hDC GDI drawing device context
-	 * \default Draws a standard HUD display with Orbiter's default display
+	 * \default Draws a standard HUD display with SpaceXpanse's default display
 	 *   layout.
 	 * \deprecated This method contains a device-dependent drawing context and
 	 *   may not work with all graphics clients. It has been superseded by
 	 *   VESSEL3::clbkDrawHUD.
-	 * \note For vessels derived from VESSEL3 orbiter will not call this method,
+	 * \note For vessels derived from VESSEL3 spacexpanse will not call this method,
 	 *   but will call the VESSEL3::clbkDrawHUD method instead. The VESSEL3
 	 *   version uses a generic \e Sketchpad drawing context instead of a HDC.
 	 * \sa VESSEL3::clbkDrawHUD, \ref progflow1
@@ -5577,7 +5577,7 @@ public:
 	 *
 	 * Called when a vessel's RCS (reaction control system) mode changes.
 	 * Usually the RCS consists of a set of small thrusters arranged so as
-	 * to allow controlled attitude changes. In Orbiter, the RCS can be
+	 * to allow controlled attitude changes. In SpaceXpanse, the RCS can be
 	 * driven in either rotational mode (to change the vessel's angular
 	 * velocity) or in linear mode (to change its linear velocity), or be
 	 * switched off.
@@ -5617,7 +5617,7 @@ public:
 	 * \param mode new HUD mode
 	 * \default None.
 	 * \note For currently supported HUD modes see HUD_* constants in
-	 *   OrbiterAPI.h
+	 *   SpaceXpanseAPI.h
 	 * \note mode HUD_NONE indicates that the HUD has been turned off.
 	 * \sa Section hudmode for a list of default mode identifiers,
 	 *   \ref progflow1
@@ -5636,7 +5636,7 @@ public:
 	 *   labels after the MFD mode has changed, or if a mode requires a
 	 *   dynamic label update.
 	 * \note The mode parameter can be one of the MFD mode identifiers
-	 *   MFD_* listed in OrbiterAPI.h, or MFD_REFRESHBUTTONS. The latter
+	 *   MFD_* listed in SpaceXpanseAPI.h, or MFD_REFRESHBUTTONS. The latter
 	 *   is sent as a result of a call to oapiRefreshMFDButtons. It
 	 *   indicates not a mode change, but the need to refresh the button
 	 *   labels within a mode (i.e. a mode that dynamically changed its
@@ -5707,11 +5707,11 @@ public:
 	 * \return A nonzero return value will completely disable default
 	 *   processing of the key state for the current time step. To disable
 	 *   the default processing of selected keys only, use the RESETKEY
-	 *   macro (see OrbiterAPI.h) and return 0.
+	 *   macro (see SpaceXpanseAPI.h) and return 0.
 	 * \default None, returns 0.
 	 * \note The keystate contains the current keyboard state. Use the
 	 *   KEYDOWN macro in combination with the key identifiers as defined
-	 *   in OrbiterAPI.h (OAPI_KEY_*) to check for particular keys being
+	 *   in SpaceXpanseAPI.h (OAPI_KEY_*) to check for particular keys being
 	 *   pressed. Example:
 	 * \code
 	 *   if (KEYDOWN (kstate, OAPI_KEY_F10)) {
@@ -5733,14 +5733,14 @@ public:
 	 *
 	 * This callback function notifies the vessel of a buffered key event
 	 * (key pressed or key released).
-	 * \param key key scan code (see OAPI_KEY_* constants in OrbiterAPI.h)
+	 * \param key key scan code (see OAPI_KEY_* constants in SpaceXpanseAPI.h)
 	 * \param down true if key was pressed, false if key was released
 	 * \param kstate current keyboard state
-	 * \return The function should return 1 if Orbiter's default processing
+	 * \return The function should return 1 if SpaceXpanse's default processing
 	 *   of the key event should be skipped, 0 otherwise.
 	 * \default None, returns 0.
 	 * \note The key state (kstate) can be used to test for key modifiers
-	 *   (Shift, Ctrl, etc.). The KEYMOD_xxx macros defined in OrbiterAPI.h
+	 *   (Shift, Ctrl, etc.). The KEYMOD_xxx macros defined in SpaceXpanseAPI.h
 	 *   are useful for this purpose.
 	 * \note This function may be called repeatedly during a single frame,
 	 *   if multiple key events have occurred in the last time step.
@@ -5763,7 +5763,7 @@ public:
 	 * \note Only disable the generic view if the vessel supports either
 	 *   2-D instrument panels (see clbkLoadPanel) or a virtual cockpit
 	 *   (see clbkLoadVC). If no valid cockpit view at all is available for
-	 *   a vessel, Orbiter will crash.
+	 *   a vessel, SpaceXpanse will crash.
 	 * \note Even if the vessel supports panels or virtual cockpits, you
 	 *   shouldn't normally disable the generic view, because it provides
 	 *   the best performance on slower computers.
@@ -5774,7 +5774,7 @@ public:
 	/**
 	 * \brief 2-D instrument panel view mode request notification
 	 *
-	 * Called when Orbiter tries to switch the cockpit view to a 2-D
+	 * Called when SpaceXpanse tries to switch the cockpit view to a 2-D
 	 * instrument panel.
 	 * \param id panel identifier (>= 0)
 	 * \return The function should return true if it supports the requested
@@ -5839,7 +5839,7 @@ public:
 	/**
 	 * \brief 3-D virtual cockpit view mode request notification
 	 *
-	 * Called when Orbiter tries to switch the cockpit view to a 3-D
+	 * Called when SpaceXpanse tries to switch the cockpit view to a 3-D
 	 * virtual cockpit mode (for example in response to the user switching
 	 * cockpit modes with F8).
 	 * \param id virtual cockpit identifier (>= 0)
@@ -6080,7 +6080,7 @@ public:
 	 *   false otherwise.
 	 * \default None, returns false.
 	 * \note If a vessel class overloads this method, it should return true. On a
-	 *   \e false return, Orbiter will try VESSEL2::clbkPanelMouseEvent instead.
+	 *   \e false return, SpaceXpanse will try VESSEL2::clbkPanelMouseEvent instead.
 	 * \note Mouse events are only sent for areas which requested
 	 *   notification during definition (see RegisterPanelArea).
 	 * \sa RegisterPanelArea, \ref progflow1
@@ -6101,7 +6101,7 @@ public:
 	 * \note This callback function is only called for areas which were
 	 *   not registered with the PANEL_REDRAW_NEVER flag.
 	 * \note If a vessel class overloads this method, it should return true. On a
-	 *   \e false return, Orbiter will try VESSEL2::clbkPanelRedrawEvent instead.
+	 *   \e false return, SpaceXpanse will try VESSEL2::clbkPanelRedrawEvent instead.
 	 * \note All redrawable panel areas receive a PANEL_REDRAW_INIT redraw
 	 *   notification when the panel is created, in addition to any
 	 *   registered redraw notification events.
@@ -6147,15 +6147,15 @@ public:
 	 * (usually at each time step, unless the HUD is turned off).
 	 * Overwriting this function allows to implement vessel-specific
 	 * modifications of the HUD display (or to suppress the HUD altogether).
-	 * \param mode HUD mode (see HUD_* constants in OrbiterAPI.h)
+	 * \param mode HUD mode (see HUD_* constants in SpaceXpanseAPI.h)
 	 * \param hps pointer to a HUDPAINTSPEC structure (see notes)
 	 * \param skp drawing context instance
 	 * \return Overloaded methods should return \e true. If the return value
-	 *   is \e false, orbiter assumes that this method is disabled and will 
+	 *   is \e false, spacexpanse assumes that this method is disabled and will 
 	 *   try VESSEL2::clbkDrawHUD.
-	 * \default Draws a standard HUD display with Orbiter's default display
+	 * \default Draws a standard HUD display with SpaceXpanse's default display
 	 *   layout and returns \e true.
-	 * \note If a vessel overwrites this method, Orbiter will draw the 
+	 * \note If a vessel overwrites this method, SpaceXpanse will draw the 
 	 *   default HUD only if the base class VESSEL3::clbkDrawHUD is called.
 	 * \note hps points to a HUDPAINTSPEC structure containing information
 	 *   about the HUD drawing surface. It has the following format:
@@ -6200,10 +6200,10 @@ public:
 	 * (usually at each time step, unless the HUD is turned off).
 	 * Overwriting this function allows to implement vessel-specific
 	 * modifications of the HUD display (or to suppress the HUD altogether).
-	 * \param mode HUD mode (see HUD_* constants in OrbiterAPI.h)
+	 * \param mode HUD mode (see HUD_* constants in SpaceXpanseAPI.h)
 	 * \param hps pointer to a HUDPAINTSPEC structure
 	 * \param hDefaultTex handle for default HUD texture
-	 * \default Renders a standard HUD display with Orbiter's default display
+	 * \default Renders a standard HUD display with SpaceXpanse's default display
 	 *   layout.
 	 * \note This function is only called in glass cockpit or 2-D panel mode,
 	 *   not in VC (virtual cockpit mode).
@@ -6232,7 +6232,7 @@ public:
 	 *   variations in surface area, and any non-radial force components due to oblique
 	 *   reflections. Does not induce any torque. For more sophisticated treatment,
 	 *   vessels should re-implement this method.
-	 * \note This method is called by orbiter when perturbation forces due to
+	 * \note This method is called by spacexpanse when perturbation forces due to
 	 *   radiation pressure need to be evaluated. The implementation should take
 	 *   into account geometric factors (cross sections), surface factors (absorption,
 	 *   reflection) and spacecraft attitude relative to the sun.
@@ -6341,12 +6341,12 @@ public:
 	 * \param mode Bit-flags for active nav programmes (see \ref nav_bitflag)
 	 * \return Modified nav programme bitflags (see notes)
 	 * \default Does nothing and returns \p mode (i.e. leaves all navmode processing
-	 *   to the default Orbiter core routines.
+	 *   to the default SpaceXpanse core routines.
 	 * \note This method is called at each frame while at least one nav programme
 	 *   is active. It is only called once per frame even if multiple programmes are
 	 *   active. Check the \p mode parameter to see which.
 	 * \note The module is free to process all, a subset, or none of the active
-	 *   programmes. The return value indicates to Orbiter which of the programmes
+	 *   programmes. The return value indicates to SpaceXpanse which of the programmes
 	 *   have been processed: clear the flags for all processed programmes, and leave
 	 *   the flags for any skipped programmes.
 	 * \note You cannot set any flags in the return value that were not set already

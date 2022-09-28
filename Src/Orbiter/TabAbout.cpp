@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "TabAbout.h"
 #include "Util.h"
 #include "Help.h"
@@ -18,13 +18,13 @@
 //-----------------------------------------------------------------------------
 // AboutTab class
 
-orbiter::AboutTab::AboutTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::AboutTab::AboutTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 }
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::AboutTab::OpenHelp ()
+bool spacexpanse::AboutTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_about");
 	return true;
@@ -32,7 +32,7 @@ bool orbiter::AboutTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::AboutTab::Create ()
+void spacexpanse::AboutTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_ABT);
 
@@ -66,7 +66,7 @@ void orbiter::AboutTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::AboutTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::AboutTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_COMMAND:
@@ -91,7 +91,7 @@ INT_PTR orbiter::AboutTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 // Name: AboutProc()
 // Desc: Minimal message proc function for the about box
 //-----------------------------------------------------------------------------
-INT_PTR CALLBACK orbiter::AboutTab::AboutProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK spacexpanse::AboutTab::AboutProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_INITDIALOG:

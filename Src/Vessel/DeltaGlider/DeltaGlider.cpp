@@ -1136,7 +1136,7 @@ void DeltaGlider::clbkLoadStateEx (FILEHANDLE scn, void *vs)
         } else {
 			// offer the line to all subsystems
 			if (!ComponentVessel::clbkParseScenarioLine (line))
-				// unrecognised option - pass to Orbiter's generic parser
+				// unrecognised option - pass to SpaceXpanse's generic parser
 	            ParseScenarioLineEx (line, vs);
         }
     }

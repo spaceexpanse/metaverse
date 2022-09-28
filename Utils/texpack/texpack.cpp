@@ -602,13 +602,13 @@ enum OP_MODE {
 int main(int narg, char *arg[])
 {
 	if (narg < 3) {
-		std::cerr << "\ntexpack: Orbiter texture tree packing tool" << std::endl;
+		std::cerr << "\ntexpack: SpaceXpanse texture tree packing tool" << std::endl;
 		std::cerr << "  Packs the files of a planet texture layer directory tree" << std::endl;
 		std::cerr << "  into a single compressed archive file." << std::endl;
 		std::cerr << "\nUsage: texpack <Planet-tree-root> <Layer> [<Flags>]" << std::endl;
 		std::cerr << "\n<Planet-tree-root>:" << std::endl;
 		std::cerr << "  Path to planet textures, e.g." << std::endl;
-		std::cerr << "  c:\\Orbiter\\Textures\\Earth" << std::endl;
+		std::cerr << "  c:\\SpaceXpanse\\Textures\\Earth" << std::endl;
 		std::cerr << "\n<Layer>:" << std::endl;
 		std::cerr << "  Surf     pack surface layer tiles" << std::endl;
 		std::cerr << "  Mask     pack water mask and night light texture tiles" << std::endl;

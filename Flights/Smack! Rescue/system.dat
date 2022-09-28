@@ -40,7 +40,7 @@
 241 NOTE Forgot to close nose cone (K key), not very critical above atmosphere, but it looks cooler in external views if closed.  I'll do this in both ships (watch external view).
 242 CAMERA PRESET 0
 259.8 CAMERA PRESET 1
-260 NOTE If you have Orbiter Sound installed (which you should), you can stop the proximity beeping. On left MFD buttons, click SEL, Radio/MP3 panel, RAD, SEL, Docking.
+260 NOTE If you have SpaceXpanse Sound installed (which you should), you can stop the proximity beeping. On left MFD buttons, click SEL, Radio/MP3 panel, RAD, SEL, Docking.
 282 CAMERA PRESET 0
 296 NOTEPOS 0.63 0.12 0.98 0.96
 296 NOTE We need to be near apoapsis to fire main engines to raise periapsis (apoapsis is open circle on orbit diagram, ApT ~845 s, about 14 minutes to go), so accelerate time 10x...
@@ -69,7 +69,7 @@
 1118.7027 TACC 1.000000
 1120 NOTE Engines shut down, 1x time - but it looks like GL-02 engines burned a little long (I was slow on the throttles).  No problem, we just won't be orbiting quite so close.
 1135 CAMERA PRESET 4
-1140 NOTE Orbits for both ships are now safely above the atmosphere (200 km in Orbiter).  Replay will end shortly, or press control-F5 and click the Stop button any time.
+1140 NOTE Orbits for both ships are now safely above the atmosphere (200 km in SpaceXpanse).  Replay will end shortly, or press control-F5 and click the Stop button any time.
 1152 CAMERA PRESET 1
 1165 NOTE Use F3 and click on some of the other ships in this scenario to see where they are, or even to fly them once replay ends.
 1175 NOTE Or press Control-F1 and click on some of the planets or moons listed there to go visit them.  See chapter 2 of "Go Play In Space" for more ideas.

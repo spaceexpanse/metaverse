@@ -19,8 +19,8 @@ target_link_libraries(LaunchpadParamTemplate
 )
 
 add_dependencies(LaunchpadParamTemplate
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(LaunchpadParamTemplate

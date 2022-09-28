@@ -3,12 +3,12 @@
 
 // ======================================================================
 //                     ORBITER SOFTWARE DEVELOPMENT KIT
-// OrbiterAPI.h
+// SpaceXpanseAPI.h
 // ORBITER Application Programming Interface (OAPI)
 // ======================================================================
 
 /**
- * \file OrbiterAPI.h
+ * \file SpaceXpanseAPI.h
  * \brief General API interface functions
  * \todo Check functions in VESSELSTATUS2::arot and oapiGetPlanetObliquityMatrix(), 
  *	minus sign has changed a place in a matrix. Is this correct??
@@ -102,7 +102,7 @@ inline double posangle (double angle)
  * \param n size of cbuf array
  * \param f floating point value
  * \param precision output precision
- * \note Formats the string in the standard Orbiter convention,
+ * \note Formats the string in the standard SpaceXpanse convention,
  *   with 'k', 'M', 'G' postfixes as required
  * \note cbuf must be allocated to sufficient size to hold the string
  */
@@ -224,7 +224,7 @@ typedef enum { ROOT, CONFIG, SCENARIOS, TEXTURES, TEXTURES2, MESHES, MODULES } P
 /**
  * \defgroup vec Vectors and matrices
  * Vectors and matrices are used to represent positions, velocities, translations,
- *   rotations, etc. in the 3-dimensional object space. Orbiter provides the
+ *   rotations, etc. in the 3-dimensional object space. SpaceXpanse provides the
  *   %VECTOR3 and %MATRIX3 structures for 3-D vectors and matrices. A number
  *   of utility functions allow common operations such as matrix-vector
  *   products, dot and vector products, etc.
@@ -1147,7 +1147,7 @@ typedef struct {
  * structure. Functions using VESSELSTATUS are still supported for backward
  * compatibility. \n
  * \note The version specification is an input parameter for all function calls
- *  (including GetStatus) and must be set by the user to tell Orbiter which interface to use.
+ *  (including GetStatus) and must be set by the user to tell SpaceXpanse which interface to use.
  * \sa VESSEL::GetStatusEx 
  */
 typedef struct {
@@ -1331,7 +1331,7 @@ typedef bool (*Listentry_clbk)(char *name, DWORD idx, DWORD flag, void *usrdata)
 //@
 
 /**
- * \brief Context information for an Orbiter ingame help page.
+ * \brief Context information for an SpaceXpanse ingame help page.
  * \sa oapiOpenHelp
  */
 typedef struct {
@@ -1693,7 +1693,7 @@ typedef enum {
  * \ingroup defines
  * \defgroup visevent Identifiers for visual events
  *
- * These constants define events that are sent from the Orbiter core to
+ * These constants define events that are sent from the SpaceXpanse core to
  * visual instances in a graphics client. The client receives these notifications
  * via the oapi::GraphicsClient::clbkVisEvent callback function, where the first parameter
  * is the event identifier, and the second parameter is a message-specific context
@@ -2176,7 +2176,7 @@ typedef int (*KeyFunc)(const char *keybuf);
 /** \class LaunchpadItem
   * \brief Base class to define launchpad items.
   * \details LaunchpadItem is the base class for objects that can be inserted into the parameter list of the
-  * Extra tab of the Orbiter Launchpad dialog. The Extra tab provides a mechanism for plugin
+  * Extra tab of the SpaceXpanse Launchpad dialog. The Extra tab provides a mechanism for plugin
   * modules to allow users to set global parameters specific to an addon. LaunchpadItem is
   * notified whenever the user selects the item from the list, and when parameters need to be
   * read from or written to disk.
@@ -2242,14 +2242,14 @@ public:
 	* \brief This method is called whenever the item should write its current state to a file.
 	* \return Currently ignored. Should be 0.
 	* \n\n<b>Default action:</b> Nothing; returns 0.
-	* \note This function is called before a simulation session is launched, before Orbiter
+	* \note This function is called before a simulation session is launched, before SpaceXpanse
 	*  shuts down, and before the module is deactivated. It allows the module to
 	*  write its current state to a file, so it can re-load its settings the next time
-	*  Orbiter is launched.
+	*  SpaceXpanse is launched.
 	* \note You can either use default C or C++ methods to open a file for output, or you
 	*  can use the oapiOpenFile() method.
-	* \note Modules should never write to the global Orbiter.cfg configuration file. Any
-	*  addons that are not active when Orbiter overwrites Orbiter.cfg will lose their
+	* \note Modules should never write to the global SpaceXpanse.cfg configuration file. Any
+	*  addons that are not active when SpaceXpanse overwrites SpaceXpanse.cfg will lose their
 	*  settings, since their clbkWriteConfig() method cannot be called.
 	* \note The best place to read the settings stored during a previous session is in the
 	*  overloaded LaunchpadItem constructor. Use oapiOpenFile or another file
@@ -2355,50 +2355,50 @@ protected:
 
 // ======================================================================
 /**
- * \defgroup oapi Orbiter API interface methods
+ * \defgroup oapi SpaceXpanse API interface methods
  *
  * The functions in this section provide a general framework to retrieve and set
- * Orbiter simulation parameters from an addon module.
+ * SpaceXpanse simulation parameters from an addon module.
  * For a linear list of oapi functions, constants and enumerations, see
- * \ref OrbiterAPI.h.
+ * \ref SpaceXpanseAPI.h.
  * For vessel-specific parameters see also the \ref VESSEL class.
  */
 // ======================================================================
 //@{
 /**
- * \brief Returns the version number of the Orbiter core system.
+ * \brief Returns the version number of the SpaceXpanse core system.
  * \return version number
- * \note Orbiter version numbers are derived from the build date.
+ * \note SpaceXpanse version numbers are derived from the build date.
  *   The version number is constructed as
  *   (year%100)*10000 + month*100 + day, resulting in a decimal
  *   version number of the form YYMMDD
  * \sa oapiGetModuleVersion
  */
-OAPIFUNC int oapiGetOrbiterVersion ();
+OAPIFUNC int oapiGetSpaceXpanseVersion ();
 
 /**
  * \brief Returns the API version number against which the module
  *   was linked.
  * \return module version number
- * \note Orbiter version numbers are derived from the build date.
+ * \note SpaceXpanse version numbers are derived from the build date.
  *   The version number is constructed as
  *   (year%100)*10000 + month*100 + day, resulting in a decimal
  *   version number of the form YYMMDD
- * \sa oapiGetOrbiterVersion
+ * \sa oapiGetSpaceXpanseVersion
  */
 int oapiGetModuleVersion ();
 
 /**
- * \brief Returns the instance handle for the running Orbiter application.
- * \return Orbiter instance handle
+ * \brief Returns the instance handle for the running SpaceXpanse application.
+ * \return SpaceXpanse instance handle
  */
-OAPIFUNC HINSTANCE oapiGetOrbiterInstance ();
+OAPIFUNC HINSTANCE oapiGetSpaceXpanseInstance ();
 
 /**
- * \brief Returns a pointer to the command line with which Orbiter was invoked.
- * \return Pointer to orbiter command line string.
+ * \brief Returns a pointer to the command line with which SpaceXpanse was invoked.
+ * \return Pointer to spacexpanse command line string.
  * \note This method can be used to pass custom parameters to a module directly
- *  from the orbiter command line.
+ *  from the spacexpanse command line.
  */
 OAPIFUNC const char *oapiGetCmdLine ();
 
@@ -2433,7 +2433,7 @@ OAPIFUNC void oapiRegisterModule (oapi::Module *module);
  * \return Pointer to debugging string.
  * \note This function should only be used for debugging purposes. 
  *  Do not use it in published modules!
- * \note The returned pointer refers to a global char[256] in the Orbiter core. It is the
+ * \note The returned pointer refers to a global char[256] in the SpaceXpanse core. It is the
  *  responsibility of the module to ensure that no overflow occurs.
  * \note If the string is written to more than once per time step (either within a single
  *  module or by multiple modules) the last state before rendering will be displayed.
@@ -2509,7 +2509,7 @@ OAPIFUNC DWORD oapiGetObjectCount ();
  *   <tr><td>OBJTP_VESSEL</td><td>vessel (spacecraft, space stations, etc.)</td></tr>
  *   <tr><td>OBJTP_SURFBASE</td><td>surface base (spaceport)</td></tr>
  *   </table>
- * \note This function searches through Orbiter's object list to determine if the
+ * \note This function searches through SpaceXpanse's object list to determine if the
  *   provided object handle is valid. It scales with O(n) in the presence of n objects.
  * \sa oapiGetObjectParam, oapiGetObjectCount
  */
@@ -2582,7 +2582,7 @@ OAPIFUNC bool oapiIsVessel (OBJHANDLE hVessel);
  *   by its name.
  * \param name celestial object name (not case-sensitive)
  * \return Object handle, or NULL if the object could not be found.
- * \note Celestial bodies in orbiter are objects that act as sources for
+ * \note Celestial bodies in spacexpanse are objects that act as sources for
  *   gravitational fields.
  * \sa oapiGetGbodyByIndex
  */
@@ -2719,7 +2719,7 @@ OAPIFUNC VESSEL *oapiGetFocusInterface ();
  *   a handle of any other type will result in undefined behaviour.
  * \note Only celestial bodies controlled by external plugin modules have
  *   access to a CELBODY instance. Celestial bodies that are updated
- *   internally by Orbiter (e.g. using 2-body orbital elements, or dynamic
+ *   internally by SpaceXpanse (e.g. using 2-body orbital elements, or dynamic
  *   updates) return NULL here.
  */
 OAPIFUNC CELBODY *oapiGetCelbodyInterface (OBJHANDLE hBody);
@@ -2755,9 +2755,9 @@ OAPIFUNC OBJHANDLE oapiCreateVessel (const char *name, const char *classname, co
  *   If the config file is located in a subfolder, the relative path must
  *   be included in the \e classname parameter.
  * \note \e status must point to a VESSELSTATUSx structure. Currently only
- *   \ref VESSELSTATUS2 is supported, but future Orbiter versions may add
+ *   \ref VESSELSTATUS2 is supported, but future SpaceXpanse versions may add
  *   new interfaces.
- * \note During the vessel creation process Orbiter will call the module's
+ * \note During the vessel creation process SpaceXpanse will call the module's
  *   \ref VESSEL2::clbkSetStateEx callback function if it exists.
  * \sa oapiCreateVessel, VESSEL2::clbkSetStateEx, VESSELSTATUS2
  */
@@ -2768,9 +2768,9 @@ OAPIFUNC OBJHANDLE oapiCreateVesselEx (const char *name, const char *classname, 
  * \param hVessel vessel handle
  * \param hAlternativeCameraTarget optional new camera target
  * \return \e true if vessel could be deleted.
- * \note If the current focus vessel is deleted, Orbiter will switch
+ * \note If the current focus vessel is deleted, SpaceXpanse will switch
  *   focus to the closest focus-enabled vessel. If the last focus-enabled
- *   vessel is deleted, Orbiter returns to the launchpad.
+ *   vessel is deleted, SpaceXpanse returns to the launchpad.
  * \note If the current camera target is deleted, a new camera target can
  *   be provided in \e hAlternativeCameraTarget. If not specified, the
  *   focus object is used as default camera target.
@@ -3315,7 +3315,7 @@ OAPIFUNC bool oapiSetFocusAttitudeMode (int mode);
  * \param [in] hObj object handle
  * \param [out] mat rotation matrix
  * \note The returned rotation matrix can be used to transform orientations from the
- *   local frame of an object to Orbiter's global reference frame (ecliptic and equinox of J2000)
+ *   local frame of an object to SpaceXpanse's global reference frame (ecliptic and equinox of J2000)
  *   and vice versa.
  * \note The rotation, defined by matrix R, together with a translation vector t, provides the
  *   transformation of a point p between local and global coordinates:
@@ -3423,7 +3423,7 @@ OAPIFUNC double oapiOrthodome (double lng1, double lat1, double lng2, double lat
 	* \brief Request a custom texture for vessel exhaust rendering.
 	* \param name exhaust texture file name (without path and extension)
 	* \return texture handle
-	* \note The exhaust texture must be stored in DDS format in Orbiter's default texture directory.
+	* \note The exhaust texture must be stored in DDS format in SpaceXpanse's default texture directory.
 	* \note If the texture is not found the function returns NULL.
 	* \note The texture can be used to define custom textures in VESSEL::AddExhaust.
 	* \sa oapiRegisterReentryTexture, oapiRegisterParticleTexture
@@ -3434,7 +3434,7 @@ OAPIFUNC SURFHANDLE oapiRegisterExhaustTexture (char *name);
 	* \brief Request a custom texture for vessel reentry flame rendering.
 	* \param name reentry texture file name (without path and extension)
 	* \return texture handle
-	* \note The exhaust texture must be stored in DDS format in Orbiter's default texture directory.
+	* \note The exhaust texture must be stored in DDS format in SpaceXpanse's default texture directory.
 	* \note If the texture is not found the function returns NULL.
 	* \note The texture can be used to define custom textures in VESSEL::SetReentryTexture().
 	* \sa oapiRegisterExhaustTexture, oapiRegisterParticleTexture
@@ -3622,7 +3622,7 @@ OAPIFUNC double oapiCameraPolar ();
 	/**
 	* \brief Returns the current camera aperture (the field of view) in rad.
 	* \return camera aperture [rad]
-	* \note Orbiter defines the the aperture as 1/2 of the vertical field of view, between
+	* \note SpaceXpanse defines the the aperture as 1/2 of the vertical field of view, between
 	*  the viewport centre and the top edge of the viewport.
 	*/
 OAPIFUNC double oapiCameraAperture ();
@@ -3630,11 +3630,11 @@ OAPIFUNC double oapiCameraAperture ();
 	/**
 	* \brief Change the camera aperture (field of view).
 	* \param aperture new aperture [rad]
-	* \note Orbiter restricts the aperture to the range from RAD*0.1 to RAD*80 (i. e. field
+	* \note SpaceXpanse restricts the aperture to the range from RAD*0.1 to RAD*80 (i. e. field
 	*  of view between 0.2 and 160 deg. Very wide angles (\> 90 deg) and very narrow angles
 	*  (\< 5 deg) should only be used to implement specific optical devices, e.g. telescopes
 	*  or wide-angle cameras, not for standard observer views.
-	* \note The Orbiter user interface does not accept apertures \> 45 deg or \< 5 deg. As
+	* \note The SpaceXpanse user interface does not accept apertures \> 45 deg or \< 5 deg. As
 	*  soon as the user manipulates the aperture manually, it will be clamped back to the
 	*  range from 5 to 45 deg.
 	*/
@@ -3732,7 +3732,7 @@ OAPIFUNC double oapiGetPlanetPeriod (OBJHANDLE hPlanet);
 	*  and the ecliptic zenith).
 	* \param hPlanet planet handle
 	* \return obliquity [rad]
-	* \note In Orbiter, the ecliptic zenith (at epoch J2000) is the positive y-axis of the
+	* \note In SpaceXpanse, the ecliptic zenith (at epoch J2000) is the positive y-axis of the
 	*  global frame of reference.
 	* \sa oapiGetPlanetPeriod, oapiGetPlanetTheta
 	*/
@@ -3906,12 +3906,12 @@ OAPIFUNC VECTOR3 oapiGetWindVector (OBJHANDLE hPlanet, double lng, double lat, d
 	*  stabilisation is active at a given time step. Use the
 	*  VESSEL::NonsphericalGravityEnabled() function to check if a vessel uses the
 	*  perturbation terms in the update of its state vectors.
-	* \note Depending on the distance to the planet, Orbiter may use fewer perturbation
+	* \note Depending on the distance to the planet, SpaceXpanse may use fewer perturbation
 	*  terms than defined, if their contribution is negligible:\n \n
 	*  If \f$ J_n(\frac{R}{r})^n < \epsilon,  n\geq 2 \f$, ignore all terms \f$ \geq n \f$, \n \n
 	*  where R is the planet radius, r is the distance from the planet, and \f$ J_n \f$ is the n-
 	*  2nd perturbation term defined for the planet.\n
-	*  Orbiter uses \f$ \epsilon = 10^{-10} \f$
+	*  SpaceXpanse uses \f$ \epsilon = 10^{-10} \f$
 	*/
 OAPIFUNC DWORD oapiGetPlanetJCoeffCount (OBJHANDLE hPlanet);
 
@@ -3921,14 +3921,14 @@ OAPIFUNC DWORD oapiGetPlanetJCoeffCount (OBJHANDLE hPlanet);
 	* \param n coefficient index
 	* \return Perturbation coefficient \f$ J_{n+2} \f$
 	* \note Valid indices \a n are 0 to oapiGetPlanetJCoeffCount()-1
-	* \note Orbiter calculates the planet's gravitational potential \a U for a given distance \a r
+	* \note SpaceXpanse calculates the planet's gravitational potential \a U for a given distance \a r
 	*  and latitude \f$ \phi \f$ by 
 	* \f[
 	* U(r,\phi) = \frac{GM}{r}\left[ 1 - \sum^{N}_{n=2} J_n\left(\frac{R}{r}\right)^2 P_n(\sin\phi) \right]
 	* \f] 
 	* where \a R is the planet's equatorial radius, \a M is its mass, \a G is the gravitational
 	* constant, and \f$ P_n \f$ is the Legendre polynomial of order n.
-	* \note Orbiter currently considers perturbations to be only a function of latitude
+	* \note SpaceXpanse currently considers perturbations to be only a function of latitude
 	*  (polar), not of longitude.
 	* \note The first coefficient, \a n = 0, returns J2, which accounts for the ellipsoid shape
 	*  of a planet (flattening). Higher perturbation terms are usually small compared
@@ -4121,7 +4121,7 @@ OAPIFUNC double oapiGetSysStep ();
 	/**
 	* \brief Retrieve absolute time measure (Modified Julian Date) for current simulation state.
 	* \return Current Modified Julian Date (days)
-	* \note Orbiter defines the Modified Julian Date (MJD) as JD - 240 0000.5, where JD is
+	* \note SpaceXpanse defines the Modified Julian Date (MJD) as JD - 240 0000.5, where JD is
 	*  the Julian Date. JD is the interval of time in mean solar days elapsed since 4713
 	*  BC January 1 at Greenwich mean noon.
 	* \sa oapiSetSimMJD, oapiGetSimTime
@@ -4133,7 +4133,7 @@ OAPIFUNC double oapiGetSimMJD ();
 	* \return Computer system time in MJD format
 	* \note The returned value is the UTC time obtained from the computer system clock,
 	*   plus dt=66.184 seconds to map from UTC to TDB (Barycentric Dynamical Time) used
-	*   internally by Orbiter. The dt offset was not added in previous Orbiter releases.
+	*   internally by SpaceXpanse. The dt offset was not added in previous SpaceXpanse releases.
 	* \sa oapiGetSysTime
 	*/
 OAPIFUNC double oapiGetSysMJD ();
@@ -4246,7 +4246,7 @@ OAPIFUNC DWORD oapiGetNavChannel (NAVHANDLE hNav);
 	* \brief Returns the frequency of a NAV transmitter.
 	* \param hNav NAV transmitter handle
 	* \return Transmitter frequency [MHz]
-	* \note In Orbiter, NAV transmitter frequencies range from 108.0 to 139.95 MHz and
+	* \note In SpaceXpanse, NAV transmitter frequencies range from 108.0 to 139.95 MHz and
 	*  are incremented in 0.05 MHz steps.
 	* \sa oapiGetNavData, oapiGetNavChannel, oapiGetNavRange, oapiGetNavPos, oapiGetNavType
 	*/
@@ -4406,7 +4406,7 @@ OAPIFUNC VISHANDLE *oapiObjectVisualPtr (OBJHANDLE hObject);
 	* \brief Loads a mesh from file and returns a handle to it.
 	* \param fname mesh file name
 	* \return Handle to the loaded mesh. (NULL indicates load error)
-	* \note The file name should not contain a path or file extension. Orbiter appends
+	* \note The file name should not contain a path or file extension. SpaceXpanse appends
 	*  extension .msh and searches in the default mesh directory.
 	* \note Meshes should be deallocated with oapiDeleteMesh when no longer needed.
 	* \sa oapiDeleteMesh, VESSEL::AddMesh
@@ -4426,7 +4426,7 @@ OAPIFUNC MESHHANDLE oapiLoadMesh (const char *fname);
 	*  the simulation. For example, parent objects may pre-load meshes for any
 	*  child objects they may create later.
 	* \note Do NOT delete any meshes obtained by this function with oapiDeleteMesh()
-	*  Orbiter takes care of deleting globally managed meshes.
+	*  SpaceXpanse takes care of deleting globally managed meshes.
 	* \note If you assign the mesh to a vessel with a subsequent VESSEL::AddMesh()
 	*  call, a copy of the global mesh is created every time the vessel creates its
 	*  visual, and discarded as soon as the visual is deleted. The global mesh can
@@ -4436,7 +4436,7 @@ OAPIFUNC MESHHANDLE oapiLoadMesh (const char *fname);
 	*  VESSEL2::clbkVisualCreated() callback function, using the
 	*  VESSEL::GetMesh() method. Vessels should only modify their individual
 	*  meshes, never the global template, since the latter is shared across all vessel instances.
-	* \note For external graphics clients, the Orbiter core forwards the mesh data
+	* \note For external graphics clients, the SpaceXpanse core forwards the mesh data
 	*  to the client for conversion to a device-specific format. The mesh template
 	*  referred to by the handle returned by oapiLoadMeshGlobal is then no longer
 	*  used, so any changes made to it will be ignored.
@@ -4461,7 +4461,7 @@ typedef void (*LoadMeshClbkFunc)(MESHHANDLE hMesh, bool firstload);
 	 * \note This function is identical to \ref oapiLoadMeshGlobal(const char*),
 	 *   except that it invokes the callback function immediately after loading
 	 *   the mesh. This is important in combination with external graphics clients,
-	 *   because Orbiter hands the loaded mesh on to the client for conversion to
+	 *   because SpaceXpanse hands the loaded mesh on to the client for conversion to
 	 *   a device-specific format. The callback function is invoked before the
 	 *   mesh is passed to the graphics client. This allows to apply modifications
 	 *   (e.g. decryption) while the mesh is still in an editable format.
@@ -4482,7 +4482,7 @@ OAPIFUNC const char* oapiGetMeshFilename(MESHHANDLE hMesh);
 	 * \param ngrp number of groups in the list
 	 * \param grp list of mesh groups
 	 * \return Handle for the newly created mesh.
-	 * \note Orbiter performs a deep copy of the group definitions passed to
+	 * \note SpaceXpanse performs a deep copy of the group definitions passed to
 	 *   the functions. Therefore it is admissable to pass the groups as
 	 *   variables with local scope. If the mesh groups were dynamically
 	 *   allocated, they should be deallocated by the caller after use.
@@ -4616,7 +4616,7 @@ OAPIFUNC DWORD oapiMeshTextureCount (MESHHANDLE hMesh);
 	* \note the texture index is given by the order in which the textures appear in the
 	*  texture list at the end of the mesh file.
 	* \note Important: Any textures which are to be dynamically modified should be
-	*  listed with the "D" flag ("dynamic") in the mesh file. This causes Orbiter to
+	*  listed with the "D" flag ("dynamic") in the mesh file. This causes SpaceXpanse to
 	*  decompress the texture when it is loaded. Blitting operations to compressed
 	*  surfaces is very inefficient on most graphics hardware.
 	*/
@@ -4630,7 +4630,7 @@ OAPIFUNC SURFHANDLE oapiGetTextureHandle (MESHHANDLE hMesh, DWORD texidx);
 	* \note Textures loaded by this function should be in DDS format and conform to the
 	*  DirectX restrictions for texture surfaces, typically square bitmaps with
 	*  dimensions of powers of 2 (128x128, 256x256, etc.).
-	* \note File names can contain search paths. Orbiter searches for textures in the
+	* \note File names can contain search paths. SpaceXpanse searches for textures in the
 	*  standard way, i.e. first searches the HitexDir directory (usually Textures2),
 	*  then the TextureDir directory (usually Textures). All search paths are relative
 	*  to the texture root directories. For example, oapiLoadTexture()
@@ -4703,7 +4703,7 @@ OAPIFUNC DWORD oapiMeshMaterialCount (MESHHANDLE hMesh);
 	*  be used to obtain special effects.
 	* \note This function can be used to edit mesh materials directly.
 	* \note This function should only be used for mesh templates, not for
-	*   device-specific rendering meshes (except for Orbiter's built-in
+	*   device-specific rendering meshes (except for SpaceXpanse's built-in
 	*   graphics engine). For device meshes, use \erf oapiSetMaterial instead.
 	* \sa oapiAddMaterial, oapiDeleteMaterial, oapiMeshMaterialCount
 	*/
@@ -4870,7 +4870,7 @@ OAPIFUNC int oapiGetHUDMode (HUDPARAM *prm);
 
 	/**
 	* \brief Switch the HUD display to a different colour.
-	* \note Orbiter currently defines 3 HUD colours: green, red, white. Calls to
+	* \note SpaceXpanse currently defines 3 HUD colours: green, red, white. Calls to
 	*  oapiToggleHUDColour will cycle through these.
 	* \sa oapiIncHUDIntensity, oapiDecHUDIntensity
 	*/
@@ -4995,7 +4995,7 @@ OAPIFUNC int oapiSendMFDKey (int mfd, DWORD key);
 	*  the mode has not changed. This is useful to update the labels for modes that
 	*  dynamically update their labels.
 	* \note You don't need to call oapiRefreshMFDButtons after an actual mode
-	*  change, because a clbkMFDMode call will be sent automatically by Orbiter.
+	*  change, because a clbkMFDMode call will be sent automatically by SpaceXpanse.
 	* \sa \ref mfdidentifier "MFD Identifiers"
 	*/
 OAPIFUNC void oapiRefreshMFDButtons (int mfd, OBJHANDLE hVessel = 0);
@@ -5006,7 +5006,7 @@ OAPIFUNC void oapiRefreshMFDButtons (int mfd, OBJHANDLE hVessel = 0);
 	* \param bt button number (>=0)
 	* \param event mouse event (a combination of \ref panel_mouse "PANEL_MOUSE_xxx" flags)
 	* \return Returns \e true if the button was processed, \e false if no action was assigned to the button.
-	* \note Orbiter assigns default button actions for the various MFD modes. For
+	* \note SpaceXpanse assigns default button actions for the various MFD modes. For
 	*  example, in Orbit mode the action assigned to button 0 is Select reference.
 	*  Calling oapiProcessMFDButton (for example as a reaction to a mouse button
 	*  event) will execute this action.
@@ -5125,7 +5125,7 @@ OAPIFUNC void oapiRegisterPanelBackground (HBITMAP hBmp, DWORD flag = PANEL_ATTA
 	* \note For possible values of mouse_event see \ref panel_mouse "Mouse event identifiers".
 	*  \c PANEL_MOUSE_IGNORE prevents mouse events from being triggered.
 	* \note By default, no mouse events are sent during a playback session. You can
-	*  force Orbiter to trigger mouse events during a playback (e.g. to allow the
+	*  force SpaceXpanse to trigger mouse events during a playback (e.g. to allow the
 	*  user to operate MFD buttons) by using \c PANEL_MOUSE_ONREPLAY in
 	*  combination with any of the other mouse event flags.\n
 	* \note bkmode defines the bitmap handed to the redraw callback:\n\n
@@ -5271,7 +5271,7 @@ OAPIFUNC void oapiSetPanelBlink (VECTOR3 v[4]);
  * \brief Obtain a drawing context for a surface.
  * \param surf surface handle
  * \return drawing context instance, or NULL if no graphics support
- * \note This function returns a valid context instance only when Orbiter
+ * \note This function returns a valid context instance only when SpaceXpanse
  *   is attached to a graphics client which supports 2-D drawing into
  *   surfaces. The caller should check the return value for NULL.
  * \note If a nonzero Sketchpad instance was returned, it should be
@@ -5396,7 +5396,7 @@ OAPIFUNC void oapiReleaseBrush (oapi::Brush *brush);
  * \warning This function uses a device-dependent drawing context handle
  *   and may not work with all graphics clients. It has been superseded by
  *   oapiGetSketchpad.
- * \note This function returns a valid device handle only when Orbiter is
+ * \note This function returns a valid device handle only when SpaceXpanse is
  *   using its inline graphics client, or if an external client is attached
  *   that supports GDI drawing. In all other cases, the function returns
  *   NULL. Therefore, the caller should always check the returned value before
@@ -5470,7 +5470,7 @@ OAPIFUNC SURFHANDLE oapiCreateSurfaceEx (int width, int height, DWORD attrib);
 	* \brief Load a texture from a file (*.dds, *.png, *.jpg, *.bmp)
 	* \param fname texture file name
 	* \param attrib OAPISURFACE_* attribute flags defining surface type.
-	* \param bPath if 'true' then 'fname' must contain absolute path to a file. If 'false' a normal Orbiter texture search path is used.
+	* \param bPath if 'true' then 'fname' must contain absolute path to a file. If 'false' a normal SpaceXpanse texture search path is used.
 	* \return Surface handle for the loaded texture, or NULL if not found.
 	*/
 OAPIFUNC SURFHANDLE oapiLoadSurfaceEx(const char* fname, DWORD attrib, bool bPath = false);
@@ -5571,7 +5571,7 @@ OAPIFUNC void       oapiClearSurfaceColourKey (SURFHANDLE surf);
 	* \note Transparent blitting can be performed by specifying a colour key in ck. The
 	*   transparent colour can either be passed explicitly in ck, or ck can be set to
 	*   SURF_PREDEF_CK to use the key previously defined with \ref oapiSetSurfaceColourKey.
-	* \note Colour keys are only supported with Orbiter's inline graphics client. External
+	* \note Colour keys are only supported with SpaceXpanse's inline graphics client. External
 	*   clients ignore the ck parameter. The use of colour keys is therefore discouraged.
 	*/
 OAPIFUNC void oapiBlt (SURFHANDLE tgt, SURFHANDLE src, int tgtx, int tgty, int srcx, int srcy, int w, int h, DWORD ck = SURF_NO_CK);
@@ -5592,7 +5592,7 @@ OAPIFUNC void oapiBlt (SURFHANDLE tgt, SURFHANDLE src, int tgtx, int tgty, int s
 	* \note Transparent blitting can be performed by specifying a colour key in ck. The
 	*   transparent colour can either be passed explicitly in ck, or ck can be set to
 	*   SURF_PREDEF_CK to use the key previously defined with \ref oapiSetSurfaceColourKey.
-	* \note Colour keys are only supported with Orbiter's inline graphics client. External
+	* \note Colour keys are only supported with SpaceXpanse's inline graphics client. External
 	*   clients ignore the ck parameter. The use of colour keys is therefore discouraged.
 	* \note The rotation flag is deprecated. It has no effect.
 	*/
@@ -5660,7 +5660,7 @@ OAPIFUNC void oapiColourFill (SURFHANDLE tgt, DWORD fillcolor, int tgtx = 0, int
 	* \brief Register a custom MFD mode.
 	* \param spec MFD specs (see notes below)
 	* \return MFD mode identifier
-	* \note This function registers a custom MFD mode with Orbiter. There are two
+	* \note This function registers a custom MFD mode with SpaceXpanse. There are two
 	*  types of custom MFDs: generic and vessel class-specific. Generic MFD
 	*  modes are available to all vessel types, while specific modes are only
 	*  available for a single vessel class. Generic modes should be registered in
@@ -5674,7 +5674,7 @@ OAPIFUNC void oapiColourFill (SURFHANDLE tgt, DWORD fillcolor, int tgtx = 0, int
 	*   void *context; // mode-specific context pointer
 	*   int (*msgproc)(UINT,UINT,WPARAM,LPARAM);   // address of MFD message parser
 	* } MFDMODESPEC; \endcode
-	* \note See orbitersdk\\samples\\CustomMFD for a sample MFD mode implementation.
+	* \note See spacexpansesdk\\samples\\CustomMFD for a sample MFD mode implementation.
 	* \sa oapiUnregisterMFDMode, VESSEL4::RegisterMFDMode
 	*/
 OAPIFUNC int oapiRegisterMFDMode (MFDMODESPECEX &spec);
@@ -5823,7 +5823,7 @@ OAPIFUNC void       oapiVCSetAreaClickmode_Quadrilateral (int id, const VECTOR3 
 	*  defines position 1 as its right neighbour, then position 1 should define
 	*  position 0 as its left neighbour.
 	* \note If only a single VC position (id 0) is defined, this function doesn't need to be called.
-	* \note Orbiter calls VESSEL2::clbkLoadVC() with the appropriate id whenever the user switches to a new position.
+	* \note SpaceXpanse calls VESSEL2::clbkLoadVC() with the appropriate id whenever the user switches to a new position.
 	*/
 OAPIFUNC void       oapiVCSetNeighbours (int left, int right, int top, int bottom);
 
@@ -5854,8 +5854,8 @@ OAPIFUNC void       oapiVCTriggerRedrawArea (int vc_id, int area_id);
 	*  front of the camera position in the virtual cockpit. This group is rendered
 	*  separately from the rest of the mesh and should therefore have FLAG 2 set
 	*  in the mesh file. The group material and texture can be set to 0.
-	* \note The HUD centre position and size are required to allow Orbiter to correctly scale the display.
-	* \note Orbiter renders the HUD with completely transparent background. Rendering
+	* \note The HUD centre position and size are required to allow SpaceXpanse to correctly scale the display.
+	* \note SpaceXpanse renders the HUD with completely transparent background. Rendering
 	*  the glass pane, brackets, etc. is up to the vessel designer.
 	*/
 OAPIFUNC void       oapiVCRegisterHUD (const VCHUDSPEC *spec);
@@ -5867,13 +5867,13 @@ OAPIFUNC void       oapiVCRegisterHUD (const VCHUDSPEC *spec);
 // =============================================================================================
 //@{ 
 	/**
-	* \brief Register a new item in the parameter list of the "Extra" tab of the Orbiter Launchpad dialog.
+	* \brief Register a new item in the parameter list of the "Extra" tab of the SpaceXpanse Launchpad dialog.
 	* \param item pointer to LaunchpadItem structure (see notes)
 	* \param parent parent item, or NULL for root item
 	* \return Handle for the new item
 	* \note The "Extra" list of the Launchpad dialog is customisable and can be used by
 	*  modules to allow user selection of global parameters and settings. Data can
-	*  be written to/read from file and therefore persist across Orbiter sessions.
+	*  be written to/read from file and therefore persist across SpaceXpanse sessions.
 	* \note Item is a pointer to a class instance derived from LaunchpadItem.
 	*  It defines what is displayed in the list, and how the user accesses the item.
 	* \note Items can be arranged in a hierarchy. Child items can be defined by passing
@@ -5891,7 +5891,7 @@ OAPIFUNC void       oapiVCRegisterHUD (const VCHUDSPEC *spec);
 OAPIFUNC LAUNCHPADITEM_HANDLE oapiRegisterLaunchpadItem (LaunchpadItem *item, LAUNCHPADITEM_HANDLE parent = 0);
 
 	/**
-	* \brief Unregister a previously registered entry in the "Extra" tab of the Orbiter Launchpad dialog.
+	* \brief Unregister a previously registered entry in the "Extra" tab of the SpaceXpanse Launchpad dialog.
 	* \param item handle of the item to be removed
 	* \return value \e true if item could be unregistered, \e false if no matching item was found.
 	* \note A module must unregister all the launchpad items it has registered before it
@@ -5918,7 +5918,7 @@ OAPIFUNC LAUNCHPADITEM_HANDLE oapiFindLaunchpadItem (const char *name = 0, LAUNC
 typedef void (*CustomFunc)(void *context);
 
 	/**
-	* \brief Register a custom function. Custom functions can be accessed in Orbiter by pressing
+	* \brief Register a custom function. Custom functions can be accessed in SpaceXpanse by pressing
 	*  Ctrl-F4. A common use for custom functions is opening plugin dialog boxes.
 	* \param label label to appear in the custom function list.
 	* \param desc a short description of the function
@@ -6024,7 +6024,7 @@ OAPIFUNC bool       oapiRegisterWindow (HINSTANCE hDLLInst, HWND hWnd, DWORD fla
 	*  generated in the message procedure, where the low-word of the WPARAM
 	*  parameter is set to msgid.
 	* \note The button size defined in the bitmap should be 15x15 pixels large. Their
-	*  look should conform to Orbiter's standard dialog buttons.
+	*  look should conform to SpaceXpanse's standard dialog buttons.
 	* \note The following bit-flags in the flag parameter are currently supported:
 	*  \c DLG_CB_TWOSTATE: The button has two states, and clicking on it will flip
 	*  between the two states.
@@ -6041,7 +6041,7 @@ OAPIFUNC DWORD      oapiGetTitleButtonState (HWND hDlg, DWORD msgid);
 OAPIFUNC bool       oapiSetTitleButtonState (HWND hDlg, DWORD msgid, DWORD state);
 
 	/**
-	* \brief Default Orbiter dialog message handler.
+	* \brief Default SpaceXpanse dialog message handler.
 	* \details This function should be called from the message handler of all
 	* dialogs created with oapiOpenDialog to perform default actions
 	* for any messages not processed in the handler.
@@ -6131,23 +6131,23 @@ OAPIFUNC void oapiSetMainInfoVisibilityMode (DWORD mode);
 	*  - \c FILE_IN_ZEROONFAIL read\n
 	*  - \c FILE_OUT write (overwrite)\n
 	*  - \c FILE_APP write (append)\n
-	* \note The file path defined in fname is relative to either the main Orbiter folder or
-	*  to one of Orbiter's default subfolders, depending on the root parameter:\n
-	*  - \c ROOT Orbiter main directory\n
-	*  - \c CONFIG Orbiter config folder\n
-	*  - \c SCENARIOS Orbiter scenarios folder\n
-	*  - \c TEXTURES Orbiter standard texture folder\n
-	*  - \c TEXTURES2 Orbiter high-res texture folder\n
-	*  - \c MESHES Orbiter mesh folder\n
-	*  - \c MODULES Orbiter module folder\n
-	* \note You should always specify a standard Orbiter subfolder by the above
-	*  mechanism, rather than manually as a path in fname, because Orbiter
+	* \note The file path defined in fname is relative to either the main SpaceXpanse folder or
+	*  to one of SpaceXpanse's default subfolders, depending on the root parameter:\n
+	*  - \c ROOT SpaceXpanse main directory\n
+	*  - \c CONFIG SpaceXpanse config folder\n
+	*  - \c SCENARIOS SpaceXpanse scenarios folder\n
+	*  - \c TEXTURES SpaceXpanse standard texture folder\n
+	*  - \c TEXTURES2 SpaceXpanse high-res texture folder\n
+	*  - \c MESHES SpaceXpanse mesh folder\n
+	*  - \c MODULES SpaceXpanse module folder\n
+	* \note You should always specify a standard SpaceXpanse subfolder by the above
+	*  mechanism, rather than manually as a path in fname, because SpaceXpanse
 	*  installations can redirect these directories.
 	* \note Access mode FILE_IN will always return a valid file handle, even if the file
 	*  doesn't exist or can't be opened for reading (in which case all subsequent read
 	*  attempts will fail). By contrast, FILE_IN_ZEROONFAIL will return 0 if the requested
 	*  file can't be opened for reading.
-	* \note Be careful when opening a file for writing in the standard Orbiter subfolders:
+	* \note Be careful when opening a file for writing in the standard SpaceXpanse subfolders:
 	*  except for ROOT and SCENARIOS, all other standard folders may be readonly
 	*  (e.g. for CD installations)
 	* \sa oapiCloseFile
@@ -6168,12 +6168,12 @@ OAPIFUNC void       oapiCloseFile (FILEHANDLE file, FileAccessMode mode);
 	* \param fname scenario file name
 	* \param desc scenario description
 	* \return \e true if scenario could be written successfully, \e false if an error occurred.
-	* \note The file name is always calculated relative from the default orbiter scenario
-	*  folder (usually Orbiter\\Scenarios). The file name can contain a relative path
+	* \note The file name is always calculated relative from the default spacexpanse scenario
+	*  folder (usually SpaceXpanse\\Scenarios). The file name can contain a relative path
 	*  starting from that directory, but the subdirectories must already exist. The
 	*  function will not create new directories. The file name should not contain an
 	*  absolute path.
-	* \note The file name should not contain an extension. Orbiter will automatically add
+	* \note The file name should not contain an extension. SpaceXpanse will automatically add
 	*  a .scn extension.
 	* \note The description string can be empty ("").
 	*/
@@ -6187,7 +6187,7 @@ OAPIFUNC bool oapiSaveScenario (const char *fname, const char *desc);
 OAPIFUNC void oapiWriteLine (FILEHANDLE file, char *line);
 
 	/**
-	* \brief Writes a line to the Orbiter log file (orbiter.log) in the main orbiter directory.
+	* \brief Writes a line to the SpaceXpanse log file (spacexpanse.log) in the main spacexpanse directory.
 	* \param line line to be written (zero-terminated)
 	* \note This function is intended for diagnostic initialisation and error messages by
 	*  plugin modules. The messages should make it easier to track problems.
@@ -6198,7 +6198,7 @@ OAPIFUNC void oapiWriteLine (FILEHANDLE file, char *line);
 OAPIFUNC void oapiWriteLog (char *line);
 
 	/**
-	* \brief Writes a formatted string with variable number of arguments to orbiter.log.
+	* \brief Writes a formatted string with variable number of arguments to spacexpanse.log.
 	* \param format Format string. Can contain any C-style parameter flags.
 	* \param ... List of output parameters. Must match the parameter flags in the format string.
 	* \note A newline character is appended to the end of the format string.
@@ -6207,7 +6207,7 @@ OAPIFUNC void oapiWriteLog (char *line);
 OAPIFUNC void oapiWriteLogV (const char *format, ...);
 
 	/**
-	* \brief Writes a formatted error message with variable number of arguments to orbiter.log.
+	* \brief Writes a formatted error message with variable number of arguments to spacexpanse.log.
 	* \param format Format string. Can contain any C-style parameter flags.
 	* \param ... List of output parameters. Must match the parameter flags in the format string.
 	* \sa oapiWriteLog, oapiWriteLogV
@@ -6381,7 +6381,7 @@ OAPIFUNC void oapiWriteItem_vec (FILEHANDLE f, char *item, const VECTOR3 &vec);
 	* \note This function uses the system call rand(), so the quality of the random
 	*  sequence depends on the system implementation. If you need high-quality
 	*  random sequences you may need to implement your own generator.
-	* \note Orbiter seeds the generator with the system time on startup, so the
+	* \note SpaceXpanse seeds the generator with the system time on startup, so the
 	*  generated sequences are not reproducible.
 	*/
 OAPIFUNC double oapiRand ();
@@ -6468,7 +6468,7 @@ OAPIFUNC void oapiOpenInputBox (char *title, bool (*Clbk)(void*,char*,void*), ch
 OAPIFUNC void oapiOpenInputBoxEx (const char *title, bool (*Clbk_enter)(void*,char*,void*), bool (*Clbk_cancel)(void*,char*,void*), char *buf = 0, int vislen = 20, void *usrdata = 0, DWORD flags = 0);
 
 /**
- * \brief Send a buffered key event to Orbiter, to be treated like a user keypress.
+ * \brief Send a buffered key event to SpaceXpanse, to be treated like a user keypress.
  * \param key keycode (see \ref keycodes)
  * \param mod list of modifier keys
  * \param nmod length of modifier list
@@ -6478,11 +6478,11 @@ OAPIFUNC void oapiOpenInputBoxEx (const char *title, bool (*Clbk_enter)(void*,ch
 OAPIFUNC bool oapiSimulateBufferedKey (DWORD key, DWORD *mod = 0, DWORD nmod = 0, bool onRunningOnly = false);
 
 /**
- * \brief Send a key state to Orbiter for one frame, to be treated like user keyboard input.
+ * \brief Send a key state to SpaceXpanse for one frame, to be treated like user keyboard input.
  * \param kstate state for each key, where bit 0x80 indicates key pressed
  * \param onRunningOnly only send the key event if the simulation is not paused
  * \return true if key was dispatched (but not necessarily processed)
- * \note Orbiter doesn't process the simulated key state request directly, but merges
+ * \note SpaceXpanse doesn't process the simulated key state request directly, but merges
  *   all requests and the actual key state for the current frame, and submits the result
  *   once per frame.
  * \note To simulate a continuous key press event, this function must be called for multiple
@@ -6681,7 +6681,7 @@ OAPIFUNC void oapiTriggerPanelRedrawArea (int panel_id, int area_id);
 OAPIFUNC void oapiTriggerRedrawArea (int panel_id, int vc_id, int area_id);
 //@}
 
-//@}  -- End of Orbiter API interface methods --
+//@}  -- End of SpaceXpanse API interface methods --
 
 
 // ======================================================================

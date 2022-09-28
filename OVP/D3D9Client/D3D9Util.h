@@ -8,7 +8,7 @@
 #ifndef __D3DUTIL_H
 #define __D3DUTIL_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "Log.h"
 #include "DrawAPI.h"
 #include <d3d9.h>

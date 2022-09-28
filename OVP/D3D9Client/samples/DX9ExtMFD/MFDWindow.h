@@ -8,7 +8,7 @@
 
 #define STRICT 1
 #include <windows.h>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "gcCoreAPI.h"
 
 class MFDWindow: public ExternMFD {

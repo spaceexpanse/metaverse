@@ -4,10 +4,10 @@
  \section docking_management Docking port management
 
  Docking ports allow individual vessel objects to connect with each other,
- forming a superstructure. Orbiter automatically calculates the physical
+ forming a superstructure. SpaceXpanse automatically calculates the physical
  properties of the superstructure from the properties of the individual
  constituents. In particular, the following properties are managed by
- Orbiter:
+ SpaceXpanse:
  - total mass: The mass of the superstructure is the sum of masses of
    the individual vessels
  - centre of mass. The centre of mass of the superstructure is calculated
@@ -39,16 +39,16 @@
  - Attachments use a simplified physics engine: the root parent alone
    defines the object's trajectory (both for freespace and atmospheric
    flight). The children are assumed to have no influence on flight behaviour.
- - Orbiter establishes docking connections automatically if the docking
+ - SpaceXpanse establishes docking connections automatically if the docking
    ports of two vessels are brought close to each other. Attachment
    connections are only established by API calls.
  - Currently, docking connections only work in freeflight. Attachments
    also work for landed vessels.
 
  Attachment connections are useful for attaching small objects to larger
- vessels. For example, Orbiter uses attachments to connect payload items
+ vessels. For example, SpaceXpanse uses attachments to connect payload items
  to the Space Shuttle's cargo bay or the tip of the RMS manipulator arm
- (see Orbitersdk\\samples\\Atlantis).
+ (see SpaceXpansesdk\\samples\\Atlantis).
 
  Attachment points use an identifier string (up to 8 characters) which can
  provide a method to establish compatibility. For example, the Atlantis

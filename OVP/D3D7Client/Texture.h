@@ -34,7 +34,7 @@ public:
 	/// \param ppdds pointer to pointer to surface which receives the texture data.
 	/// \param flags passed on to ReadTexture
 	/// \return S_OK if successful, S_FALSE otherwise
-	/// \note This follows the standard Orbiter texture loading convention: First check if the file is found
+	/// \note This follows the standard SpaceXpanse texture loading convention: First check if the file is found
 	///    in the high-resolution texture directory (usually .\Textures2 or below), then check the low-resolution
 	///    directory (usually .\Textures or below).
 	/// \note Don't use this function to load planetary surface or cloud textures that use the quadtree mechanism,

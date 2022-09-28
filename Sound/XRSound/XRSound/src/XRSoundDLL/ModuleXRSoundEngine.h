@@ -1,5 +1,5 @@
 // ==============================================================
-// XRSoundEngine class that is bound to an Orbiter module (i.e., to a unique ID); this file is not distributed with XRSound.
+// XRSoundEngine class that is bound to an SpaceXpanse module (i.e., to a unique ID); this file is not distributed with XRSound.
 // The code for this exists in XRSound.dll.
 // 
 // Copyright (c) 2018-2021 Douglas Beachy

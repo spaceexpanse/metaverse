@@ -19,8 +19,8 @@ target_link_libraries(FlightData
 )
 
 add_dependencies(FlightData
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(FlightData

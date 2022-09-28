@@ -29,14 +29,14 @@ function(add_test_file test_name)
 	)
 
 	add_dependencies(${test_name}
-		Orbitersdk
+		SpaceXpansesdk
 		LuaInterpreter
 	)
 
 	if (BUILD_ORBITER_DX7)
-		add_dependencies(${test_name} Orbiter)
+		add_dependencies(${test_name} SpaceXpanse)
 	else()
-		add_dependencies(${test_name} Orbiter_server)
+		add_dependencies(${test_name} SpaceXpanse_server)
 	endif()
 	
 	add_test( 
@@ -53,7 +53,7 @@ add_test_file(Lua.Interpreter)
 # Sanity check for scenario tests
 add_test(
 	NAME "Scenario.SanityCheck"
-	COMMAND $<TARGET_FILE:Orbiter_server> "--scenariox=${CMAKE_SOURCE_DIR}/Scenarios/Delta-glider/Smack!.scn" "--maxframes=60"
+	COMMAND $<TARGET_FILE:SpaceXpanse_server> "--scenariox=${CMAKE_SOURCE_DIR}/Scenarios/Delta-glider/Smack!.scn" "--maxframes=60"
 	WORKING_DIRECTORY ${ORBITER_BINARY_ROOT_DIR}
 )
 set_tests_properties(Scenario.SanityCheck PROPERTIES TIMEOUT 60)
@@ -64,7 +64,7 @@ foreach(Scenario ${TestScenarios})
 	get_filename_component(test_name ${Scenario} NAME_WE)
 	add_test(
 		NAME "Scenario.${test_name}"
-		COMMAND $<TARGET_FILE:Orbiter_server> "--scenariox=${Scenario}"
+		COMMAND $<TARGET_FILE:SpaceXpanse_server> "--scenariox=${Scenario}"
 		WORKING_DIRECTORY ${ORBITER_BINARY_ROOT_DIR}
 	)
 	set_tests_properties(Scenario.${test_name} PROPERTIES TIMEOUT 60)

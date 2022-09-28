@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Panel2D.h"
 #include "Pane.h"
 #include "Vessel.h"
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern TimeData td;
 extern char DBG_MSG[256];
@@ -18,7 +18,7 @@ Panel2D::Panel2D (int _id, Pane *_pane, double scale)
 {
 	int i;
 
-	gc   = g_pOrbiter->GetGraphicsClient();
+	gc   = g_pSpaceXpanse->GetGraphicsClient();
 	if (gc) {
 		gc->clbkGetViewportSize (&viewW, &viewH);
 	} else {
@@ -40,8 +40,8 @@ Panel2D::Panel2D (int _id, Pane *_pane, double scale)
 	idx_mfocus = aid_mfocus = -1;
 	mstate = 0;
 
-	if (g_pOrbiter->IsFullscreen()) cwnd = 0;
-	else                            cwnd = g_pOrbiter->GetRenderWnd();
+	if (g_pSpaceXpanse->IsFullscreen()) cwnd = 0;
+	else                            cwnd = g_pSpaceXpanse->GetRenderWnd();
 
 	for (i = 0; i < 4; i++)
 		connect[i] = -1;

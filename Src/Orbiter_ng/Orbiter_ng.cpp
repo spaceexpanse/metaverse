@@ -6,6 +6,6 @@
 
 INT WINAPI WinMain (HINSTANCE hInstance, HINSTANCE, LPSTR strCmdLine, INT nCmdShow)
 {
-	const char *cmd = "Modules\\Server\\Orbiter.exe";
+	const char *cmd = "Modules\\Server\\SpaceXpanse.exe";
 	return _execl(cmd, cmd, strCmdLine, NULL);
 }

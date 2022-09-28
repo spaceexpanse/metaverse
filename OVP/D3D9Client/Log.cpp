@@ -65,7 +65,7 @@ void RuntimeError(const char* File, const char* Fnc, UINT Line)
 {
 	if (Config->DebugLvl == 0) return;
 	char buf[256];
-	sprintf_s(buf, 256, "[%s] [%s] Line: %u See Orbiter.log for details.", File, Fnc, Line);
+	sprintf_s(buf, 256, "[%s] [%s] Line: %u See SpaceXpanse.log for details.", File, Fnc, Line);
 	MessageBoxA(g_client->GetRenderWindow(), buf, "Critical Error:", MB_OK);
 	DebugBreak();
 }

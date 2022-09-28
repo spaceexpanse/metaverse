@@ -15,13 +15,13 @@
 // within visual range around it.
 // The "render space" (i.e. the coordinate system in which the
 // camera and visual objects live) is translated against the
-// "global frame" in which orbiter's logical objects live, such
+// "global frame" in which spacexpanse's logical objects live, such
 // that the camera is always at the origin. Global and render
 // space have however the same orientation.
 // ==============================================================
 
 #include "Camera.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "D3D7Util.h"
 
 Camera::Camera (LPDIRECT3DDEVICE7 _dev, DWORD w, DWORD h)
@@ -123,8 +123,8 @@ void Camera::Update ()
 	// so that render coordinates are precise in the vicinity of the
 	// observer (before they are translated into D3D single-precision
 	// format). However, the orientation of the render space is the same
-	// as orbiter's global coordinate system. Therefore there is a
-	// translational transformation between orbiter global coordinates
+	// as spacexpanse's global coordinate system. Therefore there is a
+	// translational transformation between spacexpanse global coordinates
 	// and render coordinates.
 
 	// find the planet closest to the current camera position

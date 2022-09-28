@@ -8,7 +8,7 @@ add_library(DlgCtrl STATIC
 )
 
 target_include_directories(DlgCtrl
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 set_target_properties(DlgCtrl
@@ -16,7 +16,7 @@ set_target_properties(DlgCtrl
 	FOLDER Core
 )
 
-# Copy library to its Orbitersdk/lib location so that external project integrated into the build can find it
+# Copy library to its SpaceXpansesdk/lib location so that external project integrated into the build can find it
 add_custom_command(TARGET DlgCtrl
 	POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${ORBITER_BINARY_SDK_DIR}/lib

@@ -215,7 +215,7 @@ bool D3D7Mesh::CopyGroup (GROUPREC *grp, const MESHGROUPEX *mg)
 		// need to come up with a more graceful exit
 	grp->VtxBuf->Lock (DDLOCK_WAIT | DDLOCK_WRITEONLY | DDLOCK_DISCARDCONTENTS, (LPVOID*)&data, NULL);
 	memcpy (data, mg->Vtx, grp->nVtx*sizeof(D3DVERTEX));
-		// warning: this assumes consistency of Orbiter's NTVERTEX struct with
+		// warning: this assumes consistency of SpaceXpanse's NTVERTEX struct with
 		// D3DVERTEX. Generally, this will need to be copied element by element
 	grp->VtxBuf->Unlock();
 	if (bVMem)

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #include "cloudmgr2.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "VPlanet.h"
 #include "Camera.h"
 #include "Scene.h"
@@ -12,7 +12,7 @@
 
 // Subsystem for loading, managing and displaying planetary cloud layers
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 

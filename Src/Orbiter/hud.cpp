@@ -14,7 +14,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern Vessel *g_focusobj;
 extern PlanetarySystem *g_psys;
@@ -44,7 +44,7 @@ HUD::HUD (const Pane *_pane): pane(_pane)
 	font2 = NULL;
 	Resize (pane->GetVC() != NULL && pane->GetVC()->GetHUDSurf() != NULL);
 	hudTex = (gc ? LoadTexture (colidx) : NULL);
-	transp = g_pOrbiter->Cfg()->CfgLogicPrm.bMfdTransparent;
+	transp = g_pSpaceXpanse->Cfg()->CfgLogicPrm.bMfdTransparent;
 }
 
 HUD::~HUD ()
@@ -182,7 +182,7 @@ void HUD::Resize (bool isVC)
 	fH = pane->f1H;
 
 	if (bVC) {
-		spec.W = spec.H = g_pOrbiter->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
+		spec.W = spec.H = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
 		HRES05 = VRES05 = (spec.W/2);
 		ladder_width = (HRES05*60)/128;
 		ladder_range = 250;
@@ -212,7 +212,7 @@ void HUD::Resize (bool isVC)
 
 	if (bVC) {
 		SURFHANDLE hudsurf = pane->GetVC()->GetHUDSurf();
-		oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient();
+		oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient();
 		if (gc) {
 			oapi::Sketchpad *skp = gc->clbkGetSketchpad (hudsurf);
 			if (skp) {

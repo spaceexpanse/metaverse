@@ -3,7 +3,7 @@
 
 #define ORBITER_MODULE
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ===========================================================

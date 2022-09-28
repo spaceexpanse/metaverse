@@ -1,14 +1,14 @@
 /**
   \page particle Particle Streams HowTo
 
-  Particle streams are a component of Orbiter graphics clients (see
+  Particle streams are a component of SpaceXpanse graphics clients (see
   \ref graphics).
 
   Particle streams can be used to create visual effects for contrails,
   exhaust and plasma streams, reentry heating, condensation, etc.
 
   The management of particle streams is almost entirely the responsibility of
-  the graphics client. The orbiter core notifies the client only
+  the graphics client. The spacexpanse core notifies the client only
   - to request a new particle stream for a vessel object
   - to detach a stream from its object (e.g. if the object is deleted)
 
@@ -32,7 +32,7 @@
   appropriate derived particle stream class and return a pointer to it.
 
   \b Important: The client must keep track of all particle streams created.
-  In particular, the orbiter core never deletes any particle streams it has
+  In particular, the spacexpanse core never deletes any particle streams it has
   obtained from the client. Particle stream management and cleanup must be
   provided by the client.
 
@@ -46,12 +46,12 @@
   The particle emission point and emission direction are relative to the
   associated vessel.
 
-  Sometimes Orbiter will call the oapi::ParticleStream::Detach() method for a
+  Sometimes SpaceXpanse will call the oapi::ParticleStream::Detach() method for a
   stream. This is usually in response to deletion of the vessel. Therefore,
   the stream should no longer make use of the vessel reference after it has
   been detached. In particular, no new particles should be generated.
 
-  \b Important: After Orbiter has detached a particle stream, it will no longer
+  \b Important: After SpaceXpanse has detached a particle stream, it will no longer
   access it. The client is free to delete the particle stream instance once
   it has been detached. Generally, the stream should be deleted after all the
   remaining particles in the stream have expired.
@@ -63,7 +63,7 @@
   particles will create a visual inconsistency and should be avoided. The only
   exception is the cleanup at the end of a simulation session.
 
-  When a stream is deleted while still attached to its object, Orbiter will
+  When a stream is deleted while still attached to its object, SpaceXpanse will
   call the stream's Detach method during the destruction process.
 
  */

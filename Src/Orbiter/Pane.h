@@ -12,7 +12,7 @@
 #define STRICT 1
 #include <windows.h>
 #include <mmsystem.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Body.h"
 #include "Mfd.h"
 #include "hud.h"

@@ -14,12 +14,12 @@ set_target_properties(Galsat
 )
 
 add_dependencies(Galsat
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(Galsat
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 target_link_libraries(Galsat

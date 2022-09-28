@@ -7,7 +7,7 @@
 #ifndef __GDIPAD_H
 #define __GDIPAD_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "D3D9Client.h"
 #include <d3d9.h> 
 #include <d3dx9.h>

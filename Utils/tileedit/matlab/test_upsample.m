@@ -1,7 +1,7 @@
 clear all
 close all
 
-texpath = 'G:\Orbiter_copies\Orbiter_textures\Earth';
+texpath = 'G:\SpaceXpanse_copies\SpaceXpanse_textures\Earth';
 lvl = 17;
 ilat = 2792;
 ilng = 4519;

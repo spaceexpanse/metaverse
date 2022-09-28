@@ -1,5 +1,5 @@
 project='DeltaGlider'
-title='Orbiter DeltaGlider Lua interface'
+title='SpaceXpanse DeltaGlider Lua interface'
 description='Lua script interface for DeltaGlider vessel class'
 format='markdown'
 one=true

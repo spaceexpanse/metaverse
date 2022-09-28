@@ -4,11 +4,11 @@
 #ifndef __SCREENNOTE_H
 #define __SCREENNOTE_H
 
-class Orbiter;
+class SpaceXpanse;
 
 class ScreenNote {
 public:
-	ScreenNote (Orbiter *po, int ScreenW, int ScreenH);
+	ScreenNote (SpaceXpanse *po, int ScreenW, int ScreenH);
 	~ScreenNote();
 	void SetNote (char *note);
 	void ClearNote();
@@ -18,7 +18,7 @@ public:
 	void Render();
 
 private:
-	Orbiter *orbiter;
+	SpaceXpanse *spacexpanse;
 	int sw, sh;
 	int nw, nh, nx1, ny1, nx2, ny2, hf;
 	int txtlen;

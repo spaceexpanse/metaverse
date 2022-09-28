@@ -1,4 +1,4 @@
-set(name orbiter)
+set(name spacexpanse)
 
 file(GLOB ChmSources
 	*.htm
@@ -20,7 +20,7 @@ add_custom_command(OUTPUT ${ORBITER_BINARY_HTML_DIR}/${name}.chm
 add_custom_target(${name}_chm
 	DEPENDS ${ORBITER_BINARY_HTML_DIR}/${name}.chm
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	${name}_chm
 )
 

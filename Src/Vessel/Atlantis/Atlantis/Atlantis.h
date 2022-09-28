@@ -13,7 +13,7 @@
 #ifndef __ATLANTIS_H
 #define __ATLANTIS_H
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include <math.h>
 
 #ifdef ATLANTIS_TANK_MODULE
@@ -29,14 +29,14 @@
 #endif
 
 // ==========================================================
-// Some Orbiter-related parameters
+// Some SpaceXpanse-related parameters
 // ==========================================================
 
 const double ORBITER_EMPTY_MASS = 77564.3;
-// Orbiter empty mass [kg]
+// SpaceXpanse empty mass [kg]
 
 const double ORBITER_MAX_PROPELLANT_MASS = 11284.23 + 2162.622;
-// Amount of fuel the orbiter can hold in internal OMS tanks
+// Amount of fuel the spacexpanse can hold in internal OMS tanks
 
 const double ORBITER_MAIN_THRUST = 2170732.15; // 1668652.0 * 1.25;
 // Vacuum thrust rating per main engine [N] (x3 for total)
@@ -50,7 +50,7 @@ const double ORBITER_RCS_THRUST = 7740.0;
 
 const double ORBITER_MAIN_ISP0 = 453 * 9.80665;
 const double ORBITER_MAIN_ISP1 = 363 * 9.80665;
-// Vacuum and sea-level fuel-specific impulse for orbiter main engines [m/s]
+// Vacuum and sea-level fuel-specific impulse for spacexpanse main engines [m/s]
 // using H2/O2 (hydrogen/oxygen)
 
 const double ORBITER_OMS_ISP0 = 316 * 9.80665;
@@ -91,7 +91,7 @@ const double ARM_OPERATING_SPEED = 0.005;
 // RMS arm joint rotation speed (rad/sec)
 
 const VECTOR3 ORBITER_CS = {234.8,389.1,68.2};
-// Orbiter cross sections (projections into principal axes) [m^2]
+// SpaceXpanse cross sections (projections into principal axes) [m^2]
 
 const VECTOR3 ORBITER_CS_GEAR = {10.0,0.0,3.0};
 // Contribution of fully extended landing gear to cross sections
@@ -249,7 +249,7 @@ public:
 	// Jettison both SRBs from ET
 
 	void SeparateTank ();
-	// Jettison ET from orbiter
+	// Jettison ET from spacexpanse
 
 	void AttachChildWithMass(OBJHANDLE hChild, ATTACHMENTHANDLE attachment, ATTACHMENTHANDLE child_attachment);
 	// attachment including mass reconfiguration
@@ -290,7 +290,7 @@ public:
 	int status; // 0=launch configuration
 	            // 1=SRB's engaged
 	            // 2=SRB's separated
-	            // 3=Tank separated (orbiter only)
+	            // 3=Tank separated (spacexpanse only)
 
 	double t0;          // reference time: designated liftoff time
 	WORD srb_id1, srb_id2;
@@ -308,7 +308,7 @@ public:
 	VECTOR3 ofs_sts_sat;
 	VECTOR3 cargo_static_ofs;
 	VISHANDLE vis;      // handle for visual - note: we assume that only one visual per object is created!
-	MESHHANDLE hOrbiterMesh, hOrbiterCockpitMesh, hOrbiterVCMesh; // mesh handles
+	MESHHANDLE hSpaceXpanseMesh, hSpaceXpanseCockpitMesh, hSpaceXpanseVCMesh; // mesh handles
 	char cargo_static_mesh_name[256];
 	ATTACHMENTHANDLE sat_attach, rms_attach;
 	VECTOR3 arm_tip[3];
@@ -399,14 +399,14 @@ private:
 	UINT anim_rudder;						   // handle for rudder animation
 	UINT anim_spdb;                            // handle for speed brake animation
 	UINT anim_ssme;                            // handle for SSME pitch gimbal animation
-	UINT mesh_orbiter;                         // index for orbiter mesh
+	UINT mesh_spacexpanse;                         // index for spacexpanse mesh
 	UINT mesh_cockpit;                         // index for cockpit mesh for external view
 	UINT mesh_vc;                              // index for virtual cockpit mesh
 	UINT mesh_cargo;                           // index for static cargo mesh
 	UINT mesh_platform;                        // index for payload platform mesh
 	PROPELLANT_HANDLE ph_oms;                  // handles for propellant resources
-	THRUSTER_HANDLE th_main[3];                // handles for orbiter main engines
-	THRUSTER_HANDLE th_oms[2];                 // handles for orbiter oms engines
+	THRUSTER_HANDLE th_main[3];                // handles for spacexpanse main engines
+	THRUSTER_HANDLE th_oms[2];                 // handles for spacexpanse oms engines
 	THGROUP_HANDLE thg_main, thg_oms;          // handles for thruster groups
 
 	// RMS arm animation status
@@ -503,13 +503,13 @@ public:
 protected:
 	Atlantis_SRB *GetSRB (int which) const;
 
-	// enable docking port for connecting orbiter
-	void EnableOrbiterConnector ();
+	// enable docking port for connecting spacexpanse
+	void EnableSpaceXpanseConnector ();
 
 private:
 	MESHHANDLE hTankMesh;      // mesh handle
 	PROPELLANT_HANDLE hProp;   // propellant resource handle
-	DOCKHANDLE hDockOrbiter;   // connector to shuttle orbiter
+	DOCKHANDLE hDockSpaceXpanse;   // connector to shuttle spacexpanse
 
 	Atlantis *pAtlantis;
 	Atlantis_SRB *pSRB[2];

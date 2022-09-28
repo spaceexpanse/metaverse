@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ========================================================================
-// To be linked into all Orbiter addon modules.
+// To be linked into all SpaceXpanse addon modules.
 // Contains standard module entry point and version information.
 // ========================================================================
 

@@ -12,11 +12,11 @@
 #include "LpadTab.h"
 #include "CustomControls.h"
 
-namespace orbiter {
+namespace spacexpanse {
 
-	class ScenarioTab : public orbiter::LaunchpadTab {
+	class ScenarioTab : public spacexpanse::LaunchpadTab {
 	public:
-		ScenarioTab(const orbiter::LaunchpadDialog* lp);
+		ScenarioTab(const spacexpanse::LaunchpadDialog* lp);
 		~ScenarioTab();
 
 		void Create();

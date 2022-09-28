@@ -1,8 +1,8 @@
 /**
-  \page progflow Orbiter program flow and module callback order
+  \page progflow SpaceXpanse program flow and module callback order
 
-  This section defines the program flow of the Orbiter frame loop and the order in which module callback
-  functions are called by Orbiter.
+  This section defines the program flow of the SpaceXpanse frame loop and the order in which module callback
+  functions are called by SpaceXpanse.
 
   \section Contents
   \subpage progflow1 \n
@@ -12,12 +12,12 @@
   \page progflow1 The frame update loop and vessel module callback functions
 
   \section fameupd Frame update diagram
-  The program flow diagram below illustrates the events in the Orbiter frame update loop and the calling order
+  The program flow diagram below illustrates the events in the SpaceXpanse frame update loop and the calling order
   of VESSEL2 callback functions.
   The clbkPreStep and clbkPostStep methods are called for every vessel at each frame update. Other callback
   functions are only called when the associated event has occurred. Some callback functions such as
   clbkPanelRedrawEvent may be called multiple times for a vessel in a single frame.
-  \image html progflow1.png "Orbiter frame update loop and position of VESSEL2 callback functions." width=10cm
+  \image html progflow1.png "SpaceXpanse frame update loop and position of VESSEL2 callback functions." width=10cm
   \sa VESSEL2::clbkSetClassCaps,
     VESSEL2::clbkLoadStateEx,
 	VESSEL2::clbkPostCreation,

@@ -22,7 +22,7 @@
 #ifndef __AAPSUBSYS_H
 #define __AAPSUBSYS_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "DeltaGlider.h"
 #include "DGSubsys.h"
 

@@ -24,7 +24,7 @@ add_custom_command(
 add_custom_target(DistmassTechnote
 	DEPENDS ${out_path}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	DistmassTechnote
 )
 set_target_properties(DistmassTechnote

@@ -15,7 +15,7 @@
 #define __HST_H
 
 #define STRICT
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 // ==============================================================
 // Some parameters and capabilities

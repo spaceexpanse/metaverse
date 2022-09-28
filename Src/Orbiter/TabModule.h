@@ -12,7 +12,7 @@
 #include "LpadTab.h"
 #include "CustomControls.h"
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class ModuleTab : public LaunchpadTab {
 	public:

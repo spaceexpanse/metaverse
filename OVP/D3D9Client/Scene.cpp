@@ -682,23 +682,23 @@ void Scene::Update ()
 
 			// Why is this here ?
 			//
-			// kuddel: OrbiterSound 4.0 did not play the sounds of the 'focused'
+			// kuddel: SpaceXpanseSound 4.0 did not play the sounds of the 'focused'
 			//         Vessel when focus changed during playback. Therfore the
 			//         D3D9Client does a oapiSetFocusObject call when playback
-			//         is running. Is a OrbiterSound error, but we can work-around
+			//         is running. Is a SpaceXpanseSound error, but we can work-around
 			//         this, so we do! To reproduce, just disable the following
 			//         code and run the 'Welcome.scn'.
-			//         See also: http://www.orbiter-forum.com/showthread.php?p=392689&postcount=18
+			//         See also: http://www.spacexpanse-forum.com/showthread.php?p=392689&postcount=18
 			//         and following...
 
-			// OrbiterSound 4.0 'playback helper'
-			if (OapiExtension::RunsOrbiter2010() &&
-			    OapiExtension::RunsOrbiterSound40() &&
+			// SpaceXpanseSound 4.0 'playback helper'
+			if (OapiExtension::RunsSpaceXpanse2010() &&
+			    OapiExtension::RunsSpaceXpanseSound40() &&
 				oapiIsVessel(hTgt) && // oapiGetObjectType(vo->Object()) == OBJTP_VESSEL &&
 				dynamic_cast<vVessel*>(vo)->Playback()
 				)
 			{
-				// Orbiter doesn't do this when (only) camera focus changes
+				// SpaceXpanse doesn't do this when (only) camera focus changes
 				// during playback, therfore we do it ;)
 				oapiSetFocusObject(hTgt);
 			}
@@ -904,7 +904,7 @@ void Scene::UpdateCamVis()
 	// Update camera parameters --------------------------------------
 	// and call vObject::Update() for all visuals
 	//
-	UpdateCameraFromOrbiter(RENDERPASS_MAINSCENE);
+	UpdateCameraFromSpaceXpanse(RENDERPASS_MAINSCENE);
 
 	if (Camera.hObj_proxy) D3D9Effect::UpdateEffectCamera(Camera.hObj_proxy);
 
@@ -1159,7 +1159,7 @@ void Scene::RenderMainScene()
 	// Start Main Scene Rendering
 	// -------------------------------------------------------------------------------------------------------
 
-	UpdateCameraFromOrbiter(RENDERPASS_MAINSCENE);
+	UpdateCameraFromSpaceXpanse(RENDERPASS_MAINSCENE);
 
 	UpdateCamVis();
 
@@ -2040,7 +2040,7 @@ void Scene::RenderMainScene()
 
 		DWORD height = Config->DebugFontSize;
 
-		// Display Orbiter's debug string
+		// Display SpaceXpanse's debug string
 		if (len > 0) {
 			DWORD width = pSketch->GetTextWidth(dbgString, len);
 			pSketch->Rectangle(-1, viewH - height - 1, width + 4, viewH);
@@ -3191,7 +3191,7 @@ bool Scene::CameraPan(VECTOR3 pan, double speed)
 
 // ===========================================================================================
 //
-void Scene::UpdateCameraFromOrbiter(DWORD dwPass)
+void Scene::UpdateCameraFromSpaceXpanse(DWORD dwPass)
 {
 	MATRIX3 grot;
 	VECTOR3 pos;
@@ -3202,7 +3202,7 @@ void Scene::UpdateCameraFromOrbiter(DWORD dwPass)
 
 	if (hTgt) {
 		if (DebugControls::IsActive()==false || camMode==0) {
-			// Acquire camera information from Orbiter
+			// Acquire camera information from SpaceXpanse
 			oapiGetGlobalPos(hTgt, &pos);
 			oapiCameraGlobalPos(&Camera.pos);
 			Camera.relpos = Camera.pos - pos;	// camera_relpos is a mesh debugger paramater
@@ -3228,8 +3228,8 @@ void Scene::UpdateCameraFromOrbiter(DWORD dwPass)
 	// so that render coordinates are precise in the vicinity of the
 	// observer (before they are translated into D3D single-precision
 	// format). However, the orientation of the render space is the same
-	// as orbiter's global coordinate system. Therefore there is a
-	// translational transformation between orbiter global coordinates
+	// as spacexpanse's global coordinate system. Therefore there is a
+	// translational transformation between spacexpanse global coordinates
 	// and render coordinates.
 
 	for (VOBJREC *pv = vobjFirst; pv; pv = pv->next) pv->vobj->Update(true);

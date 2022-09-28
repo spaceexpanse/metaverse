@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Texture.h"
 #include "Log.h"
 #include "OGraphics.h"
@@ -10,7 +10,7 @@
 // Externals
 // =======================================================================
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern char DBG_MSG[256];
 
@@ -38,7 +38,7 @@ static HRESULT BltToUncompressedSurface (LPDIRECTDRAW7 pDD, DDSURFACEDESC2 ddsd,
 TextureManager2::TextureManager2 (LPDIRECT3DDEVICE7 dev)
 {
 	pDev = dev;
-	pDD = g_pOrbiter->GetInlineGraphicsClient()->GetDirectDraw();
+	pDD = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirectDraw();
 	npfp = 0;
 }
 
@@ -65,7 +65,7 @@ int TextureManager2::OpenTexture (const char *name, const char *ext, long ofs, L
 {
 	FILE *file;
 	int ntex = 0;
-	if (file = g_pOrbiter->OpenTextureFile (name, ext)) {
+	if (file = g_pSpaceXpanse->OpenTextureFile (name, ext)) {
 		if (ofs) fseek (file, ofs, SEEK_SET);
 		HRESULT h = ReadCompatibleSurface (file, pptex, flags);
 		fclose (file);
@@ -78,12 +78,12 @@ int TextureManager2::OpenTextures (const char *name, const char *ext, LPDIRECTDR
 {
 	FILE *file;
 	int ntex = 0;
-	if (file = g_pOrbiter->OpenTextureFile (name, ext)) {
+	if (file = g_pSpaceXpanse->OpenTextureFile (name, ext)) {
 		ntex = ReadTextures (file, pptex, n);
 		fclose (file);
-		g_pOrbiter->OutputLoadTick (1, true);
+		g_pSpaceXpanse->OutputLoadTick (1, true);
 	} else
-		g_pOrbiter->OutputLoadTick (1, false);
+		g_pSpaceXpanse->OutputLoadTick (1, false);
 
 	return ntex;
 }
@@ -251,7 +251,7 @@ struct PixelFormatNode {
 HRESULT ReadDDSSurface (FILE *file, LPDIRECTDRAW7 pDD,
 	DDSURFACEDESC2 *pddsd, LPDIRECTDRAWSURFACE7* ppddsDXT, DWORD flags)
 {
-	CD3DFramework7      *framework = g_pOrbiter->GetInlineGraphicsClient()->GetFramework();
+	CD3DFramework7      *framework = g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework();
 	HRESULT              hr = E_FAIL;
 	LPDIRECTDRAWSURFACE7 pdds         = NULL;
 	LPDIRECTDRAWSURFACE7 pddsAttached = NULL;
@@ -347,7 +347,7 @@ LFail:
 HRESULT ReadDDSSurfaceFromMemory (BYTE *buf, DWORD nbuf, LPDIRECTDRAW7 pDD,
 	DDSURFACEDESC2 *pddsd, LPDIRECTDRAWSURFACE7* ppddsDXT, DWORD flags)
 {
-	CD3DFramework7      *framework = g_pOrbiter->GetInlineGraphicsClient()->GetFramework();
+	CD3DFramework7      *framework = g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework();
 	HRESULT              hr = E_FAIL;
 	LPDIRECTDRAWSURFACE7 pdds         = NULL;
 	LPDIRECTDRAWSURFACE7 pddsAttached = NULL;
@@ -449,14 +449,14 @@ LFail:
 // =======================================================================
 HRESULT TextureManager2::ReadRawDDSSurface (const char *name, RAWDDS &dds, DWORD flags)
 {
-	CD3DFramework7 *framework = g_pOrbiter->GetInlineGraphicsClient()->GetFramework();
+	CD3DFramework7 *framework = g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework();
 	FILE           *file;
 	HRESULT         hr = E_FAIL;
 	DWORD           dwMagic;
 	LONG			dwDataSize;
 	bool            bLoadMip = ((flags&4) == 0 && framework->SupportsMipmaps());
 
-	if (!(file = g_pOrbiter->OpenTextureFile (name, ".dds")))
+	if (!(file = g_pSpaceXpanse->OpenTextureFile (name, ".dds")))
 		return hr;
 
 	// Read the magic number
@@ -884,7 +884,7 @@ LPDIRECTDRAWSURFACE7 CreateSurfaceFromBmp (HBITMAP hBmp, bool release_bmp)
 	BITMAP bm;
     GetObject (hBmp, sizeof(bm), &bm);
 	LPDIRECTDRAWSURFACE7 surf;
-	LPDIRECTDRAW7 pDD = g_pOrbiter->GetInlineGraphicsClient()->GetDirectDraw();
+	LPDIRECTDRAW7 pDD = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirectDraw();
 	DDSURFACEDESC2 ddsd;
     ZeroMemory (&ddsd, sizeof(ddsd));
 	ddsd.dwSize = sizeof(ddsd); 
@@ -945,7 +945,7 @@ void FillSurface (LPDIRECTDRAWSURFACE7 surf, DWORD col)
 
 LPDIRECTDRAWSURFACE7 CreateTexture (int w, int h)
 {
-	LPDIRECTDRAW7 pDD = g_pOrbiter->GetInlineGraphicsClient()->GetDirectDraw();
+	LPDIRECTDRAW7 pDD = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirectDraw();
 	LPDIRECTDRAWSURFACE7 surf;
 	DDSURFACEDESC2 ddsd;
 	ZeroMemory (&ddsd, sizeof(ddsd));
@@ -956,7 +956,7 @@ LPDIRECTDRAWSURFACE7 CreateTexture (int w, int h)
 	ddsd.ddsCaps.dwCaps = DDSCAPS_TEXTURE;
 	ddsd.ddpfPixelFormat.dwSize = sizeof (DDPIXELFORMAT);
 	ddsd.ddpfPixelFormat.dwFlags = 0;
-	g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->GetBackBuffer()->GetPixelFormat (&ddsd.ddpfPixelFormat);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->GetBackBuffer()->GetPixelFormat (&ddsd.ddpfPixelFormat);
 	if (pDD->CreateSurface (&ddsd, &surf, NULL) != DD_OK)
 		return NULL;
 	return surf;
@@ -1199,8 +1199,8 @@ HRESULT TextureManager::LoadTexture (const char *fname, TextureRec &rec, bool un
     DDPIXELFORMAT        ddpfBestMatch;
 	FILE                 *file;
 
-	LPDIRECTDRAW7        pDD              = g_pOrbiter->GetInlineGraphicsClient()->GetDirectDraw();
-	LPDIRECTDRAWSURFACE7 pddsRenderTarget = g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget();
+	LPDIRECTDRAW7        pDD              = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirectDraw();
+	LPDIRECTDRAWSURFACE7 pddsRenderTarget = g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget();
 
 	//char namebuf[256], *fullname;
 	//if (texturepath[0]) {
@@ -1224,7 +1224,7 @@ HRESULT TextureManager::LoadTexture (const char *fname, TextureRec &rec, bool un
 
     // Create a DDS texture surface based on the dds file
     // this surface may or may not be compressed
-	if ((file = g_pOrbiter->OpenTextureFile (fname, "")) == NULL) return E_FAIL;
+	if ((file = g_pSpaceXpanse->OpenTextureFile (fname, "")) == NULL) return E_FAIL;
 	//if ((file = fopen (fullname, "rb")) == NULL) return E_FAIL;
 	hr = ReadDDSSurface (file, pDD, &rec.ddsd, &pDDSDXTTop);
 	fclose (file);
@@ -1260,7 +1260,7 @@ HRESULT TextureManager::LoadTexture (const char *fname, TextureRec &rec, bool un
 		memset (&ddpfBestMatch, 0, sizeof (DDPIXELFORMAT));
 		ddpfBestMatch.dwSize = sizeof (DDPIXELFORMAT);
 		ddpfBestMatch.dwFlags = 0;
-		g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->GetBackBuffer()->GetPixelFormat (&ddpfBestMatch);
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->GetBackBuffer()->GetPixelFormat (&ddpfBestMatch);
 
 
         if (FAILED (hr = BltToUncompressedSurface (pDD, rec.ddsd, ddpfBestMatch,

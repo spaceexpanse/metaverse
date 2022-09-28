@@ -64,7 +64,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ORBITER             ICON                    "..\\..\\Orbiter.ico"
+IDI_ORBITER             ICON                    "..\\..\\SpaceXpanse.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -74,16 +74,16 @@ IDI_ORBITER             ICON                    "..\\..\\Orbiter.ico"
 IDD_VERINST_DIALOG DIALOGEX 0, 0, 261, 204
 STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "Orbiter Installation Verification"
+CAPTION "SpaceXpanse Installation Verification"
 FONT 10, "Microsoft Sans Serif", 400, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "Run Orbiter Intro",IDOK,7,183,77,14,NOT WS_VISIBLE
+    DEFPUSHBUTTON   "Run SpaceXpanse Intro",IDOK,7,183,77,14,NOT WS_VISIBLE
     PUSHBUTTON      "Exit",IDCANCEL,177,183,77,14,NOT WS_VISIBLE
     CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,18,247,49
     LTEXT           "Performing installation verification. Please stand by ...",IDC_STATIC,7,7,247,8
     LTEXT           "Details:",IDC_STATIC,7,73,24,8
     EDITTEXT        IDC_EDIT1,7,83,247,94,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
-    PUSHBUTTON      "Launch Orbiter",IDC_BUTTON1,92,183,77,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Launch SpaceXpanse",IDC_BUTTON1,92,183,77,14,NOT WS_VISIBLE
 END
 
 

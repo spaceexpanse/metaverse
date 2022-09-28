@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by Orbiter.rc
+// Used by SpaceXpanse.rc
 //
 #define IDS_STRING1                     1
 #define IDR_RT_MANIFEST1                1

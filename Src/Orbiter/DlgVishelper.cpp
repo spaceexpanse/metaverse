@@ -9,7 +9,7 @@
 #define OEMRESOURCE
 
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Camera.h"
 #include "Psys.h"
 #include "DlgMgr.h"
@@ -19,7 +19,7 @@
 #include "Uxtheme.h"
 #include <Commctrl.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern Camera *g_camera;
 extern HELPCONTEXT DefHelpContext;
@@ -31,7 +31,7 @@ DlgVishelper::DlgVishelper (HINSTANCE hInstance, HWND hParent, void *context)
 {
 	nTab = 0;
 	hcontext = 0;
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgCamera;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgCamera;
 }
 
 // ======================================================================
@@ -117,7 +117,7 @@ BOOL DlgVishelper::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDHELP:
 		DefHelpContext.topic = hcontext;
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	}
 	return DialogWin::OnCommand (hDlg, id, code, hControl);
@@ -142,7 +142,7 @@ VhelperTab::VhelperTab (HWND hParentTab, int dlgId, DLGPROC dlgProc)
 {
 	active = false;
 	hParent = hParentTab;
-	hTab = CreateDialogParam (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(dlgId), hParentTab, dlgProc, (LPARAM)this);
+	hTab = CreateDialogParam (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(dlgId), hParentTab, dlgProc, (LPARAM)this);
 }
 
 // ======================================================================
@@ -186,11 +186,11 @@ void TabPlanetarium::Update ()
 void TabPlanetarium::Refresh (HWND hDlg)
 {
 	int i;
-	bool enable = g_pOrbiter->Cfg()->PlanetariumItem (IDC_PLANETARIUM);
+	bool enable = g_pSpaceXpanse->Cfg()->PlanetariumItem (IDC_PLANETARIUM);
 	SendDlgItemMessage (hDlg, IDC_PLANETARIUM, BM_SETCHECK, enable ? BST_CHECKED:BST_UNCHECKED, 0);
 	for (i = IDC_PLN_CELGRID; i <= IDC_PLN_SHORT; i++)
 		EnableWindow (GetDlgItem (hDlg, i), enable ? TRUE:FALSE);
-	if (enable && !g_pOrbiter->Cfg()->PlanetariumItem (IDC_PLN_CNSTLABEL)) {
+	if (enable && !g_pSpaceXpanse->Cfg()->PlanetariumItem (IDC_PLN_CNSTLABEL)) {
 		for (i = IDC_PLN_FULL; i <= IDC_PLN_SHORT; i++)
 			EnableWindow (GetDlgItem (hDlg, i), FALSE);
 	}
@@ -215,7 +215,7 @@ INT_PTR CALLBACK TabPlanetarium::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, L
 	case WM_INITDIALOG: {
 		pTab->Refresh (hWnd);
 		for (int i = IDC_PLN_CELGRID; i <= IDC_PLN_SHORT; i++)
-			SendDlgItemMessage (hWnd, i, BM_SETCHECK, g_pOrbiter->Cfg()->PlanetariumItem (i) ? BST_CHECKED:BST_UNCHECKED, 0);
+			SendDlgItemMessage (hWnd, i, BM_SETCHECK, g_pSpaceXpanse->Cfg()->PlanetariumItem (i) ? BST_CHECKED:BST_UNCHECKED, 0);
 		} return TRUE;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
@@ -234,10 +234,10 @@ INT_PTR CALLBACK TabPlanetarium::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, L
 		case IDC_PLN_CCMARKER:
 			if (HIWORD(wParam) == BN_CLICKED) {
 				bool check = (SendDlgItemMessage (hWnd, LOWORD(wParam), BM_GETCHECK, 0, 0) == TRUE);
-				g_pOrbiter->Cfg()->SetPlanetariumItem (LOWORD(wParam), check);
+				g_pSpaceXpanse->Cfg()->SetPlanetariumItem (LOWORD(wParam), check);
 				pTab->Refresh (hWnd);
 				if (LOWORD(wParam) == IDC_PLANETARIUM || LOWORD(wParam) == IDC_PLN_LMARKER)
-					g_psys->ActivatePlanetLabels(g_pOrbiter->Cfg()->PlanetariumItem(IDC_PLANETARIUM) && g_pOrbiter->Cfg()->PlanetariumItem(IDC_PLN_LMARKER));
+					g_psys->ActivatePlanetLabels(g_pSpaceXpanse->Cfg()->PlanetariumItem(IDC_PLANETARIUM) && g_pSpaceXpanse->Cfg()->PlanetariumItem(IDC_PLN_LMARKER));
 				return TRUE;
 			}
 			break;
@@ -245,16 +245,16 @@ INT_PTR CALLBACK TabPlanetarium::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, L
 		case IDC_PLN_SHORT:
 			if (HIWORD(wParam) == BN_CLICKED) {
 				bool check = (SendDlgItemMessage (hWnd, LOWORD(wParam), BM_GETCHECK, 0, 0) == TRUE);
-				g_pOrbiter->Cfg()->SetPlanetariumItem (LOWORD(wParam), check);
-				g_pOrbiter->Cfg()->SetPlanetariumItem (LOWORD(wParam) == IDC_PLN_FULL ? IDC_PLN_SHORT : IDC_PLN_FULL, !check);
+				g_pSpaceXpanse->Cfg()->SetPlanetariumItem (LOWORD(wParam), check);
+				g_pSpaceXpanse->Cfg()->SetPlanetariumItem (LOWORD(wParam) == IDC_PLN_FULL ? IDC_PLN_SHORT : IDC_PLN_FULL, !check);
 				return TRUE;
 			}
 			break;
 		case IDC_PLN_CONFIG:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgCustomLabels> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgCustomLabels> ();
 			break;
 		case IDC_PLN_CONFIG2:
-			g_pOrbiter->DlgMgr()->EnsureEntry<DlgCustomCLabels> ();
+			g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgCustomCLabels> ();
 			break;
 		}
 		break;
@@ -282,7 +282,7 @@ void TabForces::Update ()
 void TabForces::Refresh (HWND hDlg, bool tick)
 {
 	int i;
-	DWORD flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagBodyforce;
+	DWORD flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagBodyforce;
 	bool active = (flag & BF_ENABLE);
 	SendDlgItemMessage (hDlg, IDC_BODYFORCE, BM_SETCHECK, active ? BST_CHECKED:BST_UNCHECKED, 0);
 	if (tick) {
@@ -319,10 +319,10 @@ INT_PTR CALLBACK TabForces::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	case WM_INITDIALOG: {
 		GAUGEPARAM gp = { 0, 50, GAUGEPARAM::LEFT, GAUGEPARAM::BLACK };
 		oapiSetGaugeParams (GetDlgItem (hWnd, IDC_SCALE), &gp);
-		int scl = (int)(25.0*(1.0+0.5*log(g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleBodyforce)/log(2.0)));
+		int scl = (int)(25.0*(1.0+0.5*log(g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleBodyforce)/log(2.0)));
 		oapiSetGaugePos (GetDlgItem (hWnd, IDC_SCALE), scl);
 		oapiSetGaugeParams (GetDlgItem (hWnd, IDC_OPACITY), &gp);
-		scl = (int)(g_pOrbiter->Cfg()->CfgVisHelpPrm.opacBodyforce * 50.0);
+		scl = (int)(g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacBodyforce * 50.0);
 		oapiSetGaugePos (GetDlgItem (hWnd, IDC_OPACITY), scl);
 		pTab->Refresh (hWnd, true);
 		} return TRUE;
@@ -339,7 +339,7 @@ INT_PTR CALLBACK TabForces::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 		case IDC_LOGSCALE:
 			if (HIWORD(wParam) == BN_CLICKED) {
 				bool check = (SendDlgItemMessage (hWnd, LOWORD(wParam), BM_GETCHECK, 0, 0) == TRUE);
-				g_pOrbiter->Cfg()->SetBodyforceItem (LOWORD(wParam), check);
+				g_pSpaceXpanse->Cfg()->SetBodyforceItem (LOWORD(wParam), check);
 				pTab->Refresh (hWnd, false);
 				return TRUE;
 			}
@@ -353,7 +353,7 @@ INT_PTR CALLBACK TabForces::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			case SB_THUMBTRACK:
 			case SB_LINELEFT:
 			case SB_LINERIGHT:
-				g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleBodyforce = (float)pow (2.0, (HIWORD(wParam)-25)*0.08);
+				g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleBodyforce = (float)pow (2.0, (HIWORD(wParam)-25)*0.08);
 				return 0;
 			}
 			break;
@@ -362,7 +362,7 @@ INT_PTR CALLBACK TabForces::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			case SB_THUMBTRACK:
 			case SB_LINELEFT:
 			case SB_LINERIGHT:
-				g_pOrbiter->Cfg()->CfgVisHelpPrm.opacBodyforce = (float)(HIWORD(wParam)*0.02);
+				g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacBodyforce = (float)(HIWORD(wParam)*0.02);
 				return 0;
 			}
 			break;
@@ -392,7 +392,7 @@ void TabAxes::Update ()
 
 void TabAxes::Refresh (HWND hDlg, bool tick)
 {
-	DWORD flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagCrdAxes;
+	DWORD flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagCrdAxes;
 	bool active = (flag & CA_ENABLE);
 	SendDlgItemMessage (hDlg, IDC_COORDINATES, BM_SETCHECK, active ? BST_CHECKED:BST_UNCHECKED, 0);
 	if (tick) {
@@ -424,10 +424,10 @@ INT_PTR CALLBACK TabAxes::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	case WM_INITDIALOG: {
 		GAUGEPARAM gp = {0, 50, GAUGEPARAM::LEFT, GAUGEPARAM::BLACK };
 		oapiSetGaugeParams (GetDlgItem (hWnd, IDC_CRD_SCALE), &gp);
-		int scl = (int)(25.0*(1.0+0.5*log(g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleCrdAxes)/log(2.0)));
+		int scl = (int)(25.0*(1.0+0.5*log(g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleCrdAxes)/log(2.0)));
 		oapiSetGaugePos (GetDlgItem (hWnd, IDC_CRD_SCALE), scl);
 		oapiSetGaugeParams (GetDlgItem (hWnd, IDC_CRD_OPAC), &gp);
-		scl = (int)(g_pOrbiter->Cfg()->CfgVisHelpPrm.opacCrdAxes * 50.0);
+		scl = (int)(g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacCrdAxes * 50.0);
 		oapiSetGaugePos (GetDlgItem (hWnd, IDC_CRD_OPAC), scl);
 		pTab->Refresh (hWnd, true);
 		} return TRUE;
@@ -440,7 +440,7 @@ INT_PTR CALLBACK TabAxes::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		case IDC_CRD_NEGATIVE:
 			if (HIWORD(wParam) == BN_CLICKED) {
 				bool check = (SendDlgItemMessage (hWnd, LOWORD(wParam), BM_GETCHECK, 0, 0) == TRUE);
-				g_pOrbiter->Cfg()->SetCoordinateAxesItem (LOWORD(wParam), check);
+				g_pSpaceXpanse->Cfg()->SetCoordinateAxesItem (LOWORD(wParam), check);
 				pTab->Refresh (hWnd, false);
 				return TRUE;
 			}
@@ -454,7 +454,7 @@ INT_PTR CALLBACK TabAxes::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 			case SB_THUMBTRACK:
 			case SB_LINELEFT:
 			case SB_LINERIGHT:
-				g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleCrdAxes = (float)pow (2.0, (HIWORD(wParam)-25)*0.08);
+				g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleCrdAxes = (float)pow (2.0, (HIWORD(wParam)-25)*0.08);
 				return 0;
 			}
 			break;
@@ -463,7 +463,7 @@ INT_PTR CALLBACK TabAxes::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 			case SB_THUMBTRACK:
 			case SB_LINELEFT:
 			case SB_LINERIGHT:
-				g_pOrbiter->Cfg()->CfgVisHelpPrm.opacCrdAxes = (float)(HIWORD(wParam)*0.02);
+				g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacCrdAxes = (float)(HIWORD(wParam)*0.02);
 				return 0;
 			}
 			break;
@@ -544,7 +544,7 @@ void DlgCustomLabels::Select (HWND hDlg)
 			list[i].active = (sel ? true : false);
 		}
 
-		std::ifstream cfg (g_pOrbiter->Cfg()->ConfigPath (planet->Name()));
+		std::ifstream cfg (g_pSpaceXpanse->Cfg()->ConfigPath (planet->Name()));
 		planet->ScanLabelLists (cfg);
 	} else {
 		nlist = planet->NumLabelLegend();
@@ -680,7 +680,7 @@ void DlgCustomCLabels::Select (HWND hDlg)
 		list[i].active = (sel ? true:false);
 	}
 
-	std::ifstream cfg (g_pOrbiter->Cfg()->ConfigPath (g_psys->Name()));
+	std::ifstream cfg (g_pSpaceXpanse->Cfg()->ConfigPath (g_psys->Name()));
 	g_psys->ScanLabelLists (cfg);
 }
 

@@ -3,7 +3,7 @@
 
 #define STRICT 1
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "LuaMFD.h"
 
 // ==============================================================

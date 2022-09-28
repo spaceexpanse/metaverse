@@ -27,7 +27,7 @@ namespace junction
 	 * \param origin The path the junction points to.
 	 * \param junction The path to the junction.
 	 * \return \e true on success, \e false otherwise.
-	 * \note All relative paths are relative to the Orbiter root directory!
+	 * \note All relative paths are relative to the SpaceXpanse root directory!
 	 */
 	bool CreateJunctionPoint(LPCSTR origin, LPCSTR junction);
 
@@ -39,7 +39,7 @@ namespace junction
 	 * \param path The path to check
 	 * \param attributes Optional file attributes
 	 * \return Whether the directory exists.
-	 * \note All relative paths are relative to the Orbiter root directory!
+	 * \note All relative paths are relative to the SpaceXpanse root directory!
 	 */
 	bool TargetDirectoryExists(LPCSTR path, DWORD attributes = 0);
 
@@ -50,7 +50,7 @@ namespace junction
 	 * \param path The path to check
 	 * \param attributes Optional file attributes
 	 * \return Whether the directory is a junction point.
-	 * \note All relative paths are relative to the Orbiter root directory!
+	 * \note All relative paths are relative to the SpaceXpanse root directory!
 	 */
 	bool IsDirectoryJunction(LPCSTR path, DWORD attributes = 0);
 }

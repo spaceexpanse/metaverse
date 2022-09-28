@@ -1,20 +1,20 @@
-TransX V3.14.1 for Open Orbiter
+TransX V3.14.1 for Open SpaceXpanse
 
 TransX V3.14.1
 --------------
-This is a derived version of TransX that has been included on Open Orbiter. It is a fork from the original TransX 3.13.2 with backports from version V2014.04.26 using only MIT sources and contains no new features.
+This is a derived version of TransX that has been included on Open SpaceXpanse. It is a fork from the original TransX 3.13.2 with backports from version V2014.04.26 using only MIT sources and contains no new features.
 
 As some components are not MIT licensed they are not included in this fork, for example Auto-Min™, Auto-Center™ and ModuleMessaging functions are not present in this version.
 
 
 Description & License
 ---------------------
-This is a complex Orbiter Navigation tool. It is also Beta software - it may yet have a few undiscovered bugs, and probably a new version without them will come along in a few weeks.
+This is a complex SpaceXpanse Navigation tool. It is also Beta software - it may yet have a few undiscovered bugs, and probably a new version without them will come along in a few weeks.
 
 
 Disclaimer
 ----------
-This software is for use as an Orbiter addon only. It is free software, and is provided as is, without any warranty. It is for recreational use only, and its operation is not guaranteed to be continuous or accurate. You may redistribute it, but may not charge anything for it, other than a fee to cover your distribution costs only. It may crash your computer, or cause other errors to occur.
+This software is for use as an SpaceXpanse addon only. It is free software, and is provided as is, without any warranty. It is for recreational use only, and its operation is not guaranteed to be continuous or accurate. You may redistribute it, but may not charge anything for it, other than a fee to cover your distribution costs only. It may crash your computer, or cause other errors to occur.
 
 YOUR USE OF THIS SOFTWARE IS ENTIRELY AT YOUR OWN RISK. RUNNING OR COPYING THIS SOFTWARE IMPLIES ACCEPTANCE OF THE CONDITIONS OF USE ABOVE.
 
@@ -24,7 +24,7 @@ For further details and the licence, please see licence.txt included with this z
 Installing
 ----------
 
-Copy the enclosed dll file into the modules/plugin directory of your Orbiter installation. Select the module on the Modules tab of the Orbiter Launchpad, and activate it.
+Copy the enclosed dll file into the modules/plugin directory of your SpaceXpanse installation. Select the module on the Modules tab of the SpaceXpanse Launchpad, and activate it.
 
 
 To start the module, either select the MFD from the onscreen menu, or use Shift-J to select it.
@@ -99,9 +99,9 @@ In addition to the cool "TransX's evil twin" look, you get all the functionality
 By Enjo:
 -TransX exposes DV and Time to burn in both views: Escape Plan and Manoeuvre.
 -The hypotetical line of nodes, which results from changing plane velocity, is now drawn as a dashed grey line, while the solid line is the reference line of nodes between source and target bodies.
-Any questions - post in the addons section of the Orbiter forum.
+Any questions - post in the addons section of the SpaceXpanse forum.
 
 Happy Orbiting!
 
 Duncan Sharpe & Steve Arch
-http://orbiter.quorg.org
+http://spacexpanse.quorg.org

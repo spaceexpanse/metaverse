@@ -8,11 +8,11 @@
 #define STRICT 1
 
 #include "DlgTacc.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Resource.h"
 #include "Resource2.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern HELPCONTEXT DefHelpContext;
 
@@ -21,7 +21,7 @@ extern HELPCONTEXT DefHelpContext;
 DlgTacc::DlgTacc (HINSTANCE hInstance, HWND hParent, void *context)
 : DialogWin (hInstance, hParent, IDD_TIMEWARP, 0, 0, context)
 {
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgTacc;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgTacc;
 }
 
 // ======================================================================
@@ -36,7 +36,7 @@ void DlgTacc::Message (DWORD msg, void *data)
 
 void DlgTacc::RegisterWarp (HWND hDlg, double warp, bool commit, bool edit, bool slide)
 {
-	if (commit) g_pOrbiter->SetWarpFactor (warp);
+	if (commit) g_pSpaceXpanse->SetWarpFactor (warp);
 	if (slide) {
 		int sliderpos;
 		if      (warp <=   1.0) sliderpos = (int)(warp*10.0);
@@ -65,7 +65,7 @@ BOOL DlgTacc::OnInitDialog (HWND hDlg, WPARAM wParam, LPARAM lParam)
 	SendDlgItemMessage (hDlg, IDC_WARP_SLIDER, TBM_SETPAGESIZE, 0, 9L);
 	SendDlgItemMessage (hDlg, IDC_WARP_SLIDER, TBM_SETTICFREQ, 9, 0);
 	RegisterWarp (hDlg, td.Warp(), false);
-	SetWindowText (GetDlgItem (hDlg, IDC_WARP_PAUSE), g_pOrbiter->IsRunning() ? "Pause": "Resume");
+	SetWindowText (GetDlgItem (hDlg, IDC_WARP_PAUSE), g_pSpaceXpanse->IsRunning() ? "Pause": "Resume");
 	return TRUE;
 }
 
@@ -76,7 +76,7 @@ BOOL DlgTacc::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDHELP:
 		DefHelpContext.topic = "/timeacc.htm";
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	case IDC_WARP_01:
 		RegisterWarp (hDlg, 0.1);
@@ -105,7 +105,7 @@ BOOL DlgTacc::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 		}
 		break;
 	case IDC_WARP_PAUSE:
-		g_pOrbiter->TogglePause();
+		g_pSpaceXpanse->TogglePause();
 		return TRUE;
 	}
 	return DialogWin::OnCommand (hDlg, id, code, hControl);

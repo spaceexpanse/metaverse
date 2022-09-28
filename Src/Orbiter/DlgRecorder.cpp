@@ -8,11 +8,11 @@
 #define STRICT 1
 
 #include "DlgRecorder.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Resource.h"
 #include "Resource2.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern HELPCONTEXT DefHelpContext;
 
@@ -35,7 +35,7 @@ void DlgRecorder::SetupDialog (HWND hDlg)
 	static int PlayItem[6] = {IDC_REC_GRPREPLAY, IDC_REC_SHOWNOTES, IDC_REC_PLAYRECSPEED, IDC_REC_USECAM, IDC_REC_USEFOCUS, IDC_REC_EDITOR};
 	static char *statestr[3] = {"Status:\nNormal", "Status:\nRecording", "Status:\nPlaying"};
 
-	int i, status = g_pOrbiter->RecorderStatus();
+	int i, status = g_pSpaceXpanse->RecorderStatus();
 
 	for (i = 0; i < 3; i++)
 		EnableWindow (GetDlgItem (hDlg, RecItem2[i]), status != 1);
@@ -50,19 +50,19 @@ void DlgRecorder::SetupDialog (HWND hDlg)
 
 	int img = (status == 0 ? IDI_REC_ICON : IDI_STOP_ICON);
 	SendDlgItemMessage (hDlg, IDC_REC_CTRL, BM_SETIMAGE, IMAGE_ICON,
-		(LPARAM)LoadImage (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(img), IMAGE_ICON, 32, 32, LR_SHARED));
+		(LPARAM)LoadImage (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(img), IMAGE_ICON, 32, 32, LR_SHARED));
 	SetWindowText (GetDlgItem (hDlg, IDC_REC_STATUS), statestr[status]);
-	SendDlgItemMessage (hDlg, IDC_REC_WARP, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bRecordWarp ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_PLAYRECSPEED, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayWarp ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_RECFOCUS, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bRecordFocus ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_USEFOCUS, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayFocus ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_USECAM, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayCam ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_SYSSAMPLE, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bSysInterval ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_SHOWNOTES, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.bShowNotes ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_ATTECL, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordAttFrame == 0 ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_ATTHOR, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordAttFrame == 1 ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_POSECL, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordPosFrame == 0 ? BST_CHECKED:BST_UNCHECKED, 0);
-	SendDlgItemMessage (hDlg, IDC_REC_POSEQU, BM_SETCHECK, g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordPosFrame == 1 ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_WARP, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bRecordWarp ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_PLAYRECSPEED, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayWarp ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_RECFOCUS, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bRecordFocus ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_USEFOCUS, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayFocus ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_USECAM, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayCam ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_SYSSAMPLE, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bSysInterval ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_SHOWNOTES, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bShowNotes ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_ATTECL, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordAttFrame == 0 ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_ATTHOR, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordAttFrame == 1 ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_POSECL, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordPosFrame == 0 ? BST_CHECKED:BST_UNCHECKED, 0);
+	SendDlgItemMessage (hDlg, IDC_REC_POSEQU, BM_SETCHECK, g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordPosFrame == 1 ? BST_CHECKED:BST_UNCHECKED, 0);
 }
 
 // ======================================================================
@@ -108,7 +108,7 @@ BOOL DlgRecorder::OnInitDialog (HWND hDlg, WPARAM wParam, LPARAM lParam)
 	RecorderDlg_h1 = r2.bottom-r1.top + ((r2.bottom-r2.top)*2)/3;
 	HideAdvancedRec (hDlg);
 	SetupDialog (hDlg);
-	SetWindowText (GetDlgItem (hDlg, IDC_REC_SCENARIO), g_pOrbiter->GetDefRecordName());
+	SetWindowText (GetDlgItem (hDlg, IDC_REC_SCENARIO), g_pSpaceXpanse->GetDefRecordName());
 	SendDlgItemMessage (hDlg, IDC_REC_ROLLDOWN, BM_SETIMAGE, IMAGE_BITMAP,
 		(LPARAM)LoadImage (hInst, MAKEINTRESOURCE(IDB_DNARROW), IMAGE_BITMAP, 0, 0, LR_SHARED|LR_LOADTRANSPARENT|LR_LOADMAP3DCOLORS));
 	SendDlgItemMessage (hDlg, IDC_REC_ROLLUP, BM_SETIMAGE, IMAGE_BITMAP,
@@ -123,13 +123,13 @@ BOOL DlgRecorder::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 {
 	switch (id) {
 	case IDC_REC_CTRL:
-		switch (g_pOrbiter->RecorderStatus()) {
+		switch (g_pSpaceXpanse->RecorderStatus()) {
 		case 0:
 		case 1:
-			g_pOrbiter->ToggleRecorder ();
+			g_pSpaceXpanse->ToggleRecorder ();
 			break;
 		case 2:
-			g_pOrbiter->EndPlayback();
+			g_pSpaceXpanse->EndPlayback();
 			break;
 		}
 		break;
@@ -140,63 +140,63 @@ BOOL DlgRecorder::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 		HideAdvancedRec (hDlg);
 		break;
 	case IDC_REC_EDITOR:
-		g_pOrbiter->FRecorder_ToggleEditor();
+		g_pSpaceXpanse->FRecorder_ToggleEditor();
 		break;
 	case IDC_REC_WARP:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bRecordWarp = (SendDlgItemMessage (hDlg, IDC_REC_WARP, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bRecordWarp = (SendDlgItemMessage (hDlg, IDC_REC_WARP, BM_GETCHECK, 0, 0) == BST_CHECKED);
 		break;
 	case IDC_REC_PLAYRECSPEED:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayWarp = (SendDlgItemMessage (hDlg, IDC_REC_PLAYRECSPEED, BM_GETCHECK, 0, 0) == BST_CHECKED);
-		if (g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayWarp) {
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayWarp = (SendDlgItemMessage (hDlg, IDC_REC_PLAYRECSPEED, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		if (g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayWarp) {
 			extern double RecordingSpeed;
-			g_pOrbiter->SetWarpFactor (RecordingSpeed, true);
+			g_pSpaceXpanse->SetWarpFactor (RecordingSpeed, true);
 		}
 		break;
 	case IDC_REC_USEFOCUS:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayFocus = (SendDlgItemMessage (hDlg, IDC_REC_USEFOCUS, BM_GETCHECK, 0, 0) == BST_CHECKED);
-		if (g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayFocus) {
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayFocus = (SendDlgItemMessage (hDlg, IDC_REC_USEFOCUS, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		if (g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayFocus) {
 			extern Vessel *vfocus;
-			if (vfocus && vfocus != g_focusobj) g_pOrbiter->SetFocusObject (vfocus);
+			if (vfocus && vfocus != g_focusobj) g_pSpaceXpanse->SetFocusObject (vfocus);
 			// do we need to check if vfocus is valid?
 		}
 		break;
 	case IDC_REC_USECAM:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayCam = (SendDlgItemMessage (hDlg, IDC_REC_USECAM, BM_GETCHECK, 0, 0) == BST_CHECKED);
-		if (g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayCam) {
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayCam = (SendDlgItemMessage (hDlg, IDC_REC_USECAM, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		if (g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayCam) {
 			// should set camera according to current playback status here!
 		}
 		break;
 	case IDC_REC_SYSSAMPLE:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bSysInterval = (SendDlgItemMessage (hDlg, IDC_REC_SYSSAMPLE, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bSysInterval = (SendDlgItemMessage (hDlg, IDC_REC_SYSSAMPLE, BM_GETCHECK, 0, 0) == BST_CHECKED);
 		break;
 	case IDC_REC_SHOWNOTES:
-		g_pOrbiter->Cfg()->CfgRecPlayPrm.bShowNotes = (SendDlgItemMessage (hDlg, IDC_REC_SHOWNOTES, BM_GETCHECK, 0, 0) == BST_CHECKED);
+		g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bShowNotes = (SendDlgItemMessage (hDlg, IDC_REC_SHOWNOTES, BM_GETCHECK, 0, 0) == BST_CHECKED);
 		break;
 	case IDC_REC_ATTECL:
 		if (SendDlgItemMessage (hDlg, IDC_REC_ATTECL, BM_GETCHECK, 0, 0) == BST_CHECKED)
-			g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordAttFrame = 0;
+			g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordAttFrame = 0;
 		break;
 	case IDC_REC_ATTHOR:
 		if (SendDlgItemMessage (hDlg, IDC_REC_ATTHOR, BM_GETCHECK, 0, 0) == BST_CHECKED)
-			g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordAttFrame = 1;
+			g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordAttFrame = 1;
 		break;
 	case IDC_REC_POSECL:
 		if (SendDlgItemMessage (hDlg, IDC_REC_POSECL, BM_GETCHECK, 0, 0) == BST_CHECKED)
-			g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordPosFrame = 0;
+			g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordPosFrame = 0;
 		break;
 	case IDC_REC_POSEQU:
 		if (SendDlgItemMessage (hDlg, IDC_REC_POSEQU, BM_GETCHECK, 0, 0) == BST_CHECKED)
-			g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordPosFrame = 1;
+			g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordPosFrame = 1;
 		break;
 	case IDC_REC_HELP1:
 	case IDC_REC_HELP2:
 		DefHelpContext.topic = "/recorder.htm";
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	case IDCANCEL:
 	case IDC_REC_CANCEL1:
 	case IDC_REC_CANCEL2:
-		g_pOrbiter->CloseDialog (hDlg);
+		g_pSpaceXpanse->CloseDialog (hDlg);
 		break;
 	}
 	return DialogWin::OnCommand (hDlg, id, code, hControl);

@@ -22,7 +22,7 @@ XRSoundImpl::XRSoundImpl() : XRSound(),
 XRSoundImpl::~XRSoundImpl()
 {
     // Note: do not free m_pEngine here: it is a BORROWED reference, and is managed by the DLL side, both for modules and for vessels (and it lives in the XRSound.dll's heap!).
-    // Also, if this is called from a *module*, it is quite possible that Orbiter already freed our XRSoundDLL module (since order is
+    // Also, if this is called from a *module*, it is quite possible that SpaceXpanse already freed our XRSoundDLL module (since order is
     // indeterminate), and so any calls we would try to make to the singleton XRSoundDLL object in XRSoundDLL now would crash 
     // because the object would have already been freed.
 }
@@ -36,7 +36,7 @@ bool XRSoundImpl::Initialize(VESSEL *pVessel)
 
     bool retVal = false;
     // Note: GetModuleHandle is faster than LoadLibrary (and no need to call FreeLibrary on it), but it's not 
-    // thread-safe.  However, GetModuleHandle is fine for our purposes since Orbiter is not multi-threaded anyway.
+    // thread-safe.  However, GetModuleHandle is fine for our purposes since SpaceXpanse is not multi-threaded anyway.
     m_hDLL = GetModuleHandle("XRSound.dll");  
     if (m_hDLL)
     {
@@ -49,7 +49,7 @@ bool XRSoundImpl::Initialize(VESSEL *pVessel)
         {
             // Log both this vessel's XRSound.lib version and the XRSound.dll version
             // Note: in order to maximize cross-compiler version linking compatibility, we don't want to use any msvcrt functions in this library, so we can't use sprintf here.
-            // Also, Orbiter's oapiWriteLog takes a char * instead of const char *, which I presume is just a bug, so we can safely (?) assume that is just a typo in the method signature.
+            // Also, SpaceXpanse's oapiWriteLog takes a char * instead of const char *, which I presume is just a bug, so we can safely (?) assume that is just a typo in the method signature.
             const float dllVersion = GetVersion();
             _ASSERTE(dllVersion > 0);
             char messageBuf[512];
@@ -67,7 +67,7 @@ bool XRSoundImpl::Initialize(VESSEL *pVessel)
             if (dllVersion < XRSOUND_ENGINE_VERSION)
             {
                 // user is running with an older XRSound.dll version than this vessel was linked with
-                StringCchPrintf(messageBuf, sizeof(messageBuf), "[XRSOUND WARNING] XRSound.dll version %0.2f is installed, but an active Orbiter vessel or module was built with XRSound version %.2f.  Please install the latest XRSound version from https://www.alteaaerospace.com.",
+                StringCchPrintf(messageBuf, sizeof(messageBuf), "[XRSOUND WARNING] XRSound.dll version %0.2f is installed, but an active SpaceXpanse vessel or module was built with XRSound version %.2f.  Please install the latest XRSound version from https://www.alteaaerospace.com.",
                     dllVersion, XRSOUND_ENGINE_VERSION);
                 oapiWriteLog(messageBuf);
             }
@@ -117,7 +117,7 @@ bool XRSoundImpl::Initialize(const char *pUniqueModuleName)
             m_pEngine = (pFunc)(pUniqueModuleName);   // returns nullptr if sound initialization fails or if another module has previously registered using pUniqueModuleName
     }
 
-    GetVersion();  // log a warning to Orbiter.log if the .lib and .dll versions don't match
+    GetVersion();  // log a warning to SpaceXpanse.log if the .lib and .dll versions don't match
     return IsPresent();   // true if m_pEngine is not nullptr
 }
 

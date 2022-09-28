@@ -12,7 +12,7 @@
 #include "TabDlg.h"
 #include "CommCtrl.h"
 #include "Uxtheme.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 // ==============================================================
 // class TabbedDialog: Dialog containing a single tab control

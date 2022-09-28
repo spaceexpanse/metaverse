@@ -22,8 +22,8 @@ target_link_libraries(LuaConsole
 )
 
 add_dependencies(LuaConsole
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	LuaInterpreter
 )
 

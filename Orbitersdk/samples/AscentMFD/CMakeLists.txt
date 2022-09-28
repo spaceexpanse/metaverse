@@ -19,8 +19,8 @@ target_link_libraries(AscentMFD
 )
 
 add_dependencies(AscentMFD
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(AscentMFD

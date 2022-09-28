@@ -1,4 +1,4 @@
-set tgtdir=c:\Source\Orbiter_textures\Orbiter2016_lores
+set tgtdir=c:\Source\SpaceXpanse_textures\SpaceXpanse2016_lores
 
 rmdir Earth
 mklink /J Earth %tgtdir%\Earth

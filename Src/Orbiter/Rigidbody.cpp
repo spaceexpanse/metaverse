@@ -13,7 +13,7 @@
 // Hierarchy:  Body --> RigidBody
 // =======================================================================
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Rigidbody.h"
 #include "Celbody.h"
 #include "Psys.h"
@@ -26,7 +26,7 @@ using namespace std;
 // =======================================================================
 // Externals
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern PlanetarySystem *g_psys; // pointer to planetary system
 extern char DBG_MSG[256];
@@ -55,7 +55,7 @@ RigidBody::RigidBody (double _mass, double _size, const Vector &_pmi): Body (_ma
 RigidBody::RigidBody (char *fname): Body (fname)
 {
 	SetDefaultCaps ();
-	ifstream ifs (g_pOrbiter->ConfigPath (fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath (fname));
 	if (ifs) ReadGenericCaps (ifs);
 }
 
@@ -76,14 +76,14 @@ void RigidBody::SetDefaultCaps ()
 
 	pmi.Set (-1,-1,-1); // "undef"
 	bDynamicPosVel = true;
-	bCanUpdateStabilised = g_pOrbiter->Cfg()->CfgPhysicsPrm.bOrbitStabilise;
-	bDistmass = g_pOrbiter->Cfg()->CfgPhysicsPrm.bDistributedMass;
-	bGPerturb = g_pOrbiter->Cfg()->CfgPhysicsPrm.bNonsphericalGrav;
+	bCanUpdateStabilised = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.bOrbitStabilise;
+	bDistmass = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.bDistributedMass;
+	bGPerturb = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.bNonsphericalGrav;
 	bOrbitStabilised = false;
 	bIgnoreGravTorque = false;
 	tidaldamp = 0.0;
 	PropLevel = 0;
-	PropSubMax = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropSubMax;
+	PropSubMax = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropSubMax;
 	nPropSubsteps = 1;
 	gfielddata.ngrav = 0;
 	gfielddata.updt = -1e10; // invalidate
@@ -128,13 +128,13 @@ const Elements *RigidBody::Els () const
 void RigidBody::SetupPropagationModes ()
 {
 	int i;
-	nPropLevel = g_pOrbiter->Cfg()->CfgPhysicsPrm.nLPropLevel;
+	nPropLevel = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.nLPropLevel;
 	for (i = 0; i < nPropLevel; i++) {
-		PropMode[i].ttgt = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropTTgt[i];
-		PropMode[i].atgt = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropATgt[i];
-		PropMode[i].tlim = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropTLim[i];
-		PropMode[i].alim = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropALim[i];
-		PropMode[i].propidx = g_pOrbiter->Cfg()->CfgPhysicsPrm.PropMode[i];
+		PropMode[i].ttgt = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropTTgt[i];
+		PropMode[i].atgt = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropATgt[i];
+		PropMode[i].tlim = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropTLim[i];
+		PropMode[i].alim = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropALim[i];
+		PropMode[i].propidx = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.PropMode[i];
 		switch (PropMode[i].propidx) {
 		case PROP_RK2:  PropMode[i].propagator = &RigidBody::RK2_LinAng;  break;
 		case PROP_RK4:  PropMode[i].propagator = &RigidBody::RK4_LinAng;  break;
@@ -206,8 +206,8 @@ void RigidBody::Update (bool force)
 
 		// First check if we should do a stabilised state update
 		if (bCanUpdateStabilised &&
-			ostep > g_pOrbiter->Cfg()->CfgPhysicsPrm.Stabilise_SLimit &&
-			g_psys->GetGravityContribution (cbody, cpos+cbody->GPos()) > 1-g_pOrbiter->Cfg()->CfgPhysicsPrm.Stabilise_PLimit) {
+			ostep > g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.Stabilise_SLimit &&
+			g_psys->GetGravityContribution (cbody, cpos+cbody->GPos()) > 1-g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.Stabilise_PLimit) {
 
 			nPropSubsteps = 1; // for now
 			double dt = td.SimDT/nPropSubsteps;

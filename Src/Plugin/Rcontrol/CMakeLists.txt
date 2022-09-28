@@ -17,8 +17,8 @@ target_link_libraries(Rcontrol
 )
 
 add_dependencies(Rcontrol
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	DlgCtrl
 )
 

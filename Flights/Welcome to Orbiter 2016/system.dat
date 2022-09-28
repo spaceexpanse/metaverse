@@ -2,16 +2,16 @@
 0.01 NOTESIZE 2
 0.01 NOTEPOS 0.3 0.1 0.8 1
 0.01 NOTECOL 0.9 0.6 0.9
-0.01 NOTE Welcome to Orbiter 2016!
+0.01 NOTE Welcome to SpaceXpanse 2016!
 8 NOTESIZE 1.2
-8 NOTE The latest version of the Orbiter spaceflight simulator has arrived.
+8 NOTE The latest version of the SpaceXpanse spaceflight simulator has arrived.
 16 NOTE Dive into higher resolution planetary textures ...
 24 NOTE with improved rendering of water surfaces ...
 35 NOTE ... to give Space Shuttle launches a more realistic backdrop.
 43 NOTE Liftoff of Space Shuttle Atlantis from Launchpad LC39B at Kennedy Space Center, Florida!
 53 NOTE The default Shuttle has received a few improvements, including gimbal support for the SRB and main engines ...
 63 NOTE and an integrated autopilot for easier ascent to orbit.
-73 NOTE For ultimate realism, you can pick an addon replacement from the Orbiter repository.
+73 NOTE For ultimate realism, you can pick an addon replacement from the SpaceXpanse repository.
 84 NOTEOFF
 112 JUMPTOTIME 163
 168 NOTE Solid rocket booster separation, 126 seconds into the mission.
@@ -22,7 +22,7 @@
 410 JUMPTOTIME 560
 560 NOTE The empty external tank is jettisoned and sent on a suborbital trajectory to spash down in the Indian Ocean.
 575 NOTEOFF
-582 NOTE Meanwhile, the Shuttle orbiter ignites its OMS engines to proceed into the target orbit ...
+582 NOTE Meanwhile, the Shuttle spacexpanse ignites its OMS engines to proceed into the target orbit ...
 600 NOTE ... leaving the tank behind.
 610 JUMPTOTIME 700
 700 NOTE While coasting towards the rendezvous with the International Space Station, the shuttle opens its payload bay doors to expose the radiators.
@@ -46,5 +46,5 @@
 1110 NOTEOFF
 1118 NOTE Touchdown!
 1125 NOTE Space Shuttle Atlantis returns safely from its mission to the International Space Station.
-1145 NOTE This is the end of the flight recording. You can press Ctrl-Q to return to the Orbiter Launchpad.
+1145 NOTE This is the end of the flight recording. You can press Ctrl-Q to return to the SpaceXpanse Launchpad.
 1160 NOTE Have a look at the other 2016 Edition showcase scenarios, or jump into your own missions!

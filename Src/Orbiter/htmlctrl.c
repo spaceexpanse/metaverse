@@ -33,7 +33,7 @@ the same level of OLE in-place activation.
 
 
 static const wchar_t Blank[] = {L"about:blank"};
-//static const wchar_t Blank[] = {L"\\source\\orbiter\\blank.htm"};
+//static const wchar_t Blank[] = {L"\\source\\spacexpanse\\blank.htm"};
 
 // A running count of how many windows we have open that contain a browser object
 unsigned char WindowCount = 0;

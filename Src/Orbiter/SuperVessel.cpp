@@ -9,14 +9,14 @@
 // events of the attached vessels.
 // ==============================================================
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Element.h"
 #include "SuperVessel.h"
 #include "Psys.h"
 #include "Log.h"
 #include <stdio.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern PlanetarySystem *g_psys; // pointer to planetary system
 extern Vessel *g_focusobj;

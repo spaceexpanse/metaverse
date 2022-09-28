@@ -2,12 +2,12 @@
 <HTML>
 <HEAD>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS" />
 <title>Datatypes</title>
 </HEAD>
 <BODY BGCOLOR=#FFFFFF TEXT=#000000>
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; Data types</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; Data types</p>
 
 <h1><a name="data"></a>Data types and structures</h1>
 <p>Various API functions require parameters packed into tables with specific field names.
@@ -39,7 +39,7 @@ This page contains a list of these tables.</p>
 
 <div class="func"><a name="data_vector"></a>
 <h3>Vectors</h3>
-<p>Any 3-D vectors passed into or returned from Orbiter API script functions conform to the following convention:</p>
+<p>Any 3-D vectors passed into or returned from SpaceXpanse API script functions conform to the following convention:</p>
 <p>A vector is defined as a table containing three numerical fields with keys "x", "y" and "z". (Vectors passed as arguments to API functions can have additional fields, which are ignored by the interpreter).</p>
 <p>Vectors can be defined and initialised by normal Lua syntax, e.g.
 <div class="code">
@@ -57,7 +57,7 @@ V3 = {}; V3["x"]=15; V3["y"]=-3.145; V3["z"]=1e3
 
 <div class="func"><a name="data_matrix"></a>
 <h3>Matrices</h3>
-<p>Any 3x3 matrices passed into or returned from Orbiter API script functions conform to the following convention:</p>
+<p>Any 3x3 matrices passed into or returned from SpaceXpanse API script functions conform to the following convention:</p>
 <p>A matrix is defined as a table containing nine numerical fields with keys "m11", "m12", "m13",
 "m21", "m22", "m23", "m31", "m32", "m33".
  (Matrices passed as arguments to API functions can have additional fields, which are ignored by the interpreter).</p>

@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "VCockpit.h"
 #include "Pane.h"
 #include "Camera.h"
@@ -12,7 +12,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern Vessel *g_focusobj;
 extern char DBG_MSG[256];
@@ -24,17 +24,17 @@ VirtualCockpit::VirtualCockpit (int _id, const Pane *_pane)
 {
 	int i;
 
-	gc         = g_pOrbiter->GetGraphicsClient();
+	gc         = g_pSpaceXpanse->GetGraphicsClient();
 	id         = _id;
 	pane       = _pane;
 	narea      = nareabuf = 0;
 	idx_mfocus = -1;
 	mstate     = 0;
 	hud.surf   = NULL;
-	if (g_pOrbiter->IsFullscreen())
+	if (g_pSpaceXpanse->IsFullscreen())
 		cwnd = 0;
 	else
-		cwnd = g_pOrbiter->GetRenderWnd();
+		cwnd = g_pSpaceXpanse->GetRenderWnd();
 	for (i = 0; i < 4; i++)
 		connect[i] = -1;
 }
@@ -234,7 +234,7 @@ void VirtualCockpit::ShiftAreas (const Vector &shift)
 
 SURFHANDLE VirtualCockpit::CreateHUDSurface (const VCHUDSPEC *spec, COLORREF col, double intens)
 {
-	const int HUDSIZE = g_pOrbiter->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
+	const int HUDSIZE = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
 	if (!hud.surf) {
 		hud.surf = gc->clbkCreateSurfaceEx (HUDSIZE, HUDSIZE, OAPISURFACE_SKETCHPAD | OAPISURFACE_TEXTURE);
 	}

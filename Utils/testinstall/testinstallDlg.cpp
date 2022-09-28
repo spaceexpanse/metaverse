@@ -114,9 +114,9 @@ BOOL CverinstDlg::OnInitDialog()
 void CverinstDlg::PerformTests1 () 
 {
 	ofstream ofs (logname);
-	ofs << "Orbiter installation verification.\r\n";
+	ofs << "SpaceXpanse installation verification.\r\n";
 	echo ("This diagnostic utility performs a few tests to verify a valid");
-	echo ("Orbiter installation. Normally, this test needs to be executed");
+	echo ("SpaceXpanse installation. Normally, this test needs to be executed");
 	echo ("only once after installation. To run it again, execute the");
 	echo ("'testinstall' utility in the Install subdirectory.");
 
@@ -128,7 +128,7 @@ void CverinstDlg::PerformTests1 ()
 
 	if (!testok) {
 		echo ("Invalid directory structure!");
-		echo ("If you have installed Orbiter by extracting a Zip archive,");
+		echo ("If you have installed SpaceXpanse by extracting a Zip archive,");
 		echo ("you may have forgotten to preserve the archive directory structure.");
 		echo ("You should repair the installation:");
 		echo ("- For installations from Zip file: Extract the zip archive again,");
@@ -136,7 +136,7 @@ void CverinstDlg::PerformTests1 ()
 		echo ("  archive.");
 		echo ("- For installations from MSI file: Run the MSI installation file");
 		echo ("  again, and choose the 'Repair' option.");
-		MessageBox ("Invalid directory structure. Orbiter was not installed correctly",
+		MessageBox ("Invalid directory structure. SpaceXpanse was not installed correctly",
 			"Verification error", MB_OK);
 	}
 
@@ -164,13 +164,13 @@ void CverinstDlg::PerformTests2 (DWORD res)
 		GetDlgItem(IDC_BUTTON1)->ShowWindow (SW_SHOW);
 
 		echo ("-----------------------------------------------------");
-		echo ("Orbiter installation verification complete.");
+		echo ("SpaceXpanse installation verification complete.");
 		if (allsucceed) {
 			echo ("No problems found.");
 		} else {
 			echo ("Potential problems found.");
 			echo ("Please examine the installation log file (install.log)");
-			echo ("and fix the problems before launching Orbiter.");
+			echo ("and fix the problems before launching SpaceXpanse.");
 		}
 	}
 }
@@ -247,7 +247,7 @@ bool CverinstDlg::TestSubdirs()
 	bool isok = true;
 	char cbuf[1024];
 
-	strcpy (cbuf, "\tOrbiter root directory:\t ");
+	strcpy (cbuf, "\tSpaceXpanse root directory:\t ");
 	_getcwd(cbuf+25, 1024);
 	echo (cbuf);
 
@@ -282,7 +282,7 @@ bool CverinstDlg::TestRuntime()
 	if (res) {
 		// runtime libraries not found
 		echo ("\tRuntime libraries not found!\r\n");
-		echo ("The Microsoft Visual-C++ runtime libraries required to run Orbiter");
+		echo ("The Microsoft Visual-C++ runtime libraries required to run SpaceXpanse");
 		echo ("appear not to be present on your system.");
 		echo ("You can install them now, or you can install them manually later by");
 		echo ("running the 'Install\\vcredist_x86.exe' utility.");
@@ -366,18 +366,18 @@ bool CverinstDlg::FinishTestDirectX (DWORD res)
 bool CverinstDlg::FinishTests ()
 {
 	if (app->firstrun) {
-		const char *orbiter = "orbiter.exe";
+		const char *spacexpanse = "spacexpanse.exe";
 		int rename_res, err_id;
 		intptr_t res;
 		struct _finddata_t ft;
 		char cbuf[1024];
 		echo ("-----------------------------------------------------");
-		echo ("Moving Orbiter executable into place.");
-		if ((res = _findfirst("Install\\orbiter.bin", &ft)) != -1) {
+		echo ("Moving SpaceXpanse executable into place.");
+		if ((res = _findfirst("Install\\spacexpanse.bin", &ft)) != -1) {
 			_findclose(res);
-			if ((res = _findfirst(orbiter, &ft)) != -1) {
+			if ((res = _findfirst(spacexpanse, &ft)) != -1) {
 				_findclose(res);
-				rename_res = rename (orbiter, "Install\\testinstall.exe");
+				rename_res = rename (spacexpanse, "Install\\testinstall.exe");
 				if (rename_res) {
 					err_id = errno;
 					if (err_id == EACCES || err_id == EEXIST) {
@@ -391,15 +391,15 @@ bool CverinstDlg::FinishTests ()
 							echo (cbuf);
 							return false;
 						} else {
-							rename_res = rename (orbiter, "Install\\testinstall.exe");
+							rename_res = rename (spacexpanse, "Install\\testinstall.exe");
 							if (rename_res) {
-								sprintf (cbuf, "Error renaming %s to Install\\testinstall.exe", orbiter);
+								sprintf (cbuf, "Error renaming %s to Install\\testinstall.exe", spacexpanse);
 								echo (cbuf);
 								return false;
 							}
 						}
 					} else {
-						sprintf (cbuf, "Error renaming %s to Install\\testinstall.exe", orbiter);
+						sprintf (cbuf, "Error renaming %s to Install\\testinstall.exe", spacexpanse);
 						echo (cbuf);
 						strerror_s (cbuf, 1024, err_id);
 						echo (cbuf);
@@ -407,19 +407,19 @@ bool CverinstDlg::FinishTests ()
 					}
 				}
 			}
-			rename_res = rename("Install\\orbiter.bin", orbiter);
+			rename_res = rename("Install\\spacexpanse.bin", spacexpanse);
 			if (rename_res) {
 				err_id = errno;
-				sprintf (cbuf, "Error renaming Install\\orbiter.bin to %s", orbiter);
+				sprintf (cbuf, "Error renaming Install\\spacexpanse.bin to %s", spacexpanse);
 				echo (cbuf);
 				strerror_s (cbuf, 1024, errno);
 				echo (cbuf);
 				return false;
 			}
 		} else {
-			echo ("Warning: Install\\orbiter.bin not found.");
+			echo ("Warning: Install\\spacexpanse.bin not found.");
 			echo ("If this is a first-time installation, you may need to repair");
-			echo ("your Orbiter installation, or extract it from zip archive");
+			echo ("your SpaceXpanse installation, or extract it from zip archive");
 			echo ("again.");
 			return false;
 		}
@@ -439,13 +439,13 @@ void CverinstDlg::OnEnChangeEdit1()
 
 void CverinstDlg::OnBnClickedCfg()
 {
-	const char *orbiter = "orbiter.exe";
-	_execl (orbiter, orbiter, "-v", NULL);
+	const char *spacexpanse = "spacexpanse.exe";
+	_execl (spacexpanse, spacexpanse, "-v", NULL);
 }
 
 void CverinstDlg::OnBnClickedOk()
 {
-	const char *orbiter = "orbiter.exe";
-	_execl (orbiter, orbiter, "-S", "2010 Edition\\Welcome", NULL);
+	const char *spacexpanse = "spacexpanse.exe";
+	_execl (spacexpanse, spacexpanse, "-S", "2010 Edition\\Welcome", NULL);
 	OnOK();
 }

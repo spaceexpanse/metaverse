@@ -3,7 +3,7 @@
 
 #define STRICT 1
 #define OAPI_IMPLEMENTATION
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "Mfd.h"
 
 extern Vessel *g_focusobj;

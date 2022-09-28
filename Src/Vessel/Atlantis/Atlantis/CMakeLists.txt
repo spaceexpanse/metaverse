@@ -82,8 +82,8 @@ add_custom_command(
 )
 
 add_dependencies(${VESSEL_NAME}
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	DlgCtrl
 	Atlantis_SRB
 	Atlantis_Tank

@@ -21,8 +21,8 @@ target_link_libraries(ScriptVessel
 )
 
 add_dependencies(ScriptVessel
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 # Installation

@@ -9,7 +9,7 @@
 using namespace std;
 
 char *zipper_path = "\\Program Files\\7-Zip\\7z";
-char *prefix_full = "a orbiter.zip";
+char *prefix_full = "a spacexpanse.zip";
 
 // List of zip-file only files
 const int nzip = 1;
@@ -17,7 +17,7 @@ char *zfile[nzip] = {"vcredist\\vcredist_x86.exe"};
 
 char *getfile(char *line)
 {
-	static char *SolutionDir = "\\Source\\Orbiter\\";
+	static char *SolutionDir = "\\Source\\SpaceXpanse\\";
 	static char cbuf[1024];
 	char *pc, *fname;
 	pc = strstr(line, "File");

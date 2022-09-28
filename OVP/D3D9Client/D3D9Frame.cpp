@@ -370,7 +370,7 @@ HRESULT CD3DFramework9::Initialize(HWND _hWnd, GraphicsClient::VIDEODATA *vData)
 	if (caps.DeclTypes&D3DDTCAPS_FLOAT16_4) LogOapi("D3DDTCAPS_FLOAT16_4..... : Yes");
 	else								    LogOapi("D3DDTCAPS_FLOAT16_4..... : No");
 
-	// Check (Log) whether orbiter runs on WINE
+	// Check (Log) whether spacexpanse runs on WINE
 	//
 	LogOapi("Runs under WINE......... : %s", OapiExtension::RunsUnderWINE() ? "Yes" : "No");
 	LogOapi("D3D9Build Date.......... : %u", BuildDate());

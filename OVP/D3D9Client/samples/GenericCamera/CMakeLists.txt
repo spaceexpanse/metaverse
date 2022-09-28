@@ -13,8 +13,8 @@ add_dependencies(GenericCamera
 )
 
 target_link_libraries(GenericCamera
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(GenericCamera

@@ -9,15 +9,15 @@
 
 #define OAPI_IMPLEMENTATION
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Element.h"
 #include "Celbody.h"
 #include "Log.h"
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern char DBG_MSG[256];
 
@@ -43,10 +43,10 @@ CelestialBody::CelestialBody (char *fname)
 	DefaultParam ();
 	ClearModule ();
 
-	ifstream ifs (g_pOrbiter->ConfigPath (fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath (fname));
 	if (!ifs) {
-		LOGOUT_ERR_FILENOTFOUND_MSG(g_pOrbiter->ConfigPath (fname), "while initialising celestial body");
-		g_pOrbiter->TerminateOnError();
+		LOGOUT_ERR_FILENOTFOUND_MSG(g_pSpaceXpanse->ConfigPath (fname), "while initialising celestial body");
+		g_pSpaceXpanse->TerminateOnError();
 	}
 
 	if (GetItemString (ifs, "Module", cbuf))
@@ -895,10 +895,10 @@ bool CELBODY2::LoadAtmosphereModule (const char *fname)
 	char path[256], name[256];
 	oapiGetObjectName (hBody, name, 256);
 	sprintf (path, "Modules\\Celbody\\%s\\Atmosphere", name);
-	if (!(hAtmModule = g_pOrbiter->LoadModule (path, fname))) return false;
+	if (!(hAtmModule = g_pSpaceXpanse->LoadModule (path, fname))) return false;
 	ATMOSPHERE *(*func)(CELBODY2*) = (ATMOSPHERE*(*)(CELBODY2*))GetProcAddress (hAtmModule, "CreateAtmosphere");
 	if (!func) {
-		g_pOrbiter->UnloadModule (fname);
+		g_pSpaceXpanse->UnloadModule (fname);
 		hAtmModule = NULL;
 		return false;
 	}
@@ -919,7 +919,7 @@ bool CELBODY2::FreeAtmosphereModule ()
 		}
 		atm = 0;
 	}
-	g_pOrbiter->UnloadModule (hAtmModule);
+	g_pSpaceXpanse->UnloadModule (hAtmModule);
 	hAtmModule = NULL;
 	return true;
 }

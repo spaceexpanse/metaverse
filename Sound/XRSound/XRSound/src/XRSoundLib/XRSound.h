@@ -7,7 +7,7 @@
 
 #pragma once
 
-class VESSEL;    // defined in Orbiter.h
+class VESSEL;    // defined in SpaceXpanse.h
 
 class XRSound
 {
@@ -96,14 +96,14 @@ public:
     // Create an instance of an XRSound proxy object for the supplied vessel; invoke this from your vessel's clbkPostCreation method.
     // Normally you will only invoke this method from your own vessel's code; however, If you call this method from a *module*, 
     // you will be able to use the returned proxy object to control the sounds for the supplied vessel.
-    //   pVessel: Orbiter vessel to which this XRSound proxy object is tied
+    //   pVessel: SpaceXpanse vessel to which this XRSound proxy object is tied
     //
     // Returns: instance of XRSound proxy to use with the specified pVessel.
     // NOTE: do not forget to delete the returned proxy object when you no longer need it (e.g., in your vessel's destructor).
     static XRSound *CreateInstance(VESSEL *pVessel);
 
     // Create an instance of an XRSound proxy object for the named *module*; invoke this from your module's clbkSimulationStart method.
-    //   pUniqueModuleName: arbitrary name uniquely identifying the calling module; typically, this should match the filename of your Orbiter module DLL, excluding the ".dll" extension.
+    //   pUniqueModuleName: arbitrary name uniquely identifying the calling module; typically, this should match the filename of your SpaceXpanse module DLL, excluding the ".dll" extension.
     //
     // Returns: instance of XRSound proxy to use with the specified pUniqueModuleName.
     // NOTE: do not forget to delete the returned proxy object when you no longer need it (e.g., in your module's clbkSimulationEnd method).
@@ -122,7 +122,7 @@ public:
     // automatically stopped if it is playing and replaced by this sound.
     //   soundID: sound ID to be assigned to this sound file (vessel-instance unique)
     //   pSoundFilename: path relatve to $ORBITER_ROOT of sound file to load; may not be nullptr or empty.
-    //   playbackType: denotes how sound will be faded.  Note: for module sounds, you should pass XRSound::PlaybackType::Global for this since other values have no effect when playing sounds from an Orbiter module (as opposed to an Orbiter vessel).
+    //   playbackType: denotes how sound will be faded.  Note: for module sounds, you should pass XRSound::PlaybackType::Global for this since other values have no effect when playing sounds from an SpaceXpanse module (as opposed to an SpaceXpanse vessel).
     //
     // Returns true on success, false if file not found or XRSound.dll not present.
     virtual bool LoadWav(const int soundID, const char *pSoundFilename, const PlaybackType playbackType) = 0;

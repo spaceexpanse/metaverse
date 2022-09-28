@@ -11,7 +11,7 @@
 #include <atlstr.h>             // for CString
 #include <unordered_map>
 
-#include "OrbiterSDK.h"
+#include "SpaceXpanseSDK.h"
 #include "XRSoundEngine30.h"   // latest interface version 
 
 using namespace std;
@@ -133,7 +133,7 @@ struct WavContext
 // the caller's DLL: by design, there is no import library for XRSound.dll.
 // Do NOT use any inline code for any methods invoked by XRSoundImpl, or it will reside in the caller's DLL instead of XRSound.dll.
 //
-// NOTE: this class is not thread-safe!  However, Orbiter is not multi-threaded, so that should not be an issue.
+// NOTE: this class is not thread-safe!  However, SpaceXpanse is not multi-threaded, so that should not be an issue.
 class XRSoundEngine : public XRSoundEngine30   
 {
 public:
@@ -186,8 +186,8 @@ public:
     
     // --------------------------------------------------------------------
 
-    // Methods only invoked by XRSoundDLL (our Orbiter module class).  Because these are non-virtual, it is impossible for XRSoundLib to invoke them
-    // because it cannot link with them when the Orbiter vessel using XRSoundLib tries to link.
+    // Methods only invoked by XRSoundDLL (our SpaceXpanse module class).  Because these are non-virtual, it is impossible for XRSoundLib to invoke them
+    // because it cannot link with them when the SpaceXpanse vessel using XRSoundLib tries to link.
     static void DestroyIrrKlangEngine();     // performs one-time destruction of our irrKlang engine
     static bool IsKlangEngineInitialized();
     static void UpdateIrrKlangEngine();     // invoked several times per second so the engine can update its state
@@ -208,7 +208,7 @@ public:
     vector<CString> GetValidSoundFileExtensions();    // e.g., ".flac", ".wav", ".mp3", etc.
     const char *GetWavFilename(const int soundID);
     
-    // returns Orbiter's camera's global coordinates
+    // returns SpaceXpanse's camera's global coordinates
     static VECTOR3 GetCameraCoordinates()
     {
         VECTOR3 cameraGlobalCoords;

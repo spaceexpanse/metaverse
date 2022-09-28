@@ -21,7 +21,7 @@ class TRUE_MFD;
 
 // ========================================================================
 
-#include "OrbiterSDK.h"
+#include "SpaceXpanseSDK.h"
 #include "DrawAPI.h"
 
 using namespace oapi;

@@ -13,7 +13,7 @@
 #define ORBITER_MODULE
 #include <windows.h>
 #include <list>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "FDGraph.h"
 #include "resource.h"
 
@@ -450,7 +450,7 @@ void oapi::FlightData::WriteLogHeader(bool start)
 {
 	FILE* f = fopen(m_sLogfile.c_str(), m_bResetLog ? "wt" : "at");
 	if (m_bResetLog) { // write out header
-		fprintf(f, "Orbiter Flight Data Log Record\n");
+		fprintf(f, "SpaceXpanse Flight Data Log Record\n");
 		fprintf(f, "==============================\n");
 		fprintf(f, "Columns:\n");
 		fprintf(f, "\tTIME:     simulation time (seconds)\n");

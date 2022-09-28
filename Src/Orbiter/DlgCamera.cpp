@@ -11,13 +11,13 @@
 #include "DlgMgr.h"
 #include "Resource.h"
 #include "Resource2.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Psys.h"
 #include "Camera.h"
 #include "Uxtheme.h"
 #include "DlgCtrl.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern Camera *g_camera;
 extern Vessel *g_focusobj;
@@ -31,7 +31,7 @@ DlgCamera::DlgCamera (HINSTANCE hInstance, HWND hParent, void *context)
 {
 	nTab = 0;
 	hcontext = 0;
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgCamera;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgCamera;
 }
 
 // ======================================================================
@@ -102,7 +102,7 @@ BOOL DlgCamera::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDHELP:
 		DefHelpContext.topic = HelpContext ();
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	}
 	return DialogWin::OnCommand (hDlg, id, code, hControl);
@@ -193,7 +193,7 @@ CameraTab::CameraTab (HWND hParentTab, int dlgId, DLGPROC dlgProc)
 {
 	active = false;
 	hParent = hParentTab;
-	hTab = CreateDialogParam (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(dlgId), hParentTab, dlgProc, (LPARAM)this);
+	hTab = CreateDialogParam (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(dlgId), hParentTab, dlgProc, (LPARAM)this);
 }
 
 // ======================================================================
@@ -245,7 +245,7 @@ char *TabControl::HelpContext () const
 BOOL TabControl::Init (HWND hWnd)
 {
 	HICON hIcon;
-	HINSTANCE hInst = g_pOrbiter->GetInstance ();
+	HINSTANCE hInst = g_pSpaceXpanse->GetInstance ();
 	hIcon = LoadIcon (hInst, MAKEINTRESOURCE(IDI_LARROW));
 	SendDlgItemMessage (hWnd, IDC_CAM_CTRL_ROTL, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIcon);
 	hIcon = LoadIcon (hInst, MAKEINTRESOURCE(IDI_RARROW));
@@ -584,7 +584,7 @@ INT_PTR CALLBACK TabTarget::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			GetWindowText (GetDlgItem (hWnd, IDC_CAM_TGT_INPUT), cbuf, 256);
 			Body *obj = g_psys->GetObj (cbuf, true);
 			if (!obj) obj = g_psys->GetBase (cbuf, true);
-			if ( obj) g_pOrbiter->SetView (obj, 1);
+			if ( obj) g_pSpaceXpanse->SetView (obj, 1);
 			else {
 				SetWindowText (GetDlgItem (hWnd, IDC_CAM_TGT_INPUT), g_camera->Target()->Name());
 				MessageBeep (MB_ICONEXCLAMATION);
@@ -592,13 +592,13 @@ INT_PTR CALLBACK TabTarget::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			} return TRUE;
 		case IDC_CAM_TGT_FCOCKPIT:
 			if (HIWORD(wParam) == BN_CLICKED) {
-				g_pOrbiter->SetView (g_focusobj, 0);
+				g_pSpaceXpanse->SetView (g_focusobj, 0);
 				return TRUE;
 			}
 			break;
 		case IDC_CAM_TGT_FEXTERN:
 			if (HIWORD(wParam) == BN_CLICKED) {
-				g_pOrbiter->SetView (g_focusobj, 1);
+				g_pSpaceXpanse->SetView (g_focusobj, 1);
 				return TRUE;
 			}
 			break;
@@ -1077,7 +1077,7 @@ void TabFov::RegisterFov (HWND hWnd, double fov)
 void TabFov::SetFov (double fov_deg)
 {
 	if (fov_deg >= 10.0 && fov_deg <= 90.0)
-		g_pOrbiter->SetFOV (fov_deg * 0.5*RAD);
+		g_pSpaceXpanse->SetFOV (fov_deg * 0.5*RAD);
 }
 
 // ======================================================================
@@ -1163,7 +1163,7 @@ INT_PTR CALLBACK TabPreset::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 		switch (LOWORD (wParam)) {
 		case IDHELP:
 			DefHelpContext.topic = "/cam_preset.htm";
-			g_pOrbiter->OpenHelp (&DefHelpContext);
+			g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 			return TRUE;
 		case IDC_CAM_PRE_NEW:
 			i = g_camera->AddPreset();

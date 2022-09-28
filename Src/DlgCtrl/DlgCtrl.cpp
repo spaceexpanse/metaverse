@@ -35,14 +35,14 @@ void oapiRegisterCustomControls (HINSTANCE hInst)
 	wndClass.hCursor       = NULL;
 	wndClass.hbrBackground = (HBRUSH)GetStockObject (LTGRAY_BRUSH);
 	wndClass.lpszMenuName  = NULL;
-	wndClass.lpszClassName = "OrbiterCtrl_Gauge";
+	wndClass.lpszClassName = "SpaceXpanseCtrl_Gauge";
 	RegisterClass (&wndClass);
 
 	// Register window class for switch
 	wndClass.lpfnWndProc   = MsgProc_Switch;
 	wndClass.cbWndExtra    = 8;
 	wndClass.hbrBackground = g_GDI.hBrush2; //(HBRUSH)GetStockObject (NULL_BRUSH);
-	wndClass.lpszClassName = "OrbiterCtrl_Switch";
+	wndClass.lpszClassName = "SpaceXpanseCtrl_Switch";
 	RegisterClass (&wndClass);
 
 	// Register window class for property list
@@ -51,8 +51,8 @@ void oapiRegisterCustomControls (HINSTANCE hInst)
 
 void oapiUnregisterCustomControls (HINSTANCE hInst)
 {
-	UnregisterClass ("OrbiterCtrl_Gauge", hInst);
-	UnregisterClass ("OrbiterCtrl_Switch", hInst);
+	UnregisterClass ("SpaceXpanseCtrl_Gauge", hInst);
+	UnregisterClass ("SpaceXpanseCtrl_Switch", hInst);
 	UnregisterPropertyList (hInst);
 
 	DeleteObject (g_GDI.hPen1);

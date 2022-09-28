@@ -1,5 +1,5 @@
 project='ShuttleA'
-title='Orbiter ShuttleA Lua interface'
+title='SpaceXpanse ShuttleA Lua interface'
 description='Lua script interface for ShuttleA vessel class'
 format='markdown'
 one=true

@@ -20,7 +20,7 @@
 
 #ifndef __TRANSX_H
 #define __TRANSX_H
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "graph.h"
 
 class TransxMFD: public MFD2 {

@@ -358,7 +358,7 @@ void PayloadBayOp::DefineAnimations (UINT vcidx)
 
 void PayloadBayOp::RegisterVC ()
 {
-	SURFHANDLE tkbk_tex = oapiGetTextureHandle (sts->hOrbiterVCMesh, 5);
+	SURFHANDLE tkbk_tex = oapiGetTextureHandle (sts->hSpaceXpanseVCMesh, 5);
 
 	// register the complete panel for mouse events
 	oapiVCRegisterArea (AID_R13L, PANEL_REDRAW_NEVER, PANEL_MOUSE_LBDOWN);

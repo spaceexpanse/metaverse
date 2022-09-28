@@ -5,7 +5,7 @@
 #define __ESYSTEMS_H_
 
 #include "thermal.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "hsystems.h"
 
 class e_object:public therm_obj

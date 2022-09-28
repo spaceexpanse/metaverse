@@ -34,7 +34,7 @@ proc.wait_sysdt(10)
 
 note:set_text ('If the effect doesn\'t show, make sure that\
 the Gravity gradient torque option is ticked in the Parameters\
-tab of the Orbiter Launchpad.')
+tab of the SpaceXpanse Launchpad.')
 proc.wait_sysdt(10)
 
 note:set_text ('Speeding up the simulation time ...')

@@ -3,7 +3,7 @@
 
 #define OAPI_IMPLEMENTATION
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vessel.h"
 #include "SuperVessel.h"
 #include "Celbody.h"
@@ -23,7 +23,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Pane *g_pane;
 extern TimeData td;
 extern PlanetarySystem *g_psys;
@@ -67,7 +67,7 @@ void Vessel::FRecorder_Reset ()
 {
 	frec_last.fstatus = FLIGHTSTATUS_UNDEFINED;
 	frec_last.simt = frec_last_syst = -1e10;
-	frec_last.frm = g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordPosFrame;
+	frec_last.frm = g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordPosFrame;
 	//frec_last.frm = 0;  // ecliptic frame by default
 	frec_last.crd = 0;  // cartesian coordinates by default
 	frec_last.ref = 0;
@@ -75,7 +75,7 @@ void Vessel::FRecorder_Reset ()
 	nfrec = 0;
 	frec_att = 0;
 	frec_att_last.simt = frec_att_last_syst = -1e10;
-	frec_att_last.frm = g_pOrbiter->Cfg()->CfgRecPlayPrm.RecordAttFrame;
+	frec_att_last.frm = g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.RecordAttFrame;
 	frec_att_last.ref = 0;
 	nfrec_att = 0;
 	nfrec_eng = 0;
@@ -139,7 +139,7 @@ void Vessel::FRecorder_Save (bool force)
 			double cddir = dotp (vel.unit(), frec_last.rvel.unit());
 
 			bool nextstep = (fstatus == FLIGHTSTATUS_FREEFLIGHT &&
-				(g_pOrbiter->Cfg()->CfgRecPlayPrm.bSysInterval ? td.SysT1 - frec_last_syst : td.SimT1 - frec_last.simt) > max_step);
+				(g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bSysInterval ? td.SysT1 - frec_last_syst : td.SimT1 - frec_last.simt) > max_step);
 
 			if (nextstep || (cddir < 0.995) || force) {
 				frec_last.simt    = td.SimT1;
@@ -223,7 +223,7 @@ void Vessel::FRecorder_Save (bool force)
 				} break;
 			}
 			if (fstatus == FLIGHTSTATUS_FREEFLIGHT) {
-				bool finestep = ((g_pOrbiter->Cfg()->CfgRecPlayPrm.bSysInterval ? td.SysT1 - frec_att_last_syst : td.SimT1 - frec_att_last.simt) > att_step);
+				bool finestep = ((g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bSysInterval ? td.SysT1 - frec_att_last_syst : td.SimT1 - frec_att_last.simt) > att_step);
 				alim = (finestep ? 1e-3 : 1e-2);
 				// the difference between two quaternions may have to be
 				// defined a bit more cleverly ...
@@ -683,8 +683,8 @@ void Vessel::FRecorder_PlayEvent ()
 			} else if (!_strnicmp (s, "TACC", 4)) { // DEPRECATED - now stored in system stream
 				if (sscanf (s+5, "%lf%lf", &RecordingSpeed, &WarpDelay) < 2)
 					WarpDelay = 0.0;
-				if (g_pOrbiter->Cfg()->CfgRecPlayPrm.bReplayWarp)
-						g_pOrbiter->SetWarpFactor (RecordingSpeed, true, WarpDelay);
+				if (g_pSpaceXpanse->Cfg()->CfgRecPlayPrm.bReplayWarp)
+						g_pSpaceXpanse->SetWarpFactor (RecordingSpeed, true, WarpDelay);
 			} else if (!_strnicmp (s, "CAMERA", 6)) { // DEPRECATED - now stored in system stream
 				s = strtok (NULL, " \t\n");
 				if (!_strnicmp (s, "PRESET", 6)) {
@@ -692,7 +692,7 @@ void Vessel::FRecorder_PlayEvent ()
 					g_camera->RecallPreset (i);
 				}
 			} else if (!_strnicmp (s, "NOTE", 4)) { // DEPRECATED - now stored in system stream
-				oapi::ScreenAnnotation *sa = g_pOrbiter->SNotePB();
+				oapi::ScreenAnnotation *sa = g_pSpaceXpanse->SNotePB();
 				if (sa) {
 					if (!strcmp (s+4, "COL")) {
 						double r, g, b;
@@ -733,12 +733,12 @@ void Vessel::FRecorder_PlayEvent ()
 void Vessel::FRecorder_CheckEnd ()
 {
 	if (td.SimT1 > frec[nfrec-1].simt) { // reached end of playback list
-		g_pOrbiter->EndPlayback();
+		g_pSpaceXpanse->EndPlayback();
 		//FRecorder_EndPlayback();
-		//g_pOrbiter->SNote()->ClearNote();
+		//g_pSpaceXpanse->SNote()->ClearNote();
 
 		// TEMPORARY
-		//g_pOrbiter->ToggleRecorder (false, true);
+		//g_pSpaceXpanse->ToggleRecorder (false, true);
 	}
 }
 
@@ -759,10 +759,10 @@ void Vessel::FRecorder_EndPlayback ()
 
 // ================================================================
 // System event recording/playback
-// (implemented in class Orbiter)
+// (implemented in class SpaceXpanse)
 // ================================================================
 
-void Orbiter::FRecorder_Reset ()
+void SpaceXpanse::FRecorder_Reset ()
 {
 	FRsysname = 0;
 	FRsys_stream = 0;
@@ -771,7 +771,7 @@ void Orbiter::FRecorder_Reset ()
 	bRecord = bPlayback = false;
 }
 
-bool Orbiter::FRecorder_PrepareDir (const char *fname, bool force)
+bool SpaceXpanse::FRecorder_PrepareDir (const char *fname, bool force)
 {
 	char cbuf[256];
 	strcpy (cbuf, "Flights\\"); strcat (cbuf, fname);
@@ -794,7 +794,7 @@ bool Orbiter::FRecorder_PrepareDir (const char *fname, bool force)
 	return true;
 }
 
-void Orbiter::FRecorder_Activate (bool active, const char *fname, bool append)
+void SpaceXpanse::FRecorder_Activate (bool active, const char *fname, bool append)
 {
 	if (bRecord == active) return; // nothing to do
 	if (active) {
@@ -812,14 +812,14 @@ void Orbiter::FRecorder_Activate (bool active, const char *fname, bool append)
 }
 
 // Save a system event
-void Orbiter::FRecorder_SaveEvent (const char *event_type, const char *event)
+void SpaceXpanse::FRecorder_SaveEvent (const char *event_type, const char *event)
 {
 	if (!bRecord) return;
 	ofstream ofs(FRsysname, ios::app);
 	ofs << setprecision(10) << (td.SimT1-Tofs) << ' ' << event_type << ' ' << event << endl;
 }
 
-void Orbiter::FRecorder_OpenPlayback (const char *scname)
+void SpaceXpanse::FRecorder_OpenPlayback (const char *scname)
 {
 	int i;
 	char cbuf[256];
@@ -841,7 +841,7 @@ void Orbiter::FRecorder_OpenPlayback (const char *scname)
 	}
 }
 
-void Orbiter::FRecorder_SuspendPlayback ()
+void SpaceXpanse::FRecorder_SuspendPlayback ()
 {
 	if (FRsys_stream) {
 		delete FRsys_stream;
@@ -849,7 +849,7 @@ void Orbiter::FRecorder_SuspendPlayback ()
 	}
 }
 
-void Orbiter::FRecorder_RescanPlayback ()
+void SpaceXpanse::FRecorder_RescanPlayback ()
 {
 	oapi::ScreenAnnotation *sa = SNotePB();
 	if (sa) sa->Reset();
@@ -858,7 +858,7 @@ void Orbiter::FRecorder_RescanPlayback ()
 	FRecorder_Play(); // read up to current playback time
 }
 
-void Orbiter::FRecorder_ClosePlayback ()
+void SpaceXpanse::FRecorder_ClosePlayback ()
 {
 	if (FRsys_stream) {
 		delete FRsys_stream;
@@ -870,7 +870,7 @@ void Orbiter::FRecorder_ClosePlayback ()
 	}
 }
 
-void Orbiter::FRecorder_Play ()
+void SpaceXpanse::FRecorder_Play ()
 {
 	// scan system event stream
 	while (FRsys_stream && td.SimT1 > frec_sys_simt) {
@@ -898,7 +898,7 @@ void Orbiter::FRecorder_Play ()
 				s = strtok (NULL, " \t\n");
 				vfocus = g_psys->GetVessel (s, true);
 				if (vfocus && Cfg()->CfgRecPlayPrm.bReplayFocus)
-					g_pOrbiter->SetFocusObject (vfocus);
+					g_pSpaceXpanse->SetFocusObject (vfocus);
 			} else if (!_strnicmp (s, "NOTE", 4)) {
 				oapi::ScreenAnnotation *sa = SNotePB();
 				if (sa) {
@@ -925,7 +925,7 @@ void Orbiter::FRecorder_Play ()
 				double jumptime;
 				if (sscanf (s+11, "%lf", &jumptime) && jumptime > td.SimT0) {
 					double tgtmjd = td.MJD0 + (jumptime-td.SimT0)/86400.0;
-					g_pOrbiter->Timejump(tgtmjd, PROP_ORBITAL_FIXEDSURF);
+					g_pSpaceXpanse->Timejump(tgtmjd, PROP_ORBITAL_FIXEDSURF);
 				}
 			} else if (!_strnicmp (s, "ENDSESSION", 10)) {
 				if (hRenderWnd) PostMessage (hRenderWnd, WM_CLOSE, 0, 0);
@@ -939,7 +939,7 @@ void Orbiter::FRecorder_Play ()
 	}
 }
 
-void Orbiter::FRecorder_ToggleEditor ()
+void SpaceXpanse::FRecorder_ToggleEditor ()
 {
 	if (FReditor) {
 		delete FReditor;

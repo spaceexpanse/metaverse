@@ -18,8 +18,8 @@ target_link_libraries(ExtMFD
 )
 
 add_dependencies(ExtMFD
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(ExtMFD

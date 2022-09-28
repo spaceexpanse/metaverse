@@ -25,7 +25,7 @@
 <h1>Features &amp; Limitations</h1>
 <p>
   D3D9Client tries to be as backwards compatible with the inline graphics client
-  of Orbiter as possible. Additionally some features of DirectX 9 enable it to do
+  of SpaceXpanse as possible. Additionally some features of DirectX 9 enable it to do
   some things that the DirectX 7 runtimes do not allow. On the other hand there
   might be some things that are not implemented at all or in  different fashion.
   Here is a brief overview of features &amp; limitations of the D3D9Client.
@@ -58,9 +58,9 @@
       viewed from very close to the surface (when landed on the surface for
       example).
     <li>Symbolic Links Creation</li>
-      Spacecraft3.dll and Orbiter Sound (Version 3.5) require some extra
+      Spacecraft3.dll and SpaceXpanse Sound (Version 3.5) require some extra
       symbolic links in <code>/Modules/Server/</code> folder to run properly
-      with Orbiter 2016 (see <a href="#_junctions">Orbiter Sound 3.5,
+      with SpaceXpanse 2016 (see <a href="#_junctions">SpaceXpanse Sound 3.5,
       Spacecraft3.dll</a>).<br />
       D3D9Clients "Advanced Setup" dialog provides a simple button for that.
 <!-- not (yet) in BETA
@@ -90,8 +90,8 @@
 <p>
   You need a DirectX February 2010 or newer to run D3D9Client. To install the
   client itself you need to extract the zip package in the root folder of the
-  Orbiter. In order to use a graphics client you need to run "Orbiter_ng.exe"
-  instead of "Orbiter.exe". Also the client must be activated from the Modules
+  SpaceXpanse. In order to use a graphics client you need to run "SpaceXpanse_ng.exe"
+  instead of "SpaceXpanse.exe". Also the client must be activated from the Modules
   tab.
 </p>
 
@@ -101,7 +101,7 @@
 <p>
   If the redistributable package isn't installed in your computer you will
   receive an error message "The program can't start because d3dx9_42.dll is
-  missing from your computer". Or you may see a pop-up window in Orbiter
+  missing from your computer". Or you may see a pop-up window in SpaceXpanse
   LaunchPad telling about a missing runtimes. If that happens then download and
   extract the content of the package in any empty directory you want and then
   find a Setup.exe and run it. You can delete the contents of the directory
@@ -115,23 +115,23 @@
 
 <hr />
 <!-- ====================================================================== -->
-<h1 id="_junctions">Orbiter Sound 3.5, Spacecraft3.dll</h1>
+<h1 id="_junctions">SpaceXpanse Sound 3.5, Spacecraft3.dll</h1>
 <p>
-  In order to use Spacecraft3.dll and Orbiter Sound (Version 3.5) with an
+  In order to use Spacecraft3.dll and SpaceXpanse Sound (Version 3.5) with an
   external graphics client &ndash;like D3D9Client is one&ndash;, symbolic links
   in <code>/Modules/Server/</code> folder must be created.
 </p>
 <p>
-  Note, that for the current version of Orbiter Sound (Version 4.0) the "Sound"
+  Note, that for the current version of SpaceXpanse Sound (Version 4.0) the "Sound"
   link is not necessary anymore. It will not be created via the according Button
   in D3D9Clients "Advanced Setup" dialog, if D3DClient detects that the loaded
-  Orbiter Sound Module if of Version 4.0. Anyhow, it does not harm if the
-  "Sound" link is present for a Orbiter Sound 4.0 setup.
+  SpaceXpanse Sound Module if of Version 4.0. Anyhow, it does not harm if the
+  "Sound" link is present for a SpaceXpanse Sound 4.0 setup.
 </p>
 <p>
   The two symbolic links in <code>/Modules/Server/</code> folder for
   <code>Config</code> and <code>Sound</code> folders point (or link) to their
-  "originals" located in the root folder of the Orbiter installation.<br />
+  "originals" located in the root folder of the SpaceXpanse installation.<br />
   If you are using Windows XP or newer and your installation is on a
   <a href="http://en.wikipedia.org/wiki/NTFS" target="_blank">NTFS</a>
   filesystem, these links can easily be created from Video Tab -&gt; Advanced
@@ -152,7 +152,7 @@
 <p>
   D3D9Client doesn't support alt-tabing in a so-called "True Fullscreen Mode".
   Therefore, it's recommended that you use a windowed fullscreen mode that will
-  run the orbiter in a fullscreen sized borderless window. There is also a
+  run the spacexpanse in a fullscreen sized borderless window. There is also a
   conflict between a GDI based dialog (i.e. pop-up) windows and anti-aliasing
   in a true fullscreen mode which will disable the anti-aliasing.
 </p>
@@ -161,7 +161,7 @@
 <!-- ====================================================================== -->
 <h1>D3D9Client Advanced Setup</h1>
 <p>
-  Under the regular Video Tab of the Orbiter (Orbiter_NG) Launchpad you find
+  Under the regular Video Tab of the SpaceXpanse (SpaceXpanse_NG) Launchpad you find
   the "Advanced" Button that will show the "D3D9Client Advanced Setup" Dialog.
   Here you can change several settings to tweak your experience with the
   D3D9Client.
@@ -175,9 +175,9 @@
   On the lower left side of the Dialog you'll find the "Create symbolic links"
   button that will create the symbolic links that are needed for some add-ons.
   The symbolic links can only be created on an NTFS filesystem, so if you have
-  installed your Orbiter installation for example on an FAT32 of extFS
+  installed your SpaceXpanse installation for example on an FAT32 of extFS
   filesystem this feature will not work. In this case you have to copy the
-  according folders as explained in the "<a href="#_junctions">Orbiter Sound,
+  according folders as explained in the "<a href="#_junctions">SpaceXpanse Sound,
   Spacecraft3.dll</a>" chapter.
 </p>
 
@@ -365,7 +365,7 @@
   <li>Disable near clip plane compatibility mode</li>
     <p>
       If the near clip-plane compatibility mode is enabled then the minimum
-      clip-plane distance is 1.0 meters as is in the Orbiters internal engine.
+      clip-plane distance is 1.0 meters as is in the SpaceXpanses internal engine.
       If the compatibility mode is disabled then the client can reduce the clip
       distance down to 0.1 meters, if there is a graphics close to the camera.
       This setting will only effect in so-called exterior pass. Virtual cockpit
@@ -388,7 +388,7 @@
     </p>
   <li>Enable absolute animation handling</li>
     <p>
-      By default Orbiter uses <b><em>incremental animations</em></b>, meaning
+      By default SpaceXpanse uses <b><em>incremental animations</em></b>, meaning
       that for each frame the previous animation state is incremented by a small
       amount, which will induce some small error.<br />
       Over time these errors accumulate and the animation is no longer in the
@@ -609,7 +609,7 @@
 
 <h2 class="brk">SketchPad settings</h2>
 <p>
-  The SketchPad is used in Orbiter to draw 2D graphics onto surfaces. These are
+  The SketchPad is used in SpaceXpanse to draw 2D graphics onto surfaces. These are
   for example MFD Displays or announcements in the Simulation.
 </p>
 <ul>
@@ -628,7 +628,7 @@
       <dd>
         will only use GDI to draw 2D surfaces which might be the option when you
         experience any glitches or graphical artifacts in MFD screens. This mode
-        is used for older graphic hardware to be able to run Orbiter.
+        is used for older graphic hardware to be able to run SpaceXpanse.
       </dd>
     </dl>
     </p>
@@ -899,7 +899,7 @@
 <p>
   The mesh debugger group contains elements to inspect a mesh. It gives a mesh
   developer some tools at hand to better inspect a mesh in its 'natural
-  environment', the Orbiter Simulation environment.<br />
+  environment', the SpaceXpanse Simulation environment.<br />
   With the options available in this group one can for example separate
   individual parts of the shown scene and leave out all the rest, so it might
   be easier to see what really happens at rendering.<br />
@@ -918,7 +918,7 @@
       <div style="text-indent:-1em; margin-left:1em">
       <b><em>Everything</em></b> will, as the name suggests, display
       everything. This will show the scene as it will be shown normally when
-      running a Orbiter simulation session.
+      running a SpaceXpanse simulation session.
       </div>
       <div style="text-indent:-1em; margin-left:1em">
       <b><em>Selected Visual</em></b> will display only the currently selected
@@ -941,7 +941,7 @@
       This combo box lets you select the camera-mode. It can be either "Center
       on visual" or "Wheel Fly/Pan Cam".
       <br />
-      <b><em>Center on visual</em></b> will select the 'normal' Orbiter camera
+      <b><em>Center on visual</em></b> will select the 'normal' SpaceXpanse camera
       operations where with pressed right mouse button you can 'drag' the
       camera around the current selected visual.
       <br />
@@ -1202,7 +1202,7 @@
   Once you are happy with the result you have adjusted in the
   <a href="#_material_x">Material 'X'</a> group, click on "save materials" and
   the changed material specifications will be saved in the
-  <code>Config\GC\</code> folder of your Orbiter installation.
+  <code>Config\GC\</code> folder of your SpaceXpanse installation.
   <br />
   Then of course you can tweak these file(s) in <code>Config\GC\</code> folder
   with notepad etc.
@@ -1212,7 +1212,7 @@
   <br />
   If you want to have the "default" look back, just delete the according file
   from that folder (e.g. <code>Config\GC\DeltaGlider.cfg</code>) and the
-  standard Orbiter appearance will be restored.
+  standard SpaceXpanse appearance will be restored.
   <br />
   The install ZIP of D3D9Client contains some of those files already, that
   contain some nice "advanced looks" for some of the standard vessels. You can
@@ -1252,8 +1252,8 @@
   The D3D9Client allows you to to configure some more details when settings up
   runway lights.
   <br />
-  Additionally to the parameters that Orbiter itself defines (see
-  <em>Doc\OrbiterConfig.pdf</em> for further details) there are some extra
+  Additionally to the parameters that SpaceXpanse itself defines (see
+  <em>Doc\SpaceXpanseConfig.pdf</em> for further details) there are some extra
   parameters you can define.
   <br />
   For a better understanding how some of those parameters will affect the
@@ -1302,7 +1302,7 @@
       1: PAPI lights added to END2 only<br />
       Not Defined: PAPI lights added in both ends<br />
       <br />
-      Note: Runwaylights can have 12 PAPI lights. Orbiter's inline engine will
+      Note: Runwaylights can have 12 PAPI lights. SpaceXpanse's inline engine will
       ignore the last parameter. If more than one PAPI entries exists in the
       runwaylights the inline engine will only use the last one.
     </p>

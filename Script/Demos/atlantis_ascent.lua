@@ -2,7 +2,7 @@ note = oapi.create_annotation()
 note:set_pos (0.3,0.1,0.8,0.95)
 note:set_colour ({r=1,g=0.6,b=0.2})
 
-note:set_text('This scenario demonstrates the use of the Shuttle ascent autopilot in Orbiter.')
+note:set_text('This scenario demonstrates the use of the Shuttle ascent autopilot in SpaceXpanse.')
 proc.wait_simdt(5)
 note:set_text('The autopilot is accessed via the AscentAP MFD mode, already activated in the left MFD.')
 proc.wait_simdt(10)

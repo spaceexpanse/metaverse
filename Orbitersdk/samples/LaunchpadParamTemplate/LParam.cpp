@@ -9,14 +9,14 @@
 //
 // This module demonstrates the ability to add custom interfaces
 // for module-specific global parameter settings into the "Extra"
-// tab of the Orbiter Launchpad startup dialog.
+// tab of the SpaceXpanse Launchpad startup dialog.
 // This particular example doesn't do anything useful, but can
 // be used as a starting point for real applications.
 // ==============================================================
 
 #define STRICT 1
 #define ORBITER_MODULE
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 #include <stdio.h>
 
@@ -47,7 +47,7 @@ class MyRootItem: public LaunchpadItem {
 public:
 	MyRootItem(): LaunchpadItem() {}
 	char *Name() { return "My root item"; }
-	char *Description() { return "Example 'Launchpad parameter template' from Orbiter SDK"; }
+	char *Description() { return "Example 'Launchpad parameter template' from SpaceXpanse SDK"; }
 };
 
 // ==============================================================
@@ -60,7 +60,7 @@ class MyItem: public LaunchpadItem {
 public:
 	MyItem();
 	char *Name() { return "My sub-item"; }
-	char *Description() { return "This item is an example from the Orbiter SDK. It doesn't do anything useful, but provides a source example for developers on how to write Launchpad plugins."; }
+	char *Description() { return "This item is an example from the SpaceXpanse SDK. It doesn't do anything useful, but provides a source example for developers on how to write Launchpad plugins."; }
 	bool clbkOpen (HWND hLaunchpad);
 	int clbkWriteConfig ();
 	static INT_PTR CALLBACK DlgProc (HWND, UINT, WPARAM, LPARAM);
@@ -85,7 +85,7 @@ bool MyItem::clbkOpen (HWND hLaunchpad)
 
 int MyItem::clbkWriteConfig ()
 {
-	// called when orbiter needs to write its configuration to disk
+	// called when spacexpanse needs to write its configuration to disk
 	FILEHANDLE hFile = oapiOpenFile (cfgfile, FILE_OUT, ROOT);
 	oapiWriteItem_float (hFile, myitemtag, gParams.my_param);
 	oapiCloseFile (hFile, FILE_OUT);
@@ -130,11 +130,11 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 
 	gParams.root_item = new MyRootItem;
 	LAUNCHPADITEM_HANDLE hRoot = oapiRegisterLaunchpadItem (gParams.root_item);
-	// register the new root item with orbiter
+	// register the new root item with spacexpanse
 
 	gParams.sub_item = new MyItem;
 	oapiRegisterLaunchpadItem (gParams.sub_item, hRoot);
-	// register the new sub-item with Orbiter
+	// register the new sub-item with SpaceXpanse
 }
 
 // ==============================================================

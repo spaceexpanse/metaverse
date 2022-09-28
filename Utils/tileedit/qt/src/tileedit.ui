@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Orbiter tileedit</string>
+   <string>SpaceXpanse tileedit</string>
   </property>
   <property name="windowIcon">
    <iconset resource="tileedit.qrc">

@@ -20,8 +20,8 @@ target_link_libraries(ScriptMFD
 )
 
 add_dependencies(ScriptMFD
-	${OrbiterTgt}
-	Orbitersdk	
+	${SpaceXpanseTgt}
+	SpaceXpansesdk	
 	LuaInterpreter
 )
 

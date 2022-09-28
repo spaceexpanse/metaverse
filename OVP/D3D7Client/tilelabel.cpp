@@ -6,7 +6,7 @@
 #include <limits>
 #include <sstream>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 
 TileLabel *TileLabel::Create(const SurfTile *stile)

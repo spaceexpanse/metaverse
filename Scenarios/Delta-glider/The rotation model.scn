@@ -1,6 +1,6 @@
 BEGIN_HYPERDESC
 <h1>Delta-glider: Rotation model</h1>
-<p>Orbiter's rigid body model in action. Check how the angular
+<p>SpaceXpanse's rigid body model in action. Check how the angular
 momentum oscillates between the principal axes of the glider.</p>
 <p>Try the "Killrot" navmode sequence (Numpad-5) for a nice firework of attitude
 thrusters. Killrot is a very useful tool in many situations.</p>

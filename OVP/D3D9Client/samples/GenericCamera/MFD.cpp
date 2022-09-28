@@ -7,7 +7,7 @@
 #define ORBITER_MODULE
 
 #include "windows.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "MFD.h"
 #include "gcCoreAPI.h"
 #include "Shell.h"
@@ -67,7 +67,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 	spec.context = NULL;
 	spec.msgproc = ShellMFD::MsgProc;  // MFD mode callback function
 
-	// Register the new MFD mode with Orbiter
+	// Register the new MFD mode with SpaceXpanse
 	g_MFDmode = oapiRegisterMFDMode (spec);
 }
 

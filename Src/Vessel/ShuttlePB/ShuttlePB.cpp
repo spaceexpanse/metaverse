@@ -18,7 +18,7 @@
 #define STRICT
 #define ORBITER_MODULE
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 // ==============================================================
 // Some vessel parameters

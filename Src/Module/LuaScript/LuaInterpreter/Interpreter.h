@@ -10,7 +10,7 @@ extern "C" {
 #include "lua\lauxlib.h"
 }
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "VesselAPI.h" // for TOUCHDOWNVTX
 
 #define PRMTP_NIL           0x01
@@ -120,7 +120,7 @@ public:
 
 	/**
 	 * \brief Wait for thread execution.
-	 * \note This is called by either the orbiter thread or the interpreter
+	 * \note This is called by either the spacexpanse thread or the interpreter
 	 *   thread when they are waiting to regain execution control.
 	 */
 	virtual void WaitExec (DWORD timeout = INFINITE);
@@ -129,14 +129,14 @@ public:
 	 * \brief Release thread execution.
 	 * \param timeout time [ms] to wait for the mutex. Default is infinite
 	 *   (wait does not time out).
-	 * \note This is called by either the orbiter thread or the interpreter
+	 * \note This is called by either the spacexpanse thread or the interpreter
 	 *   thread after finishing a cycle to hand control over to the other
 	 *   thread.
 	 */
 	virtual void EndExec ();
 
 	/**
-	 * \brief Define functions for interfacing with Orbiter API
+	 * \brief Define functions for interfacing with SpaceXpanse API
 	 */
 	virtual void LoadAPI ();
 
@@ -334,7 +334,7 @@ protected:
 	// -------------------------------------------
 	// oapi library functions
 	// -------------------------------------------
-	static int oapi_get_orbiter_version (lua_State *L);
+	static int oapi_get_spacexpanse_version (lua_State *L);
 	static int oapi_get_viewport_size (lua_State *L);
 
 	static int oapiGetObjectHandle (lua_State *L);

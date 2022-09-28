@@ -7,11 +7,11 @@
 
 #include "Input.h"
 #include "Log.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
-DInput::DInput (Orbiter *pOrbiter)
+DInput::DInput (SpaceXpanse *pSpaceXpanse)
 {
-	orbiter = pOrbiter;
+	spacexpanse = pSpaceXpanse;
 	diframe = NULL;
 }
 
@@ -49,7 +49,7 @@ bool DInput::CreateKbdDevice (HWND hRenderWnd)
 
 bool DInput::CreateJoyDevice (HWND hRenderWnd)
 {
-	Config *pcfg = orbiter->Cfg();
+	Config *pcfg = spacexpanse->Cfg();
 	if (!pcfg->CfgJoystickPrm.Joy_idx) return false; // no joystick requested
 
 	if (FAILED (diframe->CreateJoyDevice (hRenderWnd, pcfg->CfgJoystickPrm.Joy_idx-1))) {
@@ -92,7 +92,7 @@ HRESULT DInput::SetJoystickProperties ()
 	DIPROPDWORD diprw;
 	joyprop.bRudder = false;
 	joyprop.bThrottle = false;
-	Config *pcfg = orbiter->Cfg();
+	Config *pcfg = spacexpanse->Cfg();
 
 	// x-axis range
 	diprg.diph.dwSize       = sizeof (diprg);

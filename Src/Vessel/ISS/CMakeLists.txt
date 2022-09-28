@@ -49,7 +49,7 @@ set_target_properties(${VESSEL_NAME}
 	FOLDER Vessels
 )
 
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	${VESSEL_NAME}
 )
 

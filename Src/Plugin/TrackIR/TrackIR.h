@@ -1,7 +1,7 @@
 #ifndef __TRACKIR_H
 #define __TRACKIR_H
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "camapi.h"
 
 // ==============================================================

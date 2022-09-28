@@ -4,7 +4,7 @@
 #ifndef __PLAYBACKED_H
 #define __PLAYBACKED_H
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
 class PlaybackEditor;
 
@@ -172,7 +172,7 @@ private:
 
 class PlaybackEditor {
 public:
-	PlaybackEditor (Orbiter *ob, const char *ScnName);
+	PlaybackEditor (SpaceXpanse *ob, const char *ScnName);
 	~PlaybackEditor ();
 	INT_PTR DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HWND OpenEditTab (PlaybackEvent *event, int resid, DLGPROC tabproc);
@@ -192,7 +192,7 @@ private:
 	void DeleteEvent ();
 	void CommitEdit ();
 	void RegisterEdit (HWND hEdit);
-	Orbiter *orbiter;
+	SpaceXpanse *spacexpanse;
 	char *sysfname;         // system event file name
 	HWND hDlg;              // editor dialog handle
 	HWND hEdit;             // currently displayed edit tab

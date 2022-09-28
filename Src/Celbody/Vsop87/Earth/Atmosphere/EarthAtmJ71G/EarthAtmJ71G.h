@@ -4,7 +4,7 @@
 #ifndef __EARTHATMJ71G_H
 #define __EARTHATMJ71G_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ======================================================================

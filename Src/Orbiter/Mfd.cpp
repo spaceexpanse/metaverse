@@ -5,7 +5,7 @@
 
 #include <dinput.h>
 #include "Pane.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Mfd.h"
 #include "MfdOrbit.h"
@@ -26,7 +26,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern TimeData td;
 extern Select *g_select;
@@ -65,7 +65,7 @@ Instrument *Instrument::Create (int type, Pane *_pane,
 	switch (type) {
 	case MFD_ORBIT:       TRACENEW return new Instrument_Orbit       (_pane, _id, spec, _vessel);
 	case MFD_SURFACE:     TRACENEW return new Instrument_Surface     (_pane, _id, spec, _vessel);
-	case MFD_MAP:         TRACENEW if (g_pOrbiter->Cfg()->CfgLogicPrm.MFDMapVersion == 0)
+	case MFD_MAP:         TRACENEW if (g_pSpaceXpanse->Cfg()->CfgLogicPrm.MFDMapVersion == 0)
 								return new Instrument_MapOld (_pane, _id, spec, _vessel);
 							  else
 								return new Instrument_Map    (_pane, _id, spec, _vessel);
@@ -152,7 +152,7 @@ void Instrument::GlobalInit (oapi::GraphicsClient *gc)
 	draw[4][1].col = 0xA00000;  // aux colour 4 dim
 
 	// Read customised settings
-	ifstream ifs (g_pOrbiter->ConfigPath ("MFD\\Default"));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath ("MFD\\Default"));
 	if (ifs) {
 		char label[64];
 		int c;
@@ -472,12 +472,12 @@ bool Instrument::IsDisabledMode (int id)
 Instrument::Instrument (Pane *_pane, INT_PTR _id, const Spec &spec, Vessel *_vessel, bool defer_alloc)
 {
 	pane = _pane;
-	gc   =  g_pOrbiter->GetGraphicsClient();
+	gc   =  g_pSpaceXpanse->GetGraphicsClient();
 	id   = _id;
 	flag = spec.flag;
 	vessel = _vessel;
 	use_skp_interface = true;
-	instrDT = g_pOrbiter->Cfg()->CfgLogicPrm.InstrUpdDT;
+	instrDT = g_pSpaceXpanse->Cfg()->CfgLogicPrm.InstrUpdDT;
 	updT = td.SimT0-1.0;
 	updSysT = td.SysT0-1.0;
 	dT = 1.0, pT = -1.0;
@@ -711,11 +711,11 @@ void Instrument::AllocSurface (DWORD w, DWORD h)
 void Instrument::ReleaseSurface ()
 {
 	if (surf) {
-		g_pOrbiter->ReleaseSurface (surf);
+		g_pSpaceXpanse->ReleaseSurface (surf);
 		surf = NULL;
 	}
 	if (tex) {
-		g_pOrbiter->ReleaseSurface (tex);
+		g_pSpaceXpanse->ReleaseSurface (tex);
 		tex = NULL;
 	}
 }

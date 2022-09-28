@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.19)
 
 # Set the project name
-project (Orbiter VERSION 21.7.24)
+project (SpaceXpanse VERSION 21.7.24)
 
 # Allow building targets as external projects
 include(ExternalProject)
@@ -51,9 +51,9 @@ set(OVP_DIR "${CMAKE_SOURCE_DIR}/OVP")
 set(GDICLIENT_DIR "${OVP_DIR}/GDIClient")
 
 set(ORBITER_SOURCE_ROOT_DIR ${CMAKE_SOURCE_DIR})
-set(ORBITER_SOURCE_DIR ${ORBITER_SOURCE_ROOT_DIR}/Src/Orbiter)
+set(ORBITER_SOURCE_DIR ${ORBITER_SOURCE_ROOT_DIR}/Src/SpaceXpanse)
 set(ORBITER_SOURCE_MODULE_DIR ${ORBITER_SOURCE_ROOT_DIR}/Src/Plugin)
-set(ORBITER_SOURCE_SDK_DIR ${ORBITER_SOURCE_ROOT_DIR}/Orbitersdk)
+set(ORBITER_SOURCE_SDK_DIR ${ORBITER_SOURCE_ROOT_DIR}/SpaceXpansesdk)
 set(ORBITER_SOURCE_SDK_INCLUDE_DIR ${ORBITER_SOURCE_SDK_DIR}/include)
 set(ORBITER_SOURCE_HTML_DIR ${ORBITER_SOURCE_ROOT_DIR}/Html)
 
@@ -69,9 +69,9 @@ set(ORBITER_BINARY_TEXTURES_DIR ${ORBITER_BINARY_ROOT_DIR}/Textures)
 set(ORBITER_BINARY_TEXTURES2_DIR ${ORBITER_BINARY_ROOT_DIR}/Textures2)
 set(ORBITER_BINARY_HTML_DIR ${ORBITER_BINARY_ROOT_DIR}/Html)
 set(ORBITER_BINARY_DOC_DIR ${ORBITER_BINARY_ROOT_DIR}/Doc)
-set(ORBITER_BINARY_SDK_DIR ${ORBITER_BINARY_ROOT_DIR}/Orbitersdk)
+set(ORBITER_BINARY_SDK_DIR ${ORBITER_BINARY_ROOT_DIR}/SpaceXpansesdk)
 
-set(ORBITER_INSTALL_ROOT_DIR "Orbiter") # This path is relative to CMAKE_INSTALL_PREFIX
+set(ORBITER_INSTALL_ROOT_DIR "SpaceXpanse") # This path is relative to CMAKE_INSTALL_PREFIX
 set(ORBITER_INSTALL_MESH_DIR ${ORBITER_INSTALL_ROOT_DIR}/Meshes)
 set(ORBITER_INSTALL_MODULE_DIR ${ORBITER_INSTALL_ROOT_DIR}/Modules)
 set(ORBITER_INSTALL_CELBODY_DIR ${ORBITER_INSTALL_MODULE_DIR}/Celbody)
@@ -81,9 +81,9 @@ set(ORBITER_INSTALL_TEXTURES2_DIR ${ORBITER_INSTALL_ROOT_DIR}/Textures2)
 set(ORBITER_INSTALL_HTML_DIR  ${ORBITER_INSTALL_ROOT_DIR}/Html)
 set(ORBITER_INSTALL_DOC_DIR ${ORBITER_INSTALL_ROOT_DIR}/Doc)
 set(ORBITER_INSTALL_UTILS_DIR ${ORBITER_INSTALL_ROOT_DIR}/Utils)
-set(ORBITER_INSTALL_SDK_DIR ${ORBITER_INSTALL_ROOT_DIR}/Orbitersdk)
+set(ORBITER_INSTALL_SDK_DIR ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk)
 
-set(ORBITER_SDK_LIB $<TARGET_FILE:Orbitersdk>)
+set(ORBITER_SDK_LIB $<TARGET_FILE:SpaceXpansesdk>)
 set(ORBITER_DLGCTRL_LIB $<TARGET_FILE:DlgCtrl>)
 set(LUAINTERPRETER_LIB $<TARGET_LINKER_FILE:LuaInterpreter>)
 set(GDICLIENT_LIB $<TARGET_LINKER_FILE:GDIClient>)
@@ -135,7 +135,7 @@ if(MSVC)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"LIBCMTD\"")
 endif()
 
-# Copy data and binary assets from source to binary tree to provide a working Orbiter environment
+# Copy data and binary assets from source to binary tree to provide a working SpaceXpanse environment
 add_custom_target(CopyData ALL
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/BinAssets/ ${CMAKE_BINARY_DIR}
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Scenarios/ ${CMAKE_BINARY_DIR}/Scenarios
@@ -171,56 +171,56 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/pdftex_fix.bat.in ${PDFTEX_CMD}
 
 # =====================================================================================
 
-set(OrbiterExe_graphics "Orbiter (built-in DX7 graphics engine)")
-set(OrbiterExe_ng "Orbiter (graphics server version)")
-set(OrbiterExe_both "Both (inline DX7 graphics + graphics server)")
+set(SpaceXpanseExe_graphics "SpaceXpanse (built-in DX7 graphics engine)")
+set(SpaceXpanseExe_ng "SpaceXpanse (graphics server version)")
+set(SpaceXpanseExe_both "Both (inline DX7 graphics + graphics server)")
 
 if(BUILD64) # only allow graphics server version on x64 builds
 
-	set(ORBITER_GRAPHICS ${OrbiterExe_ng})
+	set(ORBITER_GRAPHICS ${SpaceXpanseExe_ng})
 
 else()
 
 	set(ORBITER_GRAPHICS
-		${OrbiterExe_both}
+		${SpaceXpanseExe_both}
 		CACHE
 		STRING
-		"Orbiter executables to be built."
+		"SpaceXpanse executables to be built."
 	)
 	set_property(CACHE ORBITER_GRAPHICS
 		PROPERTY
-		STRINGS ${OrbiterExe_both} ${OrbiterExe_graphics} ${OrbiterExe_ng}
+		STRINGS ${SpaceXpanseExe_both} ${SpaceXpanseExe_graphics} ${SpaceXpanseExe_ng}
 	)
 
 endif()
 
-if(NOT ${ORBITER_GRAPHICS} STREQUAL ${OrbiterExe_ng})
+if(NOT ${ORBITER_GRAPHICS} STREQUAL ${SpaceXpanseExe_ng})
 	set(BUILD_ORBITER_DX7 1)
 else()
 	set(BUILD_ORBITER_DX7 0)
 endif()
-if(NOT ${ORBITER_GRAPHICS} STREQUAL ${OrbiterExe_graphics})
+if(NOT ${ORBITER_GRAPHICS} STREQUAL ${SpaceXpanseExe_graphics})
 	set(BUILD_ORBITER_SERVER 1)
 else()
 	set(BUILD_ORBITER_SERVER 0)
 endif()
 
 if(BUILD_ORBITER_DX7)
-	set(OrbiterTgt Orbiter)
-	set(ORBITER_LIB $<TARGET_LINKER_FILE:Orbiter>)
+	set(SpaceXpanseTgt SpaceXpanse)
+	set(ORBITER_LIB $<TARGET_LINKER_FILE:SpaceXpanse>)
 else()
-	set(OrbiterTgt Orbiter_server)
-	set(ORBITER_LIB $<TARGET_LINKER_FILE:Orbiter_server>)
+	set(SpaceXpanseTgt SpaceXpanse_server)
+	set(ORBITER_LIB $<TARGET_LINKER_FILE:SpaceXpanse_server>)
 endif()
 
 # =====================================================================================
-# Configure Orbiter.cfg for externally installed planet textures
+# Configure SpaceXpanse.cfg for externally installed planet textures
 
 set(ORBITER_PLANET_TEXTURE_INSTALL_DIR
 	${ORBITER_BINARY_ROOT_DIR}/Textures
 	CACHE
 	PATH
-	"Planet texture installation directory (e.g. C:/Orbiter2016/Textures)"
+	"Planet texture installation directory (e.g. C:/SpaceXpanse2016/Textures)"
 )
 string(COMPARE NOTEQUAL ${ORBITER_PLANET_TEXTURE_INSTALL_DIR} "${ORBITER_BINARY_ROOT_DIR}/Textures" CUSTOM_PLANET_TEXTURE_DIR)
 
@@ -228,17 +228,17 @@ if (${CUSTOM_PLANET_TEXTURE_DIR})
 	string(REPLACE  "/" "\\" ORBITER_PLANET_TEXTURE_INSTALL_DIR_W "${ORBITER_PLANET_TEXTURE_INSTALL_DIR}")
 
 	if(BUILD_ORBITER_DX7)
-		configure_file(${ORBITER_SOURCE_DIR}/Orbiter.cfg.in ${ORBITER_BINARY_ROOT_DIR}/Orbiter.cfg)
+		configure_file(${ORBITER_SOURCE_DIR}/SpaceXpanse.cfg.in ${ORBITER_BINARY_ROOT_DIR}/SpaceXpanse.cfg)
 		install(FILES
-			${ORBITER_BINARY_ROOT_DIR}/Orbiter.cfg
+			${ORBITER_BINARY_ROOT_DIR}/SpaceXpanse.cfg
 			DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
 		)
 	endif()
 	
 	if(BUILD_ORBITER_SERVER)
-		configure_file(${ORBITER_SOURCE_DIR}/Orbiter.cfg.in ${ORBITER_BINARY_ROOT_DIR}/Orbiter_NG.cfg)
+		configure_file(${ORBITER_SOURCE_DIR}/SpaceXpanse.cfg.in ${ORBITER_BINARY_ROOT_DIR}/SpaceXpanse_NG.cfg)
 		install(FILES
-			${ORBITER_BINARY_ROOT_DIR}/Orbiter_NG.cfg
+			${ORBITER_BINARY_ROOT_DIR}/SpaceXpanse_NG.cfg
 			DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
 		)
 	endif()
@@ -250,7 +250,7 @@ endif()
 # Find required and optional build tools
 
 #option(ORBITER_BUILD_WITH_DX7
-#	"Compile Orbiter with built-in DX7 graphics. If off, the server version for external graphics clients will be built."
+#	"Compile SpaceXpanse with built-in DX7 graphics. If off, the server version for external graphics clients will be built."
 #	ON
 #)
 
@@ -262,7 +262,7 @@ option(
 
 option(
 	ORBITER_BUILD_XRSOUND
-	"Build XRSound module to enable sound in Orbiter"
+	"Build XRSound module to enable sound in SpaceXpanse"
 	ON
 )
 
@@ -459,7 +459,7 @@ INSTALL(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
 # Sub-projects
 add_subdirectory(Src)
 add_subdirectory(Utils)
-add_subdirectory(Orbitersdk)
+add_subdirectory(SpaceXpansesdk)
 add_subdirectory(OVP)
 add_subdirectory(Sound)
 add_subdirectory(Html)
@@ -472,38 +472,38 @@ endif()
 # Set up Distribution package options
 
 configure_file(${CMAKE_SOURCE_DIR}/cmake/CPackOptions.cmake.in
-	${CMAKE_BINARY_DIR}/OrbiterCPackOptions.cmake)
+	${CMAKE_BINARY_DIR}/SpaceXpanseCPackOptions.cmake)
 			   
 set(CPACK_GENERATOR "WIX;ZIP")
-set(CPACK_PACKAGE_NAME OpenOrbiter)
-set(CPACK_PACKAGE_VENDOR Orbitersim)
-set(CPACK_PACKAGE_DESCRIPTION "Orbiter is an Open-source spaceflight simulator for Windows PCs.")
+set(CPACK_PACKAGE_NAME OpenSpaceXpanse)
+set(CPACK_PACKAGE_VENDOR SpaceXpansesim)
+set(CPACK_PACKAGE_DESCRIPTION "SpaceXpanse is an Open-source spaceflight simulator for Windows PCs.")
 set(CPACK_PACKAGE_HOMEPAGE_URL http://orbit.medphys.ucl.ac.uk)
-set(CPACK_PACKAGE_EXECUTABLES Orbiter;OpenOrbiter)
+set(CPACK_PACKAGE_EXECUTABLES SpaceXpanse;OpenSpaceXpanse)
 set(CPACK_COMPONENTS_GROUPING ALL_COMPONENTS_IN_ONE)
-set(CPACK_COMPONENT_Unspecified_DISPLAY_NAME "Orbiter Core Components")
+set(CPACK_COMPONENT_Unspecified_DISPLAY_NAME "SpaceXpanse Core Components")
 set(CPACK_COMPONENT_Unspecified_REQUIRED TRUE)
-set(CPACK_COMPONENT_RuntimeLibraries_DESCRIPTION "System libraries used by Orbiter. Install if Orbiter fails to launch.")
+set(CPACK_COMPONENT_RuntimeLibraries_DESCRIPTION "System libraries used by SpaceXpanse. Install if SpaceXpanse fails to launch.")
 set(CPACK_RESOURCE_FILE_LICENSE ${ORBITER_SOURCE_ROOT_DIR}/cmake/LICENSE.rtf)
 set(CPACK_RESOURCE_FILE_README ${ORBITER_SOURCE_ROOT_DIR}/README.md)
 set(CPACK_WIX_UI_BANNER ${ORBITER_SOURCE_ROOT_DIR}/cmake/install_banner.bmp)
 set(CPACK_WIX_UI_DIALOG ${ORBITER_SOURCE_ROOT_DIR}/cmake/install_bkg.bmp)
-set(CPACK_WIX_PRODUCT_ICON ${ORBITER_SOURCE_ROOT_DIR}/cmake/orbiter_install.ico)
+set(CPACK_WIX_PRODUCT_ICON ${ORBITER_SOURCE_ROOT_DIR}/cmake/spacexpanse_install.ico)
 set(CPACK_WIX_UPGRADE_GUID AB3F6483-A1A4-4ECD-ADAE-D33DF3A5AADA)
 set(CPACK_WIX_COMPONENT_INSTALL)
-set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_BINARY_DIR}/OrbiterCPackOptions.cmake")
+set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_BINARY_DIR}/SpaceXpanseCPackOptions.cmake")
 
-include(OrbiterCPackOptions)
+include(SpaceXpanseCPackOptions)
 include(CPack)
 
 cpack_add_component(Unspecified
-	DISPLAY_NAME "OrbiterCore"
-	DESCRIPTION "Orbiter Core Components"
+	DISPLAY_NAME "SpaceXpanseCore"
+	DESCRIPTION "SpaceXpanse Core Components"
 	REQUIRED
 )
 cpack_add_component(RuntimeLibraries
 	DISPLAY_NAME "RuntimeLibraries"
-	DESCRIPTION "System libraries used by Orbiter. Install if Orbiter fails to launch."
+	DESCRIPTION "System libraries used by SpaceXpanse. Install if SpaceXpanse fails to launch."
 )
 
 # There appears to be a CMake (3.20.5) bug that prevents CMAKE_INSTALL_PREFIX to be set
@@ -519,5 +519,5 @@ if (ORBITER_MAKE_TESTS)
 endif()
 
 if (ORBITER_ENABLE_ASAN AND MSVC)
-	add_dependencies(Orbiter_server AsanBinaries)
+	add_dependencies(SpaceXpanse_server AsanBinaries)
 endif()

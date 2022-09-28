@@ -1,5 +1,5 @@
 // ==============================================================
-// XRSoundEngine class that is bound to an Orbiter vessel; this file is not distributed with XRSound.
+// XRSoundEngine class that is bound to an SpaceXpanse vessel; this file is not distributed with XRSound.
 // The code for this exists in XRSound.dll.
 // 
 // Copyright (c) 2018-2021 Douglas Beachy
@@ -24,7 +24,7 @@ class SoundPreStep;
 // the caller's DLL: by design, there is no import library for XRSound.dll.
 // Do NOT use any inline code for any methods invoked by XRSoundImpl, or it will reside in the caller's DLL instead of XRSound.dll.
 //
-// NOTE: this class is not thread-safe!  However, Orbiter is not multi-threaded, so that should not be an issue.
+// NOTE: this class is not thread-safe!  However, SpaceXpanse is not multi-threaded, so that should not be an issue.
 class VesselXRSoundEngine : public XRSoundEngine
 {
 public:
@@ -35,12 +35,12 @@ public:
     virtual EngineType GetEngineType() override { return EngineType::Vessel; }
     virtual const char *GetLogID() override { return GetVesselName(); }
 
-    // Methods only invoked by XRSoundDLL (our Orbiter module class).  Because these are non-virtual, it is impossible for XRSoundLib to invoke them
-    // because it cannot link with them when the Orbiter vessel using XRSoundLib tries to link.
+    // Methods only invoked by XRSoundDLL (our SpaceXpanse module class).  Because these are non-virtual, it is impossible for XRSoundLib to invoke them
+    // because it cannot link with them when the SpaceXpanse vessel using XRSoundLib tries to link.
     bool HasFocus() const { return (oapiGetFocusObject() == m_hVessel); }
     bool InCockpitView() const { return (HasFocus() && oapiCameraInternal()); }
     bool InAtmosphere();
-    bool IsLanded();    // can't be const; we get the vessel * from Orbiter
+    bool IsLanded();    // can't be const; we get the vessel * from SpaceXpanse
     bool InReentry();   // ditto
     double GetGearAdjustedAltitude();
     double GetLandingGearAnimationState();
@@ -122,7 +122,7 @@ public:
     }
 
     double GetCameraDistance();
-    // invoked ~20 times per second to update this sound's position relative to Orbiter's camera as well as update sounds via irrKlang engine
+    // invoked ~20 times per second to update this sound's position relative to SpaceXpanse's camera as well as update sounds via irrKlang engine
     void clbkPreStep(const double simt, const double simdt, const double mjd);
 
 protected:
@@ -135,11 +135,11 @@ protected:
     void FadeVolumeForPressure(float &volume);
 
     vector<SoundPreStep *> m_allSoundPreSteps;
-    OBJHANDLE m_hVessel;       // handle of Orbiter vessel associated with this engine; NOTE: may have been destroyed; always check first!
+    OBJHANDLE m_hVessel;       // handle of SpaceXpanse vessel associated with this engine; NOTE: may have been destroyed; always check first!
 
     // This should be called shortly after this engine is initialized; it caches data used for logging
     // purposes so that we can still log those values (for a short time) even after the vessel is 
-    // deleted by Orbiter.
+    // deleted by SpaceXpanse.
     void InitializeCachedData()
     {
         GetVessel();

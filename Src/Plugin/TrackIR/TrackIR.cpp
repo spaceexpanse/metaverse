@@ -253,7 +253,7 @@ DLLCLBK void opcOpenRenderViewport (HWND renderWnd, DWORD width, DWORD height, B
 		trackir->StartSimulation (renderWnd);
 		// connect to the render window
 		oapiRegisterExternalCameraControl (trackir);
-		// register external control with orbiter
+		// register external control with spacexpanse
 	}
 }
 
@@ -264,7 +264,7 @@ DLLCLBK void opcCloseRenderViewport (void)
 {
 	if (trackir && trackir->Connected()) {
 		oapiUnregisterExternalCameraControl();
-		// disconnect external control from orbiter
+		// disconnect external control from spacexpanse
 		trackir->EndSimulation ();
 	}
 }

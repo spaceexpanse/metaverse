@@ -76,7 +76,7 @@ CSphereManager::CSphereManager(D3D9Client *gclient, const Scene *scene) : Planet
 	tmp = *(double*)gc->GetConfigParam (CFGPRM_CSPHEREINTENS);
 	intensity = (float)tmp;
 
-	maxlvl = 8; // g_pOrbiter->Cfg()->CSphereMaxLevel;
+	maxlvl = 8; // g_pSpaceXpanse->Cfg()->CSphereMaxLevel;
 	maxbaselvl = min (8, maxlvl);
 	int maxidx = patchidx[maxbaselvl];
 	bPreloadTile = (Config->PlanetPreloadMode != 0);

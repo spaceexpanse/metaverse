@@ -24,7 +24,7 @@
 #include "Vesselbase.h"
 #include "elevmgr.h"
 #include <fstream>
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "GraphicsAPI.h"
 
 class Elements;
@@ -207,7 +207,7 @@ typedef void (*VESSEL_Exit)(VESSEL *vessel);
 // Class Vessel
 
 class Vessel: public VesselBase {
-	friend class Orbiter;
+	friend class SpaceXpanse;
 	friend class VESSEL;
 	friend class VESSEL2;
 	friend class VESSEL3;
@@ -1377,7 +1377,7 @@ private:
 	bool bThrustEngaged;                         // true if any thrusters are engaged at current time step
 
 	// thruster group specs
-	ThrustGroupSpec thruster_grp_default[15];    // list of default thruster groups (see THGROUP_TYPE in Orbitersdk.h)
+	ThrustGroupSpec thruster_grp_default[15];    // list of default thruster groups (see THGROUP_TYPE in SpaceXpansesdk.h)
 	ThrustGroupSpec **thruster_grp_user;         // list of user-defined groups
 	DWORD nthruster_grp_user;                    // length of thruster_grp_user
 

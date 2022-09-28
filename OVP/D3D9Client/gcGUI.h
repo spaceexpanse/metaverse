@@ -3,7 +3,7 @@
 // licensed under LGPL v2
 // ===================================================
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "DrawAPI.h"
 #include <assert.h>
 

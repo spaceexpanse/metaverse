@@ -118,9 +118,9 @@ void CloudTile::Render ()
 
 
 	// While viewing the Moon/Brighton Beach. Earth's cloudlayer rendering throwed through D3DX9_43.dll: 
-	// Exception thrown at 0x759635D2 (KernelBase.dll) in orbiter.exe: 0x000006BA : The RPC server is unavailable.
-	// Exception thrown at 0x759635D2 (KernelBase.dll) in orbiter.exe: 0xC0000002 : The requested operation is not implemented.
-	// Unhandled exception at 0x759635D2 (KernelBase.dll) in orbiter.exe : 0xC0000002 : The requested operation is not implemented.
+	// Exception thrown at 0x759635D2 (KernelBase.dll) in spacexpanse.exe: 0x000006BA : The RPC server is unavailable.
+	// Exception thrown at 0x759635D2 (KernelBase.dll) in spacexpanse.exe: 0xC0000002 : The requested operation is not implemented.
+	// Unhandled exception at 0x759635D2 (KernelBase.dll) in spacexpanse.exe : 0xC0000002 : The requested operation is not implemented.
 	// What is this, why ?
 
 	HR(Shader->BeginPass(0));

@@ -28,7 +28,7 @@ if exist %workdir% rd /s /q %workdir%
 mkdir %workdir%
 mkdir %workdir%\Doc
 mkdir %workdir%\Modules\Plugin
-mkdir %workdir%\Orbitersdk\XRSound
+mkdir %workdir%\SpaceXpansesdk\XRSound
 mkdir %workdir%\XRSound
 
 @rem copy FULL DISTRIBUTION files
@@ -40,9 +40,9 @@ call :copyfile "%assetsdir%\Doc\XRSound User Manual.pdf"  %workdir%\Doc\*
 @rem copy binaries, XRSound.h, and readme (note the copy-rename of XRSoundDLL.dll -> XRSound.dll)
 @rem Also, we have to ship the debug version of XRSound.lib (XRSoundD.lib) and irrKlang.dll so the users can build debug versions of their ships.
 call :copyfile "%SolutionDir%\release\XRSoundDLL.dll"     %workdir%\Modules\Plugin\XRSound.dll
-call :copyfile "%SolutionDir%\release\XRSound.lib"        %workdir%\Orbitersdk\XRSound\*
-call :copyfile "%SolutionDir%\debug\XRSound.lib"          %workdir%\Orbitersdk\XRSound\XRSoundD.lib
-call :copyfile "%SolutionDir%\XRSoundLib\XRSound.h"       %workdir%\Orbitersdk\XRSound\*
+call :copyfile "%SolutionDir%\release\XRSound.lib"        %workdir%\SpaceXpansesdk\XRSound\*
+call :copyfile "%SolutionDir%\debug\XRSound.lib"          %workdir%\SpaceXpansesdk\XRSound\XRSoundD.lib
+call :copyfile "%SolutionDir%\XRSoundLib\XRSound.h"       %workdir%\SpaceXpansesdk\XRSound\*
 call :copyfile "%irrKlangDLLdir%\ikpMP3.dll"              %workdir%\*
 call :copyfile "%irrKlangDLLdir%\ikpFlac.dll"             %workdir%\*
 call :copyfile "%irrKlangDLLdir%\irrKlang.dll"            %workdir%\*

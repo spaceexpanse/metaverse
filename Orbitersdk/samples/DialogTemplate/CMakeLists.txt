@@ -19,8 +19,8 @@ target_link_libraries(DialogTemplate
 )
 
 add_dependencies(DialogTemplate
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(DialogTemplate

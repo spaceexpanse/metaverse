@@ -5,7 +5,7 @@
 #define __LAUNCHPAD_H
 
 #include <dinput.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "Config.h"
 
 //-----------------------------------------------------------------------------
@@ -24,7 +24,7 @@ void SetClientPos (HWND hWnd, HWND hChild, RECT &r);
 INT_PTR CALLBACK AppDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 INT_PTR CALLBACK WaitPageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class LaunchpadTab;
 	class ExtraTab;
@@ -34,11 +34,11 @@ namespace orbiter {
 	// Desc: Handles the startup dialog ("Launchpad")
 	//-----------------------------------------------------------------------------
 	class LaunchpadDialog {
-		friend class Orbiter;
+		friend class SpaceXpanse;
 		friend class LaunchpadTab;
 
 	public:
-		LaunchpadDialog(Orbiter* app);
+		LaunchpadDialog(SpaceXpanse* app);
 		~LaunchpadDialog();
 
 		bool Create(bool startvideotab = false);
@@ -57,7 +57,7 @@ namespace orbiter {
 		const HWND GetTabWindow(int i) const;
 		const HWND GetWaitWindow() const { return hWait; }
 
-		inline Orbiter* App() const { return pApp; }
+		inline SpaceXpanse* App() const { return pApp; }
 		inline Config* Cfg() const { return pCfg; }
 		LaunchpadTab* GetTab(UINT i) const;
 
@@ -65,7 +65,7 @@ namespace orbiter {
 		// Inserts a new tab into the list
 
 		void EnableLaunchButton(bool enable) const;
-		// Enable/disable "Launch Orbiter" button
+		// Enable/disable "Launch SpaceXpanse" button
 
 		HTREEITEM RegisterExtraParam(LaunchpadItem* item, HTREEITEM parent = 0);
 		// Register an item in the "Extra" list. If parent=0, the item is registered
@@ -80,7 +80,7 @@ namespace orbiter {
 
 		void WriteExtraParams();
 		// allow all externally registered "Extra" items to write their data to file
-		// (internal "extra" items use the Config class to write to Orbiter.cfg)
+		// (internal "extra" items use the Config class to write to SpaceXpanse.cfg)
 
 		ExtraTab* GetExtraTab() const
 		{
@@ -104,7 +104,7 @@ namespace orbiter {
 		HWND hWait;              // "wait" page
 		HBRUSH hDlgBrush;
 		HANDLE hShadowImg;
-		Orbiter* pApp;           // application pointer
+		SpaceXpanse* pApp;           // application pointer
 		Config* pCfg;           // config pointer
 		//DPSessionInfo DPSIHead;  // pointer to list of multiplayer sessions
 
@@ -155,7 +155,7 @@ namespace orbiter {
 		int dy_bt;             // button separation
 		bool m_bVisible;       // launchpad dialog visible?
 
-		orbiter::ExtraTab* pExtra;      // tab object
+		spacexpanse::ExtraTab* pExtra;      // tab object
 	};
 
 }

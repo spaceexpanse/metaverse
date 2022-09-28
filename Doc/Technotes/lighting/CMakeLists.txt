@@ -22,7 +22,7 @@ add_custom_command(
 add_custom_target(LightingTechnote
 	DEPENDS ${out_path}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	LightingTechnote
 )
 set_target_properties(LightingTechnote

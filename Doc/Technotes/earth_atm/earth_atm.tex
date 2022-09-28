@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Earth Atmosphere Model}
+\title{SpaceXpanse Technical Notes: Earth Atmosphere Model}
 \author{Martin Schweiger}
 \date{March 5, 2009}
 
@@ -25,7 +25,7 @@
 \maketitle
 
 \section{Introduction}
-From Edition 2009, Orbiter supports a choice of different atmosphere models for Earth. In addition to the Edition 2006 legacy model, the default distribution also contains implementations of the Jacchia model \cite{jacchia65, jacchia71, jacchia77} and the NRLMSISE-00 model which is based on the MSISE90 model.
+From Edition 2009, SpaceXpanse supports a choice of different atmosphere models for Earth. In addition to the Edition 2006 legacy model, the default distribution also contains implementations of the Jacchia model \cite{jacchia65, jacchia71, jacchia77} and the NRLMSISE-00 model which is based on the MSISE90 model.
 
 These models address the shortcomings of the 2006 legacy model, in particular the underestimation of density and pressure above 120\,km. Both new models are valid to significantly higher altitudes (2500\,km, compared to 200\,km for the legacy model).
 
@@ -40,7 +40,7 @@ T_C = 379.0K + 3.24K \bar{F}_{10.7} + 1.3K(F_{10.7}-\bar{F}_{10.7})
 \end{equation}
 where $F_{10.7}$ is the daily average solar flux value one day prior, measured at wavelength 10.7\,cm, and $\bar{F}_{10.7}$ is the average value over three solar rotations of 27 days. Units for solar flux values are given in Solar Flux Units of $10^{-22}\,W/(m^2 Hz)$.
 
-In Orbiter, solar flux values based on observations are not taken into account. Instead, a constant flux of
+In SpaceXpanse, solar flux values based on observations are not taken into account. Instead, a constant flux of
 \begin{equation}
 F_{10.7} = \bar{F}_{10.7} = 140 \cdot 10^{-22} W/(m^2 Hz)
 \end{equation}
@@ -77,7 +77,7 @@ The geomagnetic activity correction $\Delta T_\infty$ can then be written as
 \begin{equation}
 \Delta T_\infty = f \Delta T^H_\infty + (1-f) \Delta T^L_\infty
 \end{equation}
-In Orbiter, variations in geomagnetic activity are ignored. Instead, a constant geomagnetic index of $K_p = 3.0$ is assumed. This simplifies the correction terms to
+In SpaceXpanse, variations in geomagnetic activity are ignored. Instead, a constant geomagnetic index of $K_p = 3.0$ is assumed. This simplifies the correction terms to
 \begin{eqnarray}
 \Delta T^H_\infty &=& 84.6026\Kelvin \\
 \Delta T^L_\infty &=& 42.4017\Kelvin \\
@@ -125,7 +125,7 @@ The density profiles as a function of altitude for three values of $T_\infty$ ar
 \caption{Density profiles for the J77 (left) and J71G model (right) as a function of altitude, for three different values of the exospheric temperature.}
 \label{fig:dens}
 \end{figure}
-The relative difference between the two models is shown in Fig.~\ref{fig:denserr}. It can be seen that the models agree well for medium to high values of $T_\infty$, but diverge significantly for low values. This may be caused by the fact that the interpolated Gill solution is modelling the earlier J71 model rather than J77, so may reflect the difference between the underlying models, rather than an effect of the interpolation approach. As can be seen in the right image, the models only diverge below temperatures of 600\,K, which are not encountered in Orbiter's model for $T_\infty$.
+The relative difference between the two models is shown in Fig.~\ref{fig:denserr}. It can be seen that the models agree well for medium to high values of $T_\infty$, but diverge significantly for low values. This may be caused by the fact that the interpolated Gill solution is modelling the earlier J71 model rather than J77, so may reflect the difference between the underlying models, rather than an effect of the interpolation approach. As can be seen in the right image, the models only diverge below temperatures of 600\,K, which are not encountered in SpaceXpanse's model for $T_\infty$.
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{dens_relerr.eps}
 \includegraphics[width=0.5\textwidth]{dens_relerr2.eps}
@@ -161,7 +161,7 @@ The atmospheric pressure values calculated with the J77 model and with the J71G 
 \end{figure}
 
 \section{The NRLMSISE-00 atmosphere model}
-A further atmospheric model supported by Orbiter is the NRLMSISE-00 model, developed by Picone, Hedin and Drob, with a C version by D. Brodowski. It is based on the MSISE90 model, adding some further observation data. MSISE90 provides the neutral temperature and density from ground level to thermospheric altitudes. Unlike the Jacchia models, the low-altitude data are not static, but vary with location. They are based on the MAP Handbook (Labitzke et al. 1985) tabulation of zonal average temperature and pressure by Barnett and Corney. Below 20 km these data were supplemented with averages from the National Meteorological Center (NMC). In addition, pitot tube, falling sphere, and grenade sounder rocket measurements from 1947 to 1972 were taken into consideration. Above 72.5 km MSISE-90 is essentially a revised MSIS-86 model taking into account data derived from space shuttle flights and newer incoherent scatter results.
+A further atmospheric model supported by SpaceXpanse is the NRLMSISE-00 model, developed by Picone, Hedin and Drob, with a C version by D. Brodowski. It is based on the MSISE90 model, adding some further observation data. MSISE90 provides the neutral temperature and density from ground level to thermospheric altitudes. Unlike the Jacchia models, the low-altitude data are not static, but vary with location. They are based on the MAP Handbook (Labitzke et al. 1985) tabulation of zonal average temperature and pressure by Barnett and Corney. Below 20 km these data were supplemented with averages from the National Meteorological Center (NMC). In addition, pitot tube, falling sphere, and grenade sounder rocket measurements from 1947 to 1972 were taken into consideration. Above 72.5 km MSISE-90 is essentially a revised MSIS-86 model taking into account data derived from space shuttle flights and newer incoherent scatter results.
 
 The input parameters for the NRLMSISE-00 model are altitude, geodetic longitude and latitude, day of year, seconds in day, average and current F10.7 flux, and magnetic index. On output, the model provides temperature at altitude, exospheric temperature, total mass density, and number densities for He, O, N$_2$, O$_2$, Ar, H, N and anomalous oxygen.
 
@@ -188,8 +188,8 @@ The density and pressure altitude profiles for both models at the same time and 
 \label{fig:comp_dns_p}
 \end{figure}
 
-\section{Comparison with Orbiter 2006 legacy model}
-The atmosphere model in Orbiter Edition 2006 (denoted as OB06) uses a simple static, piecewise linear temperature profile. For segments of constant temperature, pressure and density are calculated as
+\section{Comparison with SpaceXpanse 2006 legacy model}
+The atmosphere model in SpaceXpanse Edition 2006 (denoted as OB06) uses a simple static, piecewise linear temperature profile. For segments of constant temperature, pressure and density are calculated as
 \begin{equation}
 p(z)=p_1 e^{-[g_0/(RT)](z-z_1)}, \qquad \rho(z)=\rho_1 e^{-[g_0/(RT)](z-z_1)},
 \end{equation}
@@ -211,25 +211,25 @@ Similar to the J71G model, OB06 is based on a static standard atmosphere model a
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{ob_j71g_temp.eps}
-\caption{Comparison of temperature distributions between the Orbiter legacy model and the J71G model for $T_\infty=1000$\,K.}
+\caption{Comparison of temperature distributions between the SpaceXpanse legacy model and the J71G model for $T_\infty=1000$\,K.}
 \label{fig:ob_j71g_temp}
 \end{figure}
-Likewise, the pressure and density profiles of the legacy Orbiter model agree well with the J71G model below 120\,km, while at higher altitudes the Orbiter model continues to follow an exponential decay, while the J71G model maintains significantly higher density and pressure values (Fig.~\ref{fig:ob_j71g_dens_prs}).
+Likewise, the pressure and density profiles of the legacy SpaceXpanse model agree well with the J71G model below 120\,km, while at higher altitudes the SpaceXpanse model continues to follow an exponential decay, while the J71G model maintains significantly higher density and pressure values (Fig.~\ref{fig:ob_j71g_dens_prs}).
 As a result, the OB06 model values drop to essentially insignificant values at $z=200$\,km, the default cutoff altitude of the legacy model, while density and pressure remain significant to much higher altitudes for the J71G model.
 
-The transition from the OB06 to the J71G model in Orbiter will therefore lead to significantly higher drag effects from altitudes above 120\,km which will continue substantially above the previous cutoff altitude of 200\,km.
+The transition from the OB06 to the J71G model in SpaceXpanse will therefore lead to significantly higher drag effects from altitudes above 120\,km which will continue substantially above the previous cutoff altitude of 200\,km.
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{ob_j71g_dens.eps}
 \includegraphics[width=0.5\textwidth]{ob_j71g_prs.eps}
-\caption{Comparison of density (left) and pressure distributions (right) between the Orbiter legacy model and the J71G model for $T_\infty=1000$\,K.}
+\caption{Comparison of density (left) and pressure distributions (right) between the SpaceXpanse legacy model and the J71G model for $T_\infty=1000$\,K.}
 \label{fig:ob_j71g_dens_prs}
 \end{figure}
 
 \section {Computational complexity}
-For a real-time application like Orbiter, the computational efficiency of the atmosphere model is important. Atmosphere data are queried at each time frame by each vessel within the atmosphere range limit of a given celestial body. For densely populated simulation scenarios, a complex atmosphere model may adversely affect performance.
+For a real-time application like SpaceXpanse, the computational efficiency of the atmosphere model is important. Atmosphere data are queried at each time frame by each vessel within the atmosphere range limit of a given celestial body. For densely populated simulation scenarios, a complex atmosphere model may adversely affect performance.
 
-Timing results for the three atmosphere models are shown in Table~\ref{tab:timing}. They show the times for 1000 evaluations of model evaluation at different altitudes. It can be seen that the NRLMSISE-00 model is significantly more expensive than the J71G model by approximately an order of magnitude, and both models are substantially more expensive than the trivial Orbiter legacy model.
+Timing results for the three atmosphere models are shown in Table~\ref{tab:timing}. They show the times for 1000 evaluations of model evaluation at different altitudes. It can be seen that the NRLMSISE-00 model is significantly more expensive than the J71G model by approximately an order of magnitude, and both models are substantially more expensive than the trivial SpaceXpanse legacy model.
 
 It should however be noted that for moderately loaded simulation scenarios, even the more expensive models may not significantly degrade performance. For a test scenario with 50 vessels in the atmosphere, the application of the NRLMSISE-00 model resulted in a drop in frame rate from 130 to 114 frames per second.
 \begin{table}

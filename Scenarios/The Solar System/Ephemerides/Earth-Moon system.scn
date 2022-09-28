@@ -1,5 +1,5 @@
 BEGIN_DESC
-Earth and Moon. Lunar ephemerides now use the ELP2000-82 perturbation solution, improving the accuracy of the Moon's position in Orbiter.
+Earth and Moon. Lunar ephemerides now use the ELP2000-82 perturbation solution, improving the accuracy of the Moon's position in SpaceXpanse.
 This provides more precise eclipse timings, and removes the relative motion artefacts of the previous release.
 
 Turn on labels (F9), switch to highest time acceleration, and watch the Moon rotate around Earth.

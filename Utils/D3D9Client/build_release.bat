@@ -20,28 +20,28 @@ set VERSION=Beta30.7
 
 
 :: Check if SDK and other needed resources are present
-for %%a in ("%BASE_DIR%\Orbitersdk\lib\orbiter.lib" ^
-            "%BASE_DIR%\Orbitersdk\VS2015\PropertyPages\orbiter.props") ^
+for %%a in ("%BASE_DIR%\SpaceXpansesdk\lib\spacexpanse.lib" ^
+            "%BASE_DIR%\SpaceXpansesdk\VS2015\PropertyPages\spacexpanse.props") ^
 do if not exist %%a (
   echo ======================================================================
-  echo   Getting Orbiter SDK libs ^& headers^.^.^.
+  echo   Getting SpaceXpanse SDK libs ^& headers^.^.^.
   echo ======================================================================
 
   pushd .
-  call get_orbiter_libs.bat
+  call get_spacexpanse_libs.bat
   if errorlevel 1 goto exit_nok
   popd
 )
 
 
-:: Enhance Version by Orbiter Version
+:: Enhance Version by SpaceXpanse Version
 echo ======================================================================
 echo   Getting Version information
 echo ======================================================================
 echo   ^.^.^.
 
-for /F "usebackq tokens=*" %%i in (`over /N ..\..\Orbitersdk\lib\orbiter.lib`) do set OVER=%%i
-if "%OVER%"=="BETA r62" set OVER=Orbiter2016
+for /F "usebackq tokens=*" %%i in (`over /N ..\..\SpaceXpansesdk\lib\spacexpanse.lib`) do set OVER=%%i
+if "%OVER%"=="BETA r62" set OVER=SpaceXpanse2016
 set VERSION=%VERSION%-for%OVER%
 
 if "%VS141COMNTOOLS%"=="" if "%VS142COMNTOOLS%"=="" call helper_vswhere.bat
@@ -80,7 +80,7 @@ if not "%VS140COMNTOOLS%"=="" (
 set ZIP_NAME=D3D9Client%VERSION%
 set VC=msbuild.exe
 set BUILD_FLAG=%BUILD_FLAG% /t:build /v:minimal /nologo
-set SOLUTIONFILE="%BASE_DIR%\Orbitersdk\D3D9Client\%SOLUTIONFILE%"
+set SOLUTIONFILE="%BASE_DIR%\SpaceXpansesdk\D3D9Client\%SOLUTIONFILE%"
 set CONFIG=/p:Configuration=Release /p:Platform=Win32
 set CONFIG_DBG=/p:Configuration=Debug /p:Platform=Win32
 set ZIP_CMD="C:\Program Files\7-Zip\7z.exe"
@@ -115,17 +115,17 @@ call %VC% %BUILD_FLAG% %SOLUTIONFILE% %CONFIG%
 if errorlevel 1 goto exit_nok
 
 :: gcAPI_dbg.lib (DEBUG)
-:: if not exist "%BASE_DIR%\Orbitersdk\lib\gcAPI_dbg.lib" (
+:: if not exist "%BASE_DIR%\SpaceXpansesdk\lib\gcAPI_dbg.lib" (
 ::   echo ======================================================================
 ::   echo   Building gcAPI_dbg^.lib ^(DEBUG version of gcAPI.lib^)
 ::   echo ======================================================================
-::   call %VC% "%BASE_DIR%\Orbitersdk\D3D9Client\gcAPI\%GCAPI_PROJECTFILE%" ^
+::   call %VC% "%BASE_DIR%\SpaceXpansesdk\D3D9Client\gcAPI\%GCAPI_PROJECTFILE%" ^
 ::        %BUILD_FLAG% %CONFIG_DBG%
 ::   if errorlevel 1 goto exit_nok
 :: )
 
 :: gcAPI.lib (RELEASE)
-:: call %VC% "%BASE_DIR%\Orbitersdk\D3D9Client\gcAPI\%GCAPI_PROJECTFILE%" ^
+:: call %VC% "%BASE_DIR%\SpaceXpansesdk\D3D9Client\gcAPI\%GCAPI_PROJECTFILE%" ^
 ::           %BUILD_FLAG% %CONFIG%
 :: if errorlevel 1 goto exit_nok
 
@@ -136,7 +136,7 @@ if not "%CAM_SOLUTIONFILE%"=="" (
   echo ======================================================================
   echo   Building GenericCamera MFD
   echo ======================================================================
-  call %VC% "%BASE_DIR%\Orbitersdk\samples\GenericCamera\%CAM_SOLUTIONFILE%" ^
+  call %VC% "%BASE_DIR%\SpaceXpansesdk\samples\GenericCamera\%CAM_SOLUTIONFILE%" ^
             %BUILD_FLAG% %CONFIG%
   if errorlevel 1 goto exit_nok
 )
@@ -148,7 +148,7 @@ if not "%EXTMFD_SOLUTIONFILE%"=="" (
   echo.======================================================================
   echo   Building DX9ExtMFD
   echo ======================================================================
-  call %VC% "%BASE_DIR%\Orbitersdk\samples\DX9ExtMFD\%EXTMFD_SOLUTIONFILE%" ^
+  call %VC% "%BASE_DIR%\SpaceXpansesdk\samples\DX9ExtMFD\%EXTMFD_SOLUTIONFILE%" ^
             %BUILD_FLAG% %CONFIG%
   if errorlevel 1 goto exit_nok
 )
@@ -166,25 +166,25 @@ svn export --force --quiet "%BASE_DIR%\Config" "%ABS_PATH%\%OUT_DIR%\Config"
 svn export --force --quiet "%BASE_DIR%\Doc" "%ABS_PATH%\%OUT_DIR%\Doc"
 svn export --force --quiet "%BASE_DIR%\Meshes" "%ABS_PATH%\%OUT_DIR%\Meshes"
 svn export --force --quiet "%BASE_DIR%\Modules" "%ABS_PATH%\%OUT_DIR%\Modules"
-svn export --force --quiet "%BASE_DIR%\Orbitersdk" "%ABS_PATH%\%OUT_DIR%\Orbitersdk"
+svn export --force --quiet "%BASE_DIR%\SpaceXpansesdk" "%ABS_PATH%\%OUT_DIR%\SpaceXpansesdk"
 svn export --force --quiet "%BASE_DIR%\Textures" "%ABS_PATH%\%OUT_DIR%\Textures"
 svn export --force --quiet "%BASE_DIR%\Utils" "%ABS_PATH%\%OUT_DIR%\Utils"
 svn export --force --quiet "%BASE_DIR%\D3D9Client.cfg" "%ABS_PATH%\%OUT_DIR%"
 
 
 :: --- Remove some files we don't need to have in the source-package
-del "%OUT_DIR%\Orbitersdk\D3D9Client\doc\images\*.psd"
+del "%OUT_DIR%\SpaceXpansesdk\D3D9Client\doc\images\*.psd"
 
 
 :: --- Copy the DLLs
 if not exist "%OUT_DIR%\Modules\Plugin" mkdir "%OUT_DIR%\Modules\Plugin"
-if not exist "%OUT_DIR%\Orbitersdk\lib" mkdir "%OUT_DIR%\Orbitersdk\lib"
+if not exist "%OUT_DIR%\SpaceXpansesdk\lib" mkdir "%OUT_DIR%\SpaceXpansesdk\lib"
 copy /y %BASE_DIR%\Modules\Plugin\D3D9Client.dll ^
          %OUT_DIR%\Modules\Plugin\D3D9Client.dll > nul
-copy /y %BASE_DIR%\Orbitersdk\lib\gcAPI.lib ^
-         %OUT_DIR%\Orbitersdk\lib\gcAPI.lib > nul
-:: copy /y %BASE_DIR%\Orbitersdk\lib\gcAPI_dbg.lib ^
-::          %OUT_DIR%\Orbitersdk\lib\gcAPI_dbg.lib > nul
+copy /y %BASE_DIR%\SpaceXpansesdk\lib\gcAPI.lib ^
+         %OUT_DIR%\SpaceXpansesdk\lib\gcAPI.lib > nul
+:: copy /y %BASE_DIR%\SpaceXpansesdk\lib\gcAPI_dbg.lib ^
+::          %OUT_DIR%\SpaceXpansesdk\lib\gcAPI_dbg.lib > nul
 copy /y %BASE_DIR%\Modules\Plugin\GenericCamera.dll ^
          %OUT_DIR%\Modules\Plugin\GenericCamera.dll > nul
 copy /y %BASE_DIR%\Modules\Plugin\DX9ExtMFD.dll ^
@@ -195,7 +195,7 @@ copy /y %BASE_DIR%\Modules\Plugin\DX9ExtMFD.dll ^
 pushd %OUT_DIR%
 %ZIP_CMD% a -tzip -mx9 "..\%ZIP_NAME%(r%REVISION%)+src.zip" *
 
-rmdir /S /Q "Orbitersdk\D3D9Client"
+rmdir /S /Q "SpaceXpansesdk\D3D9Client"
 rmdir /S /Q "Utils"
 %ZIP_CMD% a -tzip -mx9 "..\%ZIP_NAME%(r%REVISION%).zip" *
 popd

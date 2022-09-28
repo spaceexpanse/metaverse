@@ -9,7 +9,7 @@
 // ==============================================================
 // VideoTab.cpp
 // Class VideoTab (implementation)
-// Manages the user selections in the "Video" tab of the Orbiter
+// Manages the user selections in the "Video" tab of the SpaceXpanse
 // Launchpad dialog.
 // ==============================================================
 
@@ -25,11 +25,11 @@ using namespace oapi;
 // ==============================================================
 // Constructor
 
-VideoTab::VideoTab (D3D7Client *gc, HINSTANCE _hInst, HINSTANCE _hOrbiterInst, HWND hVideoTab)
+VideoTab::VideoTab (D3D7Client *gc, HINSTANCE _hInst, HINSTANCE _hSpaceXpanseInst, HWND hVideoTab)
 {
 	gclient      = gc;
 	hInst        = _hInst;
-	hOrbiterInst = _hOrbiterInst;
+	hSpaceXpanseInst = _hSpaceXpanseInst;
 	hTab         = hVideoTab;
 	Initialise (gclient->CurrentDevice());
 }

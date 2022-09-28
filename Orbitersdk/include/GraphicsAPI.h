@@ -11,7 +11,7 @@
 #ifndef __GRAPHICSAPI_H
 #define __GRAPHICSAPI_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include <stdio.h>
 #include <windows.h>
 
@@ -255,7 +255,7 @@ struct FogParam {
 	VECTOR3 col;     ///< fog colour
 };
 
-class Orbiter;
+class SpaceXpanse;
 struct IWICImagingFactory;
 
 namespace oapi {
@@ -293,8 +293,8 @@ class ScreenAnnotation;
  * \brief Base class for external graphics client modules.
  *
  * This class defines the interface between the graphics-less version of
- * the Orbiter core and any external plugins providing a rendering
- * environment for the orbiter-generated scene.
+ * the SpaceXpanse core and any external plugins providing a rendering
+ * environment for the spacexpanse-generated scene.
  * The GraphicsClient base class is defined in terms of generic graphics
  * objects (meshes, textures, etc.) Derived classes can then adapt these
  * into specific rendering objects for a given 3-D rendering engine
@@ -302,7 +302,7 @@ class ScreenAnnotation;
  */
 
 class OAPIFUNC GraphicsClient: public Module {
-	friend class ::Orbiter; ///< Orbiter private class
+	friend class ::SpaceXpanse; ///< SpaceXpanse private class
 
 public:
 	/**
@@ -310,7 +310,7 @@ public:
 	 *
 	 * The graphics object is typically created during module initialisation
 	 * (see \ref InitModule). Once the client is created, it must be registered
-	 * with the Orbiter core via the oapiRegisterGraphicsClient function.
+	 * with the SpaceXpanse core via the oapiRegisterGraphicsClient function.
 	 * \param hInstance module instance handle (as passed to InitModule)
 	 */
 	GraphicsClient (HINSTANCE hInstance);
@@ -319,7 +319,7 @@ public:
 	 * \brief Destroy the graphics object.
 	 *
 	 * Usually, the graphics object is destroyed when the module is unloaded
-	 * (see opcDLLExit), after is has been detached from the Orbiter core
+	 * (see opcDLLExit), after is has been detached from the SpaceXpanse core
 	 * via a call to oapiUnregisterGraphicsClient.
 	 */
 	virtual ~GraphicsClient ();
@@ -330,7 +330,7 @@ public:
 	 * This includes enumerating drivers, graphics modes, etc.
 	 * Derived classes should also call the base class method to allow
 	 * default setup.
-	 * \default Initialises the VideoData structure from the Orbiter.cfg
+	 * \default Initialises the VideoData structure from the SpaceXpanse.cfg
 	 *   file
 	 * \par Calling sequence:
 	 *   Called during processing of oapiRegisterGraphicsClient, after the
@@ -342,11 +342,11 @@ public:
 	/**
 	 * \brief Request for video configuration data
 	 *
-	 * Called by Orbiter before the render window is opened or configuration
+	 * Called by SpaceXpanse before the render window is opened or configuration
 	 * parameters are written to file. Applications should here either update
 	 * the provided VIDEODATA structure from any user selections made in the
-	 * Launchpad Video tab and leave it to Orbiter to write these parameters
-	 * to Orbiter.cfg, or write the current video settings to their own
+	 * Launchpad Video tab and leave it to SpaceXpanse to write these parameters
+	 * to SpaceXpanse.cfg, or write the current video settings to their own
 	 * configuration file.
 	 * \default None.
 	 */
@@ -358,18 +358,18 @@ public:
 	 * Load a texture from a file into a device-specific texture object, and
 	 * return a generic SURFHANDLE for it. Derived classes should overload this
 	 * method to add texture support.
-	 * Usually, the client should read Orbiter's default texture files (in
+	 * Usually, the client should read SpaceXpanse's default texture files (in
 	 * DXT? format). However, the client also has the option to load its own
 	 * texture files stored in a different format, and pass them back via the
 	 * SUFHANDLE interface.
-	 * \param fname texture file name with path relative to orbiter
+	 * \param fname texture file name with path relative to spacexpanse
 	 *   texture folders; can be used as input for OpenTextureFile.
 	 * \param flags request for texture properties
 	 * \return Texture handle, cast into generic SURFHANDLE, or NULL if texture
 	 *   could not be loaded.
 	 * \default Return NULL.
 	 * \note If the client loads its own of texture files, they can either be
-	 *   installed in the default locations, replacing Orbiter's set of
+	 *   installed in the default locations, replacing SpaceXpanse's set of
 	 *   textures, or stored alongside the original textures, using different
 	 *   names or directory locations. In the latter case, the fname parameter
 	 *   passed to clbkLoadTexture must be adapted accordingly (for example,
@@ -382,7 +382,7 @@ public:
 	 *   - bit 1 set: decompress, even if format is supported by device
 	 *   - bit 2 set: don't load mipmaps, even if supported by device
 	 *   - bit 3 set: load as global resource (can be managed by graphics client)
-	 * \note If bit 3 of flags is set, orbiter will not try to modify or release
+	 * \note If bit 3 of flags is set, spacexpanse will not try to modify or release
 	 *   the texture. The client should manage the texture (i.e. keep it in a
 	 *   repository and release it at destruction). Any further call of
 	 *   clbkLoadTexture should first scan the repository. If the texture is
@@ -392,7 +392,7 @@ public:
 
 	/**
 	 * \brief Load a surface from file into a surface object, and return a SURFHANDLE for it.
-	 * \param fname texture file name with path relative to orbiter texture folders
+	 * \param fname texture file name with path relative to spacexpanse texture folders
 	 * \param attrib \ref surfacecaps (see notes)
 	 * \return A SURFHANDLE for the loaded surface, for example a pointer to the surface object.
 	 * \note If the request refers to a static surface that has already be loaded, or if the
@@ -406,7 +406,7 @@ public:
 	/**
 	 * \brief Save the contents of a surface to a formatted image file or to the clipboard
 	 * \param surf surface handle (0 for primary render surface)
-	 * \param fname image file path relative to orbiter root directory (excluding file extension), or NULL to save to clipboard
+	 * \param fname image file path relative to spacexpanse root directory (excluding file extension), or NULL to save to clipboard
 	 * \param fmt output file format
 	 * \param quality quality request if the format supports it (0-1)
 	 * \return Should return true on success
@@ -422,7 +422,7 @@ public:
 	/**
 	 * \brief Texture release request
 	 *
-	 * Called by Orbiter when a previously loaded texture can be released
+	 * Called by SpaceXpanse when a previously loaded texture can be released
 	 * from memory. The client can use the appropriate device-specific method
 	 * to release the texture.
 	 * \param hTex texture handle
@@ -483,10 +483,10 @@ public:
 	/// \name Visual object interface
 	//@{
 	/**
-	 * \brief Register a new visual object with Orbiter.
+	 * \brief Register a new visual object with SpaceXpanse.
 	 * \param hObj handle of the object to register the visual with
 	 * \param vis identifier for the visual (passed to the message callback function)
-	 * \note When the client creates a visual for an orbiter object (such
+	 * \note When the client creates a visual for an spacexpanse object (such
 	 *   as vessels and planets), it must register them with the core by
 	 *   calling RegisterVisObject. This will allow the visual to receive
 	 *   event notifications via clbkVisEvent.
@@ -513,7 +513,7 @@ public:
 	 * \param hObj handle of the object for which the visual is un-registered.
 	 * \note Before the client deletes a visual (e.g. when it runs out of
 	 *   the camera visual range) it must unregister it from the core.
-	 * \note Once the visual is un-registered, Orbiter will no longer generate
+	 * \note Once the visual is un-registered, SpaceXpanse will no longer generate
 	 *   visual events via clbkVisEvent for it.
 	 * \note For vessel visuals, UnregisterVisObject will trigger a
 	 *   \ref VESSEL2::clbkVisualDestroyed notification to the vessel module,
@@ -530,7 +530,7 @@ public:
 	 * \param context message context
 	 * \return Function should return 1 if it processes the message, 0 otherwise.
 	 * \default None, returns 0.
-	 * \note Messages are generated by Orbiter for objects that have been
+	 * \note Messages are generated by SpaceXpanse for objects that have been
 	 *   registered with \ref RegisterVisObject by the client, until they are
 	 *   un-registered with \ref UnregisterVisObject.
 	 * \note Currently only vessel objects create visual messages.
@@ -549,7 +549,7 @@ public:
 	 * \return Mesh handle (client-specific)
 	 * \note Derived clients should return a handle that identifies a
 	 *   mesh for the visual (in client-specific format).
-	 * \note Orbiter calls this method in response to a \ref VESSEL::GetMesh
+	 * \note SpaceXpanse calls this method in response to a \ref VESSEL::GetMesh
 	 *   call by an vessel module.
 	 */
 	virtual MESHHANDLE clbkGetMesh (VISHANDLE vis, UINT idx) { return NULL; }
@@ -622,7 +622,7 @@ public:
 	 * \default None, returns NULL. Derived classes should overload this method
 	 *   to return a ParticleStream-derived class instance in order to support
 	 *   exhaust streams.
-	 * \note The lvl, ref and dir parameters may be modified by orbiter after
+	 * \note The lvl, ref and dir parameters may be modified by spacexpanse after
 	 *   the stream has been created, e.g. to reflect changes in engine thrust
 	 *   level or gimballing.
 	 */
@@ -643,7 +643,7 @@ public:
 	 * \default None, returns NULL. Derived classes should overload this method
 	 *   to return a ParticleStream-derived class instance in order to support
 	 *   exhaust streams.
-	 * \note The lvl parameter may be modified by orbiter after
+	 * \note The lvl parameter may be modified by spacexpanse after
 	 *   the stream has been created, e.g. to reflect changes in engine thrust
 	 *   level.
 	 * \note The ref and dir parameters are fixed in this version of the method.
@@ -690,13 +690,13 @@ public:
 	 * \note This is the standard Windows message handler for the render
 	 *   window.
 	 * \note This method currently intercepts only the WM_CLOSE and WM_DESTROY
-	 *   messages, and passes everything else to the Orbiter core message
+	 *   messages, and passes everything else to the SpaceXpanse core message
 	 *   handler.
 	 */
 	virtual LRESULT RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	/**
-	 * \brief Message handler for 'video' tab in Orbiter Launchpad dialog
+	 * \brief Message handler for 'video' tab in SpaceXpanse Launchpad dialog
 	 *
 	 * Overload this method to display and retrieve video parameters using
 	 * the Launchpad video tab. This method acts like a standard Windows dialog
@@ -712,7 +712,7 @@ public:
 
 	/**
 	 * \brief Structure containing default video options, as stored in
-	 *   Orbiter.cfg.
+	 *   SpaceXpanse.cfg.
 	 */
 	struct VIDEODATA {
 		bool fullscreen; ///< fullscreen mode flag
@@ -730,7 +730,7 @@ public:
 	 * \brief Returns a pointer to the VideoData structure.
 	 *
 	 * This structure contains the user selection for video parameters as
-	 * stored in the Orbiter.cfg file. You can use this structure to retrieve
+	 * stored in the SpaceXpanse.cfg file. You can use this structure to retrieve
 	 * and present video options to the user, or ignore it and define your own
 	 * method (e.g. reading/writing to a separate config file)
 	 * \return pointer to VIDEODATA structure containing default video settings
@@ -762,7 +762,7 @@ public:
 	 * \brief Returns the dimensions of the render viewport
 	 * \param width render viewport width [pixel]
 	 * \param height render viewport height [pixel]
-	 * \note This function is called by orbiter after the render window or
+	 * \note This function is called by spacexpanse after the render window or
 	 *   fullscreen renderer has been created (see \ref clbkCreateRenderWindow).
 	 * \note This should normally return the screen resolution in fullscreen
 	 *   mode, and the size of the render window client area in windowed mode,
@@ -781,10 +781,10 @@ public:
 	virtual bool clbkGetRenderParam (DWORD prm, DWORD *value) const = 0;
 
 	/**
-	 * \brief Returns a pointer to an Orbiter configuration parameter.
+	 * \brief Returns a pointer to an SpaceXpanse configuration parameter.
 	 *
 	 * This function can be used to access various configuration parameters
-	 * defined in the Orbiter core (e.g. user selections in the Launchpad
+	 * defined in the SpaceXpanse core (e.g. user selections in the Launchpad
 	 * dialog box).
 	 * \param paramtype Parameter identifier (see \ref cfgprm)
 	 * \return Pointer to parameter
@@ -802,13 +802,13 @@ public:
 	 * \brief Return the full path for a texture file.
 	 *
 	 * Returns the fully qualified path for texture file 'fname' in
-	 * 'path', relative to the orbiter root directory.
-	 * The search method conforms to the standard orbiter convention (first
+	 * 'path', relative to the spacexpanse root directory.
+	 * The search method conforms to the standard spacexpanse convention (first
 	 * search under Textures2, then under Textures directory)
 	 * Example: for fname="mypath\\tex1.dds", this may return
 	 * ".\Textures2\mypath\tex1.dds" or ".\Textures\mypath\tex1.dds"
 	 * Return value is false if no file is found in either directory
-	 * \param fname texture file name (with path relative to an Orbiter
+	 * \param fname texture file name (with path relative to an SpaceXpanse
 	 *   texture directory)
 	 * \param path string into which the full path is copied
 	 * \return true if file was found, false otherwise.
@@ -930,7 +930,7 @@ public:
 	 * Surfaces are used for offscreen bitmap and texture manipulation,
 	 * blitting and rendering.
 	 * Derived classes should create a device-specific surface, and
-	 * return a cast to a generic Orbiter SURFHANDLE.
+	 * return a cast to a generic SpaceXpanse SURFHANDLE.
 	 * \param w surface width [pixels]
 	 * \param h surface height [pixels]
 	 * \param attrib \ref surfacecaps (bitflags). See notes.
@@ -955,7 +955,7 @@ public:
 	 * Surfaces are used for offscreen bitmap and texture manipulation,
 	 * blitting and rendering.
 	 * Derived classes should create a device-specific surface, and
-	 * return a cast to a generic Orbiter SURFHANDLE.
+	 * return a cast to a generic SpaceXpanse SURFHANDLE.
 	 * \param w surface width [pixels]
 	 * \param h surface height [pixels]
 	 * \param hTemplate surface format template
@@ -1369,7 +1369,7 @@ public:
 protected:
 	/** \brief Launchpad video tab indicator
 	 *
-	 * Indicate if the the default video tab in the Orbiter launchpad dialog
+	 * Indicate if the the default video tab in the SpaceXpanse launchpad dialog
 	 * is to be used for obtaining user video preferences. If a derived
 	 * class returns false here, the video tab is not shown.
 	 * \return true if the module wants to use the video tab in the launchpad
@@ -1416,7 +1416,7 @@ protected:
 	 * \note Derived clients can use this function to perform cleanup operations
 	 *   for which the simulation objects are still required.
 	 * \note If fastclose == true, the user has selected one of the fast
-	 *   shutdown options (terminate Orbiter, or respawn Orbiter process). In
+	 *   shutdown options (terminate SpaceXpanse, or respawn SpaceXpanse process). In
 	 *   this case, the current process will terminate, and the graphics client
 	 *   can skip object cleanup and deallocation in order to speed up the
 	 *   closedown process.
@@ -1442,7 +1442,7 @@ protected:
 	 *   simulation session. Therefore, device-specific options should be
 	 *   destroyed and re-created at the start of the next session.
 	 * \note If fastclose == true, the user has selected one of the fast
-	 *   shutdown options (terminate Orbiter, or respawn Orbiter process). In
+	 *   shutdown options (terminate SpaceXpanse, or respawn SpaceXpanse process). In
 	 *   this case, the current process will terminate, and the graphics client
 	 *   can skip object cleanup and deallocation in order to speed up the
 	 *   closedown process.
@@ -1505,16 +1505,16 @@ protected:
 	virtual bool clbkSplashLoadMsg (const char *msg, int line) { return false; }
 
 	/**
-	 * \brief Notifies Orbiter to to initiate rendering of the 2D scene overlay
+	 * \brief Notifies SpaceXpanse to to initiate rendering of the 2D scene overlay
 	 *
 	 * The 2D overlay is used to render 2D instrument panels, HUD, the info
 	 * boxes at the top left and right of the screen, etc. This function should
 	 * typically be called at the end of \ref clbkRenderScene, after the 3D
 	 * scene has been rendered, but before the rendering environment is
-	 * released. During the execution of this function, Orbiter will call the
+	 * released. During the execution of this function, SpaceXpanse will call the
 	 * \ref clbkRender2DPanel function several times to allow the client to
 	 * build up the 2D layer.
-	 * \note Orbiter will \e not acquire a Sketchpad environment while
+	 * \note SpaceXpanse will \e not acquire a Sketchpad environment while
 	 *  executing this function, because the graphics driver may not allow to
 	 *  lock surfaces for drawing while in render mode. If a Sketchpad environment
 	 *  is required to draw on top of the render window (for example for displaying
@@ -1529,7 +1529,7 @@ protected:
 	 * Called when a plugin loads a mesh with oapiLoadMeshGlobal, to allow the
 	 * client to store a copy of the mesh in client-specific format. Whenever
 	 * the mesh is required later, the client can create an instance as a copy
-	 * of the template, rather than creating it by converting from Orbiter's
+	 * of the template, rather than creating it by converting from SpaceXpanse's
 	 * mesh format.
 	 * \param hMesh mesh handle
 	 * \param fname mesh file name
@@ -1542,13 +1542,13 @@ protected:
 	 * \note The file name is provide to allow the client to parse the mesh directly
 	 *   from file, rather than copying it from the hMesh object, or to use an
 	 *   alternative mesh file.
-	 * \note The file name contains a path relative to Orbiter's main mesh
+	 * \note The file name contains a path relative to SpaceXpanse's main mesh
 	 *   directory.
 	 */
 	virtual void clbkStoreMeshPersistent (MESHHANDLE hMesh, const char *fname) {}
 
 	/**
-	 * \brief Displays the default Orbiter splash screen on top of
+	 * \brief Displays the default SpaceXpanse splash screen on top of
 	 *   the render window.
 	 */
 	void ShowDefaultSplash ();
@@ -1556,7 +1556,7 @@ protected:
 	/**
 	 * \brief Write a block of raw image data to a formatted image file.
 	 * \param data image specification structure
-	 * \param fname output file name (relative to orbiter root directory)
+	 * \param fname output file name (relative to spacexpanse root directory)
 	 * \param fmt output format
 	 * \param quality requested image quality, if supported by the format
 	 * \return \e true on success, \e false if inconsistencies in the image
@@ -1603,12 +1603,12 @@ protected:
 	inline HINSTANCE ModuleInstance () const { return hModule; }
 
 	/**
-	 * \brief Returns the orbiter core instance handle
+	 * \brief Returns the spacexpanse core instance handle
 	 */
-	inline HINSTANCE OrbiterInstance () const { return hOrbiterInst; }
+	inline HINSTANCE SpaceXpanseInstance () const { return hSpaceXpanseInst; }
 
 	/**
-	 * \brief Returns the window handle of the 'video' tab of the Orbiter
+	 * \brief Returns the window handle of the 'video' tab of the SpaceXpanse
 	 *   Launchpad dialog.
 	 *
 	 * If clbkUseLanuchpadVideoTab() is overloaded to return false, this
@@ -1623,7 +1623,7 @@ public:
 	struct StarRec { float lng, lat, mag; };
 
 	/**
-	 * \brief Load star data from Orbiter's data base file.
+	 * \brief Load star data from SpaceXpanse's data base file.
      *
 	 * Load up to 'n' data records from the default data base (in decreasing
 	 * order of apparent magnitude).
@@ -1637,7 +1637,7 @@ public:
 	struct ConstRec { float lng1, lat1, lng2, lat2; };
 
 	/**
-	 * \brief Load constellation line data from Orbiter's data base file.
+	 * \brief Load constellation line data from SpaceXpanse's data base file.
 	 *
 	 * Load up to 'n' constellation lines from the default constellation
 	 * data base.
@@ -1726,7 +1726,7 @@ private:
 	HWND InitRenderWnd (HWND hWnd);
 
 	HWND hRenderWnd;        // render window handle
-	HINSTANCE hOrbiterInst; // orbiter core instance handle
+	HINSTANCE hSpaceXpanseInst; // spacexpanse core instance handle
 	VIDEODATA VideoData;    // the standard video options from config
 
 	IWICImagingFactory *m_pIWICFactory; // Windows Image Component factory instance
@@ -1771,7 +1771,7 @@ public:
 	 * \param pdir pointer to particle direction (object frame)
 	 * \param srclvl pointer to particle generator level
 	 * \note This method uses pointers to externally defined position and
-	 *   direction variables which may be modified by orbiter during the
+	 *   direction variables which may be modified by spacexpanse during the
 	 *   lifetime of the particle stream.
 	 */
 	void Attach (OBJHANDLE hObj, const VECTOR3 *ppos, const VECTOR3 *pdir, const double *srclvl);

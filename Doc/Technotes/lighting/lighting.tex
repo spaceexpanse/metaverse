@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Object lighting}
+\title{SpaceXpanse Technical Notes: Object lighting}
 \author{Martin Schweiger}
 \date{January 26, 2006}
 
@@ -24,7 +24,7 @@
 \maketitle
 
 \section{Introduction}
-This note contains some implementation details of lighting objects such as spacecraft or buildings on planet surfaces in Orbiter.
+This note contains some implementation details of lighting objects such as spacecraft or buildings on planet surfaces in SpaceXpanse.
 
 \section{Planetary shadows}
 Planets and moons cast shadows into space away from the central sun. An object entering that shadow (such as an orbiting spacecraft, or a surface building moving across the planet's terminator) need to modify their lighting parameters to simulate this. In general, the planet shadow reduces the direct (diffuse and specular) lighting component, $D_\text{RGB}$. If the planet also contains an atmosphere, this can lead to a spectral dispersion of the direct light distribution in the twilight zone (penumbra), as well as an increase in the ambient component, $A_\text{RGB}$, due to atmospheric scattering. In the following, subscript ``RGB'' denotes a colour value consisting of red, green and blue components.
@@ -93,7 +93,7 @@ D_\text{RGB}^{(\text{2b})} = (f,f,f)
 \text{and}\; f = 1-\frac{1-f_0}{2} (1+\frac{\alpha_s-\theta}{\alpha_p})
 \end{array}
 \end{equation}
-Note that for large distances the effect of the planet disc becomes insignificant. Orbiter disregards shadowing at distances where $\alpha_p/\alpha_s < 0.1$.
+Note that for large distances the effect of the planet disc becomes insignificant. SpaceXpanse disregards shadowing at distances where $\alpha_p/\alpha_s < 0.1$.
 
 \subsection{Planets with atmospheric layer}
 In the presence of an atmosphere, additional effects such as spectral filtering of the direct component and ambient in-scattering must be taken into account.
@@ -101,7 +101,7 @@ At high altitudes $h=p-a_p$, we can describe the atmospheric layer as an increas
 \begin{equation}\label{eq:altmod1}
 \alpha_p' = \alpha_p \frac{h_0 + a_p}{a_p},\qquad (h > h_0)
 \end{equation}
-where $h_0$ is the effective thickness of the atmospheric layer (in Orbiter given by the AtmAlt parameter).
+where $h_0$ is the effective thickness of the atmospheric layer (in SpaceXpanse given by the AtmAlt parameter).
 At low altitudes, when the object is already within the atmosphere, this value is no longer adequate. We simply assume that at ground level the atmosphere affects the lighting parameters up to an elevation $\gamma$ of the sun of $\gamma_0=10$\,deg. above the horizon, and interpolate to the actual altitude:
 \begin{equation}\label{eq:altmod2}
 \alpha_p' \leftarrow \alpha_p' \frac{\alpha_0}{\alpha_p'+\frac{h}{h_0}(\alpha_0-\alpha_p')},\qquad (0 \leq h \leq h_0)
@@ -139,7 +139,7 @@ At distances beyond the totality zone atmospheric effects are considered negligi
 \subsubsection{Ambient lighting}
 In addition to changes to the direct light parameters, the atmosphere can also affect the ambient level due to atmospheric scattering, thereby increasing ambient light parameters during daytime.
 
-Ambient lighting is considered to be affected when the sun's horizon elevation, $\gamma = \phi-\alpha_p$, is higher than a threshold level $\gamma_0$. In Orbiter, $\gamma_0 = -14$\,deg. universally. Ambient lighting is considered fully saturated for $\gamma > \gamma_1$ where $\gamma_1$ is another threshold value. In Orbiter, $\gamma_1 = +6$\,deg. universally.
+Ambient lighting is considered to be affected when the sun's horizon elevation, $\gamma = \phi-\alpha_p$, is higher than a threshold level $\gamma_0$. In SpaceXpanse, $\gamma_0 = -14$\,deg. universally. Ambient lighting is considered fully saturated for $\gamma > \gamma_1$ where $\gamma_1$ is another threshold value. In SpaceXpanse, $\gamma_1 = +6$\,deg. universally.
 
 The following ad-hoc formula is used to determine the ambient level $A$ as a functioion of atmospheric density at zero altitude, $\rho_0$:
 \begin{equation}
@@ -149,7 +149,7 @@ A_0 = 0.45 \ln(\rho_0+1), & \text{bounded at}\; A_0 \leq 0.7.\\
 A = \frac{f A_0}{h/h_0 +1} &
 \end{array}
 \end{equation}
-where $h$ is the altitude of the object, and $h_0$ is a reference altitude. In Orbiter, $h_0 = 2\cdot10^4$\,m universally. Thus, atmospheric effects are inversely proportional to altitude. Furthermore, ambient effects are not considered if $h$ is above the effective atmospheric layer defined by the AtmAlt parameter.
+where $h$ is the altitude of the object, and $h_0$ is a reference altitude. In SpaceXpanse, $h_0 = 2\cdot10^4$\,m universally. Thus, atmospheric effects are inversely proportional to altitude. Furthermore, ambient effects are not considered if $h$ is above the effective atmospheric layer defined by the AtmAlt parameter.
 
 Ambient lighting modifications are non-dispersive, i.e. affect all channels equally: $A_\text{RGB} = (A,A,A)$.
 

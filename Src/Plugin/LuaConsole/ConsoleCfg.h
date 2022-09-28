@@ -4,7 +4,7 @@
 #ifndef __CONSOLECFG_H
 #define __CONSOLECFG_H
 
-//#include "Orbitersdk.h"
+//#include "SpaceXpansesdk.h"
 #include "LuaConsole.h"
 
 class ConsoleConfig: public LaunchpadItem {

@@ -40,7 +40,7 @@ SATOBJ::SATOBJ (OBJHANDLE hObj, int is, double dt): CELBODY2 (hObj)
 	sample[ksat][0].t = sample[ksat][1].t = -1e20; // invalidate
 	pInterpT[ksat] = -1;                           // invalidate
 
-	// write some statistics to the orbiter log
+	// write some statistics to the spacexpanse log
 	oapiWriteLogV("SATSAT %s: Terms %d", satname[ksat], nterm(ksat));
 }
 
@@ -82,7 +82,7 @@ int SATOBJ::clbkFastEphemeris (double simt, int req, double *ret)
 
 // -----------------------------------------------------------
 // SatEphem:
-// Interface to TASS1.7 function posired. Maps results to Orbiter
+// Interface to TASS1.7 function posired. Maps results to SpaceXpanse
 // coordinates and units
 // -----------------------------------------------------------
 
@@ -100,7 +100,7 @@ void SatEphem (int ksat, double mjd, double *ret)
 
 		posired (mjd+2400000.5, ksat, r, r+3);
 
-		// map from default to orbiter frame of reference: xyz -> xzy
+		// map from default to spacexpanse frame of reference: xyz -> xzy
 		// and change units from AU and AU/year to m and m/s
 
 		static const double AU = 299792458.0 * 499.004783806;

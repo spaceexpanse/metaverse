@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Planetary axis precession}
+\title{SpaceXpanse Technical Notes: Planetary axis precession}
 \author{Martin Schweiger}
 \date{July 19, 2010}
 
@@ -30,11 +30,11 @@
 \maketitle
 
 \section{Introduction}
-This document describes the implementation of planetary axis precession in Orbiter.
+This document describes the implementation of planetary axis precession in SpaceXpanse.
 
 \section{Definitions}
 The rotation axis of a celestial body is assumed to rotate around a \emph{precession reference axis} at constant obliquity angle and constant angular velocity. Currently, the orientation of the reference axis (OP) is considered time-invariant and is defined with respect to the ecliptic and equinox of J2000 (see Fig.~\ref{fig:prec_ref}). The axis orientation is defined by the obliquity $\varepsilon_\mathrm{ref}$ (the angle between the axis and the ecliptic north pole, $N$) and the angle from the vernal equinox  $\vernal$ to the ascending node of the ecliptic with respect to the body equator, $L_\mathrm{ref}$.
-In Orbiter's left-handed system, $\vernal$ is defined as (1,0,0), and $N$ is defined as (0,1,0). The rotation matrix $\mat{R}_\mathrm{ref}$ for transforming from ecliptic to precession reference frame is then given by
+In SpaceXpanse's left-handed system, $\vernal$ is defined as (1,0,0), and $N$ is defined as (0,1,0). The rotation matrix $\mat{R}_\mathrm{ref}$ for transforming from ecliptic to precession reference frame is then given by
 \begin{equation}
 \mat{R}_\mathrm{ref} = \left( \begin{array}{ccc}
 \cos L_\mathrm{ref} & 0 & -\sin L_\mathrm{ref} \\
@@ -158,7 +158,7 @@ where
 \end{array} \right).
 \end{equation}
 
-\section{Orbiter interface}
+\section{SpaceXpanse interface}
 \subsection{Configuration}
 The precession and rotation parameters supported in planet configuration files are listed in Table~\ref{tab:param}.
 The following default assumptions apply:

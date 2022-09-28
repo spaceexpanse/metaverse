@@ -218,7 +218,7 @@ void Dragonfly::LoadState (FILEHANDLE scn, void *vs)
 			//sscanf (line+5, "%f %i", &dock_latched, &latch_handle);
         } else {
             ParseScenarioLineEx (line, vs);
-			// unrecognised option - pass to Orbiter's generic parser
+			// unrecognised option - pass to SpaceXpanse's generic parser
         }
     }
 
@@ -281,7 +281,7 @@ void Dragonfly::MoveCGOfs (int dir)
 		cgofs = min (22.2, cgofs + oapiGetSysStep() * 0.5);
 	}
 };
-void Dragonfly::DeleteAutoRCS() //this removes normal control of Orbiter over RCS
+void Dragonfly::DeleteAutoRCS() //this removes normal control of SpaceXpanse over RCS
 {
   DelThrusterGroup(THGROUP_ATT_PITCHUP);
   DelThrusterGroup(THGROUP_ATT_PITCHDOWN);
@@ -760,7 +760,7 @@ else
 //*******************************  THIS TAKES CARE OF AUTOMATIC GC MANAGEMENT...
 	if (!cgmode) // auto
 		cgofs = (GetSuperstructureCG (cg) ? cg.z : 0.0);
-	if (Manual_RCS==0) { //auto mode we use normal Orbiter channels
+	if (Manual_RCS==0) { //auto mode we use normal SpaceXpanse channels
 	if (cgofs) {
 		ratio = 2.0*cgofs/(cgofs+11.1); // counter-balance level
 

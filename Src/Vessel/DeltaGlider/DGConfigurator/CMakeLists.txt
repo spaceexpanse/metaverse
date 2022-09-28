@@ -18,8 +18,8 @@ target_link_libraries(DGConfigurator
 )
 
 add_dependencies(DGConfigurator
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(DGConfigurator

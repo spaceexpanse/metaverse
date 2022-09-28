@@ -268,7 +268,7 @@ RandomDefaultSoundGroupPreStep::MinMaxDelay ATCDefaultSoundGroupPreStep::GetMinM
         return RandomDefaultSoundGroupPreStep::MinMaxDelay(MAXINT, MAXINT);  // sounds will never play
 
     const VESSEL *pVessel = GetVessel();
-    if (pVessel)  // sanity check in case Orbiter deleted it out from under us as the other checks missed it
+    if (pVessel)  // sanity check in case SpaceXpanse deleted it out from under us as the other checks missed it
     {
         const double distInKm = GetVessel()->GetAltitude() / 1000.0;
         if (distInKm >= GetConfig().ATCDelayPlanetDistance)
@@ -606,7 +606,7 @@ void MusicDefaultSoundGroupPreStep::clbkPreStep(const double simt, const double 
     if (!HasFocus())
         return;
 
-    // To prevent intermittent music stuttering on Orbiter startup when Orbiter hangs for a full second, which starves the irrKLang engine, 
+    // To prevent intermittent music stuttering on SpaceXpanse startup when SpaceXpanse hangs for a full second, which starves the irrKLang engine, 
     // don't play any music until two seconds after simulation start.
     if (simt < 2.0)
     {

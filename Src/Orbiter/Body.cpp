@@ -7,7 +7,7 @@
 
 #include <string.h>
 #include <fstream>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Psys.h"
 #include "Body.h"
@@ -21,7 +21,7 @@ using namespace oapi;
 // =======================================================================
 // Externals
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern Camera *g_camera;        // observer camera
 extern PlanetarySystem *g_psys; // pointer to planetary system
@@ -46,10 +46,10 @@ Body::Body (double _mass, double _size)
 
 Body::Body(char* fname)
 {
-	char *cpath = g_pOrbiter->ConfigPath (fname);
+	char *cpath = g_pSpaceXpanse->ConfigPath (fname);
 
-	//g_pOrbiter->OutputLoadStatus (fname, 0);
-	g_pOrbiter->OutputLoadStatus (cpath, 1);
+	//g_pSpaceXpanse->OutputLoadStatus (fname, 0);
+	g_pSpaceXpanse->OutputLoadStatus (cpath, 1);
 
 	Setup ();
 	ifstream ifs (cpath);
@@ -118,7 +118,7 @@ void Body::SetName (char *_name)
 void Body::SetSize (double newsize)
 {
 	size = newsize;
-	g_pOrbiter->NotifyObjectSize (this);
+	g_pSpaceXpanse->NotifyObjectSize (this);
 }
 
 void Body::RPlace (const Vector &rpos, const Vector &rvel)
@@ -198,7 +198,7 @@ void Body::UnregisterVisual ()
 void Body::BroadcastVisMsg (DWORD msg, DWORD_PTR content)
 {
 	oapi::GraphicsClient *gc;
-	if (hVis && (gc = g_pOrbiter->GetGraphicsClient())) {
+	if (hVis && (gc = g_pSpaceXpanse->GetGraphicsClient())) {
 		gc->clbkVisEvent ((OBJHANDLE)this, hVis, msg, content);
 	}
 }

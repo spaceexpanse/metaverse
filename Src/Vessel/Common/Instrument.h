@@ -16,7 +16,7 @@
 #ifndef __INSTRUMENT_H
 #define __INSTRUMENT_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include <vector>
 
 class VESSEL3;
@@ -253,7 +253,7 @@ public:
 
 	/**
 	 * \brief Allow a subsystem to respond to a key down/up event
-	 * \param key key scan code (see OAPI_KEY_* constants in OrbiterAPI.h)
+	 * \param key key scan code (see OAPI_KEY_* constants in SpaceXpanseAPI.h)
 	 * \param down true if key was pressed, false if key was released
 	 * \param kstate current keyboard state
 	 * \return The function should return 1 if the subsystem handles the event and

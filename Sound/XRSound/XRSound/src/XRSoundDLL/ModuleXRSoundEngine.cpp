@@ -1,5 +1,5 @@
 // ==============================================================
-// XRSound engine class bound to an Orbiter module (i.e., to a unique ID).
+// XRSound engine class bound to an SpaceXpanse module (i.e., to a unique ID).
 // 
 // Copyright (c) 2018-2021 Douglas Beachy
 // Licensed under the MIT License

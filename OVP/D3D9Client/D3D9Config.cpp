@@ -7,7 +7,7 @@
 // ==============================================================
 
 #include "D3D9Config.h"
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 static char *cfgfile = "D3D9Client.cfg";
 

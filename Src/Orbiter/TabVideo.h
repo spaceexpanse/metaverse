@@ -11,7 +11,7 @@
 
 #include "LpadTab.h"
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class DefVideoTab : public LaunchpadTab {
 	public:
@@ -36,7 +36,7 @@ namespace orbiter {
 		void EnumerateClients(HWND hTab);
 
 		void ScanDir(HWND hTab, const PSTR dir);
-		// scan directory dir (relative to Orbiter root) for graphics clients
+		// scan directory dir (relative to SpaceXpanse root) for graphics clients
 		// and enter them in the combo box
 
 		void SelectClientIndex(UINT idx);

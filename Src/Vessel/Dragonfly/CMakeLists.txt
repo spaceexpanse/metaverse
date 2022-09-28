@@ -37,8 +37,8 @@ target_link_libraries(Dragonfly
 )
 
 add_dependencies(Dragonfly
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 add_custom_command(

@@ -1,12 +1,12 @@
-# Lua Script Interface for Orbiter
+# Lua Script Interface for SpaceXpanse
 
 @lookup intro.md
 
-Orbiter contains a script interpreter module which allows to control a variety of simulation tasks with the help of scripts. Script applications include autopilots, MFD control, interactive tutorials, mission control, and many others.
+SpaceXpanse contains a script interpreter module which allows to control a variety of simulation tasks with the help of scripts. Script applications include autopilots, MFD control, interactive tutorials, mission control, and many others.
 
-The Orbiter script engine uses the Lua scripting language ([www.lua.org](http://www.lua.org)). A large number of functions and methods have been added to the standard Lua command set to provide an interface to the Orbiter simulation environment. To a large extent the Lua-Orbiter interface replicates the Orbiter C++ API interface.
+The SpaceXpanse script engine uses the Lua scripting language ([www.lua.org](http://www.lua.org)). A large number of functions and methods have been added to the standard Lua command set to provide an interface to the SpaceXpanse simulation environment. To a large extent the Lua-SpaceXpanse interface replicates the SpaceXpanse C++ API interface.
 
-This manual describes the Orbiter extensions to Lua. It is not a general introduction to Lua. To learn how to write Lua scripts, please consult the documentation and resources available on the Lua website.
+This manual describes the SpaceXpanse extensions to Lua. It is not a general introduction to Lua. To learn how to write Lua scripts, please consult the documentation and resources available on the Lua website.
 
 ## Invoking the interpreter
 
@@ -45,7 +45,7 @@ The interpreters remain active when the MFD is closed. This means that a script 
 
 ### Automatic script processing
 
-It is possible to associate a Lua script with a scenario so that it is invoked automatically (using Orbiter's built-in script interpreter) when the scenario is launched. No additional modules need to be activated for this.
+It is possible to associate a Lua script with a scenario so that it is invoked automatically (using SpaceXpanse's built-in script interpreter) when the scenario is launched. No additional modules need to be activated for this.
 
 To associate a script with a scenario, add the line 
 
@@ -67,7 +67,7 @@ To load and execute a script, use the run command:
 
 	run(script) 
 
-where _script_ is the script file name (with optional path). The script file extension '.lua' is assumed and should not be included in the call parameter. The default script path is the Script subdirectory below the Orbiter main directory. All paths specified in the call to run are relative to this directory. Therefore, 
+where _script_ is the script file name (with optional path). The script file extension '.lua' is assumed and should not be included in the call parameter. The default script path is the Script subdirectory below the SpaceXpanse main directory. All paths specified in the call to run are relative to this directory. Therefore, 
 
 	run('myscripts/demo')
 	

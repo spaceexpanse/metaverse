@@ -10,7 +10,7 @@ of gravity gradient torque.</p>
 <p>Try killing the angular velocity of the spinning rocket (using the Scenario
 Editor) and see what happens.</p>
 <p>This scenario requires gravity gradient torque enabled in the "Parameters" tab
-of the Orbiter Launchpad.</p>
+of the SpaceXpanse Launchpad.</p>
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT

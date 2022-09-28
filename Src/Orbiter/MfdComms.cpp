@@ -5,7 +5,7 @@
 #include "Nav.h"
 #include <stdio.h>
 #include <dinput.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
 using namespace std;
 

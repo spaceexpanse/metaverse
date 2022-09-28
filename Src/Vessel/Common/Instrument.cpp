@@ -11,7 +11,7 @@
 // ==============================================================
 
 #include "Instrument.h"
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 PanelElement::PanelElement (VESSEL3 *v)
 {

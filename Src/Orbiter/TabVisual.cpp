@@ -13,21 +13,21 @@
 
 //-----------------------------------------------------------------------------
 
-orbiter::VisualTab::VisualTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::VisualTab::VisualTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 	ncsphere_img = 0;
 }
 
 //-----------------------------------------------------------------------------
 
-orbiter::VisualTab::~VisualTab ()
+spacexpanse::VisualTab::~VisualTab ()
 {
 	EmptyCSphereList();
 }
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::Create ()
+void spacexpanse::VisualTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_VIS);
 
@@ -47,7 +47,7 @@ void orbiter::VisualTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::GetConfig (const Config *cfg)
+void spacexpanse::VisualTab::GetConfig (const Config *cfg)
 {
 	char cbuf[256];
 
@@ -117,7 +117,7 @@ void orbiter::VisualTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::SetConfig (Config *cfg)
+void spacexpanse::VisualTab::SetConfig (Config *cfg)
 {
 	DWORD i;
 	char cbuf[128];
@@ -160,7 +160,7 @@ void orbiter::VisualTab::SetConfig (Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::VisualTab::OpenHelp ()
+bool spacexpanse::VisualTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_visual");
 	return true;
@@ -168,7 +168,7 @@ bool orbiter::VisualTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::VisualTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::VisualTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_COMMAND:
@@ -188,7 +188,7 @@ INT_PTR orbiter::VisualTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::VisualsChanged ()
+void spacexpanse::VisualTab::VisualsChanged ()
 {
 	EnableWindow (GetDlgItem (hTab, IDC_VIS_CSHADOW),
 		SendDlgItemMessage (hTab, IDC_VIS_CLOUD, BM_GETCHECK, 0, 0) == BST_CHECKED);
@@ -198,7 +198,7 @@ void orbiter::VisualTab::VisualsChanged ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::EmptyCSphereList ()
+void spacexpanse::VisualTab::EmptyCSphereList ()
 {
 	if (ncsphere_img) {
 		for (int i = 0; i < ncsphere_img; i++) {
@@ -213,7 +213,7 @@ void orbiter::VisualTab::EmptyCSphereList ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::VisualTab::AddCSphereList (const char *c)
+void spacexpanse::VisualTab::AddCSphereList (const char *c)
 {
 	int len = strlen(c);
 	char **tmp = new char*[ncsphere_img+1];

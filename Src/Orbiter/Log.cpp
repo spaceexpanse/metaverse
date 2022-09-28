@@ -9,14 +9,14 @@
 #include <dx7\dplay.h>
 #include <dinput.h>
 #include "Log.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
 using namespace std;
 
 extern char DBG_MSG[256];
 extern TimeData td;
 
-static char logname[256] = "Orbiter.log";
+static char logname[256] = "SpaceXpanse.log";
 static char logs[256] = "";
 static bool finelog = false;
 static DWORD t0 = 0;
@@ -365,7 +365,7 @@ void LogOut_Obsolete(char* func, char* msg)
 	else {
 		LogOut("At least one active module is accessing an obsolete interface function.");
 		LogOut("Addons which rely on obsolete functions may not be compatible with");
-		LogOut("future versions of Orbiter.");
+		LogOut("future versions of SpaceXpanse.");
 	}
 	LogOut_Warning_End();
 }

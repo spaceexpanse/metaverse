@@ -4,7 +4,7 @@
 #include "cloudmgr2.h"
 #include "surfmgr2.h"
 #include "tilelabel.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "VPlanet.h"
 #include "Camera.h"
 #include "Scene.h"
@@ -15,7 +15,7 @@
 
 // -----------------------------------------------------------------------
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 extern DWORD g_vtxcount;
@@ -161,7 +161,7 @@ void SurfTile::Load ()
 	}
 
 	static const DWORD label_enable = PLN_ENABLE|PLN_LMARK;
-	if ((g_pOrbiter->Cfg()->CfgVisHelpPrm.flagPlanetarium & label_enable) == label_enable)
+	if ((g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagPlanetarium & label_enable) == label_enable)
 		CreateLabels();
 }
 
@@ -936,7 +936,7 @@ void TileManager2<SurfTile>::Render (LPDIRECT3DDEVICE7 dev, MATRIX4 &dwmat, VPla
 		dev->SetTextureStageState (1, D3DTSS_COLOROP, D3DTOP_ADD);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG1, D3DTA_CURRENT);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG2, D3DTA_TFACTOR);
-		Vector bgc = g_pOrbiter->GetInlineGraphicsClient()->GetScene()->BGcol();
+		Vector bgc = g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->BGcol();
 		dev->SetRenderState (D3DRENDERSTATE_TEXTUREFACTOR, D3DRGBA(bgc.x, bgc.y, bgc.z, 1));
 		prm.tint = false; // the two effects are not currently compatible
 	}

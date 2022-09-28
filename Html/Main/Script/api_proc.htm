@@ -2,13 +2,13 @@
 <HTML>
 <HEAD>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS">
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS">
 <title>Script API: proc (Process control)</title>
 </HEAD>
 <BODY BGCOLOR=#FFFFFF TEXT=#000000>
 
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; proc</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; proc</p>
 
 <h1>proc: Script process control</h1>
 <p>The proc library contains functions to control the program flow of a script.
@@ -66,7 +66,7 @@ It is loaded automatically by every interpreter instance.</p>
 
 <div class="func">
 <h3><a name="proc_skip"></a>proc.skip()</h3>
-<p>Suspends script execution and returns control to the Orbiter core for executing the next time step. As soon as Orbiter has finished processing the next cycle, control is handed back to the script.</p>
+<p>Suspends script execution and returns control to the SpaceXpanse core for executing the next time step. As soon as SpaceXpanse has finished processing the next cycle, control is handed back to the script.</p>
 
 <h4>Notes:</h4>
 <p>This function must be called whenever a script is running over an extended period of time. The skip function effectively allows the script to run alongside the simulation session.</p>
@@ -76,8 +76,8 @@ while focus:GetAltitude() < 100e3 do<br>
 &nbsp;&nbsp;proc.skip()<br>
 end
 </div>
-<p>Not invoking skip here would result in an infinite loop (provided that the vessel altitude was less than 100km on entry), because Orbiter would never have any opportunity to update the vessel state.</p>
-<p>If a script is running multiple program branches, all side branches as well as the main trunk must call proc.skip(). Calling proc.skip() in a side branch yields branch execution. Calling proc.skip() in the main trunk first resumes all side branches to allow them to execute their next cycle, then suspends the interpreter and hands control back to Orbiter for the next cycle.</p>
+<p>Not invoking skip here would result in an infinite loop (provided that the vessel altitude was less than 100km on entry), because SpaceXpanse would never have any opportunity to update the vessel state.</p>
+<p>If a script is running multiple program branches, all side branches as well as the main trunk must call proc.skip(). Calling proc.skip() in a side branch yields branch execution. Calling proc.skip() in the main trunk first resumes all side branches to allow them to execute their next cycle, then suspends the interpreter and hands control back to SpaceXpanse for the next cycle.</p>
 <p>Implemented as a script in oapi_init.lua.</p>
 
 <h4>See also:</h4>

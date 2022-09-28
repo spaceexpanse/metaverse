@@ -4,7 +4,7 @@
 #include <iostream>
 #include <set>
 #include "cmdline.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Launchpad.h"
 
 CommandLine::CommandLine(const PSTR cmdLine)
@@ -151,18 +151,18 @@ void CommandLine::ApplyOptions()
 
 
 
-orbiter::CommandLine::CommandLine(Orbiter* pOrbiter, const PSTR cmdLine)
+spacexpanse::CommandLine::CommandLine(SpaceXpanse* pSpaceXpanse, const PSTR cmdLine)
 	: ::CommandLine(cmdLine)
-	, m_pOrbiter(pOrbiter)
+	, m_pSpaceXpanse(pSpaceXpanse)
 {
-	CFG_CMDLINEPRM& cfg = m_pOrbiter->Cfg()->CfgCmdlinePrm;
+	CFG_CMDLINEPRM& cfg = m_pSpaceXpanse->Cfg()->CfgCmdlinePrm;
 	cfg.LoadPlugins.clear();
 
 	MapKeys();
 	ApplyOptions();
 }
 
-std::vector<::CommandLine::Key>& orbiter::CommandLine::KeyList() const
+std::vector<::CommandLine::Key>& spacexpanse::CommandLine::KeyList() const
 {
 	static std::vector<CommandLine::Key> keyList = {
 		{ KEY_HELP, "help", 'h', false},
@@ -180,12 +180,12 @@ std::vector<::CommandLine::Key>& orbiter::CommandLine::KeyList() const
 	return keyList;
 }
 
-void orbiter::CommandLine::ApplyOption(const Key* key, const std::string& value)
+void spacexpanse::CommandLine::ApplyOption(const Key* key, const std::string& value)
 {
 	int res;
 	size_t s;
 	double f;
-	CFG_CMDLINEPRM& cfg = m_pOrbiter->Cfg()->CfgCmdlinePrm;
+	CFG_CMDLINEPRM& cfg = m_pSpaceXpanse->Cfg()->CfgCmdlinePrm;
 
 	switch (key->id) {
 	case KEY_HELP:
@@ -233,20 +233,20 @@ void orbiter::CommandLine::ApplyOption(const Key* key, const std::string& value)
 	}
 }
 
-void orbiter::CommandLine::PrintHelpAndExit() const
+void spacexpanse::CommandLine::PrintHelpAndExit() const
 {
 	// Get console output
 	if (AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole()) {
 		freopen("CONOUT$", "w", stdout);
 	}
 
-	std::cout << "\nOrbiter Space Flight Simulator" << std::endl;
-	std::cout << "orbiter.exe [options]\n\n";
+	std::cout << "\nSpaceXpanse Space Flight Simulator" << std::endl;
+	std::cout << "spacexpanse.exe [options]\n\n";
 	std::cout << "Options:\n";
 	std::cout << "  --help, -h: Print this help page and exit.\n";
 	std::cout << "  --scenario=<scn>, -S <scn>: Launch scenario <scn>\n";
 	std::cout << "  --scenariox=<scn>, -s <scn>: Launch scenario <scn>, exit on close\n";
-	std::cout << "  --fastexit, -x: Exit Orbiter after simulation session\n";
+	std::cout << "  --fastexit, -x: Exit SpaceXpanse after simulation session\n";
 	std::cout << "  --openvideotab, -v: Open Launchpad on video tab\n";
 	std::cout << "  --keeplog, -l: Append log to previous session\n";
 	std::cout << "  --fixedstep=<s>, -f <s>: Enforce fixed time step length (seconds)\n";
@@ -259,8 +259,8 @@ void orbiter::CommandLine::PrintHelpAndExit() const
 	exit(0);
 }
 
-orbiter::CommandLine& orbiter::CommandLine::InstanceImpl(Orbiter* pOrbiter, const PSTR cmdLine)
+spacexpanse::CommandLine& spacexpanse::CommandLine::InstanceImpl(SpaceXpanse* pSpaceXpanse, const PSTR cmdLine)
 {
-	static orbiter::CommandLine instance{ pOrbiter, cmdLine };
+	static spacexpanse::CommandLine instance{ pSpaceXpanse, cmdLine };
 	return instance;
 }

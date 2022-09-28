@@ -12,7 +12,7 @@
 
 class VideoTab {
 public:
-	VideoTab(oapi::D3D9Client *gc, HINSTANCE _hInst, HINSTANCE _hOrbiterInst, HWND hVideoTab);
+	VideoTab(oapi::D3D9Client *gc, HINSTANCE _hInst, HINSTANCE _hSpaceXpanseInst, HWND hVideoTab);
 	~VideoTab();
 
 	BOOL WndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -48,7 +48,7 @@ private:
 	void SaveSetupState(HWND hWnd);
 	
 	oapi::D3D9Client *gclient;
-	HINSTANCE hOrbiterInst; // orbiter instance handle
+	HINSTANCE hSpaceXpanseInst; // spacexpanse instance handle
 	HINSTANCE hInst;        // module instance handle
 	HWND hTab;              // window handle of the video tab
 	int aspect_idx;

@@ -40,7 +40,7 @@
 //     can add their own components)
 // =======================================================================
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Rigidbody.h"
 #include "Element.h"
 #include "Log.h"

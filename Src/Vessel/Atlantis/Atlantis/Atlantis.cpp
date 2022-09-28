@@ -97,7 +97,7 @@ Atlantis::Atlantis (OBJHANDLE hObj, int fmodel)
 	ph_oms  = CreatePropellantResource (ORBITER_MAX_PROPELLANT_MASS); // OMS propellant
 	SetDefaultPropellantResource (ph_oms); // display OMS tank level in generic HUD
 
-	// Orbiter engines	
+	// SpaceXpanse engines	
 	CreateSSME(); // main thrusters
 	CreateOMS();  // OMS thrusters (activated only after tank separation)
 	CreateRCS();  // Reaction control system (activated only after tank separation)
@@ -165,18 +165,18 @@ Atlantis::~Atlantis ()
 void Atlantis::LoadMeshes()
 {
 	// Retrieve mesh handles
-	hOrbiterMesh        = oapiLoadMeshGlobal ("Atlantis\\Atlantis");
-	hOrbiterCockpitMesh = oapiLoadMeshGlobal ("Atlantis\\AtlantisCockpit");
-	hOrbiterVCMesh      = oapiLoadMeshGlobal ("Atlantis\\AtlantisVC");
+	hSpaceXpanseMesh        = oapiLoadMeshGlobal ("Atlantis\\Atlantis");
+	hSpaceXpanseCockpitMesh = oapiLoadMeshGlobal ("Atlantis\\AtlantisCockpit");
+	hSpaceXpanseVCMesh      = oapiLoadMeshGlobal ("Atlantis\\AtlantisVC");
 
 	// Load meshes
-	mesh_cockpit = AddMesh (hOrbiterCockpitMesh);
+	mesh_cockpit = AddMesh (hSpaceXpanseCockpitMesh);
 	SetMeshVisibilityMode (mesh_cockpit, MESHVIS_EXTERNAL);
 
-	mesh_orbiter = AddMesh (hOrbiterMesh);
-	SetMeshVisibilityMode (mesh_orbiter, MESHVIS_EXTERNAL|MESHVIS_VC|MESHVIS_EXTPASS);
+	mesh_spacexpanse = AddMesh (hSpaceXpanseMesh);
+	SetMeshVisibilityMode (mesh_spacexpanse, MESHVIS_EXTERNAL|MESHVIS_VC|MESHVIS_EXTPASS);
 
-	mesh_vc = AddMesh (hOrbiterVCMesh);
+	mesh_vc = AddMesh (hSpaceXpanseVCMesh);
 	SetMeshVisibilityMode (mesh_vc, MESHVIS_VC);
 
 	// Optonal meshes
@@ -722,7 +722,7 @@ void Atlantis::SeparateBoosters (double met)
 }
 
 // --------------------------------------------------------------
-// Jettison ET from orbiter
+// Jettison ET from spacexpanse
 // --------------------------------------------------------------
 void Atlantis::SeparateTank ()
 {
@@ -1158,7 +1158,7 @@ void Atlantis::Jettison ()
 	}
 }
 
-// Update moving parts of the orbiter's visual: payload bay doors and gear
+// Update moving parts of the spacexpanse's visual: payload bay doors and gear
 // This should only be called when the visual exists, e.g. from within
 // clbkVisualCreated or clbkAnimate
 
@@ -1215,7 +1215,7 @@ void Atlantis::SetSSMEPosition (double pos)
 void Atlantis::OperateLandingGear (AnimState::Action action)
 {
 	if (status < 3) return;
-	// operate landing gear only once the orbiter is free from the tank
+	// operate landing gear only once the spacexpanse is free from the tank
 
 	if (action == AnimState::OPENING && GroundContact()) {
 		VECTOR3 nml = {0,1,0}, vnml;
@@ -1231,7 +1231,7 @@ void Atlantis::OperateLandingGear (AnimState::Action action)
 void Atlantis::RevertLandingGear ()
 {
 	if (status < 3) return;
-	// operate landing gear only once the orbiter is free from the tank
+	// operate landing gear only once the spacexpanse is free from the tank
 
 	OperateLandingGear (gear_status == AnimState::CLOSED || gear_status == AnimState::CLOSING ?
 		AnimState::OPENING : AnimState::CLOSING);
@@ -1370,7 +1370,7 @@ void Atlantis::clbkLoadStateEx (FILEHANDLE scn, void *vs)
         } else {
 			if      (plop->ParseScenarioLine (line)) continue;  // offer the line to bay door operations
 			else if (ascap->ParseScenarioLine (line)) continue; // offer to ascent autopilot
-            else    ParseScenarioLineEx (line, vs);             // unrecognised option - pass to Orbiter's generic parser
+            else    ParseScenarioLineEx (line, vs);             // unrecognised option - pass to SpaceXpanse's generic parser
         }
     }
 	if (status == 0) {
@@ -1588,14 +1588,14 @@ void Atlantis::clbkPreStep (double simt, double simdt, double mjd)
 			AutoGimbal (tgt_rate);
 		}
 		break;
-	case 2: // Orbiter+ET configuration
+	case 2: // SpaceXpanse+ET configuration
 		AutoGimbal (tgt_rate);
 		if (pET && (/*pET->GetMainPropellantMass () < 10.0 ||*/ bManualSeparate)) {
 			SeparateTank ();
 			bManualSeparate = false;
 		}
 		break;
-	case 3: // Orbiter
+	case 3: // SpaceXpanse
 		if (ascap->Active())
 			AutoRCS (tgt_rate);
 
@@ -1910,7 +1910,7 @@ void Atlantis::RegisterVC_CntMFD ()
 void Atlantis::RegisterVC_AftMFD ()
 {
 	// register+activate aft MFD function buttons
-	SURFHANDLE tex1 = oapiGetTextureHandle (hOrbiterVCMesh, 7);
+	SURFHANDLE tex1 = oapiGetTextureHandle (hSpaceXpanseVCMesh, 7);
 	oapiVCRegisterArea (AID_MFDA_BUTTONS, _R(0,127,255,140), PANEL_REDRAW_USER, PANEL_MOUSE_LBDOWN|PANEL_MOUSE_LBUP|PANEL_MOUSE_LBPRESSED|PANEL_MOUSE_ONREPLAY, PANEL_MAP_BACKGROUND, tex1);
 	oapiVCSetAreaClickmode_Quadrilateral (AID_MFDA_BUTTONS, _V(1.3862,2.2570,13.8686), _V(1.3862,2.2570,13.6894), _V(1.3678,2.2452,13.8686), _V(1.3678,2.2452,13.6894));
 
@@ -1956,7 +1956,7 @@ bool Atlantis::clbkLoadVC (int id)
 
 	// register MFD function buttons
 	// this needs to be done globally, so that the labels are correctly updated from all VC positions
-	SURFHANDLE tex1 = oapiGetTextureHandle (hOrbiterVCMesh, 7);
+	SURFHANDLE tex1 = oapiGetTextureHandle (hSpaceXpanseVCMesh, 7);
 
 	// commander MFD function buttons
 	oapiVCRegisterArea (AID_CDR1_BUTTONS, _R(0,1,255,14), PANEL_REDRAW_USER, PANEL_MOUSE_LBDOWN|PANEL_MOUSE_LBUP|PANEL_MOUSE_LBPRESSED|PANEL_MOUSE_ONREPLAY, PANEL_MAP_BACKGROUND, tex1);
@@ -2185,7 +2185,7 @@ int Atlantis::clbkConsumeBufferedKey (DWORD key, bool down, char *kstate)
 
 		switch (key) {
 		case OAPI_KEY_E:
-			if (status != 3) return 1; // Allow MMU only after orbiter has detached from MT
+			if (status != 3) return 1; // Allow MMU only after spacexpanse has detached from MT
 			return 1;
 		}	
 	} else if (KEYMOD_CONTROL (kstate)) {

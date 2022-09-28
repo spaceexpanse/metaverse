@@ -10,10 +10,10 @@
 #define __TABEXTRA_H
 
 #include "LpadTab.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CustomControls.h"
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class ExtraTab : public LaunchpadTab {
 		friend class LaunchpadDialog;
@@ -55,7 +55,7 @@ namespace orbiter {
 
 		void WriteExtraParams();
 		// allow all externally registered "Extra" items to write their data to file
-		// (internal "extra" items use the Config class to write to Orbiter.cfg)
+		// (internal "extra" items use the Config class to write to SpaceXpanse.cfg)
 
 	private:
 		std::vector<LaunchpadItem*> m_ExtPrm; // list of parameter items on "Extra" list
@@ -76,13 +76,13 @@ namespace orbiter {
 
 class BuiltinLaunchpadItem: public LaunchpadItem {
 public:
-	BuiltinLaunchpadItem (const orbiter::ExtraTab *tab);
+	BuiltinLaunchpadItem (const spacexpanse::ExtraTab *tab);
 	bool OpenDialog (HWND hParent, int resid, DLGPROC pDlg);
 	static INT_PTR CALLBACK DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 protected:
 	void Error (const char *msg);
-	const orbiter::ExtraTab *pTab;
+	const spacexpanse::ExtraTab *pTab;
 };
 
 //=============================================================================
@@ -91,7 +91,7 @@ protected:
 
 class ExtraPropagation: public BuiltinLaunchpadItem {
 public:
-	ExtraPropagation (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraPropagation (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 };
@@ -102,7 +102,7 @@ public:
 
 class ExtraDynamics: public BuiltinLaunchpadItem {
 public:
-	ExtraDynamics (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraDynamics (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -148,7 +148,7 @@ private:
 
 class ExtraStabilisation: public BuiltinLaunchpadItem {
 public:
-	ExtraStabilisation (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraStabilisation (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -170,7 +170,7 @@ private:
 
 class ExtraInstruments: public BuiltinLaunchpadItem {
 public:
-	ExtraInstruments (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraInstruments (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 };
@@ -181,7 +181,7 @@ public:
 
 class ExtraMfdConfig: public BuiltinLaunchpadItem {
 public:
-	ExtraMfdConfig (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraMfdConfig (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -203,7 +203,7 @@ private:
 
 class ExtraVesselConfig: public BuiltinLaunchpadItem {
 public:
-	ExtraVesselConfig (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraVesselConfig (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 };
@@ -214,7 +214,7 @@ public:
 
 class ExtraPlanetConfig: public BuiltinLaunchpadItem {
 public:
-	ExtraPlanetConfig (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraPlanetConfig (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 };
@@ -225,7 +225,7 @@ public:
 
 class ExtraDebug: public BuiltinLaunchpadItem {
 public:
-	ExtraDebug (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraDebug (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 };
@@ -236,7 +236,7 @@ public:
 
 class ExtraShutdown: public BuiltinLaunchpadItem {
 public:
-	ExtraShutdown (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraShutdown (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -256,7 +256,7 @@ private:
 
 class ExtraFixedStep: public BuiltinLaunchpadItem {
 public:
-	ExtraFixedStep (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraFixedStep (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -277,7 +277,7 @@ private:
 
 class ExtraRenderingOptions: public BuiltinLaunchpadItem {
 public:
-	ExtraRenderingOptions (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraRenderingOptions (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -296,7 +296,7 @@ private:
 
 class ExtraTimerSettings: public BuiltinLaunchpadItem {
 public:
-	ExtraTimerSettings (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraTimerSettings (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -316,7 +316,7 @@ private:
 
 class ExtraPerformanceSettings: public BuiltinLaunchpadItem {
 public:
-	ExtraPerformanceSettings (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraPerformanceSettings (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -336,7 +336,7 @@ private:
 
 class ExtraLaunchpadOptions: public BuiltinLaunchpadItem {
 public:
-	ExtraLaunchpadOptions (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraLaunchpadOptions (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);
@@ -355,7 +355,7 @@ private:
 
 class ExtraLogfileOptions: public BuiltinLaunchpadItem {
 public:
-	ExtraLogfileOptions (const orbiter::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
+	ExtraLogfileOptions (const spacexpanse::ExtraTab *tab): BuiltinLaunchpadItem (tab) {}
 	char *Name ();
 	char *Description ();
 	bool clbkOpen (HWND hParent);

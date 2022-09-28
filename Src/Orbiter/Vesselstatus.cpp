@@ -6,7 +6,7 @@
 // concerned with VESSELCLASS interfaces
 // ==============================================================
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vessel.h"
 #include "Supervessel.h"
 #include "VVessel.h"
@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern PlanetarySystem *g_psys;
 extern char DBG_MSG[256];
@@ -177,7 +177,7 @@ bool Vessel::ParseScenarioLine2 (char *line, void *status)
 				char cerr[1024];
 				sprintf (cerr, "Scenario parse error for vessel %s: base '%s' not found on body '%s'.", name, trim_string(cbuf), ((Planet*)vs->rbody)->Name());
 				LOGOUT_ERR(cerr);
-				g_pOrbiter->TerminateOnError();
+				g_pSpaceXpanse->TerminateOnError();
 			}
 			vs->base = (OBJHANDLE)base;
 			if (pd = strtok (NULL, ":")) {
@@ -710,7 +710,7 @@ int Vessel::TouchdownPointsFromFile (const char *fname)
 	char line[512], *c;
 	strcpy (line, fname);
 	strcat (line, ".dat");
-	std::ifstream ifs (g_pOrbiter->Cfg()->ConfigPathNoext (line));
+	std::ifstream ifs (g_pSpaceXpanse->Cfg()->ConfigPathNoext (line));
 	if (!ifs.good()) return 1;
 
 	// parse the touchdown point specs

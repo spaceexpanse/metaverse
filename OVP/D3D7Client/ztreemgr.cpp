@@ -15,7 +15,7 @@
 // --------------------------------------------------------------
 
 #include "ztreemgr.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 // =======================================================================
 // File header for compressed tree files

@@ -10,8 +10,8 @@
 // D3D7Client.h
 // Class D3D7Client
 //
-// DX7 version of a graphics subsystem for Orbiter, derived from
-// the GraphicsClient class in the Orbiter API.
+// DX7 version of a graphics subsystem for SpaceXpanse, derived from
+// the GraphicsClient class in the SpaceXpanse API.
 // --------------------------------------------------------------
 
 #ifndef __D3D7CLIENT_H
@@ -57,7 +57,7 @@ namespace oapi {
 
 // ==============================================================
 // D3D7Client class interface
-/// The DX7 render client for Orbiter
+/// The DX7 render client for SpaceXpanse
 // ==============================================================
 
 class D3D7Client: public GDIClient {
@@ -72,7 +72,7 @@ public:
 	~D3D7Client ();
 
 	/**
-	 * \brief Message handler for 'video' tab in Orbiter Launchpad dialog.
+	 * \brief Message handler for 'video' tab in SpaceXpanse Launchpad dialog.
 	 *
 	 * Passes the message on to the VideoTab::WndProc() method.
 	 * \param hWnd window handle for video tab
@@ -133,7 +133,7 @@ public:
 	 * \param context message context
 	 * \return Returns 1 if the event is recognised, 0 otherwise.
 	 * \note This callback method receives visual events (mesh addition/deletion, etc.)
-	 *   from the orbiter core and distributes them to the appropriate
+	 *   from the spacexpanse core and distributes them to the appropriate
 	 *   visual object.
 	 */
 	int clbkVisEvent (OBJHANDLE hObj, VISHANDLE vis, DWORD msg, DWORD_PTR context);
@@ -145,7 +145,7 @@ public:
 	 * \return Mesh handle (client-specific)
 	 * \note This method returns a handle that identifies a mesh for the
 	 *   visual (in client-specific format).
-	 * \note Orbiter calls this method in response to a \ref VESSEL::GetMesh
+	 * \note SpaceXpanse calls this method in response to a \ref VESSEL::GetMesh
 	 *   call by an vessel module.
 	 */
 	virtual MESHHANDLE clbkGetMesh (VISHANDLE vis, UINT idx);
@@ -685,8 +685,8 @@ private:
 /**
  * \brief Visual object representation.
  *
- * A VisObject is the visual representation of an Orbiter object (vessel,
- * planet, etc.). The 'logical' object representation resides in the Orbiter
+ * A VisObject is the visual representation of an SpaceXpanse object (vessel,
+ * planet, etc.). The 'logical' object representation resides in the SpaceXpanse
  * core, while its 'visual' representation is located in the graphics client.
  *
  * Visual representations should be non-permanent: they should be created
@@ -727,7 +727,7 @@ public:
 	 * \param event message identifier
 	 * \param context message content (message-specific)
 	 * \default None.
-	 * \note This method is called by the Orbiter core to notify the visual
+	 * \note This method is called by the SpaceXpanse core to notify the visual
 	 *   of certain events (e.g. adding and deleting meshes)
 	 * \note For currently supported event types, see \ref visevent.
 	 */

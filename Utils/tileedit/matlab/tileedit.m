@@ -164,7 +164,7 @@ prm.request(2) = get(handles.popupmenu2,'Value');
 prm.request(3) = get(handles.popupmenu3,'Value');
 
 function settilegui(handles,prm)
-set(handles.figure1,'Name',['Orbiter tileedit [' prm.texpath ']']);
+set(handles.figure1,'Name',['SpaceXpanse tileedit [' prm.texpath ']']);
 set(handles.edit2,'String',num2str(prm.res));
 set(handles.edit3,'String',num2str(prm.latidx));
 set(handles.edit4,'String',num2str(prm.lngidx));

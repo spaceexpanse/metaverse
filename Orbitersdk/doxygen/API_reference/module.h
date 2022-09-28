@@ -2,7 +2,7 @@
  * \defgroup module_clbk Top-level module callback functions
  *
  * This section contains a list of global nonmember callback functions
- * that can be defined by an addon module. Orbiter will call these functions
+ * that can be defined by an addon module. SpaceXpanse will call these functions
  * when specific events occur, e.g. a module is activated or deactivated,
  * a simulation session is opened or closed, etc.
  */
@@ -12,7 +12,7 @@
  * \defgroup general_clbk General module callback functions
  *
  * Module initialisation and exit notifications. The two callback functions
- * in this group are called by Orbiter when the module is loaded or unloaded,
+ * in this group are called by SpaceXpanse when the module is loaded or unloaded,
  * respecively. It is used for all module types (plugin and vessel modules).
  */
 //@{
@@ -20,10 +20,10 @@
 /**
  * \brief Module initialisation callback function
  * \param hModule module handle
- * \note This function is called by Orbiter when a module becomes active.
+ * \note This function is called by SpaceXpanse when a module becomes active.
  * \note For plugin modules, InitModule is called at program start for all
- *   modules in the <i>active module list</i> of orbiter.def, or whenever
- *   a user activates a module in the <i>Modules</i> tab of the Orbiter
+ *   modules in the <i>active module list</i> of spacexpanse.def, or whenever
+ *   a user activates a module in the <i>Modules</i> tab of the SpaceXpanse
  *   launchpad.
  * \note For vessel modules, InitModule is called whenever the first vessel
  *   of the corresponding type is created (usually at the start of a
@@ -31,18 +31,18 @@
  *   is created dynamically).
  * \note hModule is the module handle that identifies the addon DLL being
  *   initialised. It can be stored and used later, e.g. for loading resources
- *   from the module. To get the handle of the Orbiter core module, use
- *   \ref oapiGetOrbiterInstance.
+ *   from the module. To get the handle of the SpaceXpanse core module, use
+ *   \ref oapiGetSpaceXpanseInstance.
  */
 DLLCLBK void InitModule (HINSTANCE hModule);
 
 /**
  * \brief Module exit notification callback function
  * \param hModule module handle
- * \note This function is called by Orbiter when a module is deactivated.
+ * \note This function is called by SpaceXpanse when a module is deactivated.
  * \note For plugin modules, ExitModule is called at program shutdown for
  *   all active modules, or whenever a user deactivates a module in the
- *   <i>Modules</i> tab of the Orbiter launchpad.
+ *   <i>Modules</i> tab of the SpaceXpanse launchpad.
  * \note For vessel modules, ExitModule is called when a simulation session
  *   is closed for any vessel types active at that time, or during a session
  *   when the last vessel of this type is destroyed.
@@ -70,12 +70,12 @@ DLLCLBK void ExitModule (HINSTANCE hModule);
  * \param flightmodel flight model selection identifier
  * \return The function should return a pointer to the derived VESSEL
  *   instance it created.
- * \note This function is called by Orbiter whenever a vessel of the type
+ * \note This function is called by SpaceXpanse whenever a vessel of the type
  *   defined by the module is created at the beginning or during a simulation
  *   session.
  * \note The implementation should create an instance of a vessel class
  *   derived from VESSEL, VESSEL2 or VESSEL3 and return a pointer to it.
- * \note hvessel is a handle that identifies the vessel instance in Orbiter.
+ * \note hvessel is a handle that identifies the vessel instance in SpaceXpanse.
  * \note flightmodel identifies the realism level of the requested flight
  *   model. This value may be 0 (simple) or 1 (complex). Vessel implementation
  *   that support different flight models for easy/realistic setups can use
@@ -86,7 +86,7 @@ DLLCLBK VESSEL *ovcInit (OBJHANDLE hvessel, int flightmodel);
 /**
  * \brief Vessel deletion notification.
  * \param vessel pointer to vessel instance
- * \note This function is called by Orbiter whenever a vessel of the type
+ * \note This function is called by SpaceXpanse whenever a vessel of the type
  *   defined by the module is about to be destroyed at the end or during a
  *   simulation session.
  * \note The pointer passed to the function is the same as the one returned
@@ -103,7 +103,7 @@ DLLCLBK void ovcExit (VESSEL *vessel);
  *
  * The callback functions in this group are specific for \e plugin modules, i.e.
  * modules that can be activated or deactivated in the Modules tab of the
- * Orbiter Launchpad. They can not be used in vessel modules.
+ * SpaceXpanse Launchpad. They can not be used in vessel modules.
  *
  * Note that most of the top-level plugin callback functions (opcXXX) are
  * now obsolete and should no longer be used. Addon modules should instead
@@ -112,7 +112,7 @@ DLLCLBK void ovcExit (VESSEL *vessel);
  */
 //@{
 /**
- * \brief Called by Orbiter when a graphics-enabled simulation session is started.
+ * \brief Called by SpaceXpanse when a graphics-enabled simulation session is started.
  * \deprecated This function has been replaced by \ref oapi::Module::clbkSimulationStart.
  * \param hRenderWnd render window handle
  * \param width viewport width [pixel]
@@ -122,20 +122,20 @@ DLLCLBK void ovcExit (VESSEL *vessel);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkSimulationStart method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcOpenRenderViewport is called by Orbiter only if no instance of oapi::Module
+ * \note opcOpenRenderViewport is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkSimulationStart method.
  */
 DLLCLBK void opcOpenRenderViewport(HWND hRenderWnd, DWORD width, DWORD height, BOOL fullscreen);
 
 /**
- * \brief Called by Orbiter when a graphics-enabled simulation session is closed.
+ * \brief Called by SpaceXpanse when a graphics-enabled simulation session is closed.
  * \deprecated This function has been replaced by \ref oapi::Module::clbkSimulationEnd.
  * \note Plugins should no longer implement this function. Instead they should
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkSimulationEnd method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcCloseRenderViewport is called by Orbiter only if no instance of oapi::Module
+ * \note opcCloseRenderViewport is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkSimulationEnd method.
  */
@@ -157,7 +157,7 @@ DLLCLBK void opcCloseRenderViewport ();
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkPreStep method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcPreStep is called by Orbiter only if no instance of oapi::Module
+ * \note opcPreStep is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkPreStep method.
  */
@@ -176,7 +176,7 @@ DLLCLBK void opcPreStep (double simt, double simdt, double mjd);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkPostStep method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcPostStep is called by Orbiter only if no instance of oapi::Module
+ * \note opcPostStep is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkPostStep method.
  */
@@ -195,7 +195,7 @@ DLLCLBK void opcPostStep (double simt, double simdt, double mjd);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkFocusChanged method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcFocusChanged is called by Orbiter only if no instance of oapi::Module
+ * \note opcFocusChanged is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkFocusChanged method.
  */
@@ -212,7 +212,7 @@ DLLCLBK void opcFocusChanged (OBJHANDLE hGainsFocus, OBJHANDLE hLosesFocus);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkTimeAccChanged method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcTimeAccChanged is called by Orbiter only if no instance of oapi::Module
+ * \note opcTimeAccChanged is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkTimeAccChanged method.
  */
@@ -229,7 +229,7 @@ DLLCLBK void opcTimeAccChanged (double new_warp, double old_warp);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkPause method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcPause is called by Orbiter only if no instance of oapi::Module
+ * \note opcPause is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkPause method.
  */
@@ -248,7 +248,7 @@ DLLCLBK void opcPause (bool pause);
  *   create an instance of a class derived from oapi::Module during \ref InitModule
  *   that overloads the oapi::Module::clbkDeleteVessel method, and register it with
  *   \ref oapiRegisterModule.
- * \note opcDeleteVessel is called by Orbiter only if no instance of oapi::Module
+ * \note opcDeleteVessel is called by SpaceXpanse only if no instance of oapi::Module
  *   is created and registered during \ref InitModule, or if a registered module does
  *   not overload the oapi::Module::clbkDeleteVessel method.
  */

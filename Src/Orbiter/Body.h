@@ -9,7 +9,7 @@
 #ifndef __BODY_H
 #define __BODY_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "Config.h"
 
 class Elements;

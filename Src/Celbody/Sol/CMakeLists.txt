@@ -10,7 +10,7 @@ add_custom_command(
 add_custom_target(Sol
 	DEPENDS ${tgtlist}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	Sol
 )
 

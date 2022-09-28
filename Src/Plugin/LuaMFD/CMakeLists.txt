@@ -21,8 +21,8 @@ target_link_libraries(LuaMFD
 )
 
 add_dependencies(LuaMFD
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	LuaInterpreter
 )
 

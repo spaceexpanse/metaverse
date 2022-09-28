@@ -5,13 +5,13 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Select.h"
 #include "Util.h"
 #include "Log.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern char DBG_MSG[256];
 COLORREF titlecol   = RGB(255,255,255);
 COLORREF enablecol  = RGB(210,210,210);
@@ -50,9 +50,9 @@ void InlineDialog::GlobalInit (oapi::GraphicsClient *gclient)
 	draw.pen2 = gclient->clbkCreatePen (1, 0, 0xFFFFFF);
 	draw.brushMark = gclient->clbkCreateBrush (markcol);
 
-	DWORD viewH = g_pOrbiter->ViewH();
-	double scale = g_pOrbiter->Cfg()->CfgFontPrm.dlgFont_Scale;
-	char *face1 = g_pOrbiter->Cfg()->CfgFontPrm.dlgFont1_Face;
+	DWORD viewH = g_pSpaceXpanse->ViewH();
+	double scale = g_pSpaceXpanse->Cfg()->CfgFontPrm.dlgFont_Scale;
+	char *face1 = g_pSpaceXpanse->Cfg()->CfgFontPrm.dlgFont1_Face;
 
 	draw.fontH = (int)(viewH*0.02*scale);
 	if (draw.fontH < 8) draw.fontH = 8;
@@ -114,7 +114,7 @@ Select::~Select ()
 
 void Select::Activate ()
 {
-	DWORD viewW = g_pOrbiter->ViewW(), viewH = g_pOrbiter->ViewH();
+	DWORD viewW = g_pSpaceXpanse->ViewW(), viewH = g_pSpaceXpanse->ViewH();
 	int i, colh, itemh;
 	bool submenu = false;
 	DWORD textW;
@@ -173,7 +173,7 @@ void Select::Activate ()
 	// allocate and init surface
 	surf = gc->clbkCreateSurface (surfw, surfh);
 	RefreshSurface ();
-	SetFocus (g_pOrbiter->GetRenderWnd());
+	SetFocus (g_pSpaceXpanse->GetRenderWnd());
 }
 
 void Select::Open (char *_title, Callbk submenu_cbk, Callbk enter_cbk,
@@ -457,7 +457,7 @@ void SelectionList::Clear ()
 
 void SelectionList::AllocSurface ()
 {
-	DWORD viewW = g_pOrbiter->ViewW(), viewH = g_pOrbiter->ViewH();
+	DWORD viewW = g_pSpaceXpanse->ViewW(), viewH = g_pSpaceXpanse->ViewH();
 	int colh, itemh;
 	DWORD i, textw;
 	bool submenu = false;
@@ -628,7 +628,7 @@ void InputBox::InitBuffer (int _vislen, char *_buf)
 
 void InputBox::Activate (int cntx, int cnty)
 {
-	DWORD viewW = g_pOrbiter->ViewW(), viewH = g_pOrbiter->ViewH();
+	DWORD viewW = g_pSpaceXpanse->ViewW(), viewH = g_pSpaceXpanse->ViewH();
 	DWORD textW;
 	oapi::Sketchpad *skp = gc->clbkGetSketchpad (NULL);
 	if (skp) {
@@ -819,8 +819,8 @@ SURFHANDLE AllocSurface (oapi::GraphicsClient *gc, int w, int h)
 {
 	return gc->clbkCreateSurface (w, h);
 #ifdef INLINEGRAPHICS
-//	extern Orbiter* g_pOrbiter;
-//	LPDIRECTDRAW7 pDD = g_pOrbiter->GetInlineGraphicsClient()->GetDirectDraw();
+//	extern SpaceXpanse* g_pSpaceXpanse;
+//	LPDIRECTDRAW7 pDD = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirectDraw();
 //	DDSURFACEDESC2 ddsd;
 //	LPDIRECTDRAWSURFACE7 surf;
 //    ZeroMemory (&ddsd, sizeof(ddsd));

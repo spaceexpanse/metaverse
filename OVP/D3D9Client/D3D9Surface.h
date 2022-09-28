@@ -7,7 +7,7 @@
 #ifndef __D3DSURFACE_H
 #define __D3DSURFACE_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "D3D9Client.h"
 #include "D3D9Pad.h"
 #include "GDIPad.h"

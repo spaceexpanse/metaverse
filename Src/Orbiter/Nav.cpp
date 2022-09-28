@@ -11,7 +11,7 @@
 #include "Nav.h"
 #include "Planet.h"
 #include "Base.h"
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "Log.h"
 
 using namespace std;

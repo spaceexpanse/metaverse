@@ -13,26 +13,26 @@
 #include "Launchpad.h"
 #include "TabExtra.h"
 #include "ExtraRender.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Rigidbody.h"
 #include "Log.h"
 #include "Help.h"
 #include "resource.h"
 #include "resource2.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 
 //-----------------------------------------------------------------------------
 // ExtraTab class
 
-orbiter::ExtraTab::ExtraTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::ExtraTab::ExtraTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 	m_internalPrm = 0;
 }
 
 //-----------------------------------------------------------------------------
 
-orbiter::ExtraTab::~ExtraTab ()
+spacexpanse::ExtraTab::~ExtraTab ()
 {
 	// at this point, only the internally created entries should be left
 	// so they should be safe to delete
@@ -45,7 +45,7 @@ orbiter::ExtraTab::~ExtraTab ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ExtraTab::Create ()
+void spacexpanse::ExtraTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_EXT);
 
@@ -58,7 +58,7 @@ void orbiter::ExtraTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ExtraTab::GetConfig (const Config *cfg)
+void spacexpanse::ExtraTab::GetConfig (const Config *cfg)
 {
 	HTREEITEM ht;
 	ht = RegisterExtraParam(new ExtraPropagation(this), NULL); TRACENEW
@@ -89,14 +89,14 @@ void orbiter::ExtraTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ExtraTab::SetConfig (Config *cfg)
+void spacexpanse::ExtraTab::SetConfig (Config *cfg)
 {
 	cfg->CfgWindowPos.LaunchpadExtListWidth = splitListDesc.GetPaneWidth (SplitterCtrl::PANE1);
 }
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::ExtraTab::OpenHelp ()
+bool spacexpanse::ExtraTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_extra");
 	return true;
@@ -104,7 +104,7 @@ bool orbiter::ExtraTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::ExtraTab::Size (int w, int h)
+BOOL spacexpanse::ExtraTab::Size (int w, int h)
 {
 	int dw = w - (int)(pos0.right-pos0.left);
 	int dh = h - (int)(pos0.bottom-pos0.top);
@@ -139,7 +139,7 @@ BOOL orbiter::ExtraTab::Size (int w, int h)
 
 //-----------------------------------------------------------------------------
 
-HTREEITEM orbiter::ExtraTab::RegisterExtraParam (LaunchpadItem *item, HTREEITEM parent)
+HTREEITEM spacexpanse::ExtraTab::RegisterExtraParam (LaunchpadItem *item, HTREEITEM parent)
 {
 	// first check that the item doesn't already exist
 	HTREEITEM hti = FindExtraParam (item->Name(), parent);
@@ -165,7 +165,7 @@ HTREEITEM orbiter::ExtraTab::RegisterExtraParam (LaunchpadItem *item, HTREEITEM 
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::ExtraTab::UnregisterExtraParam (LaunchpadItem *item)
+bool spacexpanse::ExtraTab::UnregisterExtraParam (LaunchpadItem *item)
 {
 	for (auto it = m_ExtPrm.begin(); it != m_ExtPrm.end(); it++) {
 		if (*it == item) {
@@ -180,7 +180,7 @@ bool orbiter::ExtraTab::UnregisterExtraParam (LaunchpadItem *item)
 
 //-----------------------------------------------------------------------------
 
-HTREEITEM orbiter::ExtraTab::FindExtraParam (const char *name, const HTREEITEM parent)
+HTREEITEM spacexpanse::ExtraTab::FindExtraParam (const char *name, const HTREEITEM parent)
 {
 	HTREEITEM hti = FindExtraParamChild (parent);
 	if (!name) return hti; // no name given - return first child
@@ -204,7 +204,7 @@ HTREEITEM orbiter::ExtraTab::FindExtraParam (const char *name, const HTREEITEM p
 
 //-----------------------------------------------------------------------------
 
-HTREEITEM orbiter::ExtraTab::FindExtraParamChild (const HTREEITEM parent)
+HTREEITEM spacexpanse::ExtraTab::FindExtraParamChild (const HTREEITEM parent)
 {
 	HWND hCtrl = GetDlgItem (hTab, IDC_EXT_LIST);
 	if (parent) return TreeView_GetChild (hCtrl, parent);
@@ -213,7 +213,7 @@ HTREEITEM orbiter::ExtraTab::FindExtraParamChild (const HTREEITEM parent)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ExtraTab::WriteExtraParams ()
+void spacexpanse::ExtraTab::WriteExtraParams ()
 {
 	for (auto it = m_ExtPrm.begin(); it != m_ExtPrm.end(); it++)
 		(*it)->clbkWriteConfig();
@@ -221,7 +221,7 @@ void orbiter::ExtraTab::WriteExtraParams ()
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::ExtraTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::ExtraTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NM_TREEVIEW *pnmtv;
 
@@ -275,7 +275,7 @@ INT_PTR orbiter::ExtraTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 // Additional functions (under the "Extra" tab)
 //-----------------------------------------------------------------------------
 
-BuiltinLaunchpadItem::BuiltinLaunchpadItem (const orbiter::ExtraTab *tab): LaunchpadItem ()
+BuiltinLaunchpadItem::BuiltinLaunchpadItem (const spacexpanse::ExtraTab *tab): LaunchpadItem ()
 {
 	pTab = tab;
 }
@@ -287,7 +287,7 @@ bool BuiltinLaunchpadItem::OpenDialog (HWND hParent, int resid, DLGPROC pDlg)
 
 void BuiltinLaunchpadItem::Error (const char *msg)
 {
-	MessageBox (pTab->LaunchpadWnd(), msg, "Orbiter configuration error", MB_OK|MB_ICONERROR);
+	MessageBox (pTab->LaunchpadWnd(), msg, "SpaceXpanse configuration error", MB_OK|MB_ICONERROR);
 }
 
 INT_PTR CALLBACK BuiltinLaunchpadItem::DlgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -320,7 +320,7 @@ char *ExtraPropagation::Name ()
 
 char *ExtraPropagation::Description ()
 {
-	static char *desc = "Select and configure the time propagation methods Orbiter uses to update vessel positions and velocities from one time frame to the next.";
+	static char *desc = "Select and configure the time propagation methods SpaceXpanse uses to update vessel positions and velocities from one time frame to the next.";
 	return desc;
 }
 
@@ -766,7 +766,7 @@ char *ExtraStabilisation::Name ()
 
 char *ExtraStabilisation::Description ()
 {
-	static char *desc = "Select the parameters that determine the conditions when Orbiter switches between dynamic and stabilised state updates.";
+	static char *desc = "Select the parameters that determine the conditions when SpaceXpanse switches between dynamic and stabilised state updates.";
 	return desc;
 }
 
@@ -1069,12 +1069,12 @@ char *ExtraDebug::Description ()
 
 char *ExtraShutdown::Name ()
 {
-	return "Orbiter shutdown options";
+	return "SpaceXpanse shutdown options";
 }
 
 char *ExtraShutdown::Description ()
 {
-	static char *desc = "Set the behaviour of Orbiter after closing the simulation window: return to Launchpad, respawn or terminate.";
+	static char *desc = "Set the behaviour of SpaceXpanse after closing the simulation window: return to Launchpad, respawn or terminate.";
 	return desc;
 }
 
@@ -1337,7 +1337,7 @@ char *ExtraTimerSettings::Name ()
 
 char *ExtraTimerSettings::Description ()
 {
-	static char *desc = "This option allows the selection of the timer used by Orbiter to calculate time step intervals. Useful for testing and working around buggy hardware timers.";
+	static char *desc = "This option allows the selection of the timer used by SpaceXpanse to calculate time step intervals. Useful for testing and working around buggy hardware timers.";
 	return desc;
 }
 
@@ -1450,9 +1450,9 @@ bool ExtraPerformanceSettings::StoreParams (HWND hWnd)
 	cfg->CfgDebugPrm.bDisableSmoothFont = (SendDlgItemMessage (hWnd, IDC_CHECK1, BM_GETCHECK, 0, 0) == BST_CHECKED ? true : false);
 	cfg->CfgDebugPrm.bForceReenableSmoothFont = (SendDlgItemMessage (hWnd, IDC_CHECK2, BM_GETCHECK, 0, 0) == BST_CHECKED ? true : false);
 	if (cfg->CfgDebugPrm.bDisableSmoothFont)
-		g_pOrbiter->ActivateRoughType();
+		g_pSpaceXpanse->ActivateRoughType();
 	else
-		g_pOrbiter->DeactivateRoughType();
+		g_pSpaceXpanse->DeactivateRoughType();
 	return true;
 }
 
@@ -1498,7 +1498,7 @@ char *ExtraLaunchpadOptions::Name ()
 
 char *ExtraLaunchpadOptions::Description ()
 {
-	static char *desc = "Configure the behaviour of the Orbiter Launchpad dialog.";
+	static char *desc = "Configure the behaviour of the SpaceXpanse Launchpad dialog.";
 	return desc;
 }
 
@@ -1539,7 +1539,7 @@ bool ExtraLaunchpadOptions::StoreParams (HWND hWnd)
 	}
 	if (i != cfg->CfgDebugPrm.bHtmlScnDesc) {
 		cfg->CfgDebugPrm.bHtmlScnDesc = i;
-		MessageBox (NULL, "You need to restart Orbiter for these changes to take effect.", "Orbiter settings", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox (NULL, "You need to restart SpaceXpanse for these changes to take effect.", "SpaceXpanse settings", MB_OK | MB_ICONEXCLAMATION);
 	}
 	return true;
 }
@@ -1639,7 +1639,7 @@ INT_PTR CALLBACK ExtraLogfileOptions::DlgProc (HWND hWnd, UINT uMsg, WPARAM wPar
 
 //-----------------------------------------------------------------------------
 // class LaunchpadItem: addon-defined items for the "Extra" tab
-// Interface in OrbiterAPI.h
+// Interface in SpaceXpanseAPI.h
 //-----------------------------------------------------------------------------
 
 LaunchpadItem::LaunchpadItem ()

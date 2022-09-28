@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #include "OGraphics.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vvessel.h"
 #include "Config.h"
 #include "Mesh.h"
@@ -23,7 +23,7 @@
 #define EXHAUST_SCALEALPHA
 //#define EXHAUST_SCALESIZE
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern char DBG_MSG[256];
 extern PlanetarySystem *g_psys;
 extern Camera *g_camera;
@@ -93,10 +93,10 @@ VVessel::~VVessel ()
 
 void VVessel::CreateDeviceObjects (LPDIRECT3DDEVICE7 dev)
 {
-	const DWORD texsize = g_pOrbiter->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
+	const DWORD texsize = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.PanelMFDHUDSize;
 
 	if (mfdsurf) mfdsurf->Release();
-	mfdsurf = (LPDIRECTDRAWSURFACE7)g_pOrbiter->GetInlineGraphicsClient()->clbkCreateTexture (texsize, texsize);
+	mfdsurf = (LPDIRECTDRAWSURFACE7)g_pSpaceXpanse->GetInlineGraphicsClient()->clbkCreateTexture (texsize, texsize);
 }
 
 void VVessel::DestroyDeviceObjects ()
@@ -374,7 +374,7 @@ void VVessel::Render (LPDIRECT3DDEVICE7 dev)
 
 void VVessel::Render (LPDIRECT3DDEVICE7 dev, bool internalpass)
 {
-	oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient();
+	oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient();
 
 	bool rendercockpit = (vessel == g_focusobj && g_camera->IsInternal());
 	// render this vessel from its cockpit view?
@@ -665,7 +665,7 @@ void VVessel::RenderExhaust (LPDIRECT3DDEVICE7 dev, LPDIRECTDRAWSURFACE7 default
 #endif
 
 	// render re-entry trail
-	if (vessel->sp.is_in_atm && g_pOrbiter->Cfg()->CfgVisualPrm.bReentryFlames && vessel->reentry.do_render) {
+	if (vessel->sp.is_in_atm && g_pSpaceXpanse->Cfg()->CfgVisualPrm.bReentryFlames && vessel->reentry.do_render) {
 		const double afac = 1.0/log(1e11/2e8);
 		double friction = 0.5 * pow(vessel->sp.atmrho,0.6) * pow (vessel->sp.airspd, 3);
 		double opac = max (0, min (1, log(friction/2e8)*afac));
@@ -749,7 +749,7 @@ void VVessel::RenderGroundShadow (LPDIRECT3DDEVICE7 dev, const Planet *planet)
 	// project all vessel meshes. This should be replaced by a dedicated shadow mesh
 	dev->SetTransform (D3DTRANSFORMSTATE_WORLD, &mWorld);
 
-	if (g_pOrbiter->UseStencil()) {
+	if (g_pSpaceXpanse->UseStencil()) {
 		static D3DMATERIAL7 shmat_grey = {{0,0,0,1},{0,0,0,0},{0,0,0,0},{0,0,0,0},0};
 
 		shmat_grey.diffuse.a = (float)(depth * min (1, (csun-0.07)/0.015));
@@ -792,14 +792,14 @@ void VVessel::SetupRenderVectorList ()
 	Vector cam;
 	bool havecam = false;
 
-	DWORD flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagBodyforce;
+	DWORD flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagBodyforce;
 	if (flag & BF_ENABLE) {
 		static double shift = 1e3, lshift = log(shift);
 		bool logscale = ((flag & BF_LOGSCALE) != 0);
 		double len, scale, scale2 = vessel->size*0.02;
 		scale = (logscale ? 1.0 : vessel->size / (vessel->Mass() * 9.81));
-		double pscale = g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleBodyforce;
-		float alpha = g_pOrbiter->Cfg()->CfgVisHelpPrm.opacBodyforce;
+		double pscale = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleBodyforce;
+		float alpha = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacBodyforce;
 		char cbuf[32];
 		Vector F;
 		cam.Set (tmul (vessel->GRot(), g_camera->GPos()-vessel->GPos()));
@@ -853,11 +853,11 @@ void VVessel::SetupRenderVectorList ()
 			}
 		}
 	}
-	flag = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagCrdAxes;
+	flag = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagCrdAxes;
 	if ((flag & CA_ENABLE) && (flag & CA_VESSEL)) {
-		double scale = vessel->size * g_pOrbiter->Cfg()->CfgVisHelpPrm.scaleCrdAxes;
+		double scale = vessel->size * g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.scaleCrdAxes;
 		double rad   = vessel->size*0.02;
-		float alpha  = g_pOrbiter->Cfg()->CfgVisHelpPrm.opacCrdAxes;
+		float alpha  = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.opacCrdAxes;
 		if (!havecam)
 			cam.Set (tmul (vessel->GRot(), g_camera->GPos()-vessel->GPos()));
 		AddVec (cam, Vector(scale,0,0), Vector(0,0,0), rad, Vector(0.5,0.5,0.5), alpha, LABEL_PX, D3DRGB(1,1,1));

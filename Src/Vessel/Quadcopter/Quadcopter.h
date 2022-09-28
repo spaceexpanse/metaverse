@@ -12,7 +12,7 @@
 #ifndef __QUADCOPTER_H
 #define __QUADCOPTER_H
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "QuadcopterLua.h"
 #include "..\Common\Instrument.h"
 

@@ -4,7 +4,7 @@
 #ifndef __EARTHATMNRLMSISE00
 #define __EARTHATMNRLMSISE00
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ======================================================================

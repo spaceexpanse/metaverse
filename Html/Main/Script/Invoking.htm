@@ -2,12 +2,12 @@
 <HTML>
 <HEAD>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS" />
 <title>Invoking the interpreter</title>
 </HEAD>
 <BODY BGCOLOR=#FFFFFF TEXT=#000000>
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; Invoking</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; Invoking</p>
 
 <h1><a name="invoke"></a>Invoking the interpreter</h1>
 <p>There are currently two ways to access an interpreter instance: using a system console
@@ -65,7 +65,7 @@ the MFD will continue to run even if the MFD is switched to a different mode.</p
 
 <h2><a name="invoke_auto"></a>Automatic script processing</h2>
 <p>It is possible to associate a Lua script with a scenario so that it is invoked automatically (using
-Orbiter's built-in script interpreter) when the scenario is launched. No additional modules need
+SpaceXpanse's built-in script interpreter) when the scenario is launched. No additional modules need
 to be activated for this.</p>
 
 <p>To associate a script with a scenario, add the line
@@ -95,7 +95,7 @@ run(script)
 </div>
 where <i>script</i> is the script file name (with optional path). The script file extension '.lua' is
 assumed and should not be included in the call parameter. The default script path is the
-<i>Script</i> subdirectory below the Orbiter main directory. All paths specified in the call to run are
+<i>Script</i> subdirectory below the SpaceXpanse main directory. All paths specified in the call to run are
 relative to this directory. Therefore,
 <div class="code">
 run('myscripts/demo')

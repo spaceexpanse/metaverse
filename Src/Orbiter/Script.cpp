@@ -8,15 +8,15 @@
 const char *path = ".";
 const char *libname = "LuaInline";
 
-ScriptInterface::ScriptInterface (Orbiter *pOrbiter)
+ScriptInterface::ScriptInterface (SpaceXpanse *pSpaceXpanse)
 {
-	orbiter = pOrbiter;
+	spacexpanse = pSpaceXpanse;
 	hLib = NULL;
 }
 
 HINSTANCE ScriptInterface::LoadInterpreterLib ()
 {
-	hLib = orbiter->LoadModule (path, libname);
+	hLib = spacexpanse->LoadModule (path, libname);
 	return hLib;
 }
 

@@ -4,7 +4,7 @@
 #define STRICT 1
 #define ORBITER_MODULE
 
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 #include <io.h>
 
@@ -204,7 +204,7 @@ void AtmConfig::Apply (HWND hWnd)
 void AtmConfig::OpenHelp (HWND hWnd)
 {
 	HELPCONTEXT hc = {
-		"html/Orbiter.chm",
+		"html/SpaceXpanse.chm",
 		"extra_atmconfig",
 		0, 0
 	};
@@ -319,7 +319,7 @@ DLLCLBK void InitModule (HINSTANCE hDLL)
 	gParams.item = new AtmConfig;
 	// create the new config item
 	LAUNCHPADITEM_HANDLE root = oapiFindLaunchpadItem ("Celestial body configuration");
-	// find the config root entry provided by orbiter
+	// find the config root entry provided by spacexpanse
 	oapiRegisterLaunchpadItem (gParams.item, root);
 	// register the DG config entry
 }

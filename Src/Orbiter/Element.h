@@ -35,7 +35,7 @@ public:
 	void SetMasses (double m, double M);
 
 	void Setup (double m, double M, double mjd);
-	// Set up everything, using orbiter mass m and mass of central body M
+	// Set up everything, using spacexpanse mass m and mass of central body M
 	// This must be called before any calculations can be performed
 
 	void Reset (double _a, double _e, double _i,
@@ -151,7 +151,7 @@ public:
 
 private:
 	// secondary elements
-	double priv_m;		// mass of orbiter [kg]
+	double priv_m;		// mass of spacexpanse [kg]
 	double priv_M;		// mass of central object [kg]
 	double priv_le;     // linear eccentricity [m]
 	double priv_pd;		// periapsis distance [m]

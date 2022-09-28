@@ -6,7 +6,7 @@
 #ifndef __ORBIT_ReferenceClass_H
 #define __ORBIT_ReferenceClass_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 class ReferenceClass {
 	

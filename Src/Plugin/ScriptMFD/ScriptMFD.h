@@ -13,7 +13,7 @@
 #ifndef __SCRIPTMFD_H
 #define __SCRIPTMFD_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 const int NCLBK = 13;
 const int SETUP               =  0;

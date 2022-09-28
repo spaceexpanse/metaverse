@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Distributed Vessel Mass}
+\title{SpaceXpanse Technical Notes: Distributed Vessel Mass}
 \author{Martin Schweiger}
 \date{September 27, 2005}
 
@@ -33,7 +33,7 @@ For numerical calculations it is sometimes useful to discretise the object into 
 \begin{equation*}
 \vec{F}_G = \sum_i m_i \vec{g}(\vec{s}_i+\vec{r}_\text{CG})
 \end{equation*}
-where $\vec{r}_\text{CG}$ is the position of the barycentre. For the calculation of the linear force $\vec{F}_G$ Orbiter makes the assumption $\vec{g}(\vec{s}_i + \vec{r}_\text{CG}) = \vec{g}(\vec{r}_\text{CG})$, i.e. the gravitational field is homogeneous over the volume of the object. This approximation is justified when calculating the gravitational force on a spacecraft which is small compared to its orbital radius vector, $|\vec{s}_i| \ll |\vec{r}_\text{CG}|$. With this assumption, we arrive back at the expression for a point mass:
+where $\vec{r}_\text{CG}$ is the position of the barycentre. For the calculation of the linear force $\vec{F}_G$ SpaceXpanse makes the assumption $\vec{g}(\vec{s}_i + \vec{r}_\text{CG}) = \vec{g}(\vec{r}_\text{CG})$, i.e. the gravitational field is homogeneous over the volume of the object. This approximation is justified when calculating the gravitational force on a spacecraft which is small compared to its orbital radius vector, $|\vec{s}_i| \ll |\vec{r}_\text{CG}|$. With this assumption, we arrive back at the expression for a point mass:
 \begin{equation*}
 \vec{F}_G = \vec{g}(\vec{r}_\text{CG}) \sum_i m_i = m \vec{g}(\vec{r}_\text{CG})
 \end{equation*}
@@ -66,11 +66,11 @@ If the vectors $\vec{s}$ and $\hat{r}_\text{CG}$ are expressed in the vessel ref
 \begin{equation}
 \vec{M}_G = \frac{3GM}{r_\text{CG}^3} [(\mat{L}\hat{r}_\text{CG}) \times \hat{r}_\text{CG}]
 \end{equation}
-where $\mat{L}$ is the vessel's inertia tensor expressed in the same frame. (Note that Orbiter currently assumes that the vessel frame of reference is orientated so that $\mat{L}$ is diagonal.)
+where $\mat{L}$ is the vessel's inertia tensor expressed in the same frame. (Note that SpaceXpanse currently assumes that the vessel frame of reference is orientated so that $\mat{L}$ is diagonal.)
 
 
 \section{Discrete point mass systems}
-Orbiter implements gravity gradient torque as discussed in Section~\ref{sec:sympot}, assuming that the vessel's inertia tensor is known. In this section we give an alternative method that describes the vessel as a rigid system of point masses. This method is not currently implemented in Orbiter.
+SpaceXpanse implements gravity gradient torque as discussed in Section~\ref{sec:sympot}, assuming that the vessel's inertia tensor is known. In this section we give an alternative method that describes the vessel as a rigid system of point masses. This method is not currently implemented in SpaceXpanse.
 
 \subsection{2-point systems}
 In the simplest case, a vessel can be expressed as a rigid system of two point masses. This allows to simulate an angular moment as a result of a gradient in the gravitational potential $\vec{g}(\vec{r})$.
@@ -204,7 +204,7 @@ and inserting into Eq.~\ref{eq:multitorque} leads to
 \section{Damping}
 The model defined above has equilibrium states ($\vec{M}_G = 0$) for the attitudes $\vec{s} \parallel \vR{0}$ (vessel axis aligned with radius vector) and $\vec{s} \perp \vR{0}$ (vessel axis perpendicular to radius vector). Only the first of these is stable because an attitude perturbation will generate a torque in the opposite direction, leading to an undamped oscillation around the equilibrium attitude.
 
-Orbiter allows to introduce a damping term
+SpaceXpanse allows to introduce a damping term
 \begin{equation*}
 \vec{M}_D = -\alpha\vec{\omega}_G
 \end{equation*}

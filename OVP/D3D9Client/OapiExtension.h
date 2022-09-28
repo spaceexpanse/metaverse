@@ -111,7 +111,7 @@ typedef struct {
  * \brief Configuration parameter provider for non-API parameters
  *
  * This class provides access to config-parameters that are not (yet) available
- * through the 'official' API of Orbiter. Currently the switches and values of
+ * through the 'official' API of SpaceXpanse. Currently the switches and values of
  * the 'Visual helpers' dialog.
  */
 class OapiExtension
@@ -162,23 +162,23 @@ public:
 	static const void *GetConfigParam (DWORD paramtype);
 
 	/**
-	 * \brief Returns whether we run Orbiter 2010 (and derivatives)
+	 * \brief Returns whether we run SpaceXpanse 2010 (and derivatives)
 	 *
-	 * \return Whether we run Orbiter 2010
+	 * \return Whether we run SpaceXpanse 2010
 	 */
-	static const bool RunsOrbiter2010 () { return isOrbiter2010; }
+	static const bool RunsSpaceXpanse2010 () { return isSpaceXpanse2010; }
 
 	/**
-	 * \brief Returns whether OrbiterSound 4.0 is up and running
+	 * \brief Returns whether SpaceXpanseSound 4.0 is up and running
 	 *
-	 * \return Whether OrbiterSound 4.0 is active
+	 * \return Whether SpaceXpanseSound 4.0 is active
 	 */
-	static const bool RunsOrbiterSound40() { return orbiterSound40; }
+	static const bool RunsSpaceXpanseSound40() { return spacexpanseSound40; }
 
 	/**
-	 * \brief Returns whether Orbiter runs under WINE
+	 * \brief Returns whether SpaceXpanse runs under WINE
 	 *
-	 * \return Whether Orbiter runs under WINE
+	 * \return Whether SpaceXpanse runs under WINE
 	 */
 	static const bool RunsUnderWINE() { return runsUnderWINE; }
 
@@ -249,17 +249,17 @@ private:
 	static DWORD showCoordinateAxesFlags;
 	static float coordinateAxesScale;   // [0.25...4.0]
 	static float coordinateAxesOpacity; // [0...1]
-	// OrbiterSound 4.0 helper
-	static bool isOrbiter2010;          ///< Whether we run Orbiter  2010 (and derivatives)
-	static bool orbiterSound40;
-	static std::string configDir;       ///< Value of Orbiters ConfigDir parameter
-	static std::string meshDir;         ///< Value of Orbiters MeshDir parameter
-	static std::string textureDir;      ///< Value of Orbiters TextureDir parameter
-	static std::string hightexDir;      ///< Value of Orbiters HightexDir parameter
-	static std::string scenarioDir;     ///< Value of Orbiters ScenarioDir config parameter
-	static std::string startupScenario; ///< Scenario-Path if Orbiters was started with "-s {Scenario}" command line parameter
+	// SpaceXpanseSound 4.0 helper
+	static bool isSpaceXpanse2010;          ///< Whether we run SpaceXpanse  2010 (and derivatives)
+	static bool spacexpanseSound40;
+	static std::string configDir;       ///< Value of SpaceXpanses ConfigDir parameter
+	static std::string meshDir;         ///< Value of SpaceXpanses MeshDir parameter
+	static std::string textureDir;      ///< Value of SpaceXpanses TextureDir parameter
+	static std::string hightexDir;      ///< Value of SpaceXpanses HightexDir parameter
+	static std::string scenarioDir;     ///< Value of SpaceXpanses ScenarioDir config parameter
+	static std::string startupScenario; ///< Scenario-Path if SpaceXpanses was started with "-s {Scenario}" command line parameter
 	// WINE detection
-	static bool runsUnderWINE;          ///< Whether Orbiter runs under WINE
+	static bool runsUnderWINE;          ///< Whether SpaceXpanse runs under WINE
 	// Spacecraft.dll detection
 	static bool runsSpacecraftDll;      ///< Whether the current Scenario uses Spacecraft.dll
 	static void LogD3D9Modules(void);   ///< Logs loaded D3D9 DLLs and their versions
@@ -268,8 +268,8 @@ private:
 	static DWORD    hookMap;     // Flags indicating 'already delegated' widgets
 	static HOOKINFO hookInfos[]; // Table of information of wrapped methods and items
 
-	static bool configParameterRead;      ///< Indication that Orbiter_NG.cfg has been read
-	static bool GetConfigParameter(void); ///< Tries to read parameter from Orbiter_NG.cfg
+	static bool configParameterRead;      ///< Indication that SpaceXpanse_NG.cfg has been read
+	static bool GetConfigParameter(void); ///< Tries to read parameter from SpaceXpanse_NG.cfg
 	static std::string ScanCommandLine(void); ///< Tries to read a Startup Scenario given by "-s" command line parameter
 
 	static bool AllHooksAttached(void) {return hookMap == 0x7FFF;}

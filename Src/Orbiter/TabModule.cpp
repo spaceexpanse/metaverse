@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Launchpad.h"
 #include "TabModule.h"
 #include "resource.h"
@@ -18,14 +18,14 @@ static int counter = -1;
 
 //-----------------------------------------------------------------------------
 
-orbiter::ModuleTab::ModuleTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::ModuleTab::ModuleTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 	nmodulerec = 0;
 }
 
 //-----------------------------------------------------------------------------
 
-orbiter::ModuleTab::~ModuleTab ()
+spacexpanse::ModuleTab::~ModuleTab ()
 {
 	int i;
 
@@ -46,7 +46,7 @@ orbiter::ModuleTab::~ModuleTab ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ModuleTab::Create ()
+void spacexpanse::ModuleTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_MOD);
 
@@ -61,7 +61,7 @@ void orbiter::ModuleTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::ModuleTab::InitDialog (HWND hWnd, WPARAM wParam, LPARAM lParam)
+BOOL spacexpanse::ModuleTab::InitDialog (HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	SetWindowLongPtr (GetDlgItem (hTab, IDC_MOD_TREE), GWL_STYLE, TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | TVS_NOTOOLTIPS | WS_BORDER | WS_TABSTOP);
 	SetWindowPos (GetDlgItem (hTab, IDC_MOD_TREE), NULL, 0, 0, 0, 0, SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOSIZE | SWP_NOZORDER);
@@ -71,10 +71,10 @@ BOOL orbiter::ModuleTab::InitDialog (HWND hWnd, WPARAM wParam, LPARAM lParam)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ModuleTab::GetConfig (const Config *cfg)
+void spacexpanse::ModuleTab::GetConfig (const Config *cfg)
 {
 	RefreshLists();
-	SetWindowText (GetDlgItem (hTab, IDC_MOD_INFO), "Optional Orbiter plugin modules.\r\n\r\nDouble-click on a category to show or hide its entries.\r\n\r\nCheck or uncheck items to activate the corresponding modules.\r\n\r\nSelect an item to see a description of the module function.");
+	SetWindowText (GetDlgItem (hTab, IDC_MOD_INFO), "Optional SpaceXpanse plugin modules.\r\n\r\nDouble-click on a category to show or hide its entries.\r\n\r\nCheck or uncheck items to activate the corresponding modules.\r\n\r\nSelect an item to see a description of the module function.");
 	int listw = cfg->CfgWindowPos.LaunchpadModListWidth;
 	if (!listw) {
 		RECT r;
@@ -86,14 +86,14 @@ void orbiter::ModuleTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ModuleTab::SetConfig (Config *cfg)
+void spacexpanse::ModuleTab::SetConfig (Config *cfg)
 {
 	cfg->CfgWindowPos.LaunchpadModListWidth = splitListDesc.GetPaneWidth (SplitterCtrl::PANE1);
 }
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::ModuleTab::OpenHelp ()
+bool spacexpanse::ModuleTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_modules");
 	return true;
@@ -101,7 +101,7 @@ bool orbiter::ModuleTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::ModuleTab::Size (int w, int h)
+BOOL spacexpanse::ModuleTab::Size (int w, int h)
 {
 	int dw = w - (int)(pos0.right-pos0.left);
 	int dh = h - (int)(pos0.bottom-pos0.top);
@@ -136,14 +136,14 @@ BOOL orbiter::ModuleTab::Size (int w, int h)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ModuleTab::Show ()
+void spacexpanse::ModuleTab::Show ()
 {
 	LaunchpadTab::Show();
 }
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ModuleTab::RefreshLists ()
+void spacexpanse::ModuleTab::RefreshLists ()
 {
 	HWND hTree = GetDlgItem (hTab, IDC_MOD_TREE);
 	TreeView_DeleteAllItems (hTree);
@@ -226,7 +226,7 @@ void orbiter::ModuleTab::RefreshLists ()
 	counter = 0;
 }
 
-HTREEITEM orbiter::ModuleTab::GetCategoryItem (char *cat)
+HTREEITEM spacexpanse::ModuleTab::GetCategoryItem (char *cat)
 {
 	HWND hTree = GetDlgItem (hTab, IDC_MOD_TREE);
 	HTREEITEM root = TreeView_GetRoot (hTree);
@@ -251,7 +251,7 @@ HTREEITEM orbiter::ModuleTab::GetCategoryItem (char *cat)
 	return TreeView_InsertItem (hTree, &tvis);
 }
 
-void orbiter::ModuleTab::ExpandCollapseAll (bool expand)
+void spacexpanse::ModuleTab::ExpandCollapseAll (bool expand)
 {
 	HWND hTree = GetDlgItem (hTab, IDC_MOD_TREE);
 	UINT code = (expand ? TVE_EXPAND : TVE_COLLAPSE);
@@ -264,7 +264,7 @@ void orbiter::ModuleTab::ExpandCollapseAll (bool expand)
 	}
 }
 
-void orbiter::ModuleTab::InitActivation ()
+void spacexpanse::ModuleTab::InitActivation ()
 {
 	HWND hTree = GetDlgItem (hTab, IDC_MOD_TREE);
 	TVITEM catitem, subitem;
@@ -296,7 +296,7 @@ void orbiter::ModuleTab::InitActivation ()
 	ExpandCollapseAll (true);
 }
 
-void orbiter::ModuleTab::ActivateFromList ()
+void spacexpanse::ModuleTab::ActivateFromList ()
 {
 	const char *path = "Modules\\Plugin";
 
@@ -325,7 +325,7 @@ void orbiter::ModuleTab::ActivateFromList ()
 				}
 				else {
 					TreeView_SetCheckState(hTree, subitem.hItem, rec->active ? TRUE : FALSE);
-					MessageBox(NULL, "This module has been requested on the command line and cannot be deactivated interactively.", "Orbiter: Plugin Modules", MB_ICONWARNING | MB_OK);
+					MessageBox(NULL, "This module has been requested on the command line and cannot be deactivated interactively.", "SpaceXpanse: Plugin Modules", MB_ICONWARNING | MB_OK);
 				}
 			}
 			subitem.hItem = TreeView_GetNextSibling (hTree, subitem.hItem);
@@ -334,7 +334,7 @@ void orbiter::ModuleTab::ActivateFromList ()
 	}
 }
 
-void orbiter::ModuleTab::DeactivateAll ()
+void spacexpanse::ModuleTab::DeactivateAll ()
 {
 	HWND hTree = GetDlgItem (hTab, IDC_MOD_TREE);
 	TVITEM catitem, subitem;
@@ -355,7 +355,7 @@ void orbiter::ModuleTab::DeactivateAll ()
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::ModuleTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::ModuleTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	const int MAXSEL = 100;
 	int i;

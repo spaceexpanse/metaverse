@@ -10,12 +10,12 @@ add_library(${ATM_TARGET} SHARED
 )
 
 add_dependencies(${ATM_TARGET}
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(${ATM_TARGET}
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 target_link_libraries(${ATM_TARGET}

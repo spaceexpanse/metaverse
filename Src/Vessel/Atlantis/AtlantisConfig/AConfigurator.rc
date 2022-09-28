@@ -36,12 +36,12 @@ FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,57,136,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,111,136,50,14
-    GROUPBOX        "Atlantis orbiter: Texture resolution",IDC_STATIC,7,7,
+    GROUPBOX        "Atlantis spacexpanse: Texture resolution",IDC_STATIC,7,7,
                     154,29
     CONTROL         "High",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
                     18,20,31,10
     CONTROL         "Low",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,60,20,29,10
-    GROUPBOX        "Atlantis orbiter: Mesh resolution",IDC_STATIC,7,44,154,
+    GROUPBOX        "Atlantis spacexpanse: Mesh resolution",IDC_STATIC,7,44,154,
                     29
     CONTROL         "High",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
                     18,58,31,10

@@ -1,4 +1,4 @@
--- Orbiter Lua script initialisations
+-- SpaceXpanse Lua script initialisations
 
 -- Some useful general constants
 PI=3.14159265358979    -- pi
@@ -14,7 +14,7 @@ ATMP=101.4e3           -- atmospheric pressure [Pa] at Earth sea level
 ATMD=1.293             -- atmospheric density [kg/m^3] at Earth sea level
 
 
--- Build a key table for orbiter keys
+-- Build a key table for spacexpanse keys
 -- NEEDS TO BE COMPLETED!
 ktable = {Q=0x10, W=0x11, E=0x12, R=0x13, T=0x14, Y=0x15, U=0x16, I=0x17,
           O=0x18, P=0x19, A=0x1E, S=0x1F, D=0x20, F=0x21, G=0x22, H=0x23,
@@ -27,7 +27,7 @@ function run (script)
   dofile('./Script/'..script..'.lua')
 end
 
--- execute a script in the Orbiter root folder
+-- execute a script in the SpaceXpanse root folder
 function run_global (script)
   dofile(script)
 end
@@ -96,7 +96,7 @@ end
 
 -- Time skip: branches yield, the main trunk resumes all
 -- coroutines for a single cycle, then calls proc.Frameskip
--- to pass control back to orbiter for a new simulation cycle
+-- to pass control back to spacexpanse for a new simulation cycle
 
 function proc.skip ()
 	if coroutine.running() == nil then  -- we are in the main trunk
@@ -105,7 +105,7 @@ function proc.skip ()
 				coroutine.resume (branch[i])
 			end
 		end
-		proc.Frameskip() -- hand control to orbiter for one cycle
+		proc.Frameskip() -- hand control to spacexpanse for one cycle
             if wait_exit ~= nil then
                 error()   -- return to caller immediately
             end

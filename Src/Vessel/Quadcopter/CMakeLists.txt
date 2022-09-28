@@ -30,8 +30,8 @@ target_link_libraries(Quadcopter
 )
 
 add_dependencies(Quadcopter
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 add_custom_command(

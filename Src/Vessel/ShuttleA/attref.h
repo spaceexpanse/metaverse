@@ -12,7 +12,7 @@
 #ifndef __ATTREF_H
 #define __ATTREF_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 class AttitudeReference {
 public:

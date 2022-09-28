@@ -22,7 +22,7 @@ add_custom_command(
 add_custom_target(GravityTechnote
 	DEPENDS ${out_path}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	GravityTechnote
 )
 set_target_properties(GravityTechnote

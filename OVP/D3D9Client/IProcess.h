@@ -10,7 +10,7 @@
 #include <d3dx9.h>
 #include <list>
 #include <map>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "D3D9Util.h"
 #include "gcCore.h"
 

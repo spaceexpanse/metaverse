@@ -49,7 +49,7 @@ typedef enum {
 } CamAction;
 
 class Camera {
-	friend class Orbiter;
+	friend class SpaceXpanse;
 
 public:
 	Camera (double _nearplane = 1.0, double _farplane = 1e8);

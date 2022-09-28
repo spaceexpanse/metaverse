@@ -511,7 +511,7 @@ void vVessel::ResetAnimations (UINT reset/*=1*/)
 //
 void vVessel::DelAnimation (UINT idx)
 {
-	// Orbiter never reduces the animation buffer size. (i.e. anim[])
+	// SpaceXpanse never reduces the animation buffer size. (i.e. anim[])
 	// VESSEL::GetAnimPtr() returns highest existing animation ID + 1, not the actual animation count
 	vessel->GetAnimPtr(&anim);
 	currentstate.erase(idx);

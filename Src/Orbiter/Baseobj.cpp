@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Planet.h"
 #include "Baseobj.h"
@@ -23,7 +23,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern Camera *g_camera;
 extern char DBG_MSG[256];
@@ -2221,7 +2221,7 @@ void RunwayLights::Render (LPDIRECT3DDEVICE7 dev, bool day)
 			dyndata->Idx_PAPI_w, 12*dyndata->PAPIwhite, 0);
 
 	dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, FALSE);
-	g_pOrbiter->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
 #endif // INLINEGRAPHICS
 }
 
@@ -2534,7 +2534,7 @@ void BeaconArray::Render (LPDIRECT3DDEVICE7 dev, bool day)
 	dev->DrawIndexedPrimitive (
 		D3DPT_TRIANGLELIST, POSTEXVERTEXFLAG, Vtx, nVtx, Idx, nIdx, 0);
 	dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, FALSE);
-	g_pOrbiter->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
 #endif // INLINEGRAPHICS
 }
 
@@ -3530,7 +3530,7 @@ void SolarPlant::Activate ()
 		vtx_ofs += 4;
 	}
 	// shadow mesh
-	if (g_pOrbiter->Cfg()->CfgVisualPrm.bShadows) {
+	if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bShadows) {
 		ShVtx = new VERTEX_XYZ[nShVtx = npanel*4]; TRACENEW
 		ShIdx = new WORD[nShIdx = npanel*6]; TRACENEW
 		D3DCOLOR shcol = base->ShadowColor();
@@ -3563,7 +3563,7 @@ void SolarPlant::Deactivate ()
 	Idx = NULL;
 	delete []flash;
 	flash = NULL;
-	if (g_pOrbiter->Cfg()->CfgVisualPrm.bShadows) {
+	if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bShadows) {
 		delete []ShVtx;
 		ShVtx = NULL;
 		delete []ShIdx;
@@ -3618,7 +3618,7 @@ void SolarPlant::Update ()
 
 void SolarPlant::UpdateShadow (Vector &fromsun, double az)
 {
-	if (!g_pOrbiter->Cfg()->CfgVisualPrm.bShadows) return;
+	if (!g_pSpaceXpanse->Cfg()->CfgVisualPrm.bShadows) return;
 	if (have_shadows = (nml.y > 0.2)) {
 		int i, j;
 		double a;

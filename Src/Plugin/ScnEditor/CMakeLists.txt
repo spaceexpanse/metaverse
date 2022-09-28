@@ -36,8 +36,8 @@ add_custom_target(deploy_api
 )
 
 add_dependencies(ScnEditor
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	DlgCtrl
 	deploy_api
 )

@@ -5,7 +5,7 @@
 // ==============================================================
 
 // ----------------------------------------------------------------------------
-// D3D9Client rendering techniques for Orbiter Spaceflight simulator
+// D3D9Client rendering techniques for SpaceXpanse Spaceflight simulator
 // ----------------------------------------------------------------------------
 
 
@@ -183,7 +183,7 @@ struct MESH_VERTEX {                        // D3D9Client Mesh vertex layout
 	float3 tex0   : TEXCOORD0;
 };
 
-struct NTVERTEX {                           // Orbiter Mesh vertex layout
+struct NTVERTEX {                           // SpaceXpanse Mesh vertex layout
 	float3 posL     : POSITION0;
 	float3 nrmL     : NORMAL0;
 	float2 tex0     : TEXCOORD0;

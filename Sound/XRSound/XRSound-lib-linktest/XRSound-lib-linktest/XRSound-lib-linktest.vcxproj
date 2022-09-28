@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug-with-OrbiterRelease|Win32">
-      <Configuration>Debug-with-OrbiterRelease</Configuration>
+    <ProjectConfiguration Include="Debug-with-SpaceXpanseRelease|Win32">
+      <Configuration>Debug-with-SpaceXpanseRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-with-OrbiterRelease|x64">
-      <Configuration>Debug-with-OrbiterRelease</Configuration>
+    <ProjectConfiguration Include="Debug-with-SpaceXpanseRelease|x64">
+      <Configuration>Debug-with-SpaceXpanseRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-with-OrbiterRelease|Win32">
-      <Configuration>Release-with-OrbiterRelease</Configuration>
+    <ProjectConfiguration Include="Release-with-SpaceXpanseRelease|Win32">
+      <Configuration>Release-with-SpaceXpanseRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-with-OrbiterRelease|x64">
-      <Configuration>Release-with-OrbiterRelease</Configuration>
+    <ProjectConfiguration Include="Release-with-SpaceXpanseRelease|x64">
+      <Configuration>Release-with-SpaceXpanseRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
@@ -48,7 +48,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -61,7 +61,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -74,7 +74,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -87,7 +87,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -103,7 +103,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
   </ImportGroup>
@@ -111,7 +111,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
   </ImportGroup>
@@ -119,7 +119,7 @@
     <Import Project="paths.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
   </ImportGroup>
@@ -127,7 +127,7 @@
     <Import Project="paths.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="paths.props" />
   </ImportGroup>
@@ -135,25 +135,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -164,17 +164,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalLibraryDirectories>
-      <AdditionalDependencies>XRSoundD.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSoundD.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -182,14 +182,14 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\XRSound</AdditionalLibraryDirectories>
-      <AdditionalDependencies>XRSoundD.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSoundD.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -202,7 +202,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -210,11 +210,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSound.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSound.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -224,7 +224,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x86-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x86-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -232,8 +232,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSound.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x86-release\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSound.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x86-release\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -244,17 +244,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSoundD.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSoundD.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-OrbiterRelease|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-with-SpaceXpanseRelease|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -262,14 +262,14 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSoundD.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSoundD.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -282,7 +282,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -290,11 +290,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSound.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSound.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-OrbiterRelease|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-with-SpaceXpanseRelease|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -304,7 +304,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\include;$(CMAKE_BINARY_DIR)\x64-debug\Orbitersdk\XRSound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\include;$(CMAKE_BINARY_DIR)\x64-debug\SpaceXpansesdk\XRSound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -312,8 +312,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>XRSound.lib;Orbiter.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\lib;$(CMAKE_BINARY_DIR)\x64-release\Orbitersdk\XRSound</AdditionalLibraryDirectories>
+      <AdditionalDependencies>XRSound.lib;SpaceXpanse.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\lib;$(CMAKE_BINARY_DIR)\x64-release\SpaceXpansesdk\XRSound</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

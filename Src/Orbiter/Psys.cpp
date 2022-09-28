@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Config.h"
 #include "Psys.h"
 #include "Astro.h"
@@ -18,7 +18,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern bool g_bForceUpdate;
 extern char DBG_MSG[256];
@@ -204,7 +204,7 @@ bool PlanetarySystem::Read (char *fname)
 	char cbuf[256], label[128];
 	Planet *body;
 	
-	ifstream ifs (g_pOrbiter->ConfigPath (fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath (fname));
 	if (!ifs) return false;
 	Clear();
 	if (GetItemString (ifs, "Name", cbuf)) {
@@ -254,7 +254,7 @@ void PlanetarySystem::OutputLoadStatus (const char *bname)
 {
 	char cbuf[256];
 	sprintf (cbuf, "%s: %s", name, bname);
-	g_pOrbiter->OutputLoadStatus (cbuf, 0);
+	g_pSpaceXpanse->OutputLoadStatus (cbuf, 0);
 }
 
 intptr_t PlanetarySystem::FindFirst (int type, _finddata_t *fdata, char *path, char *fname)
@@ -265,7 +265,7 @@ intptr_t PlanetarySystem::FindFirst (int type, _finddata_t *fdata, char *path, c
 	switch (type) {
 	case FILETYPE_MARKER:
 		if (labelpath) strcpy (path, labelpath);
-		else           sprintf (path, "%s%s\\Marker\\", g_pOrbiter->Cfg()->CfgDirPrm.ConfigDir, name);
+		else           sprintf (path, "%s%s\\Marker\\", g_pSpaceXpanse->Cfg()->CfgDirPrm.ConfigDir, name);
 		break;
 	}
 	sprintf (cbuf, "%s*.mkr", path);
@@ -526,7 +526,7 @@ int PlanetarySystem::AddVessel (Vessel *_vessel)
 
 bool PlanetarySystem::DelVessel (Vessel *_vessel, Body *_alt_cam_tgt)
 {
-	//if (!g_pOrbiter->RequestDelete (_vessel, _alt_cam_tgt)) return false;
+	//if (!g_pSpaceXpanse->RequestDelete (_vessel, _alt_cam_tgt)) return false;
 	DWORD i, j, k;
 	for (i = 0; i < nvessel; i++)
 		if (vessel[i] == _vessel) break;
@@ -962,7 +962,7 @@ void PlanetarySystem::Timejump ()
 	for (i = 0; i < nbody; i++) body[i]->EndStateUpdate ();
 
 	for (i = 0; i < nvessel; i++)
-		vessel[i]->Timejump(g_pOrbiter->tjump.dt, g_pOrbiter->tjump.mode);
+		vessel[i]->Timejump(g_pSpaceXpanse->tjump.dt, g_pSpaceXpanse->tjump.mode);
 }
 
 void PlanetarySystem::InitDeviceObjects ()

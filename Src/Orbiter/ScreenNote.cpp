@@ -1,14 +1,14 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "ScreenNote.h"
 #include "Texture.h"
 #include "OGraphics.h"
 
-ScreenNote::ScreenNote (Orbiter *po, int ScreenW, int ScreenH)
+ScreenNote::ScreenNote (SpaceXpanse *po, int ScreenW, int ScreenH)
 {
-	orbiter = po;
+	spacexpanse = po;
 	sw = ScreenW;
 	sh = ScreenH;
 	SetPos (0.25, 0.1, 0.75, 0.9);
@@ -68,7 +68,7 @@ void ScreenNote::Render ()
 	double x = 0.25, y = 0.1, w = 0.5, h = 0.8;
 	HDC hDC;
 	HFONT pFont;
-	if (SUCCEEDED (orbiter->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC))) {
+	if (SUCCEEDED (spacexpanse->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC))) {
 		pFont = (HFONT)SelectObject (hDC, hFont);
 		SetTextColor (hDC, txtcol2);
 		SetBkMode (hDC, TRANSPARENT);
@@ -81,7 +81,7 @@ void ScreenNote::Render ()
 		r.left--, r.top--, r.right--, r.bottom--;
 		SetTextColor (hDC, txtcol);
 		DrawText (hDC, txt, txtlen, &r, DT_LEFT|DT_NOPREFIX|DT_WORDBREAK);
-		orbiter->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
+		spacexpanse->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
 		SelectObject (hDC, pFont);
 	}
 }

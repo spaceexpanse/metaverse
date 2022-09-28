@@ -11,7 +11,7 @@
 #define ORBITER_MODULE
 
 #include <set> // ...for Brush-, Pen- and Font-accounting
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "D3D9Client.h"
 #include "D3D9Config.h"
 #include "D3D9Util.h"
@@ -312,12 +312,12 @@ bool D3D9Client::clbkInitialise()
 {
 	_TRACE;
 	LogAlw("================ clbkInitialise ===============");
-	LogAlw("Orbiter Version = %d",oapiGetOrbiterVersion());
+	LogAlw("SpaceXpanse Version = %d",oapiGetSpaceXpanseVersion());
 
 	// Perform default setup
 	if (GraphicsClient::clbkInitialise()==false) return false;
 	//Create the Launchpad video tab interface
-	vtab = new VideoTab(this, ModuleInstance(), OrbiterInstance(), LaunchpadVideoTab());
+	vtab = new VideoTab(this, ModuleInstance(), SpaceXpanseInstance(), LaunchpadVideoTab());
 
 	return true;
 }
@@ -1634,7 +1634,7 @@ LRESULT D3D9Client::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	if (bRunning && DebugControls::IsActive()) {
 		// Must update camera to correspond MAIN_SCENE due to Pick() function,
 		// because env-maps have altered camera settings
-		// GetScene()->UpdateCameraFromOrbiter(RENDERPASS_PICKSCENE);
+		// GetScene()->UpdateCameraFromSpaceXpanse(RENDERPASS_PICKSCENE);
 		// Obsolete: since moving env/cam stuff in pre-scene
 	}
 
@@ -2883,11 +2883,11 @@ void D3D9Client::SplashScreen()
 
 	D3DXIMAGE_INFO Info;
 
-	HMODULE hOrbiter =  GetModuleHandleA("orbiter.exe");
-	HRSRC hRes = FindResourceA(hOrbiter, MAKEINTRESOURCEA(292), "IMAGE");
-	HGLOBAL hImage = LoadResource(hOrbiter, hRes);
+	HMODULE hSpaceXpanse =  GetModuleHandleA("spacexpanse.exe");
+	HRSRC hRes = FindResourceA(hSpaceXpanse, MAKEINTRESOURCEA(292), "IMAGE");
+	HGLOBAL hImage = LoadResource(hSpaceXpanse, hRes);
 	LPVOID pData = LockResource(hImage);
-	DWORD size = SizeofResource(hOrbiter, hRes);
+	DWORD size = SizeofResource(hSpaceXpanse, hRes);
 
 	// Splash screen image is 1920 x 1200 pixel
 	double scale = min(viewW / 1920.0, viewH / 1200.0);
@@ -2926,7 +2926,7 @@ void D3D9Client::SplashScreen()
 
 	char *months[]={"???","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","???"};
 
-	DWORD d = oapiGetOrbiterVersion();
+	DWORD d = oapiGetSpaceXpanseVersion();
 	DWORD y = d/10000; d-=y*10000;
 	DWORD m = d/100; d-=m*100;
 	if (m>12) m=0;
@@ -2937,7 +2937,7 @@ void D3D9Client::SplashScreen()
 	char dataA[]={"D3D9Client Beta R30.7 [" __DATE__ "]"};
 #endif
 
-	char dataB[128]; sprintf_s(dataB,128,"Build %s %lu 20%lu [%u]", months[m], d, y, oapiGetOrbiterVersion());
+	char dataB[128]; sprintf_s(dataB,128,"Build %s %lu 20%lu [%u]", months[m], d, y, oapiGetSpaceXpanseVersion());
 	char dataD[] = { "Warning: Config folder not present in /Modules/Server/. Please create symbolic link." };
 	//char dataE[] = { "Note: Cubic Interpolation is use... Consider using linear for better elevation matching" };
 	//char dataF[] = { "Note: Terrain flattening offline due to cubic interpolation" };

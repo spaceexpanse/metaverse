@@ -14,7 +14,7 @@
 #define __D3DUTIL_H
 
 #include <d3d.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 struct VECTOR2D     { D3DVALUE x, y; };
 

@@ -1,7 +1,7 @@
 Purpose of main classes in TransX
 ----------------------------------
 
-The actual MFD class in TransX doesn't do much - mostly because Orbiter insists on deleting it and recreating it without warning. It therefore does little other than pass on the messages it receives to its viewstate.
+The actual MFD class in TransX doesn't do much - mostly because SpaceXpanse insists on deleting it and recreating it without warning. It therefore does little other than pass on the messages it receives to its viewstate.
 
 Viewstate is the part of the code that holds information relevant to a particular open window to TransX. There can of course be several of these, all looking at different parts of the flight, and looking at different variable sets.
 
@@ -27,7 +27,7 @@ basefunction does the processing shared by all types of stage, irrespective of t
 
 planfunctions (of which there are several types) are designed to plug into basefunction to give extra specific abilities and user variables to a stage. This is how the plan selection process works. Future versions will extend TransX by adding new plan classes at this point.
 
-globals holds things that aren't classes - some vector functions, the opctimestep process - the orbiter callbacks and TransX's response to them.
+globals holds things that aren't classes - some vector functions, the opctimestep process - the spacexpanse callbacks and TransX's response to them.
 
 parser is a simple class designed to help with the processing of scenario files as they are loaded into basefunctions and plans.
 

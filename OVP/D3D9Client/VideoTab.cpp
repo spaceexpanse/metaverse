@@ -1,6 +1,6 @@
 // ==============================================================
 // Class VideoTab (implementation)
-// Manages the user selections in the "Video" tab of the Orbiter
+// Manages the user selections in the "Video" tab of the SpaceXpanse
 // Launchpad dialog.
 // Part of the ORBITER VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
@@ -23,7 +23,7 @@
 
 using namespace oapi;
 
-const UINT IDC_SCENARIO_TREE = (oapiGetOrbiterVersion() >= 111105) ? 1090 : 1088;
+const UINT IDC_SCENARIO_TREE = (oapiGetSpaceXpanseVersion() >= 111105) ? 1090 : 1088;
 
 BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam)
 {
@@ -38,11 +38,11 @@ BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam)
 // ==============================================================
 // Constructor
 
-VideoTab::VideoTab(D3D9Client *gc, HINSTANCE _hInst, HINSTANCE _hOrbiterInst, HWND hVideoTab)
+VideoTab::VideoTab(D3D9Client *gc, HINSTANCE _hInst, HINSTANCE _hSpaceXpanseInst, HWND hVideoTab)
 {
 	gclient      = gc;
 	hInst        = _hInst;
-	hOrbiterInst = _hOrbiterInst;
+	hSpaceXpanseInst = _hSpaceXpanseInst;
 	hTab         = hVideoTab;
 	aspect_idx	 = 0;
 	SelectedAdapterIdx = 0;
@@ -951,13 +951,13 @@ void VideoTab::CreateSymbolicLinks()
 
 	// Sound -> Modules/Server/Sound
 	//
-	if (OapiExtension::RunsOrbiter2010())
+	if (OapiExtension::RunsSpaceXpanse2010())
 	{
 		result += "Sound: ";
 		if (junction::TargetDirectoryExists("Sound"))
 		{
-			if (OapiExtension::RunsOrbiterSound40()) {
-				result += "OK. OrbiterSound (4.0) detected. No link necessary.";
+			if (OapiExtension::RunsSpaceXpanseSound40()) {
+				result += "OK. SpaceXpanseSound (4.0) detected. No link necessary.";
 			}
 			else if (!junction::IsDirectoryJunction("Modules\\Server\\Sound"))
 			{
@@ -976,7 +976,7 @@ void VideoTab::CreateSymbolicLinks()
 			}
 		}
 		else {
-			result += "OK. OrbiterSound not installed.";
+			result += "OK. SpaceXpanseSound not installed.";
 		}
 		result += "\r\n";
 	}

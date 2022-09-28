@@ -5,13 +5,13 @@
 #include "GraphicsAPI.h"
 #include "DlgMgr.h"
 #include "Resource.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Log.h"
 
 using namespace oapi;
 
 extern char DBG_MSG[256];
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 
 static int x_sizeframe = GetSystemMetrics (SM_CXSIZEFRAME);
 static int y_sizeframe = GetSystemMetrics (SM_CYSIZEFRAME);
@@ -40,10 +40,10 @@ static DIALOGENTRY *de_create = 0;
 // ==================================================================
 // class DialogManager
 
-DialogManager::DialogManager (Orbiter *orbiter, HWND hAppWnd)
+DialogManager::DialogManager (SpaceXpanse *spacexpanse, HWND hAppWnd)
 {
-	pOrbiter = orbiter;
-	gc = orbiter->GetGraphicsClient();
+	pSpaceXpanse = spacexpanse;
+	gc = spacexpanse->GetGraphicsClient();
 	hWnd = hAppWnd;
 	nEntry = 0;
 	nList = nListBuf = 0;
@@ -307,16 +307,16 @@ void DialogManager::BroadcastMessage (DWORD msg, void *data)
 }
 
 //-----------------------------------------------------------------------------
-// Name: OrbiterDefDialogProc()
-// Desc: Default message handler for orbiter dialog boxes
+// Name: SpaceXpanseDefDialogProc()
+// Desc: Default message handler for spacexpanse dialog boxes
 //-----------------------------------------------------------------------------
-INT_PTR OrbiterDefDialogProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR SpaceXpanseDefDialogProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_SETCURSOR:
 		// implements "focus follows mouse" behaviour
-		if (!g_pOrbiter->StickyFocus() && g_pOrbiter->Cfg()->CfgUIPrm.bFocusFollowsMouse && GetFocus() != hDlg &&
-			!IsChild (hDlg, GetFocus()) && GetParent (hDlg) == g_pOrbiter->GetRenderWnd()) {
+		if (!g_pSpaceXpanse->StickyFocus() && g_pSpaceXpanse->Cfg()->CfgUIPrm.bFocusFollowsMouse && GetFocus() != hDlg &&
+			!IsChild (hDlg, GetFocus()) && GetParent (hDlg) == g_pSpaceXpanse->GetRenderWnd()) {
 				SetFocus (hDlg);
 				return FALSE;
 		}
@@ -335,7 +335,7 @@ INT_PTR OrbiterDefDialogProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam
 		KillTimer (hDlg, 0xff);
 		return 0;
 	case WM_TIMER:
-		if (wParam == 0xff) g_pOrbiter->SingleFrame();
+		if (wParam == 0xff) g_pSpaceXpanse->SingleFrame();
 		return 0;
 
 	// *** Provide custom buttons in the window title bar ***

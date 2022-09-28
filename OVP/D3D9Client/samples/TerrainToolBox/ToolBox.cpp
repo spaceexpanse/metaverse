@@ -10,7 +10,7 @@
 
 #include <Windows.h>
 #include <windowsx.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "VesselAPI.h"
 #include "ModuleAPI.h"
 #include "DrawAPI.h"
@@ -225,7 +225,7 @@ BOOL ToolKit::DlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 
 // =================================================================================================
-// Orbiter Module
+// SpaceXpanse Module
 // =================================================================================================
 //
 ToolKit::ToolKit(HINSTANCE hInst) : gcGUIApp(), Module(hInst)
@@ -264,7 +264,7 @@ ToolKit::~ToolKit()
 
 
 // =================================================================================================
-// Orbiter is shuting down... Release resources...
+// SpaceXpanse is shuting down... Release resources...
 //
 void ToolKit::clbkShutdown()
 {
@@ -1138,7 +1138,7 @@ void ToolKit::clbkMouseClick(int iUser, void *pData)
 
 
 // =================================================================================================
-// Orbiter Module Callback
+// SpaceXpanse Module Callback
 //
 bool ToolKit::clbkProcessMouse(UINT event, DWORD state, DWORD x, DWORD y)
 {
@@ -1185,7 +1185,7 @@ bool ToolKit::clbkProcessMouse(UINT event, DWORD state, DWORD x, DWORD y)
 
 
 // =================================================================================================
-// Orbiter Module Callback
+// SpaceXpanse Module Callback
 //
 bool ToolKit::clbkProcessKeyboardBuffered(DWORD key, char kstate[256], bool simRunning)
 {
@@ -1203,7 +1203,7 @@ bool ToolKit::clbkProcessKeyboardBuffered(DWORD key, char kstate[256], bool simR
 
 
 // =================================================================================================
-// Orbiter Module Callback
+// SpaceXpanse Module Callback
 //
 void ToolKit::clbkSimulationStart(RenderMode rm)
 {
@@ -1212,7 +1212,7 @@ void ToolKit::clbkSimulationStart(RenderMode rm)
 
 
 // =================================================================================================
-// Orbiter Module Callback, ** USELESS **, By the time this is called D3D9Client and all graphics
+// SpaceXpanse Module Callback, ** USELESS **, By the time this is called D3D9Client and all graphics
 // servises has shutdown long ago.
 //
 void ToolKit::clbkSimulationEnd()

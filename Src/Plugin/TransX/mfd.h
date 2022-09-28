@@ -22,7 +22,7 @@
 #define __MFDGLOBALS_H
 
 
-// Needed due to the implementation of the selection functions in Orbiter
+// Needed due to the implementation of the selection functions in SpaceXpanse
 bool SelectVariableBody(void *id, char *str, void *usrdata);
 bool SelectVariableFloat(void *id, char *str, void *usrdata);
 bool SelectVariableAngle(void *id, char *str, void *usrdata); // hurr

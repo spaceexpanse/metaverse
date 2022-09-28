@@ -9,7 +9,7 @@
 #include <dx7\ddraw.h>
 #include "DialogWin.h"
 
-class Orbiter;
+class SpaceXpanse;
 class oapi::GraphicsClient;
 
 struct DIALOGENTRY {
@@ -19,7 +19,7 @@ struct DIALOGENTRY {
 
 class DialogManager {
 public:
-	DialogManager(Orbiter *orbiter, HWND hAppWnd);
+	DialogManager(SpaceXpanse *spacexpanse, HWND hAppWnd);
 	~DialogManager();
 
 	void Init (HWND hAppWnd);
@@ -31,7 +31,7 @@ public:
 	template<typename DlgType>
 	DlgType *EnsureEntry (HINSTANCE hInst = 0, void *context = 0)
 	{
-		if (!hInst) hInst = g_pOrbiter->GetInstance();
+		if (!hInst) hInst = g_pSpaceXpanse->GetInstance();
 		DlgType *pDlg = EntryExists<DlgType> (hInst);
 		if (!pDlg) pDlg = MakeEntry<DlgType> (hInst, context);
 		return pDlg;
@@ -43,8 +43,8 @@ public:
 	template<typename DlgType>
 	DlgType *MakeEntry (HINSTANCE hInst = 0, void *context = 0)
 	{
-		if (!hInst) hInst = g_pOrbiter->GetInstance();
-		HWND hParent = g_pOrbiter->GetRenderWnd();
+		if (!hInst) hInst = g_pSpaceXpanse->GetInstance();
+		HWND hParent = g_pSpaceXpanse->GetRenderWnd();
 		DlgType *pDlg = new DlgType (hInst, hParent, context);
 		AddEntry (pDlg);
 		return pDlg;
@@ -117,11 +117,11 @@ private:
 	HWND *DlgList;
 	DWORD nList, nListBuf;
 
-	Orbiter *pOrbiter;
+	SpaceXpanse *pSpaceXpanse;
 	oapi::GraphicsClient *gc;
 	HWND hWnd;
 
-	static LRESULT FAR PASCAL OrbiterCtrl_Level_MsgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static LRESULT FAR PASCAL SpaceXpanseCtrl_Level_MsgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	// MessageHandler for slider custom control
 
 	// ====================================================================
@@ -150,6 +150,6 @@ private:
 
 };
 
-INT_PTR OrbiterDefDialogProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR SpaceXpanseDefDialogProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 #endif // !__DLGMGR_H

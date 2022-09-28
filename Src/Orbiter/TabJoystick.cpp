@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Launchpad.h"
 #include "TabJoystick.h"
 #include "resource.h"
@@ -16,13 +16,13 @@
 //-----------------------------------------------------------------------------
 // JoystickTab class
 
-orbiter::JoystickTab::JoystickTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::JoystickTab::JoystickTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 }
 
 //-----------------------------------------------------------------------------
 
-void orbiter::JoystickTab::Create ()
+void spacexpanse::JoystickTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_JOY);
 
@@ -37,7 +37,7 @@ void orbiter::JoystickTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::JoystickTab::GetConfig (const Config *cfg)
+void spacexpanse::JoystickTab::GetConfig (const Config *cfg)
 {
 	DWORD ndev;
 	DIDEVICEINSTANCE *joylist;
@@ -71,7 +71,7 @@ void orbiter::JoystickTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::JoystickTab::SetConfig (Config *cfg)
+void spacexpanse::JoystickTab::SetConfig (Config *cfg)
 {
 	cfg->CfgJoystickPrm.Joy_idx = SendDlgItemMessage (hTab, IDC_JOY_DEVICE, CB_GETCURSEL, 0, 0);
 	cfg->CfgJoystickPrm.ThrottleAxis = SendDlgItemMessage (hTab, IDC_JOY_THROTTLE, CB_GETCURSEL, 0, 0);
@@ -82,7 +82,7 @@ void orbiter::JoystickTab::SetConfig (Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::JoystickTab::OpenHelp ()
+bool spacexpanse::JoystickTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_joystick");
 	return true;
@@ -90,7 +90,7 @@ bool orbiter::JoystickTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::JoystickTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::JoystickTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_COMMAND:
@@ -127,7 +127,7 @@ INT_PTR orbiter::JoystickTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 
 //-----------------------------------------------------------------------------
 
-void orbiter::JoystickTab::JoystickChanged (DWORD idx)
+void spacexpanse::JoystickTab::JoystickChanged (DWORD idx)
 {
 	BOOL bJoy = (idx != 0);
 	for (DWORD i = IDC_JOY_STATIC2; i <= IDC_JOY_INIT; i++)

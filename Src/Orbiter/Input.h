@@ -11,10 +11,10 @@
 #include "Di7frame.h"
 
 class DInput {
-	friend class Orbiter;
+	friend class SpaceXpanse;
 
 public:
-	DInput (Orbiter *pOrbiter);
+	DInput (SpaceXpanse *pSpaceXpanse);
 	~DInput ();
 
 	HRESULT Create (HINSTANCE hInst);
@@ -40,7 +40,7 @@ protected:
 	HRESULT SetJoystickProperties ();
 
 private:
-	Orbiter *orbiter;
+	SpaceXpanse *spacexpanse;
 	CDIFramework7 *diframe;
 	JoyProp joyprop;
 };

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #define ORBITER_MODULE
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 #include "LuaConsole.h"
 #include "ConsoleCfg.h"
 #include "resource.h"
@@ -73,7 +73,7 @@ LuaConsole::LuaConsole (HINSTANCE hDLL): Module (hDLL)
 
 LuaConsole::~LuaConsole ()
 {
-	// Unregister the custom function in Orbiter
+	// Unregister the custom function in SpaceXpanse
 	oapiUnregisterCustomCmd (dwCmd);
 
 	// Unregister the terminal window class
@@ -102,7 +102,7 @@ void LuaConsole::clbkSimulationStart (RenderMode mode)
 	col[1] = 0x008000;
 	col[2] = 0x0000FF;
 
-	AddLine ("==== Orbiter Terminal (" LUA_RELEASE ") ====");
+	AddLine ("==== SpaceXpanse Terminal (" LUA_RELEASE ") ====");
 	AddLine ("Type 'help()' for help.");
 	AddLine ("");
 }
@@ -138,9 +138,9 @@ void LuaConsole::clbkPreStep (double simt, double simdt, double mjd)
 {
 	if (interp) {
 		if (interp->IsBusy() || cConsoleCmd[0] || interp->nJobs()) { // let the interpreter do some work
-			interp->EndExec();        // orbiter hands over control
+			interp->EndExec();        // spacexpanse hands over control
 			// At this point the interpreter is performing one cycle
-			interp->WaitExec();   // orbiter waits to get back control
+			interp->WaitExec();   // spacexpanse waits to get back control
 		}
 		if (bRefresh) {
 			UpdateScrollbar();

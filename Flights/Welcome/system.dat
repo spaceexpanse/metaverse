@@ -1,10 +1,10 @@
 0 NOTECOL 1 0.7 0
 0 NOTESIZE 2
 0 NOTEPOS 0.25 0.1 0.9 0.9
-0 NOTE Welcome to Orbiter 2010!
+0 NOTE Welcome to SpaceXpanse 2010!
 5 NOTEPOS 0.25 0.05 0.7 0.9
 5 NOTESIZE 1.4
-5 NOTE Orbiter is a free and realistic space flight simulator ...
+5 NOTE SpaceXpanse is a free and realistic space flight simulator ...
 5 CAMERA SET Track:ISS:40.00:RELATIVE 1.837 -1.767 -0.073
 11 CAMERA SET Cockpit:GL-01:40.00
 11 NOTEPOS 0.25 0.3 0.7 0.9
@@ -15,9 +15,9 @@
 21 NOTE ... for a tour around Cape Canaveral, into orbit, or to the moon and beyond.
 32 CAMERA SET Track:GL-01:40.00:GLOBAL 12.615 2.870 1.092
 32 NOTEPOS 0.25 0.2 0.7 0.9
-32 NOTE Orbiter's physics model includes atmospheric flight as well as low Earth orbit, or interplanetary missions.
+32 NOTE SpaceXpanse's physics model includes atmospheric flight as well as low Earth orbit, or interplanetary missions.
 42 CAMERA SET Ground:GL-01:40.00:Earth -80.62138 28.58011 1662.02 2.94 -0.50
-42 NOTE Orbiter includes existing launch sites such as the Kennedy Space Center ...
+42 NOTE SpaceXpanse includes existing launch sites such as the Kennedy Space Center ...
 45 CAMERA SET Ground:GL-01:40.00:Earth -80.65128 28.58846 14171.73 1.68 -1.47
 48 CAMERA SET Ground:GL-01:40.00:Earth -80.42505 28.56332 23301.07 2.99 -0.74
 51 CAMERA SET Ground:SH-02:40.00:Moon -33.43144 41.10661 136.21 1.84 -0.17
@@ -40,7 +40,7 @@
 104 CAMERA SET Ground:STS-101:30.00:Earth -80.60746 28.62575 4500
 104 NOTE Watch Florida in glorious high resolution drop away below you.
 112 CAMERA SET Track:STS-101:50.00:GLOBAL 86.584 -2.506 -0.475
-112 NOTE (Check the Orbiter web site for links to additional high resolution planet textures.)
+112 NOTE (Check the SpaceXpanse web site for links to additional high resolution planet textures.)
 117 CAMERA SET Track:STS-101:40.00:ABSDIR 6.389 -0.179 3.125
 121 CAMERA SET Ground:STS-101:10.00:Earth -80.63109 28.65232 6733.79 -0.75 0.40
 121 NOTE The Shuttle is pitching over into its ascent trajectory.
@@ -57,7 +57,7 @@
 169.884 TACC 0.100000
 170.343 CAMERA SET Track:Hubble:30.00:RELATIVE 6.388 2.432 0.184
 170.343 TACC 1.000000
-170.343 NOTE Orbiter's supply of stock objects contains old favourites like the Hubble Space Telescope ...
+170.343 NOTE SpaceXpanse's supply of stock objects contains old favourites like the Hubble Space Telescope ...
 178 CAMERA SET Track:SolarSail:30.00:GLOBAL 2.890 1.139 0.519
 178 NOTE ... and futuristic new designs such as this solar sail.
 188 CAMERA SET Track:Mars:50.00:GLOBAL 1.640 1.656 0.629
@@ -80,13 +80,13 @@
 233.053 CAMERA SET Track:STS-104:40.00:GLOBAL 1.350 2.548 0.547
 238 NOTE Hard dock with the ISS!
 242 CAMERA SET Track:STS-104:40.00:GLOBAL 8.276 2.298 -0.003
-242 NOTE Now it's over to you. Have fun with Orbiter 2010!
+242 NOTE Now it's over to you. Have fun with SpaceXpanse 2010!
 248 CAMERA SET Track:STS-104:40.00:GLOBAL 32.243 2.050 -0.016
-248 NOTE If you just installed Orbiter, take a moment to configure the video options and simulation parameters.
+248 NOTE If you just installed SpaceXpanse, take a moment to configure the video options and simulation parameters.
 254 CAMERA SET Track:STS-104:40.00:GLOBAL 25840.373 2.050 -0.016
-254 NOTE Have a look at the manual in Doc\Orbiter.pdf.
+254 NOTE Have a look at the manual in Doc\SpaceXpanse.pdf.
 260 CAMERA SET Track:STS-104:40.00:GLOBAL 249263.812 1.755 -0.164
-260 NOTE Orbiter can be expanded with hundreds of addons - from new spacecraft, to instrumentation, bases, planets and moons, and high resolution textures.
-270 NOTE Visit the online forum at www.orbiter-forum.com, and the addon repository at www.orbithangar.com.
-280 NOTE Orbiter - orbit.medphys.ucl.ac.uk
+260 NOTE SpaceXpanse can be expanded with hundreds of addons - from new spacecraft, to instrumentation, bases, planets and moons, and high resolution textures.
+270 NOTE Visit the online forum at www.spacexpanse-forum.com, and the addon repository at www.orbithangar.com.
+280 NOTE SpaceXpanse - orbit.medphys.ucl.ac.uk
 290 ENDSESSION

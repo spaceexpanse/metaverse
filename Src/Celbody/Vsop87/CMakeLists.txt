@@ -10,11 +10,11 @@ set_target_properties(Vsop87
 )
 
 add_dependencies(Vsop87
-	${OrbiterTgt}
+	${SpaceXpanseTgt}
 )
 
 target_include_directories(Vsop87
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 )
 
 target_link_libraries(Vsop87

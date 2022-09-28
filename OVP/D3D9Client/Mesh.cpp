@@ -2141,7 +2141,7 @@ void D3D9Mesh::RenderSimplified(const LPD3DXMATRIX pW, LPDIRECT3DCUBETEXTURE9 *p
 
 
 // ================================================================================================
-// Render a legacy orbiter mesh without any additional textures
+// Render a legacy spacexpanse mesh without any additional textures
 //
 void D3D9Mesh::RenderFast(const LPD3DXMATRIX pW, int iTech)
 {

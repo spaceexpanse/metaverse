@@ -16,7 +16,7 @@ Sound/XRSound/**/Debug/
 Sound/XRSound/**/Release/
 Sound/XRSound/**/x64/
 Sound/XRSound/**/dist/
-Sound/XRSound/**/Debug-with-OrbiterRelease/
-Sound/XRSound/**/Release-with-OrbiterRelease/
+Sound/XRSound/**/Debug-with-SpaceXpanseRelease/
+Sound/XRSound/**/Release-with-SpaceXpanseRelease/
 
 *.~*

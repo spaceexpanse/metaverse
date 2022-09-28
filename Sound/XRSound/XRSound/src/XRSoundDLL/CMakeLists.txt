@@ -33,8 +33,8 @@ target_link_libraries(XRSound_dll
 )
 
 add_dependencies(XRSound_dll
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 install(TARGETS XRSound_dll

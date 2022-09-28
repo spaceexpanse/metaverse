@@ -118,7 +118,7 @@ void TileManager2Base::ProcessNode (QuadTreeNode<TileType> *node)
 			double a = prm.cdist - erad*cos(adist);
 			tdist = sqrt(a*a + h*h);
 		}
-		double apr = tdist * g_camera->TanAperture() / g_pOrbiter->ViewH() * 1400.0;
+		double apr = tdist * g_camera->TanAperture() / g_pSpaceXpanse->ViewH() * 1400.0;
 		double amax = (prm.cdist > 1.0 ? acos(1.0/prm.cdist) : 0.0);
 		if (adist > 0.5*amax) bias -= 2.0*(adist/amax-0.5); // reduce resolution for oblique tiles at the horizon
 		int tgtres = (apr < 1e-6 ? prm.maxlvl : max (0, min (prm.maxlvl, (int)(bias - log(apr)*res_scale))));

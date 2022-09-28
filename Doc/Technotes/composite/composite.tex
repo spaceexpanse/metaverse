@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Inertia calculations for composite vessels}
+\title{SpaceXpanse Technical Notes: Inertia calculations for composite vessels}
 \author{Martin Schweiger}
 \date{September 28, 2017}
 
@@ -18,7 +18,7 @@
 \maketitle
 
 \section{Introduction}
-This document describes the method Orbiter uses to define the inertial behaviour for composite vessels from the parameters of its components.
+This document describes the method SpaceXpanse uses to define the inertial behaviour for composite vessels from the parameters of its components.
 
 \section{Definitions}
 To describe the dynamics of a rigid body we use Euler's rotation equations that describe the rotation of the body in the rotating system:
@@ -35,13 +35,13 @@ In the principal body frame, the inertia matrix is diagonal, where diagonal elem
   I_3 \dot\omega_3 + (I_2 - I_1) \omega_1 \omega_2 &= M_3
 \end{split}
 \end{equation}
-Note that Orbiter assumes vessels to be defined in the principal frame but does not enforce it, that is, only the diagonal elements of $\mat{I}$ are considered. For most vessel layouts, an intrinsic symmetry is present, and the vessel frame naturally aligns closely with the principal frame, so that neglecting the off-diagonal elements of $\mat{I}$ incurs a small error. For composite structures this may not be true, so a more general framework may be introduced in the future. 
+Note that SpaceXpanse assumes vessels to be defined in the principal frame but does not enforce it, that is, only the diagonal elements of $\mat{I}$ are considered. For most vessel layouts, an intrinsic symmetry is present, and the vessel frame naturally aligns closely with the principal frame, so that neglecting the off-diagonal elements of $\mat{I}$ incurs a small error. For composite structures this may not be true, so a more general framework may be introduced in the future. 
 
 \section{Composite structures}
 In spaceflight scenarios, rigid structures may commonly be formed by connecting individual components (launch stack composed from individual stages, spacecraft docked at a space station, Apollo CSM+LM assembly, etc.) These rigid assemblies act as a single body under rotation, governed by its own composite PMI.
 
-While the composite PMI may be pre-calculated for commonly encountered arrangements, not all combinations are predictable. In Orbiter, any vessels with suitable docking ports can be connected to form arbitrary new ``super-vessels'' of two or more components. It is therefore necessary to find a method to compute the composite PMI from the inertia parameters of the individual components and the geometry of the assembly.
-Orbiter uses the following method:
+While the composite PMI may be pre-calculated for commonly encountered arrangements, not all combinations are predictable. In SpaceXpanse, any vessels with suitable docking ports can be connected to form arbitrary new ``super-vessels'' of two or more components. It is therefore necessary to find a method to compute the composite PMI from the inertia parameters of the individual components and the geometry of the assembly.
+SpaceXpanse uses the following method:
 \begin{itemize}
 \item Represent a vessel by a small number of discrete point masses arranged so that they generate the same PMI as the original vessel.
 \item Transform the point masses of all individual vessels into the common barycentric frame of the super-vessel.
@@ -121,7 +121,7 @@ I_3^S & = \sum_{j=1}^N \sum_{i=1}^6 \hat m_j ([\hat x_{ji}^S]^2 + [\hat y_{ji}^S
 \end{equation}
 
 \section{Mass-normalised PMI}
-It should be noted that Orbiter uses \emph{mass-normalised} PMI values $\tilde I_n = I_n/m$, which has the advantage that PMI values can remain unchanged even if the vessel mass changes. All Orbiter API calls by convention return and expect $\tilde I_n$ instead of $I_n$. Applying this convention to the super-vessel definition yields
+It should be noted that SpaceXpanse uses \emph{mass-normalised} PMI values $\tilde I_n = I_n/m$, which has the advantage that PMI values can remain unchanged even if the vessel mass changes. All SpaceXpanse API calls by convention return and expect $\tilde I_n$ instead of $I_n$. Applying this convention to the super-vessel definition yields
 \begin{equation}
 \tilde{I}_n^S = \frac{I_n^S}{\sum_{j=1}^N m_j}
 \end{equation}

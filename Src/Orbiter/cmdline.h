@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-class Orbiter;
+class SpaceXpanse;
 
 // ----------------------------------------------------------------------
 // Generic command line parser
@@ -50,15 +50,15 @@ private:
 
 
 // ----------------------------------------------------------------------
-// Orbiter-specific command line parser
+// SpaceXpanse-specific command line parser
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class CommandLine : public ::CommandLine
 	{
 	public:
 		static CommandLine& Instance() { return InstanceImpl(); }
-		static void Parse(Orbiter* pOrbiter, const PSTR cmdLine) { InstanceImpl(pOrbiter, cmdLine); }
+		static void Parse(SpaceXpanse* pSpaceXpanse, const PSTR cmdLine) { InstanceImpl(pSpaceXpanse, cmdLine); }
 
 		CommandLine(CommandLine const&) = delete;
 		void operator=(CommandLine const&) = delete;
@@ -83,9 +83,9 @@ namespace orbiter {
 		void PrintHelpAndExit() const;
 
 	private:
-		CommandLine(Orbiter* pOrbiter, const PSTR cmdLine);
-		static CommandLine& InstanceImpl(Orbiter* pOrbiter = 0, const PSTR cmdLine = 0);
-		Orbiter* m_pOrbiter;
+		CommandLine(SpaceXpanse* pSpaceXpanse, const PSTR cmdLine);
+		static CommandLine& InstanceImpl(SpaceXpanse* pSpaceXpanse = 0, const PSTR cmdLine = 0);
+		SpaceXpanse* m_pSpaceXpanse;
 	};
 
 }

@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Base.h"
 #include "Baseobj.h"
 #include "Vessel.h"
@@ -22,7 +22,7 @@ extern TextureManager2 *g_texmanager2;
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern char DBG_MSG[256];
 
@@ -54,7 +54,7 @@ Base::Base (char *fname, Planet *_planet, double _lng, double _lat)
 
 	InitDeviceObjects ();
 
-	ifstream ifs (g_pOrbiter->ConfigPath(fname));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath(fname));
 
 	// read location information from file, if available
 	if (ifs && GetItemString (ifs, "LOCATION", cbuf)) {
@@ -200,14 +200,14 @@ void Base::CreateStaticDeviceObjects ()
 {
 	ngenericmesh = 0;
 	ngenerictex  = 0;
-	ifstream ifs (g_pOrbiter->ConfigPath ("Base"));
+	ifstream ifs (g_pSpaceXpanse->ConfigPath ("Base"));
 	if (ifs) {
 		char cbuf[256], **tmp_list;
 		LONGLONG *tmp_id;
 		// load list of generic mesh names
 #ifndef NOGRAPHICS
 		if (FindLine (ifs, "begin_meshes")) {
-			g_pOrbiter->OutputLoadStatus ("Generic base textures", 0);
+			g_pSpaceXpanse->OutputLoadStatus ("Generic base textures", 0);
 			char str[256];
 			for (;;) {
 				if (!ifs.getline (cbuf, 256) || !_strnicmp (cbuf, "end_meshes", 10)) break;
@@ -265,7 +265,7 @@ void Base::CreateStaticDeviceObjects ()
 		}
 	}
 
-	oapi::GraphicsClient *gclient = g_pOrbiter->GetGraphicsClient();
+	oapi::GraphicsClient *gclient = g_pSpaceXpanse->GetGraphicsClient();
 	char fname[256];
 
 	for (int i = 0; i < ngenerictex; i++) {
@@ -284,7 +284,7 @@ void Base::CreateStaticDeviceObjects ()
 void Base::DestroyStaticDeviceObjects ()
 {
 	// destroy common static resources
-	oapi::GraphicsClient *gclient = g_pOrbiter->GetGraphicsClient();
+	oapi::GraphicsClient *gclient = g_pSpaceXpanse->GetGraphicsClient();
 
 #ifndef NOGRAPHICS
 	// destroy meshes
@@ -380,7 +380,7 @@ bool Base::InitSurfaceTiles () const
 			sprintf (cbuf, "%s_%d_%c%04d_%c%04d.dds", cbody->Name(), tile[i].res,
 				tile[i].ilng >= 0 ? 'e':'w', abs(tile[i].ilng),
 				tile[i].ilat >= 0 ? 'n':'s', abs(tile[i].ilat));
-			tile[i].tex = g_pOrbiter->LoadTexture (cbuf);			
+			tile[i].tex = g_pSpaceXpanse->LoadTexture (cbuf);			
 		}
 	}
 
@@ -396,7 +396,7 @@ void Base::DestroySurfaceTiles ()
 				tile[i].mesh = NULL;
 			}
 			if (tile[i].tex) {
-				g_pOrbiter->ReleaseSurface (tile[i].tex);
+				g_pSpaceXpanse->ReleaseSurface (tile[i].tex);
 				tile[i].tex = NULL;
 			}
 		}
@@ -457,7 +457,7 @@ void Base::ScanObjectMeshes () const
 	GroupSpec *grp_os = 0, *grp_us = 0; // mesh groups for the meshes compiled from generic primitives (over and under shadows)
 	DWORD ngrp_os = 0, ngrp_us = 0;
 	nobjmsh_os = nobjmsh_us = nobjmsh_sh = 0;
-	bool bshadow = g_pOrbiter->Cfg()->CfgVisualPrm.bShadows;
+	bool bshadow = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bShadows;
 
 	for (i = 0; i < nobj; i++) {
 		BaseObject *bo = obj[i];
@@ -755,7 +755,7 @@ int Base::ReportTouchdown (VesselBase *vessel, double vlng, double vlat)
 		}
 	}
 	if (padno != (DWORD)-1) { // cancel all other requests for this vessel
-		if (g_pOrbiter->Cfg()->CfgLogicPrm.bPadRefuel)
+		if (g_pSpaceXpanse->Cfg()->CfgLogicPrm.bPadRefuel)
 			vessel->Refuel();
 		for (i = 0; i < npad; i++) {
 			if (i == padno) continue;

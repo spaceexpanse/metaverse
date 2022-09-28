@@ -1,14 +1,14 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "tilelabel.h"
 #include "camera.h"
 #include "D3dmath.h"
 #include <limits>
 #include <sstream>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 
 TileLabel *TileLabel::Create(const SurfTile *stile)
@@ -66,7 +66,7 @@ bool TileLabel::Read()
 
 	if (tile->mgr->Cprm().tileLoadFlags & 0x0001) { // try loading from individual tile file
 		sprintf (path, "%s\\Label\\%02d\\%06d\\%06d.lab", tile->mgr->Cbody()->Name(), lvl+4, ilat, ilng);
-		g_pOrbiter->Cfg()->PTexPath (texpath, path);
+		g_pSpaceXpanse->Cfg()->PTexPath (texpath, path);
 
 		std::ifstream ifs(texpath);
 		if (ifs.good()) {

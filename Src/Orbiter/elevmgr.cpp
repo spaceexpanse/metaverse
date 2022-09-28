@@ -4,13 +4,13 @@
 #include "elevmgr.h"
 #include "Celbody.h"
 #include "Planet.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 
 static int elev_grid = 256;
 static int elev_stride = elev_grid+3;
 static int MAXLVL_LIMIT = 11;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern char DBG_MSG[256];
 
@@ -34,8 +34,8 @@ struct ELEVFILEHEADER { // file header for patch elevation data file
 ElevationManager::ElevationManager (const CelestialBody *_cbody)
 : cbody(_cbody)
 {
-	mode = g_pOrbiter->Cfg()->CfgVisualPrm.ElevMode;
-	tilesource = g_pOrbiter->Cfg()->CfgPRenderPrm.TileLoadFlags;
+	mode = g_pSpaceXpanse->Cfg()->CfgVisualPrm.ElevMode;
+	tilesource = g_pSpaceXpanse->Cfg()->CfgPRenderPrm.TileLoadFlags;
 	maxlvl = MAXLVL_LIMIT;
 	elev_res = 1.0;
 	if (cbody->Type() == OBJTP_PLANET) {
@@ -45,7 +45,7 @@ ElevationManager::ElevationManager (const CelestialBody *_cbody)
 	}
 	if (tilesource & 0x0002) {
 		char cbuf[256];
-		g_pOrbiter->Cfg()->PTexPath (cbuf, cbody->Name());
+		g_pSpaceXpanse->Cfg()->PTexPath (cbuf, cbody->Name());
 		treeMgr[0] = ZTreeMgr::CreateFromFile(cbuf, ZTreeMgr::LAYER_ELEV);
 		treeMgr[1] = ZTreeMgr::CreateFromFile(cbuf, ZTreeMgr::LAYER_ELEVMOD);
 	} else {
@@ -84,7 +84,7 @@ INT16 *ElevationManager::LoadElevationTile (int lvl, int ilat, int ilng, double 
 			FILE *f;
 			char fname[256], path[256];
 			sprintf (fname, "%s\\Elev\\%02d\\%06d\\%06d.elv", cbody->Name(), lvl, ilat, ilng);
-			g_pOrbiter->Cfg()->PTexPath(path, fname);
+			g_pSpaceXpanse->Cfg()->PTexPath(path, fname);
 			if (f = fopen(path, "rb")) {
 				elev = new INT16[ndat];
 				ELEVFILEHEADER hdr;
@@ -168,7 +168,7 @@ bool ElevationManager::LoadElevationTile_mod (int lvl, int ilat, int ilng, doubl
 			FILE *f;
 			char fname[256], path[256];
 			sprintf (fname, "%s\\Elev_mod\\%02d\\%06d\\%06d.elv", cbody->Name(), lvl, ilat, ilng);
-			g_pOrbiter->Cfg()->PTexPath(path, fname);
+			g_pSpaceXpanse->Cfg()->PTexPath(path, fname);
 			if (f = fopen(path, "rb")) {
 				ELEVFILEHEADER hdr;
 				fread (&hdr, sizeof(ELEVFILEHEADER), 1, f);
@@ -314,7 +314,7 @@ double ElevationManager::Elevation (double lat, double lng, int reqlvl, std::vec
 					t->lngmin = (double)ilng/(double)nlng*Pi2 - Pi;
 					t->lngmax = (double)(ilng+1)/(double)nlng*Pi2 - Pi;
 					// still need to store emin and emax
-					auto gc = g_pOrbiter->GetGraphicsClient();
+					auto gc = g_pSpaceXpanse->GetGraphicsClient();
 					if (gc) gc->clbkFilterElevation((OBJHANDLE)cbody, ilat, ilng, lvl, elev_res, t->data);
 					break;
 				}

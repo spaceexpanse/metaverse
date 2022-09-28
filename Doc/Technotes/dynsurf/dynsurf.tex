@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Dynamic vessel-surface interaction}
+\title{SpaceXpanse Technical Notes: Dynamic vessel-surface interaction}
 \author{Martin Schweiger}
 \date{\today}
 
@@ -30,7 +30,7 @@
 blah
 
 \section{Equilibrium landing gear compression}\label{sec:equi_comp}
-For seamless transition between dynamic and deterministic state updates for vessels resting on a planetary surface, we must be able to calculate the compression of landing gear at equilibrium, given the magnitude of gravitational acceleration $g$ on the surface, the vessel mass $m$, and the positions $\vec{r}_i = \lbrace x_i, y_i, z_i\rbrace$ and suspension constants $\alpha_i$ of the individual landing gear components (or equivalent) $i$. The compression has to be included in the touchdown position calculation for the deterministic model, to avoid vertical jumps when switching between update models. Orbiter currently uses 3 touchdown points to define a vessel's surface interaction, but the approach is valid for an arbitrary number of points.
+For seamless transition between dynamic and deterministic state updates for vessels resting on a planetary surface, we must be able to calculate the compression of landing gear at equilibrium, given the magnitude of gravitational acceleration $g$ on the surface, the vessel mass $m$, and the positions $\vec{r}_i = \lbrace x_i, y_i, z_i\rbrace$ and suspension constants $\alpha_i$ of the individual landing gear components (or equivalent) $i$. The compression has to be included in the touchdown position calculation for the deterministic model, to avoid vertical jumps when switching between update models. SpaceXpanse currently uses 3 touchdown points to define a vessel's surface interaction, but the approach is valid for an arbitrary number of points.
 
 First, assume that the plane described by the three touchdown points is parallel to the vessel's $y=0$ plane, and that any tilt of the vessel at rest induced by different loads on the gear elements is small. Then the compression effect on each gear is represented by a change $\Delta y_i$ of the gear's $y$-coordinate.
 
@@ -81,7 +81,7 @@ If the plane described by the touchdown point positions is not parallel to the $
 where $R$ is the required rotation, and $C$ denotes the operation of applying Equations \ref{eq:linsys} and \ref{eq:prm} on the rotated points.
 
 \section{Acknowlegements}
-I want to thank RisingFury and RAF92\_Moser, and in particular Miner1 of orbiter-forum.com for their input to the equilibrium landing gear compression problem. The solution in Section~\ref{sec:equi_comp} follows Miner1's 2D solution. Any mistakes in the 3D extension are mine.
+I want to thank RisingFury and RAF92\_Moser, and in particular Miner1 of spacexpanse-forum.com for their input to the equilibrium landing gear compression problem. The solution in Section~\ref{sec:equi_comp} follows Miner1's 2D solution. Any mistakes in the 3D extension are mine.
 
 \bibliography{ref}
 

@@ -82,31 +82,31 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,108,92,32,32,BS_FLAT
     GROUPBOX        "",IDC_STATIC,154,92,32,32,BS_FLAT
     GROUPBOX        "",IDC_STATIC,199,92,32,32,BS_FLAT
-    CONTROL         "",IDC_LATCHA,"OrbiterCtrl_Switch",0x0,65,158,23,29
-    CONTROL         "",IDC_LATCHB,"OrbiterCtrl_Switch",0x0,114,158,23,29
+    CONTROL         "",IDC_LATCHA,"SpaceXpanseCtrl_Switch",0x0,65,158,23,29
+    CONTROL         "",IDC_LATCHB,"SpaceXpanseCtrl_Switch",0x0,114,158,23,29
     CTEXT           "RELEASE",IDC_STATIC,85,151,34,8
     CTEXT           "LATCH",IDC_STATIC,89,186,24,8
     CTEXT           "O\r\nF\r\nF",IDC_STATIC,87,160,13,25
     CTEXT           "O\r\nF\r\nF",IDC_STATIC,102,160,13,25
     LTEXT           "SYS A",IDC_STATIC,155,142,22,8
     LTEXT           "SYS B",IDC_STATIC,203,142,22,8
-    CONTROL         "",IDC_RADA,"OrbiterCtrl_Switch",0x0,153,158,23,29
-    CONTROL         "",IDC_RADB,"OrbiterCtrl_Switch",0x0,201,158,23,29
+    CONTROL         "",IDC_RADA,"SpaceXpanseCtrl_Switch",0x0,153,158,23,29
+    CONTROL         "",IDC_RADB,"SpaceXpanseCtrl_Switch",0x0,201,158,23,29
     CTEXT           "DEPLOY",IDC_STATIC,174,151,30,8
     CTEXT           "STOW",IDC_STATIC,178,186,23,8
     CTEXT           "O\r\nF\r\nF",IDC_STATIC,174,160,13,25
     CTEXT           "O\r\nF\r\nF",IDC_STATIC,190,160,13,25
-    CONTROL         "",IDC_MECH1,"OrbiterCtrl_Switch",0x0,114,32,23,29
-    CONTROL         "",IDC_MECH2,"OrbiterCtrl_Switch",0x0,162,32,23,29
+    CONTROL         "",IDC_MECH1,"SpaceXpanseCtrl_Switch",0x0,114,32,23,29
+    CONTROL         "",IDC_MECH2,"SpaceXpanseCtrl_Switch",0x0,162,32,23,29
     CTEXT           "ON",IDC_STATIC,144,25,12,8
     CTEXT           "OFF",IDC_STATIC,142,60,14,8
     LTEXT           "SYS 1",IDC_STATIC,20,16,21,8
     LTEXT           "SYS 2",IDC_STATIC,66,16,21,8
-    CONTROL         "",IDC_PLBD1,"OrbiterCtrl_Switch",0x0,18,32,23,29
-    CONTROL         "",IDC_PLBD2,"OrbiterCtrl_Switch",0x0,66,32,23,29
+    CONTROL         "",IDC_PLBD1,"SpaceXpanseCtrl_Switch",0x0,18,32,23,29
+    CONTROL         "",IDC_PLBD2,"SpaceXpanseCtrl_Switch",0x0,66,32,23,29
     CTEXT           "ENABLE",IDC_STATIC,39,25,29,8
     CTEXT           "DISABLE",IDC_STATIC,38,60,31,8
-    CONTROL         "",IDC_PLBD,"OrbiterCtrl_Switch",0x0,17,158,23,29
+    CONTROL         "",IDC_PLBD,"SpaceXpanseCtrl_Switch",0x0,17,158,23,29
     LTEXT           "OPEN",IDC_STATIC,19,151,21,8
     LTEXT           "CLOSE",IDC_STATIC,17,186,24,8
     CTEXT           "S\r\nT\r\nO\r\nP",IDC_STATIC,8,156,9,33
@@ -150,8 +150,8 @@ BEGIN
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,161,189,16,1
     CTEXT           "LAT",IDC_KU_TLKBK,64,227,27,14,SS_CENTERIMAGE | SS_SUNKEN | WS_BORDER
     GROUPBOX        "",IDC_STATIC,62,216,32,32,BS_FLAT
-    CONTROL         "",IDC_KU,"OrbiterCtrl_Switch",0x0,66,262,23,29
-    CONTROL         "",IDC_KU_DIRECT,"OrbiterCtrl_Switch",0x0,17,262,23,29
+    CONTROL         "",IDC_KU,"SpaceXpanseCtrl_Switch",0x0,66,262,23,29
+    CONTROL         "",IDC_KU_DIRECT,"SpaceXpanseCtrl_Switch",0x0,17,262,23,29
     CTEXT           "KU ANTENNA",IDC_STATIC,32,204,44,8
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,80,208,16,1
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,14,208,16,1

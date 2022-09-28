@@ -4,7 +4,7 @@
 # SAFESEH linker flag must be turned off because the DX7 libraries don't support it'
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -SAFESEH:NO")
 
-# Sources for all Orbiter executable targets
+# Sources for all SpaceXpanse executable targets
 set(common_src
 # General source files
 	Astro.cpp
@@ -20,7 +20,7 @@ set(common_src
 	LightEmitter.cpp
 	Mesh.cpp
 	Nav.cpp
-	Orbiter.cpp
+	SpaceXpanse.cpp
 	PlaybackEd.cpp
 	Psys.cpp
 	Script.cpp
@@ -102,7 +102,7 @@ set(common_src
 	GraphicsAPI.cpp
 	MFDAPI.cpp
 	ModuleAPI.cpp
-	OrbiterAPI.cpp
+	SpaceXpanseAPI.cpp
 # Graphics utils
 	D3d7util.cpp
 	D3dmath.cpp
@@ -115,9 +115,9 @@ set(common_src
 	Util.cpp
 	ZTreeMgr.cpp
 # Resources
-	Orbiter.rc
-	Orbiter.rc2
-	Orbiter.ico
+	SpaceXpanse.rc
+	SpaceXpanse.rc2
+	SpaceXpanse.ico
 # Files built on the fly
 	cryptstring.h
 	Disclaimer.txt
@@ -150,9 +150,9 @@ set(graphics_src
 	Vvessel.cpp
 )
 
-set(Orbiter_includes
+set(SpaceXpanse_includes
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 	${CMAKE_SOURCE_DIR}/OVP
 	${CMAKE_CURRENT_BINARY_DIR}
 	${ZLIB_INCLUDE_DIR}
@@ -160,43 +160,43 @@ set(Orbiter_includes
 	${DX7SDK_INCLUDE_DIR}
 )
 
-set(Orbiter_common_libs
+set(SpaceXpanse_common_libs
 	Winmm.dll
 	comctl32.lib
 	UxTheme.lib
 	${HTML_HELP_LIBRARY}
 	${ZLIB_LIB}
 	${HTMLHELP_LIB}
-	$<TARGET_FILE:Orbitersdk>
+	$<TARGET_FILE:SpaceXpansesdk>
 	$<TARGET_FILE:DlgCtrl>
 )
-set(Orbiter_dx7_libs
+set(SpaceXpanse_dx7_libs
 	dxguid.lib
 	dinput8.lib
 	${DX7SDK_LIB_DIR}/d3dim.lib
 	${DX7SDK_LIB_DIR}/ddraw.lib
 )
-set(Orbiter_server_libs
+set(SpaceXpanse_server_libs
 	dxguid.lib
 	dinput8.lib
 )
 
-set(Orbiter_depends
+set(SpaceXpanse_depends
 	scramble
 	fchecksum
-	Orbitersdk
+	SpaceXpansesdk
 	DlgCtrl
 )
 
-# Orbiter executable (DX7 inline graphics version)
+# SpaceXpanse executable (DX7 inline graphics version)
 if(BUILD_ORBITER_DX7)
 
-	add_executable(Orbiter
+	add_executable(SpaceXpanse
 		${common_src}
 		${graphics_src}
 	)
 
-	set_target_properties(Orbiter
+	set_target_properties(SpaceXpanse
 		PROPERTIES
 		LINK_FLAGS "/SUBSYSTEM:WINDOWS"
 		COMPILE_FLAGS "${CompileFlags}"
@@ -206,91 +206,91 @@ if(BUILD_ORBITER_DX7)
 		FOLDER Core
 	)
 
-	target_include_directories(Orbiter PUBLIC
-		${Orbiter_includes}
+	target_include_directories(SpaceXpanse PUBLIC
+		${SpaceXpanse_includes}
 	)
 	
-	target_link_libraries(Orbiter
-		${Orbiter_common_libs}
-		${Orbiter_dx7_libs}
+	target_link_libraries(SpaceXpanse
+		${SpaceXpanse_common_libs}
+		${SpaceXpanse_dx7_libs}
 	)
 
-	add_dependencies(Orbiter
-		${Orbiter_depends}
+	add_dependencies(SpaceXpanse
+		${SpaceXpanse_depends}
 	)
 
-	# Installation: Orbiter executable (standalone graphics version)
+	# Installation: SpaceXpanse executable (standalone graphics version)
 	install(TARGETS
-		Orbiter
+		SpaceXpanse
 		RUNTIME
 		DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
 	)
 
-	# Installation: Orbiter SDK interface library to SDK folder to be included by addons
-	install(FILES $<TARGET_LINKER_FILE:Orbiter>
+	# Installation: SpaceXpanse SDK interface library to SDK folder to be included by addons
+	install(FILES $<TARGET_LINKER_FILE:SpaceXpanse>
 		DESTINATION ${ORBITER_INSTALL_SDK_DIR}/lib
 	)
 	
 endif()
 
-# Orbiter executable (graphics server version)
+# SpaceXpanse executable (graphics server version)
 if(BUILD_ORBITER_SERVER)
 
-	add_executable(Orbiter_server
+	add_executable(SpaceXpanse_server
 		${common_src}
 	)
 
-	set_target_properties(Orbiter_server
+	set_target_properties(SpaceXpanse_server
 		PROPERTIES
 		LINK_FLAGS "/SUBSYSTEM:CONSOLE /ENTRY:WinMainCRTStartup"
 		COMPILE_FLAGS "${CompileFlags}"
 		RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_MODULE_DIR}/Server
-		OUTPUT_NAME Orbiter
+		OUTPUT_NAME SpaceXpanse
 		VS_DEBUGGER_WORKING_DIRECTORY ${ORBITER_BINARY_ROOT_DIR}
 		COMPILE_DEFINITIONS "NOGRAPHICS;DIRECTINPUT_VERSION=0x0800"
 		FOLDER Core
 	)
 
-	target_include_directories(Orbiter_server PUBLIC
-		${Orbiter_includes}
+	target_include_directories(SpaceXpanse_server PUBLIC
+		${SpaceXpanse_includes}
 	)
 
-	target_link_libraries(Orbiter_server
-		${Orbiter_common_libs}
-		${Orbiter_server_libs}
+	target_link_libraries(SpaceXpanse_server
+		${SpaceXpanse_common_libs}
+		${SpaceXpanse_server_libs}
 	)
 
-	add_dependencies(Orbiter_server
-		${Orbiter_depends}
+	add_dependencies(SpaceXpanse_server
+		${SpaceXpanse_depends}
 	)
 
-	# Installation: Orbiter executable (graphics-server versions)
+	# Installation: SpaceXpanse executable (graphics-server versions)
 	install(TARGETS
-		Orbiter_server
+		SpaceXpanse_server
 		RUNTIME
 		DESTINATION ${ORBITER_INSTALL_MODULE_DIR}/Server
 	)
-	# If the standard Orbiter executable is not built...
+	# If the standard SpaceXpanse executable is not built...
 	if(NOT BUILD_ORBITER_DX7)
-		set_target_properties(Orbiter_server
+		set_target_properties(SpaceXpanse_server
 			PROPERTIES
 			ENABLE_EXPORTS 1
 		)
 		# ...we have to use the NG version to export the API links
-		install(FILES $<TARGET_LINKER_FILE:Orbiter_server>
+		install(FILES $<TARGET_LINKER_FILE:SpaceXpanse_server>
 			DESTINATION ${ORBITER_INSTALL_SDK_DIR}/lib
 		)
-		# ...and copy Orbiter.exe into build dir (not install dir) so that tests work
-		add_custom_command(TARGET Orbiter_server
+		# ...and copy SpaceXpanse.exe into build dir (not install dir) so that tests work
+		add_custom_command(TARGET SpaceXpanse_server
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Orbiter_server> ${ORBITER_BINARY_ROOT_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:SpaceXpanse_server> ${ORBITER_BINARY_ROOT_DIR}
 		)
 	endif()
 	
 endif()
 
-# Copy library to its Orbitersdk/lib location so that external project integrated into the build can find it
-add_custom_command(TARGET ${OrbiterTgt}
+# Copy library to its SpaceXpansesdk/lib location so that external project integrated into the build can find it
+add_custom_command(TARGET ${SpaceXpanseTgt}
 	POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${ORBITER_BINARY_SDK_DIR}/lib
 	COMMAND ${CMAKE_COMMAND} -E copy ${ORBITER_LIB} ${ORBITER_BINARY_SDK_DIR}/lib/ 

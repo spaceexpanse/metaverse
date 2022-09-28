@@ -25,8 +25,8 @@ target_link_libraries(MMU
 )
 
 add_dependencies(MMU
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 add_custom_command(

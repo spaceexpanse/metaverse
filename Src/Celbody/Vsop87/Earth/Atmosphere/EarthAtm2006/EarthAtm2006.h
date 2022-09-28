@@ -4,7 +4,7 @@
 #ifndef __EARTHATM2006_H
 #define __EARTHATM2006_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ======================================================================

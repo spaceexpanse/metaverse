@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "vectors.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 
 class Panel;
@@ -17,7 +17,7 @@ class instrument		// basic instrument template
 	instrument(int x, int y,Panel *i_parent);
 	virtual ~instrument(){};
 	int type;							//instrument registration number for run-time ID
-	virtual void RegisterMe(int index){};//register instrument within Orbiter's api
+	virtual void RegisterMe(int index){};//register instrument within SpaceXpanse's api
 	virtual void PaintMe(){};		//repaint the instrument
 	virtual void RefreshMe(){};	//basic refresh()
 	virtual void LBD(int x,int y) {};

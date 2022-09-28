@@ -10,7 +10,7 @@
 // VObject.cpp
 // class vObject (implementation)
 //
-// A "vObject" is the visual representation of an Orbiter object
+// A "vObject" is the visual representation of an SpaceXpanse object
 // (vessel, planet/moon/sun, surface base). vObjects usually have
 // one or more meshes associated with it that define their visual
 // appearance, but they can be arbitrarily complex (e.g. planets

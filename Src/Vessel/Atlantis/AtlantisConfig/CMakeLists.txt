@@ -18,8 +18,8 @@ target_link_libraries(AtlantisConfig
 )
 
 add_dependencies(AtlantisConfig
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(AtlantisConfig

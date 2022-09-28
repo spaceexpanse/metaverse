@@ -7,7 +7,7 @@
 #define STRICT 1
 #include <windows.h>
 #include <d3d.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "GraphicsAPI.h"
 
 #define ITEM_SUBMENU 0x01

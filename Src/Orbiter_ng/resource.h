@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by Orbiter_ng.rc
+// Used by SpaceXpanse_ng.rc
 //
 #define IDI_ICON1                       101
 

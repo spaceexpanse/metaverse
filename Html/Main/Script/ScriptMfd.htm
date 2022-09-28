@@ -2,22 +2,22 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS" />
 <title>MFD scripts</title>
 </head>
 <body BGCOLOR=#FFFFFF TEXT=#000000>
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; MFD scripts</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script User's Guide</a> &gt; MFD scripts</p>
 
 <h1>MFD scripts</h1>
 <p>MFD scripts provide a quick and easy way to create new multifunctional display
- modes for enhancing all Orbiter vessels. Unlike vessel DLL modules, they don't require the compilation of a C++ file, but just a text
+ modes for enhancing all SpaceXpanse vessels. Unlike vessel DLL modules, they don't require the compilation of a C++ file, but just a text
 file containing the script.</p>
 <p>This section illustrates how to create a new MFD mode using the <i>ScriptMFD</i>
 interface. ScriptMFD is a generic MFD plugin that loads scripts and uses them to
-register MFD modes with Orbiter.</p>
-<p>The C++ sources for the ScriptMFD module are contained in the Orbiter SDK, at
-Orbitersdk\samples\ScriptMFD.</p>
+register MFD modes with SpaceXpanse.</p>
+<p>The C++ sources for the ScriptMFD module are contained in the SpaceXpanse SDK, at
+SpaceXpansesdk\samples\ScriptMFD.</p>
 
 <h2>Step 1: The MFD configuration file</h2>
 <p>Script MFD modes require a configuration file (unlike MFD modes defined via a
@@ -37,7 +37,7 @@ containing the MFD script (with path relative to Config\MFD), and <i>&lt;keycode
 is the keycode for the MFD selection shortcut.</p>
 <p>The keycode is an integer value (specified either in decimal or in 0x... hexadecimal
 notation) corresponding to the values of the OAPI_KEY_xxx identifiers found in
-Orbitersdk\include\OrbiterAPI.h</p>
+SpaceXpansesdk\include\SpaceXpanseAPI.h</p>
 <p>While the MFD script can be put in a separate text file, it is also possible
 (and usually more convenient) to put it directly in the configuration file,
 allowing to define the entire MFD mode with a single file. This method is explained
@@ -73,7 +73,7 @@ END_PARSE<br />
 --]]
 </div>
 where <i>&lt;configname&gt;</i> is the name of the configuration file itself.
-The "END_PARSE" entry prevents Orbiter's configuration parser from scanning the
+The "END_PARSE" entry prevents SpaceXpanse's configuration parser from scanning the
 following script, while the "--[[" and "--]]" lines define the entire
 configuration block as a Lua comment, so it doesn't interfere with the script
 interpreter.</p>
@@ -87,14 +87,14 @@ MFD\<i>&lt;configname&gt;</i>
 </div>
 to the end of the file, where <i>&lt;configname&gt;</i> is the name of the
 configuration file you just created.</p>
-<p>Script MFD modes are only accessible in Orbiter if the <i>ScriptMFD</i> module
-is activated in the Modules tab of the Orbiter launchpad.</p>
+<p>Script MFD modes are only accessible in SpaceXpanse if the <i>ScriptMFD</i> module
+is activated in the Modules tab of the SpaceXpanse launchpad.</p>
 
 <h2>Step 5: Drawing the MFD display</h2>
 <p>The script must implement a number of callback functions to define the
-behaviour of the MFD mode. Orbiter calls these functions (via the ScriptMFD plugin)
+behaviour of the MFD mode. SpaceXpanse calls these functions (via the ScriptMFD plugin)
 whenever the MFD display needs to be updated, an MFD button is pressed, etc.</p>
-<p>An essential callback function is <i>update</i> which is called by Orbiter
+<p>An essential callback function is <i>update</i> which is called by SpaceXpanse
 to redraw the MFD display. Its interface looks like this:</p>
 <div class="code">
 function update(skp)<br />
@@ -266,9 +266,9 @@ end
 <p>The <i>kstate</i> argument for <i>consumekeyimmediate</i> is an array of the states
 of all keys. Use the <a href="api_oapi.htm#oapi_keydown">oapi.keydown</a> function
 to query individual keys or key combinations. Use the <a href="api_oapi.htm#oapi_resetkey">oapi.resetkey</a>
-function to reset the key state (and prevent Orbiter from further trying to process the key.</p>
+function to reset the key state (and prevent SpaceXpanse from further trying to process the key.</p>
 <p>This function should normally return <i>false</i>. Returning <i>true</i> resets
-the entire key state (preventing Orbiter from further processing any keys).</p>
+the entire key state (preventing SpaceXpanse from further processing any keys).</p>
 
 <h2>Step 8: Further reading</h2>
 <p>The following Script Reference sections are useful when designing an MFD mode:

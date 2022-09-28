@@ -10,7 +10,7 @@
 #ifndef __SCNEDITORAPI_H
 #define __SCNEDITORAPI_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 #define WM_SCNEDITOR WM_USER
 

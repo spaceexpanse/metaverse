@@ -12,13 +12,13 @@
 
 //-----------------------------------------------------------------------------
 
-orbiter::ParameterTab::ParameterTab (const LaunchpadDialog *_lp): LaunchpadTab (_lp)
+spacexpanse::ParameterTab::ParameterTab (const LaunchpadDialog *_lp): LaunchpadTab (_lp)
 {
 }
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ParameterTab::Create ()
+void spacexpanse::ParameterTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_OPT);
 
@@ -40,7 +40,7 @@ void orbiter::ParameterTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ParameterTab::GetConfig (const Config *cfg)
+void spacexpanse::ParameterTab::GetConfig (const Config *cfg)
 {
 	char cbuf[20];
 	SendDlgItemMessage (hTab, IDC_OPT_MFDTRANSP, BM_SETCHECK,
@@ -85,7 +85,7 @@ void orbiter::ParameterTab::GetConfig (const Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::ParameterTab::SetConfig (Config *cfg)
+void spacexpanse::ParameterTab::SetConfig (Config *cfg)
 {
 	DWORD i;
 	char cbuf[128];
@@ -133,7 +133,7 @@ void orbiter::ParameterTab::SetConfig (Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::ParameterTab::OpenHelp ()
+bool spacexpanse::ParameterTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_param");
 	return true;

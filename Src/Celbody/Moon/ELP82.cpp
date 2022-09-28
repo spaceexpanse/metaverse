@@ -1,7 +1,7 @@
 #include <math.h>
 #include <fstream>
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ using namespace std;
 // Uncomment this to add higher-order perturbation terms
 // (tidal, relativistic, solar eccentricity)
 // Warning: Using this can lead to inconsistencies since these
-// effects are not currently modelled in Orbiter's dynamic model.
+// effects are not currently modelled in SpaceXpanse's dynamic model.
 
 // ===========================================================
 // Global variables
@@ -406,7 +406,7 @@ int ELP82 (double mjd, double *r)
 	pw_dot   = pw_dot*ra + pw*ra_dot;
 	qw       = qw*ra;
 	qw_dot   = qw_dot*ra + qw*ra_dot;
-	// at this point we swap y and z components to conform with orbiter convention
+	// at this point we swap y and z components to conform with spacexpanse convention
 	// r[1] <-> r[2] and r[4] <-> r[5]
 	r[0] = pw2*x1+pwqw*x2+pw*x3;
 	r[3] = pw2_dot*x1 + pw2*x1_dot + pwqw_dot*x2 + pwqw*x2_dot + pw_dot*x3 + pw*x3_dot;
@@ -416,7 +416,7 @@ int ELP82 (double mjd, double *r)
 	r[4] = -pw_dot*x1 - pw*x1_dot + qw_dot*x2 + qw*x2_dot + (pw2_dot+qw2_dot)*x3 + (pw2+qw2-1)*x3_dot;
 
 	// ========= End of ELP82 code =========
-	// Below is conversion to Orbiter format
+	// Below is conversion to SpaceXpanse format
 
 	// convert to m and m/s
 	static double pscale = 1e3;

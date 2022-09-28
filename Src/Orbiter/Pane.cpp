@@ -21,7 +21,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern Camera *g_camera;
 extern Vessel *g_focusobj;
@@ -34,7 +34,7 @@ static COLORREF brightColor = RGB (255, 224, 128);
 			   
 Pane::Pane (oapi::GraphicsClient *gclient, HWND hwnd, int width, int height, int bpp)
 {
-	// Note: gclient is assumed to be a valid pointer. Nongraphics orbiter
+	// Note: gclient is assumed to be a valid pointer. Nongraphics spacexpanse
 	// instances should not create a Pane.
 
 	int i;
@@ -66,17 +66,17 @@ Pane::Pane (oapi::GraphicsClient *gclient, HWND hwnd, int width, int height, int
 	else    mibar = NULL;
 
 	
-	i = g_pOrbiter->Cfg()->CfgInstrumentPrm.bMfdPow2;
+	i = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.bMfdPow2;
 	if (i == 2) {
 		DWORD val;
 		gc->clbkGetRenderParam (RP_REQUIRETEXPOW2, &val);
 		mfdsize_pow2 = (val > 0);
 	} else mfdsize_pow2 = (i > 0);
-	mfd_hires_threshold = g_pOrbiter->Cfg()->CfgInstrumentPrm.MfdHiresThreshold;
-	mfd_vc_size = g_pOrbiter->Cfg()->CfgInstrumentPrm.VCMFDSize;
+	mfd_hires_threshold = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.MfdHiresThreshold;
+	mfd_vc_size = g_pSpaceXpanse->Cfg()->CfgInstrumentPrm.VCMFDSize;
 
 	InitResources ();
-	SetHUDColour (g_pOrbiter->Cfg()->CfgCameraPrm.HUDCol, 1.0, true);
+	SetHUDColour (g_pSpaceXpanse->Cfg()->CfgCameraPrm.HUDCol, 1.0, true);
 
 	blinkmesh.mesh2d = NULL;
 
@@ -215,7 +215,7 @@ bool Pane::SetPanelMode (int pmode, bool force)
 			ok = g_focusobj->SetGenericCockpit();
 			break;
 		case 2:
-			panel2d = new Panel2D (0, this, g_pOrbiter->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
+			panel2d = new Panel2D (0, this, g_pSpaceXpanse->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
 			if (ok = g_focusobj->LoadPanel2D (0, panel2d)) {
 				//panel2d->RedrawAllAreas (PANEL_REDRAW_INIT);
 				panel2d->Setup();
@@ -225,7 +225,7 @@ bool Pane::SetPanelMode (int pmode, bool force)
 				delete panel2d;
 				panel2d = 0;
 			}
-			panel = new Panel (0, this, g_pOrbiter->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
+			panel = new Panel (0, this, g_pSpaceXpanse->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
 			if (ok = g_focusobj->LoadPanel (0)) {
 				//panel->RedrawAllAreas (PANEL_REDRAW_INIT);
 				panel->Setup ();
@@ -281,7 +281,7 @@ int Pane::SelectPanel (int id)
 	if (panel2d) delete panel2d;
 	if (panel) delete panel;
 
-	panel2d = new Panel2D (id, this, g_pOrbiter->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
+	panel2d = new Panel2D (id, this, g_pSpaceXpanse->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
 	if (g_focusobj->LoadPanel2D (id, panel2d)) {
 		panel2d->RedrawAllAreas (PANEL_REDRAW_INIT);
 		panel2d->Setup ();
@@ -296,7 +296,7 @@ int Pane::SelectPanel (int id)
 		panel2d = 0;
 	}
 
-	panel = new Panel (id, this, g_pOrbiter->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
+	panel = new Panel (id, this, g_pSpaceXpanse->Cfg()->CfgLogicPrm.PanelScale); TRACENEW
 	if (g_focusobj->LoadPanel (id)) {
 		panel->RedrawAllAreas (PANEL_REDRAW_INIT);
 		panel->Setup ();
@@ -491,7 +491,7 @@ void Pane::SetHUDColour (int idx, double intens, bool force)
 			if (mfd[0].instr) mfd[0].instr->Refresh();
 			if (mfd[1].instr) mfd[1].instr->Refresh();
 		}
-		g_pOrbiter->Cfg()->CfgCameraPrm.HUDCol = colidx;
+		g_pSpaceXpanse->Cfg()->CfgCameraPrm.HUDCol = colidx;
 	}
 }
 

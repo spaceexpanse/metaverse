@@ -12,8 +12,8 @@ g.tex1.w =  512; % texture 1 width (instrument texture)
 g.tex1.h = 1024; % texture 1 height (instrument texture)
 g.nml = [0,0,-1];
 
-%path = 'c:\source\orbiter\meshes\DG\';
-path = 'C:\Source\Orbiter\Meshes\DG\';
+%path = 'c:\source\spacexpanse\meshes\DG\';
+path = 'C:\Source\SpaceXpanse\Meshes\DG\';
 fid = fopen([path 'deltaglider_p0_part.msh'],'wt');
 
 switch1.w  =   26;

@@ -15,7 +15,7 @@
 // within visual range around it.
 // The "render space" (i.e. the coordinate system in which the
 // camera and visual objects live) is translated against the
-// "global frame" in which orbiter's logical objects live, such
+// "global frame" in which spacexpanse's logical objects live, such
 // that the camera is always at the origin. Global and render
 // space have however the same orientation.
 // --------------------------------------------------------------

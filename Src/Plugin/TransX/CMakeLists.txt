@@ -33,8 +33,8 @@ target_link_libraries(TransX
 )
 
 add_dependencies(TransX
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(TransX

@@ -194,7 +194,7 @@ void VSOPOBJ::VsopEphem (double mjd, double *ret)
 		double tmp;
 		for (i = 0; i < 3; i++) ret[i] *= pscl;
 		for (     ; i < 6; i++) ret[i] *= vscl;
-		// swap y and z to map to orbiter system
+		// swap y and z to map to spacexpanse system
 		tmp = ret[1]; ret[1] = ret[2]; ret[2] = tmp;
 		tmp = ret[4]; ret[4] = ret[5]; ret[5] = tmp;
 	}

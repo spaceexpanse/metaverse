@@ -10,7 +10,7 @@
 // VObject.h
 // class vObject (interface)
 //
-// A "vObject" is the visual representation of an Orbiter object
+// A "vObject" is the visual representation of an SpaceXpanse object
 // (vessel, planet/moon/sun, surface base). vObjects usually have
 // one or more meshes associated with them that define their visual
 // appearance, but they can be arbitrarily complex (e.g. planets
@@ -25,7 +25,7 @@
 #ifndef __VOBJECT_H
 #define __VOBJECT_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "GraphicsAPI.h"
 #include "Scene.h"
 #include <d3d.h>
@@ -37,7 +37,7 @@
  * \brief Visual object base class.
  *
  * A vObject is a render object representing a 'logical'
- * Orbiter object (identified by its OBJHANDLE) in a scene.
+ * SpaceXpanse object (identified by its OBJHANDLE) in a scene.
  */
 
 class vObject: public oapi::VisObject {

@@ -3,10 +3,10 @@
 
 #define STRICT 1
 #define OAPI_IMPLEMENTATION
-#include "Orbitersdk.h"
-#include "Orbiter.h"
+#include "SpaceXpansesdk.h"
+#include "SpaceXpanse.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 
 using namespace oapi;
@@ -63,7 +63,7 @@ void Module::clbkSimulationStart (RenderMode mode)
 {
 	// backward compatibility call (deprecated)
 	void (*opcOpenRenderViewport)(HWND,DWORD,DWORD,BOOL) = (void(*)(HWND,DWORD,DWORD,BOOL))GetProcAddress (hModule, "opcOpenRenderViewport");
-	if (opcOpenRenderViewport) opcOpenRenderViewport (g_pOrbiter->GetRenderWnd(), g_pOrbiter->ViewW(), g_pOrbiter->ViewH(), g_pOrbiter->IsFullscreen()?TRUE:FALSE);
+	if (opcOpenRenderViewport) opcOpenRenderViewport (g_pSpaceXpanse->GetRenderWnd(), g_pSpaceXpanse->ViewW(), g_pSpaceXpanse->ViewH(), g_pSpaceXpanse->IsFullscreen()?TRUE:FALSE);
 }
 
 // ======================================================================

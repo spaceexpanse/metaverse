@@ -1564,7 +1564,7 @@ bool vPlanet::ParseMicroTextures()
 	MicroCfgsIterator it = MicroCfgs.find(GetName());
 	if (it != MicroCfgs.end()) {
 		MicroCfg = it->second;
-		//MicroCfgs.erase(it);	 Keep the table allocated for Orbiter restarts from launchpad
+		//MicroCfgs.erase(it);	 Keep the table allocated for SpaceXpanse restarts from launchpad
 		return true;
 	}
 	return false;

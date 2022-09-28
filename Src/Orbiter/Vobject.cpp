@@ -4,7 +4,7 @@
 #define STRICT 1
 #define OAPI_IMPLEMENTATION
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "D3dmath.h"
 #include "Vecmat.h"
 #include "Camera.h"
@@ -22,14 +22,14 @@ using namespace oapi;
 
 class Vessel;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern char DBG_MSG[256];
 extern Vessel *g_focusobj;
 extern bool g_bExternalView;
 extern TextureManager2 *g_texmanager2;
 
-OrbiterGraphics *VObject::gc = NULL;
+SpaceXpanseGraphics *VObject::gc = NULL;
 LPDIRECTDRAWSURFACE7 VObject::blobtex[3] = {0,0,0};
 Scene *VObject::scene = NULL;
 
@@ -38,16 +38,16 @@ VObject::VObject (const Body *_body): body(_body)
 	dmWorld = identity4();
 	VMAT_identity (mWorld);
 	isdist_old = 0.0;
-	apprad_factor = g_camera->TanAperture() / (body->Size() * g_pOrbiter->ViewH()*0.5);
+	apprad_factor = g_camera->TanAperture() / (body->Size() * g_pSpaceXpanse->ViewH()*0.5);
 }
 
-void VObject::CreateDeviceObjects (OrbiterGraphics *gclient)
+void VObject::CreateDeviceObjects (SpaceXpanseGraphics *gclient)
 {
 	FILE *file;
 	gc = gclient;
 	for (int i = 0; i < 3; i++) {
 		static char *fname[3] = {"Ball","Ball2","Ball3"};
-		file = fopen (g_pOrbiter->TexPath (fname[i]), "rb");
+		file = fopen (g_pSpaceXpanse->TexPath (fname[i]), "rb");
 		if (file) {
 			g_texmanager2->ReadTexture(file, blobtex + i);
 			fclose(file);
@@ -74,7 +74,7 @@ void VObject::Update (bool moving, bool force)
 
 	if (force) {
 		apprad_factor = g_camera->TanAperture() /
-			(body->Size() * g_pOrbiter->ViewH()*0.5);
+			(body->Size() * g_pSpaceXpanse->ViewH()*0.5);
 	}
 
 	// inverse apparent radius
@@ -145,7 +145,7 @@ void VObject::RenderAsPixel (LPDIRECT3DDEVICE7 dev)
 		homog.z >=  0.0) {
 		RECT r;
 		int x, y;
-		DWORD viewW = g_pOrbiter->ViewW(), viewH = g_pOrbiter->ViewH();
+		DWORD viewW = g_pSpaceXpanse->ViewW(), viewH = g_pSpaceXpanse->ViewH();
 		if (_hypot (homog.x, homog.y) < 1e-6) {
 			x = viewW/2, y = viewH/2;
 		} else {
@@ -184,7 +184,7 @@ void VObject::RenderAsPixel (LPDIRECT3DDEVICE7 dev)
 		int ir, ig, ib, c;
 		double ip;
 
-		g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
 		ip = min (1.0, intens*2.0);
 		ir = min (255, (int)(ip*abr));
 		ig = min (255, (int)(ip*abg));
@@ -211,7 +211,7 @@ void VObject::RenderAsPixel (LPDIRECT3DDEVICE7 dev)
 				SetPixel (hDC, x+1, y+1, c);
 			}
 		}
-		g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
 	}
 }
 

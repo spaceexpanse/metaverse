@@ -100,7 +100,7 @@ void D3D9Pad::D3D9TechInit(D3D9Client *_gc, LPDIRECT3DDEVICE9 pDevice)
 	if (errors) {
 		LogErr("Effect Error: %s",(char*)errors->GetBufferPointer());
 		MessageBoxA(0, (char*)errors->GetBufferPointer(), "Sketchpad.fx Error", 0);
-		FatalAppExitA(0,"Critical error has occured. See Orbiter.log for details");
+		FatalAppExitA(0,"Critical error has occured. See SpaceXpanse.log for details");
 	}
 
 	if (FX==0) {

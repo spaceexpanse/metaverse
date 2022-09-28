@@ -20,7 +20,7 @@ void PrintUsage()
 	std::cout << "Scans a mesh file and generates a C header file containing mesh group\n";
 	std::cout << "identifiers.\n\n";
 	std::cout << "Usage: meshc /I <meshfile> /O <header file> /P <suffix>\n";
-	std::cout << "  <meshfile>:    Orbiter mesh file to be scanned\n";
+	std::cout << "  <meshfile>:    SpaceXpanse mesh file to be scanned\n";
 	std::cout << "  <header file>: Output C header file name\n";
 	std::cout << "  <suffix>:      Variable name suffix\n\n";
 	std::cout << "Any parameters not provided on the command line are queried interactively.\n\n";

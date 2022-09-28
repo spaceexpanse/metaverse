@@ -9,7 +9,7 @@
 #define __KEYMAP_H
 
 #include "windows.h"
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 // key modifier list
 #define KMOD_LSHIFT 0x0100
@@ -27,7 +27,7 @@ public:
 	Keymap ();
 
 	void SetDefault ();
-	// set orbiter-default key mapping
+	// set spacexpanse-default key mapping
 
 	bool Read (char *fname);
 	// parse keymap table from file

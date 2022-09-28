@@ -6,11 +6,11 @@ D3D7 Client Installation Instructions
 
 To compile the sources of the D3D7 graphics client, you need:
 
-* The latest Orbiter release (base + SDK packages), available from the
-  download page at the Orbiter site http://orbit.medphys.ucl.ac.uk/
+* The latest SpaceXpanse release (base + SDK packages), available from the
+  download page at the SpaceXpanse site http://orbit.medphys.ucl.ac.uk/
 
-* The latest Orbiter beta diffs, available under
-  download.orbit.m6.net/betaNG/orbiter_beta.html
+* The latest SpaceXpanse beta diffs, available under
+  download.orbit.m6.net/betaNG/spacexpanse_beta.html
 
 * A Windows C++ compiler (VC++6 is ok, later should be fine, other compilers
   may or may not work).
@@ -39,38 +39,38 @@ To compile the sources of the D3D7 graphics client, you need:
 
 For a first-time installation only:
 
-* Create a directory for the Orbiter distribution, e.g.
-  Program Files\Orbiter_OVP
+* Create a directory for the SpaceXpanse distribution, e.g.
+  Program Files\SpaceXpanse_OVP
 
-* Install the latest Orbiter release by unpacking the base package
-  (orbiter060929_base.zip) and the SDK package (orbiter060929_sdk.zip) in
+* Install the latest SpaceXpanse release by unpacking the base package
+  (spacexpanse060929_base.zip) and the SDK package (spacexpanse060929_sdk.zip) in
   that directory. Make sure to preserve the directory structure of the
   zip archives.
 
 For each update of the OVP sources:
 
-* Download the latest orbiter beta diffs from
-  download.orbit.m6.net/betaNG/orbiter_beta.html
-  Unpack in the Orbiter directory. Make sure to preserve the directory
+* Download the latest spacexpanse beta diffs from
+  download.orbit.m6.net/betaNG/spacexpanse_beta.html
+  Unpack in the SpaceXpanse directory. Make sure to preserve the directory
   structure of the zip archive. Answer "yes" if asked whether to overwrite
   existing files.
-  The graphics API linking the orbiter core and external graphics clients
+  The graphics API linking the spacexpanse core and external graphics clients
   is continuously evolving, so it is important to make sure you have the
-  latest orbiter beta installed when compiling the current OVP snapshot.
+  latest spacexpanse beta installed when compiling the current OVP snapshot.
 
-* Make sure that the Orbiter_NG shortcut in the Orbiter root directory points
-  to Modules/Server/orbiter.exe and is working properly.
+* Make sure that the SpaceXpanse_NG shortcut in the SpaceXpanse root directory points
+  to Modules/Server/spacexpanse.exe and is working properly.
 
-* Download the OVP source tree into the Orbiter directory:
+* Download the OVP source tree into the SpaceXpanse directory:
 
-  cvs -d:pserver:anonymous@orbitervis.cvs.sourceforge.net:/cvsroot/orbitervis login
-  cvs -z3 -d:pserver:anonymous@orbitervis.cvs.sourceforge.net:/cvsroot/orbitervis co -P orbitervis
+  cvs -d:pserver:anonymous@spacexpansevis.cvs.sourceforge.net:/cvsroot/spacexpansevis login
+  cvs -z3 -d:pserver:anonymous@spacexpansevis.cvs.sourceforge.net:/cvsroot/spacexpansevis co -P spacexpansevis
 
-  You should end up with a directory "orbitervis" inside you Orbiter root
+  You should end up with a directory "spacexpansevis" inside you SpaceXpanse root
   directory.
 
 * Open the D3D7Client project (for VC++, the project file is in
-  orbitervis/D3D7Client/D3D7Client.dsw) and compile (this requires the
+  spacexpansevis/D3D7Client/D3D7Client.dsw) and compile (this requires the
   DX7 SDK to be installed).
 
 * Note that the VS2005 project files included in the sources tend to get out
@@ -86,17 +86,17 @@ For each update of the OVP sources:
 * If the compilation of the D3D7 client was successful, it has created a
   plugin in Modules/Plugin/D3D7Client.dll.
 
-* Run the "no-graphics" version of orbiter (orbiter_ng) and activate
+* Run the "no-graphics" version of spacexpanse (spacexpanse_ng) and activate
   the D3D7Client plugin from the Modules tab.
 
 * You should now get a video tab in the Launchpad dialog. Configure your
   graphics driver and screen options, then launch a scenario.
 
 * If you run a windowed mode, you will get the main render window, and
-  an additional diagnosis window opened by the orbiter core (which does
+  an additional diagnosis window opened by the spacexpanse core (which does
   currently not have any functionality).
 
 * The current version of the D3D7 client is not yet complete. Some of the
-  features of the orbiter built-in graphics engine are still missing.
+  features of the spacexpanse built-in graphics engine are still missing.
   However, the client is slowly taking shape, and new features are added on
   a regular basis.

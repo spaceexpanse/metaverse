@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Panel.h"
 #include "Pane.h"
 #include "Vessel.h"
@@ -14,7 +14,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern char DBG_MSG[256];
 
@@ -25,7 +25,7 @@ Panel::Panel (int _id, const Pane *_pane, double _scale)
 {
 	int i;
 
-	gc      = g_pOrbiter->GetGraphicsClient();
+	gc      = g_pSpaceXpanse->GetGraphicsClient();
 	id      = _id;
 	pane    = _pane;
 	scale   = _scale;
@@ -34,10 +34,10 @@ Panel::Panel (int _id, const Pane *_pane, double _scale)
 	surf    = NULL;
 	visible = false;
 	has_ck  = false;
-	if (g_pOrbiter->IsFullscreen())
+	if (g_pSpaceXpanse->IsFullscreen())
 		cwnd = 0;
 	else
-		cwnd = g_pOrbiter->GetRenderWnd();
+		cwnd = g_pSpaceXpanse->GetRenderWnd();
 	narea   = nareabuf = 0;
 	idx_mfocus = aid_mfocus = mstate = 0;
 

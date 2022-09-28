@@ -104,7 +104,7 @@ protected:
 	Vector VCcnt;             // HUD centre in VC [(m,m,m)]
 	double VCscale;           // HUD semi-size in VC [m]
 
-	HUDPAINTSPEC spec;        // parameters required for painting the HUD (defined in Orbitersdk.h)
+	HUDPAINTSPEC spec;        // parameters required for painting the HUD (defined in SpaceXpansesdk.h)
 	static Mesh hudMesh;      // mesh for drawing HUD elements
 	SURFHANDLE hudTex;        // HUD texture elements
 

@@ -10,7 +10,7 @@ https://www.alteaaerospace.com
 mailto:doug.beachy@outlook.com
     
   Requirements:
-    Orbiter 2016 or newer; XRSound will *not* run under older Orbiter versions.
+    SpaceXpanse 2016 or newer; XRSound will *not* run under older SpaceXpanse versions.
 ===========================================================================
 
 ---------
@@ -43,13 +43,13 @@ SOFTWARE.
 SUMMARY
 -------
 
-XRSound automatically adds default sounds to any Orbiter vessel that defines thrusters.  It includes over 450 default sounds and voice callouts, including all those used by the XR fleet (DeltaGlider-XR1, XR2 Ravenstar, and XR5 Vanguard).  Each sound is fully configurable and may be replaced or disabled by editing $ORBITER_ROOT\XRSound\XRSound.cfg and/or a vessel class's XRSound-<vessel class>.cfg file. 
+XRSound automatically adds default sounds to any SpaceXpanse vessel that defines thrusters.  It includes over 450 default sounds and voice callouts, including all those used by the XR fleet (DeltaGlider-XR1, XR2 Ravenstar, and XR5 Vanguard).  Each sound is fully configurable and may be replaced or disabled by editing $ORBITER_ROOT\XRSound\XRSound.cfg and/or a vessel class's XRSound-<vessel class>.cfg file. 
 
-For information about the XRSound C++ API, refer to $ORBITER_ROOT\Orbitersdk\XRSound.h and $ORBITER_ROOT\Doc\XRSound User Manual.pdf.  
+For information about the XRSound C++ API, refer to $ORBITER_ROOT\SpaceXpansesdk\XRSound.h and $ORBITER_ROOT\Doc\XRSound User Manual.pdf.  
 
 Note for developers: the included XRSound.lib is for release builds and XRSoundD.lib is for debug builds.  You need likey need Visual Studio 2015 or newer in order to properly link with XRSound.lib or XRSoundD.lib: older Visual Studio versions have not been tested.
 
-XRSound includes a new ambient music track named `Solar Serenity` that plays in external views in space by default; it was created by and licensed from Grzegorz Lorens ("Loru" on Orbiter-Forum).  If you are interested in a lossless version of Solar Serenity, take a look here: https://loru.bandcamp.com/track/solar-serenity
+XRSound includes a new ambient music track named `Solar Serenity` that plays in external views in space by default; it was created by and licensed from Grzegorz Lorens ("Loru" on SpaceXpanse-Forum).  If you are interested in a lossless version of Solar Serenity, take a look here: https://loru.bandcamp.com/track/solar-serenity
 
 Please refer to the included $ORBITER_ROOT\Doc\XRSound User Manual.pdf for more information and details about how to install, configure, and use XRSound.
 
@@ -59,11 +59,11 @@ QUICK INSTALLATION
 
 Quick installation instructions are:
 
-    1. Unzip the XRSound.zip installation file to your $ORBITER_ROOT folder; e.g., C:\Orbiter.
-    2. Bring up your Orbiter launch pad and click "Modules".
-    3. In the "Sound module for Orbiter" section, click on "XRSound" to activate it.
+    1. Unzip the XRSound.zip installation file to your $ORBITER_ROOT folder; e.g., C:\SpaceXpanse.
+    2. Bring up your SpaceXpanse launch pad and click "Modules".
+    3. In the "Sound module for SpaceXpanse" section, click on "XRSound" to activate it.
      
-You are now ready to launch Orbiter, and you should hear default sounds playing for your active vessel, provided it defines any thrusters.  For troubleshooting information and XRSound status info, refer to the $ORBITER_ROOT\XRSound.log file that is written whenever XRSound runs.
+You are now ready to launch SpaceXpanse, and you should hear default sounds playing for your active vessel, provided it defines any thrusters.  For troubleshooting information and XRSound status info, refer to the $ORBITER_ROOT\XRSound.log file that is written whenever XRSound runs.
 
 *** Please refer to the included `$ORBITER_ROOT\Doc\XRSound User Manual.pdf` for detailed installation and configuration instructions. ***
 

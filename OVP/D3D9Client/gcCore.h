@@ -4,7 +4,7 @@
 // ===================================================
 
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "DrawAPI.h"
 #include <assert.h>
 
@@ -30,7 +30,7 @@ static __gcBindCoreMethod pBindCoreMethod = NULL;
 */
 
 
-/// \defgroup PixelFormats Common pixelformats for surfaces [ Orbiter 2021+ only ]
+/// \defgroup PixelFormats Common pixelformats for surfaces [ SpaceXpanse 2021+ only ]
 ///@{
 #define OAPISURFACE_PF_MASK				0xFF0000	///< PixelFormat Mask
 #define OAPISURFACE_PF_XRGB				0x010000	///< 32bit RGB no-alpha
@@ -54,8 +54,8 @@ static __gcBindCoreMethod pBindCoreMethod = NULL;
 /// \defgroup RenderProc Specify a SketchPad render callback function
 ///@{
 #define RENDERPROC_DELETE				0x0000	///< Unregister/Remove existing callback 
-#define RENDERPROC_HUD_1ST				0x0001	///< Register a HUD callback to draw under Orbiter's main HUD
-#define RENDERPROC_HUD_2ND				0x0002	///< Register a HUD callback to draw over Orbiter's main HUD
+#define RENDERPROC_HUD_1ST				0x0001	///< Register a HUD callback to draw under SpaceXpanse's main HUD
+#define RENDERPROC_HUD_2ND				0x0002	///< Register a HUD callback to draw over SpaceXpanse's main HUD
 #define RENDERPROC_PLANETARIUM			0x0003	///< Register a HUD callback to draw into a planetarium view using perspective projection
 #define RENDERPROC_EXTERIOR				0x0005  ///< Register a callback to draw into an exterior vessel view using perspective projection
 ///@}
@@ -585,7 +585,7 @@ public:
 
 
 	/**
-	* \brief Get device specific mesh from Orbiter mesh template
+	* \brief Get device specific mesh from SpaceXpanse mesh template
 	* \param hMesh handle to a mesh acquired from oapiLoadMeshGlobal()
 	* \param pBox a pointer to an array of 8 FVECTOR3s
 	*/

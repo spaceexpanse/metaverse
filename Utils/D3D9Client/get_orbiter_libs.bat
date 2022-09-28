@@ -1,10 +1,10 @@
 @echo off
 :: ----------------------------------------------------------------------------
-:: Batch file to retreive (update) the needed orbiter SDK libraries and
+:: Batch file to retreive (update) the needed spacexpanse SDK libraries and
 :: headers to build the D3D9Client.
 ::
 :: Notes:
-:: - This swill always get the HEAD revision of Orbiter trunk
+:: - This swill always get the HEAD revision of SpaceXpanse trunk
 ::   (see REV variable at setup)!
 ::
 :: ----------------------------------------------------------------------------
@@ -12,9 +12,9 @@ setlocal
 
 :: --- Setup
 set BASE_DIR=..\..
-set URL=svn://svn.orbiter-forum.com/orbiter/Orbitersdk
+set URL=svn://svn.spacexpanse-forum.com/spacexpanse/SpaceXpansesdk
 set REV=HEAD
-set OUT_DIR=Orbitersdk
+set OUT_DIR=SpaceXpansesdk
 
 
 :: --- Do it
@@ -30,5 +30,5 @@ exit /B 0
 
 :exit_nok
 echo.
-echo Failed to retrieve Orbiter SDK libs ^& headers!
+echo Failed to retrieve SpaceXpanse SDK libs ^& headers!
 exit /B 1

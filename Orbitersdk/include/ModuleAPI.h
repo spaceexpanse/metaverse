@@ -4,8 +4,8 @@
 // ======================================================================
 //                     ORBITER SOFTWARE DEVELOPMENT KIT
 // ModuleAPI.h
-// Defines generic base class Orbiter::Module which can be used by
-// plugins to define a set of interface functions to the Orbiter core.
+// Defines generic base class SpaceXpanse::Module which can be used by
+// plugins to define a set of interface functions to the SpaceXpanse core.
 // ======================================================================
 
 #ifndef __MODULEAPI_H
@@ -14,10 +14,10 @@
 namespace oapi {
 
 	/**
-	 * \brief Generic Orbiter plugin interface class
+	 * \brief Generic SpaceXpanse plugin interface class
 	 *
 	 * Defines generic base class which can be used by plugins to provide a set
-	 * of interface functions to the Orbiter core.
+	 * of interface functions to the SpaceXpanse core.
 	 * This class contains only the non-virtual set of methods (excluding
 	 * callback functions). Plugin implementations should normally not derive
 	 * their inferface classes from oapi::ModuleNV, but instead from class
@@ -68,7 +68,7 @@ namespace oapi {
 		 * \brief Returns the absolute simulation time in Modified Julian
 		 *   Date format.
 		 * \return Current Modified Julian Date [days]
-		 * \note Orbiter defines the Modified Julian Date (MJD) as
+		 * \note SpaceXpanse defines the Modified Julian Date (MJD) as
 		 *   JD - 2 400 000.5, where JD is the Julian Date. JD is the
 		 *   interval of time in mean solar days elapsed since 4713 BC
 		 *   January 1 at Greenwich mean noon.
@@ -82,10 +82,10 @@ namespace oapi {
 	}; // class ModuleNV
 
 	/**
-	 * \brief Generic Orbiter plugin interface class
+	 * \brief Generic SpaceXpanse plugin interface class
 	 *
 	 * Defines generic base class which can be used by plugins to provide a set
-	 * of interface functions to the Orbiter core, and callback
+	 * of interface functions to the SpaceXpanse core, and callback
 	 * functions which can be overloaded by derived classes to react to specific
 	 * types of events.
 	 */
@@ -142,7 +142,7 @@ namespace oapi {
 		 * \param mjd simulation time afte the currently processed step in
 		 *   Modified Julian Date format [days]
 		 * \default Calls \ref opcPreStep, if defined in the module.
-		 * \note This function is called by Orbiter after the new time step
+		 * \note This function is called by SpaceXpanse after the new time step
 		 *   length (simdt) and simulation time (simt) have been calculated,
 		 *   but before the simulation state is integrated to simt. The
 		 *   parameters passed to clbkPreStep therefore are the values that
@@ -264,14 +264,14 @@ namespace oapi {
 		 *   the window message handler for mouse events (e.g. MK_CONTROL).
 		 * \param x Mouse x position in render window at event
 		 * \param y Mouse y position in render window at event
-		 * \return Returning true prevents the event from entering the standard Orbiter processing queue
-		 *   (blocking event). Returning false allows Orbiter to also process this event.
+		 * \return Returning true prevents the event from entering the standard SpaceXpanse processing queue
+		 *   (blocking event). Returning false allows SpaceXpanse to also process this event.
 		 * \default Nothing, returns false.
 		 * \note Even if an overloaded function returns true, the event will still be offered to the other
-		 *   plugin modules through their clbkProcessMouse method. It only prevents the standard Orbiter
+		 *   plugin modules through their clbkProcessMouse method. It only prevents the standard SpaceXpanse
 		 *   processing of the event. This avoids one module blocking all subsequent modules from receiving
 		 *   the event notification.
-		 * \note Mouse-processing of the Orbiter main menu cannot be blocked.
+		 * \note Mouse-processing of the SpaceXpanse main menu cannot be blocked.
 		 * \sa clbkProcessKeyboardImmediate, clbkProcessKeyboardBuffered
 		 */
 		virtual bool clbkProcessMouse (UINT event, DWORD state, DWORD x, DWORD y) { return false; }
@@ -281,14 +281,14 @@ namespace oapi {
 		 *
 		 * Called to offer immediate keyboard events to the module.
 		 * \param kstate State flags for all keyboard keys. The indices into the kstate list correspond to
-		 *   the OAPI_KEY_xxx constants defined in OrbiterAPI.h. A pressed key is indicated by a set bit 0x80.
+		 *   the OAPI_KEY_xxx constants defined in SpaceXpanseAPI.h. A pressed key is indicated by a set bit 0x80.
 		 * \param simRunning Indicates that the simulation is running (not paused). This allows a module
 		 *   to differentiate between key processing in running/paused simulation states.
-		 * \return Returning true prevents the keyboard event from entering the standard Orbiter processing
-		 *   queue (blocking event). Returning false allows Orbiter to also process the event.
+		 * \return Returning true prevents the keyboard event from entering the standard SpaceXpanse processing
+		 *   queue (blocking event). Returning false allows SpaceXpanse to also process the event.
 		 * \default Nothing, returns false.
 		 * \note Even if an overloaded function returns true, the event will still be offered to the other
-		 *   plugin modules through their clbkProcessKeyboardBuffered method. It only prevents the standard Orbiter
+		 *   plugin modules through their clbkProcessKeyboardBuffered method. It only prevents the standard SpaceXpanse
 		 *   processing of the event. This avoids one module blocking all subsequent modules from receiving
 		 *   the event notification.
 		 * \sa clbkProcessKeyboardBuffered, clbkProcessMouse
@@ -299,17 +299,17 @@ namespace oapi {
 		 * \brief Process buffered keyboard events
 		 *
 		 * Called to offer buffered keyboard events to the module.
-		 * \param key Key identifier. Corresponds to the OAPI_KEY_xxx constants defined in OrbiterAPI.h.
+		 * \param key Key identifier. Corresponds to the OAPI_KEY_xxx constants defined in SpaceXpanseAPI.h.
 		 * \param kstate State flags for all keyboard keys. This allows to check for modifier keys pressed when the
 		 *   key event was generated. The indices into the kstate list correspond to the OAPI_KEY_xxx constants
-		 *   defined in OrbiterAPI.h. A pressed key is indicated by a set bit 0x80.
+		 *   defined in SpaceXpanseAPI.h. A pressed key is indicated by a set bit 0x80.
 		 * \param simRunning Indicates that the simulation is running (not paused). This allows a module
 		 *   to differentiate between key processing in running/paused simulation states.
-		 * \return Returning true prevents the keyboard event from entering the standard Orbiter processing
-		 *   queue (blocking event). Returning false allows Orbiter to also process the event.
+		 * \return Returning true prevents the keyboard event from entering the standard SpaceXpanse processing
+		 *   queue (blocking event). Returning false allows SpaceXpanse to also process the event.
 		 * \default Nothing, returns false.
 		 * \note Even if an overloaded function returns true, the event will still be offered to the other
-		 *   plugin modules through their clbkProcessKeyboardImmediate method. It only prevents the standard Orbiter
+		 *   plugin modules through their clbkProcessKeyboardImmediate method. It only prevents the standard SpaceXpanse
 		 *   processing of the event. This avoids one module blocking all subsequent modules from receiving
 		 *   the event notification.
 		 * \sa clbkProcessKeyboardImmediate, clbkProcessMouse

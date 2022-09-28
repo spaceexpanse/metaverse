@@ -6,16 +6,16 @@
 
 #include <windows.h>
 
-class Orbiter;
+class SpaceXpanse;
 
-namespace orbiter {
+namespace spacexpanse {
 
 	class ConsoleNG {
 	public:
-		ConsoleNG(Orbiter* pOrbiter);
+		ConsoleNG(SpaceXpanse* pSpaceXpanse);
 		~ConsoleNG();
 
-		Orbiter* GetOrbiter() const { return m_pOrbiter; }
+		SpaceXpanse* GetSpaceXpanse() const { return m_pSpaceXpanse; }
 		HWND WindowHandle() const { return m_hWnd; }
 		bool ParseCmd();
 		void Echo(const char* str) const;
@@ -24,7 +24,7 @@ namespace orbiter {
 
 	private:
 
-		Orbiter* m_pOrbiter;
+		SpaceXpanse* m_pSpaceXpanse;
 		HWND m_hWnd;       // console window handle
 		HWND m_hStatWnd;   // stats dialog
 		HANDLE m_hThread;  // console thread handle

@@ -9,11 +9,11 @@
 
 #include <windows.h>
 #include "DlgCapture.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Resource.h"
 #include "Resource2.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern HELPCONTEXT DefHelpContext;
 
 // ======================================================================
@@ -36,7 +36,7 @@ BOOL DlgCapture::OnInitDialog (HWND hDlg, WPARAM wParam, LPARAM lParam)
 	const char *fmtstr[4] = {".bmp",".png",".jpg",".tif"};
 	char cbuf[256];
 	int i;
-	CFG_CAPTUREPRM &prm = g_pOrbiter->Cfg()->CfgCapturePrm;
+	CFG_CAPTUREPRM &prm = g_pSpaceXpanse->Cfg()->CfgCapturePrm;
 	SendDlgItemMessage (hDlg, IDC_CAP_TOCLIP, BM_SETCHECK, prm.ImageTgt == 0 ? BST_CHECKED : BST_UNCHECKED, 0);
 	SendDlgItemMessage (hDlg, IDC_CAP_TOFILE, BM_SETCHECK, prm.ImageTgt == 0 ? BST_UNCHECKED : BST_CHECKED, 0);
 	EnableWindow (GetDlgItem (hDlg, IDC_CAP_FNAME), prm.ImageTgt == 0 ? FALSE:TRUE);
@@ -68,12 +68,12 @@ BOOL DlgCapture::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDCANCEL:
 		Take (hDlg);
-		g_pOrbiter->CloseDialog (hDlg);
+		g_pSpaceXpanse->CloseDialog (hDlg);
 		return TRUE;
 	case IDC_COMBO1:
 		if (code == CBN_SELCHANGE) {
 			int idx = SendDlgItemMessage (hDlg, id, CB_GETCURSEL, 0, 0);
-			g_pOrbiter->Cfg()->CfgCapturePrm.ImageFormat = idx;
+			g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageFormat = idx;
 			EnableWindow (GetDlgItem (hDlg, IDC_COMBO2), idx == 2 ? TRUE:FALSE);
 			return TRUE;
 		}
@@ -81,41 +81,41 @@ BOOL DlgCapture::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	case IDC_COMBO2:
 		if (code == CBN_SELCHANGE) {
 			int idx = SendDlgItemMessage (hDlg, id, CB_GETCURSEL, 0, 0);
-			g_pOrbiter->Cfg()->CfgCapturePrm.ImageQuality = idx+1;
+			g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageQuality = idx+1;
 			return TRUE;
 		}
 		break;
 	case IDC_CAP_SNAPSHOT: {
-		oapi::GraphicsClient *gclient = g_pOrbiter->GetGraphicsClient();
+		oapi::GraphicsClient *gclient = g_pSpaceXpanse->GetGraphicsClient();
 		if (gclient) {
 			Take (hDlg);
-			if (g_pOrbiter->Cfg()->CfgCapturePrm.ImageTgt) {
-				oapi::ImageFileFormat fmt = (oapi::ImageFileFormat)g_pOrbiter->Cfg()->CfgCapturePrm.ImageFormat;
-				float quality = (float)g_pOrbiter->Cfg()->CfgCapturePrm.ImageQuality/10.0f;
-				gclient->clbkSaveSurfaceToImage (0, g_pOrbiter->Cfg()->CfgCapturePrm.ImageFile, fmt, quality);
+			if (g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageTgt) {
+				oapi::ImageFileFormat fmt = (oapi::ImageFileFormat)g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageFormat;
+				float quality = (float)g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageQuality/10.0f;
+				gclient->clbkSaveSurfaceToImage (0, g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageFile, fmt, quality);
 				AutoIncrement (hDlg);
-				GetWindowText (GetDlgItem (hDlg, IDC_CAP_FNAME), g_pOrbiter->Cfg()->CfgCapturePrm.ImageFile, 128);
+				GetWindowText (GetDlgItem (hDlg, IDC_CAP_FNAME), g_pSpaceXpanse->Cfg()->CfgCapturePrm.ImageFile, 128);
 			} else
 				gclient->clbkSaveSurfaceToImage (0, NULL, oapi::IMAGE_BMP);
 		}
 		} return TRUE;
 	case IDC_CAP_RECORD:
-		if (g_pOrbiter->IsCapturingFrames()) {
-			g_pOrbiter->StopCaptureFrames();
+		if (g_pSpaceXpanse->IsCapturingFrames()) {
+			g_pSpaceXpanse->StopCaptureFrames();
 			SetWindowText (GetDlgItem (hDlg, IDC_CAP_RECORD), "Start recording");
 		} else if (Take (hDlg)) {
-			g_pOrbiter->StartCaptureFrames();
+			g_pSpaceXpanse->StartCaptureFrames();
 			SetWindowText (GetDlgItem (hDlg, IDC_CAP_RECORD), "Stop recording");
 		}
 		return TRUE;
 	case IDC_BUTTON1:
-		g_pOrbiter->Cfg()->SetDefaults_Capture();
+		g_pSpaceXpanse->Cfg()->SetDefaults_Capture();
 		OnInitDialog (hDlg, 0, 0);
 		return TRUE;
 	case IDHELP: {
 		char *topic = "/capture.htm";
 		DefHelpContext.topic = topic;
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		} return TRUE;
 	case IDC_CAP_TOCLIP:
 	case IDC_CAP_TOFILE:
@@ -132,9 +132,9 @@ BOOL DlgCapture::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 
 void DlgCapture::Update ()
 {
-	if (g_pOrbiter->IsCapturingFrames()) {
+	if (g_pSpaceXpanse->IsCapturingFrames()) {
 		char cbuf[256];
-		int curframe = g_pOrbiter->Cfg()->CfgCapturePrm.SequenceStart;
+		int curframe = g_pSpaceXpanse->Cfg()->CfgCapturePrm.SequenceStart;
 		int showframe;
 		GetWindowText (GetDlgItem (hWnd, IDC_CAP_STARTCOUNT), cbuf, 256);
 		if (!sscanf (cbuf, "%d", &showframe) || showframe != curframe) {
@@ -150,7 +150,7 @@ bool DlgCapture::Take (HWND hDlg)
 {
 	bool ok = true;
 	char cbuf[256];
-	CFG_CAPTUREPRM &prm = g_pOrbiter->Cfg()->CfgCapturePrm;
+	CFG_CAPTUREPRM &prm = g_pSpaceXpanse->Cfg()->CfgCapturePrm;
 	bool isClipbd = (SendDlgItemMessage (hDlg, IDC_CAP_TOCLIP, BM_GETCHECK, 0, 0) == TRUE);
 	prm.ImageTgt = (isClipbd ? 0 : 1);
 	EnableWindow (GetDlgItem (hDlg, IDC_CAP_FNAME), isClipbd ? FALSE:TRUE);

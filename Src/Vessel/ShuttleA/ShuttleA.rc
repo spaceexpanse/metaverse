@@ -53,14 +53,14 @@ BEGIN
     PUSHBUTTON      "Closed",IDC_OLOCK_CLOSE,141,27,43,11
     PUSHBUTTON      "Open",IDC_OLOCK_OPEN,141,40,43,11
     GROUPBOX        "Auxiliary pods",IDC_STATIC,8,60,184,52
-    CONTROL         "",IDC_LAUX_POS,"OrbiterCtrl_Gauge",0x0,36,73,124,8
+    CONTROL         "",IDC_LAUX_POS,"SpaceXpanseCtrl_Gauge",0x0,36,73,124,8
     LTEXT           "Left",IDC_STATIC,15,73,13,8
-    CONTROL         "",IDC_RAUX_POS,"OrbiterCtrl_Gauge",0x0,36,82,124,8
+    CONTROL         "",IDC_RAUX_POS,"SpaceXpanseCtrl_Gauge",0x0,36,82,124,8
     LTEXT           "Right",IDC_STATIC,15,82,18,8
     PUSHBUTTON      "Retro",IDC_AUX_RETRO,36,96,33,11
     PUSHBUTTON      "Fwd",IDC_AUX_FWD,126,96,33,11
     PUSHBUTTON      "Hover",IDC_AUX_HOVER,81,96,33,11
-    CONTROL         "",IDC_AUX_POS,"OrbiterCtrl_Gauge",0x0,36,77,124,9
+    CONTROL         "",IDC_AUX_POS,"SpaceXpanseCtrl_Gauge",0x0,36,77,124,9
     CONTROL         "Sync",IDC_AUX_SYNC,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,163,76,21,11
 END
 

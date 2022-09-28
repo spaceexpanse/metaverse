@@ -6,7 +6,7 @@
 #define OAPI_IMPLEMENTATION
 
 #include "D3dmath.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Texture.h"
 #include "Vecmat.h"
 #include "Mesh.h"
@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <fstream>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TextureManager *g_texmanager;
 extern Camera *g_camera;
 extern Pane *g_pane;
@@ -129,7 +129,7 @@ COLORREF VStar::CenterPixelColor ()
 	COLORREF col;
 	if (g_pane->GlobalToScreen (orig, x, y)) {
 		HDC hDC;
-		LPDIRECTDRAWSURFACE7 surf = g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget();
+		LPDIRECTDRAWSURFACE7 surf = g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget();
 		surf->GetDC (&hDC);
 		col = GetPixel (hDC, x, y);
 		surf->ReleaseDC (hDC);

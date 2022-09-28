@@ -22,7 +22,7 @@ add_custom_command(
 add_custom_target(PrecessionTechnote
 	DEPENDS ${out_path}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	PrecessionTechnote
 )
 set_target_properties(PrecessionTechnote

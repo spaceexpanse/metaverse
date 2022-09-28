@@ -102,7 +102,7 @@ if mjd < 57457.66028 then
 	oapi.set_cameramode({mode='track',trackmode='global',reldist=17.857, phi=-2.210, tht=-1.057})
 	oapi.set_cameraaperture(RAD*15)
 	-- oapi.set_cameramode({mode='track',trackmode='relative',reldist=14.468, phi=0.001, tht=-0.168})
-	h:set_text('>>> Check out the latest news and updates at the Orbiter home page orbit.medphys.ucl.ac.uk')
+	h:set_text('>>> Check out the latest news and updates at the SpaceXpanse home page orbit.medphys.ucl.ac.uk')
 	
 	while t1 < 78 do
 		tstep()
@@ -140,7 +140,7 @@ if mjd < 57457.66028 then
 		tstep()
 	end
 	oapi.set_cameramode({mode='track',trackmode='global',reldist=9.491, phi=1.697, tht=0.730})
-	h:set_text('>>> Join the Orbiter community at orbiter-forum.com!')
+	h:set_text('>>> Join the SpaceXpanse community at spacexpanse-forum.com!')
 	while t1 < 600 do
 		tstep()
 	end
@@ -193,7 +193,7 @@ if mjd < 57457.66028 then
 	end
 	oapi.set_cameramode({mode='track',trackmode='global',reldist=1.975, phi=1.315, tht=0.764})
 	oapi.set_cameraaperture(RAD*10)
-	h:set_text('>>> Find free downloads at the Orbiter addon repository orbithangar.com')
+	h:set_text('>>> Find free downloads at the SpaceXpanse addon repository orbithangar.com')
 
 	while t1 < 871 do
 		tstep()
@@ -241,7 +241,7 @@ if mjd < 57457.66028 then
 	end
 	oapi.set_cameramode({mode='track',trackmode='global',reldist=5.894, phi=-1.916, tht=-0.856})
 
-	h:set_text(">>> Look for essential addons like Dan Steph's OrbiterSound and Jarmonik's D3D9 GraphicsClient.")
+	h:set_text(">>> Look for essential addons like Dan Steph's SpaceXpanseSound and Jarmonik's D3D9 GraphicsClient.")
 	while t1 < 1030 do
 		tstep()
 	end
@@ -252,7 +252,7 @@ if mjd < 57457.66028 then
 		tstep()
 	end
 	oapi.set_cameramode({mode='cockpit', cockpitmode='vc', pos=0, lean=0})
-	h:set_text('>>> Check out the orbitersim channel on youtube!')
+	h:set_text('>>> Check out the spacexpansesim channel on youtube!')
 	while t1 < 1067 do
 		tstep()
 	end

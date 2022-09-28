@@ -19,7 +19,7 @@ g.defscale = 4.508e-4; % default scaling from pixels to mesh units for 1024 text
 
 root = '..\..\..\..\';
 meshpath = [root 'meshes\DG\'];
-srcpath = [root 'orbitersdk\samples\deltaglider\'];
+srcpath = [root 'spacexpansesdk\samples\deltaglider\'];
 fid = fopen([meshpath 'deltaglider_vc.msh'],'wt');
 fhd = fopen([srcpath, 'dg_vc_anim.h'],'wt');
 writeh_string(fhd, ['// Created by deltaglider_vc.m ' date '\n']);

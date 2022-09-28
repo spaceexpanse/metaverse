@@ -16,8 +16,8 @@ add_dependencies(DrawOrbits
 )
 
 target_link_libraries(DrawOrbits
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(DrawOrbits

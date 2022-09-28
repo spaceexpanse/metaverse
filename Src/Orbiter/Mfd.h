@@ -4,8 +4,8 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Steps for implementing a new default Instrument:
-// - Add an MFD id (MFD_xxx) in orbitersdk.h
-// - Increment BUILTIN_MFD_MODES in orbitersdk.h
+// - Add an MFD id (MFD_xxx) in spacexpansesdk.h
+// - Increment BUILTIN_MFD_MODES in spacexpansesdk.h
 // - Implement the Instrument class derived from Instrument
 // - Add entries in Instrument::Create (both versions)
 // - Add entry in Instrument::RegisterBuiltinModes()
@@ -16,7 +16,7 @@
 #define __MFD_H
 
 #define STRICT 1
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "GraphicsAPI.h"
 #include "Vessel.h"
 #include "Element.h"

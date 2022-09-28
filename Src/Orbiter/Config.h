@@ -4,7 +4,7 @@
 // =============================================================
 // Config.h
 // Interface for class Config
-// Load configuration settings for Orbiter
+// Load configuration settings for SpaceXpanse
 // =============================================================
 
 #ifndef __CONFIG_H
@@ -254,7 +254,7 @@ struct CFG_UIPRM {              // user interface options
 struct CFG_DEMOPRM {
 	bool   bDemo;				// run in demo mode?
 	bool   bBkImage;			// show background image?
-	bool   bBlockExit;			// prevent from terminating orbiter?
+	bool   bBlockExit;			// prevent from terminating spacexpanse?
 	double MaxDemoTime;			// maximum demo run time [s]
 	double LPIdleTime;			// maximum launchpad idle time [s]
 };
@@ -283,9 +283,9 @@ struct CFG_WINDOWPOS {
 };
 
 struct CFG_CMDLINEPRM {
-	bool   bFastExit;           // Terminate Orbiter at session end?
+	bool   bFastExit;           // Terminate SpaceXpanse at session end?
 	bool   bOpenVideoTab;       // Open Launchpad on video tab?
-	bool   bAppendLog;          // Orbiter log: append instead of overwrite?
+	bool   bAppendLog;          // SpaceXpanse log: append instead of overwrite?
 	size_t FrameLimit;          // max number of timeframes before session termination (0 = unlimited)
 	double FixedStep;           // fixed time step length (0 = disabled). If != 0, overrides CFG_DEBUGPRM::FixedStep
 	double MaxSysTime;          // Max session runtime (sys time). 0 = unlimited

@@ -1,6 +1,6 @@
 % -*-latex-*-
 
-\title{Orbiter Technical Notes: Dynamic state vector propagation}
+\title{SpaceXpanse Technical Notes: Dynamic state vector propagation}
 \author{Martin Schweiger}
 \date{June 10, 2006}
 
@@ -28,9 +28,9 @@
 \maketitle
 
 \section{Introduction}
-This document describes the numerical integration methods used by Orbiter to propagate vessel state vectors from one time point to the next. The time step intervals can vary over a large range, both due to variations in the computational complexity of rendering a frame for the 3D scenery, and due to support for ``time compression'' up to $10^5 \times$ real time.
+This document describes the numerical integration methods used by SpaceXpanse to propagate vessel state vectors from one time point to the next. The time step intervals can vary over a large range, both due to variations in the computational complexity of rendering a frame for the 3D scenery, and due to support for ``time compression'' up to $10^5 \times$ real time.
 To avoid the accumulation of numerical errors during the simulation, integration schemes of adequate accuracy must be chosen.
-Where the time intervals become too large to allow sufficiently accurate numerical integration of the state vectors, Orbiter can switch to ``orbit stabilisation'', a variant of \emph{Encke's method}, where only the perturbations on top of a base line 2-body orbit defined by its osculating elements are integrated numerically.
+Where the time intervals become too large to allow sufficiently accurate numerical integration of the state vectors, SpaceXpanse can switch to ``orbit stabilisation'', a variant of \emph{Encke's method}, where only the perturbations on top of a base line 2-body orbit defined by its osculating elements are integrated numerically.
 
 \section{Polynomial interpolation methods}
 Let $\vec{r}_n$ and $\vec{v}_n$ be the state vectors of a vessel at time $t_n$, given in some coordinate system. Let the interval to the next step $t_{n+1}$ be given by $\Delta t_n = t_{n+1}-t_n$.
@@ -44,7 +44,7 @@ The equation of motion is then given by the 2nd order differential equation
 \begin{equation}\label{eq:motion}
 \ddot{\vec{r}} = \ACC(t,\vec{r})
 \end{equation}
-The following sections describe methods used in the Orbiter code to solve the initial value problem of propagating $(\vec{r}_n,\vec{v}_n)$ to $(\vec{r}_{n+1},\vec{v}_{n+1})$.
+The following sections describe methods used in the SpaceXpanse code to solve the initial value problem of propagating $(\vec{r}_n,\vec{v}_n)$ to $(\vec{r}_{n+1},\vec{v}_{n+1})$.
 
 \subsection{Linear interpolation, single pass [L/s]}
 Given state vectors ($\vec{r}_n$, $\vec{v}_n$) and $\vec{a}_n = \ACC(t_n,\vec{r}_n)$, and interval $h=\Delta t_n$, calculate $(\vec{r}_{n+1},\vec{v}_{n+1})$ using a predictor-corrector method with a linear interpolation of $\vec{a}$.
@@ -222,7 +222,7 @@ leading to state vector updates
 \section{Symplectic integrators [SY]}
 A popular choice for long-term numerical integration of celestial trajectories is the family of \emph{symplectic integrators} for Hamiltonian systems which have the property of preserving the total energy of the problem. This is reflected in the excellent stability of the semi-major axis shown in the numerical tests in Section~\ref{sec:results}. Note however that other orbital elements may not show a similar improvement of accuracy over non-symplectic integrators.
 
-A discussion of the theory of symplectic integrators is beyond the scope of this document, but a rich literature is available on the subject. For the implementation of symplectic integrators of orders 4, 6 and 8 in Orbiter, the paper by Yoshida \cite{yoshida1990} was followed.
+A discussion of the theory of symplectic integrators is beyond the scope of this document, but a rich literature is available on the subject. For the implementation of symplectic integrators of orders 4, 6 and 8 in SpaceXpanse, the paper by Yoshida \cite{yoshida1990} was followed.
 
 \section{Rotational state propagation}
 The propagation of the linear state vectors $(\vec{r},\vec{v})$ discussed in the previous sections can now be extended to the angular state vectors of orientation and angular velocity, $(\vec{\rho},\vec{\omega})$. In analogy to the linear case, this requires the propagation of $(\vec{\rho}_n,\vec{\omega}_n)$ at time $t_n$ to $(\vec{\rho}_{n+1},\vec{\omega}_{n+1})$ at time $t_{n+1}$, given a time-dependent torque $\vec{\tau}(t)$.
@@ -247,7 +247,7 @@ I_3\dot\omega_3 - \omega_1\omega_2(I_1-I_2)
 \end{equation}
 where $\vec{L}$ is the angular momentum measured in the frame of the rotating body, and $(I_1,I_2,I_3)$ are the principal moments of inertia of the body (assuming that the frame is the principal axis frame, with diagonal inertia tensor).
 
-We now consider $\vec\tau(t)$ to be composed of a time-dependent \emph{gravity gradient} component $\vec\tau_g$ (cf. \emph{Orbiter Technotes: Distributed Vessel Mass}) and a term $\vec\tau_0$ containing all other torque components (atmospheric effects, engine thrust, etc.) which is assumed to be constant in the interval $[t_n, t_{n+1}]$:
+We now consider $\vec\tau(t)$ to be composed of a time-dependent \emph{gravity gradient} component $\vec\tau_g$ (cf. \emph{SpaceXpanse Technotes: Distributed Vessel Mass}) and a term $\vec\tau_0$ containing all other torque components (atmospheric effects, engine thrust, etc.) which is assumed to be constant in the interval $[t_n, t_{n+1}]$:
 \begin{equation}
 \vec\tau(t,\vec{r},\vec\rho,\vec\omega) = \vec\tau_g(t,\vec{r},\vec\rho,\vec\omega) + \vec\tau_0 \equiv \AACC(t,\vec{r},\vec\rho,\vec\omega), \qquad t \in [t_n, t_{n+1}]
 \end{equation}
@@ -287,10 +287,10 @@ leading to updates
 \vec\omega_{n+1} &= \vec\omega_n + \vec\lambda_2
 \end{split}
 \end{equation}
-Note that the formal sum operator for the orientation $\vec\rho$ represents a rotation. Its actual implementation depends on the representation of body orientation. Orbiter uses a quaternion representation. Other choices are rotation matrices, Euler angles or axis-angle representations.
+Note that the formal sum operator for the orientation $\vec\rho$ represents a rotation. Its actual implementation depends on the representation of body orientation. SpaceXpanse uses a quaternion representation. Other choices are rotation matrices, Euler angles or axis-angle representations.
 
 \section{Numerical simulations}\label{sec:results}
-Figure~\ref{fig:1day_err} shows the mean drift and standard deviation of the semi-major axis of a low Earth orbit (mean altitude 217\,km) over a 10-day period for the different integration schemes as a function of step interval. For these simulations, the interval lengths were kept constant (during an actual Orbiter simulation run, step lengths will normally vary as a function of scenery complexity and time compression).
+Figure~\ref{fig:1day_err} shows the mean drift and standard deviation of the semi-major axis of a low Earth orbit (mean altitude 217\,km) over a 10-day period for the different integration schemes as a function of step interval. For these simulations, the interval lengths were kept constant (during an actual SpaceXpanse simulation run, step lengths will normally vary as a function of scenery complexity and time compression).
 
 It can be seen that the standard deviations of all methods converge at approximately $5\cdot 10^{-3}$\,km, defined by the noise level due to rounding errors and ``true'' orbit perturbations. The step lengths up to which this maximum accuracy level is maintained vary widely between the different methods. Of the polynomial interpolation schemes described above, the quadratic scheme compares favourably to the Runge-Kutta methods, providing better accuracy than RK4, while requiring fewer function evaluations.
 
@@ -326,18 +326,18 @@ SY8 & 16 & 51.5
 \begin{figure}\centering
 \includegraphics[width=0.99\textwidth]{sma_dev}\\
 \includegraphics[width=0.99\textwidth]{sma_std}
-\caption{Mean drift (top) and standard deviation (bottom) in semi-major axis for a low Earth orbit (mean altitude 217\,km) over a period of 10 days, as a function of time step length. Shown are the interpolation and Runge-Kutta families of integrators used in the Orbiter code.}
+\caption{Mean drift (top) and standard deviation (bottom) in semi-major axis for a low Earth orbit (mean altitude 217\,km) over a period of 10 days, as a function of time step length. Shown are the interpolation and Runge-Kutta families of integrators used in the SpaceXpanse code.}
 \label{fig:1day_err}
 \end{figure}
 
 \begin{figure}\centering
 \includegraphics[width=0.99\textwidth]{sma_symp_std}
 \includegraphics[width=0.99\textwidth]{pea_symp_std}
-\caption{Standard deviation in semi-major axis (top) and perigee altitude (bottom) for the 2nd, 4th, 6th and 8th order symplectic integrators available in Orbiter. For comparison, the 2nd, 4th, 6th and 8th order Runge-Kutta results are shown as dashed lines.}
+\caption{Standard deviation in semi-major axis (top) and perigee altitude (bottom) for the 2nd, 4th, 6th and 8th order symplectic integrators available in SpaceXpanse. For comparison, the 2nd, 4th, 6th and 8th order Runge-Kutta results are shown as dashed lines.}
 \label{fig:symp_err}
 \end{figure}
 
-Note that with default parameters, Orbiter will switch to ``stabilised'' orbit calculation for steps that involove a change in mean anomaly of more than $10^{-3} \cdot 2\pi$. In low Earth orbit with period $T\approx5400\,s$, this corresponds to a time interval of 5.4\,s.
+Note that with default parameters, SpaceXpanse will switch to ``stabilised'' orbit calculation for steps that involove a change in mean anomaly of more than $10^{-3} \cdot 2\pi$. In low Earth orbit with period $T\approx5400\,s$, this corresponds to a time interval of 5.4\,s.
 
 For comparison, with a typical frame rate of 50\,fps and at a selected time compression of $1000\times$, the step interval is 20\,s. During normal simulation runs, the main problem are however isolated long steps, caused for example by disc I/O. During such steps, the orbit stabilisation mode keeps orbits from deteriorating. 
 

@@ -44,13 +44,13 @@ add_library(D3D7Client SHARED
 )
 
 target_include_directories(D3D7Client
-	PUBLIC ${CMAKE_SOURCE_DIR}/Orbitersdk/include
+	PUBLIC ${CMAKE_SOURCE_DIR}/SpaceXpansesdk/include
 	PUBLIC ${DX7SDK_INCLUDE_DIR}
 )
 
 add_dependencies(D3D7Client
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	GDIClient
 )
 

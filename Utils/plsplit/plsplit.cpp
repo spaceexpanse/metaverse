@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // =========================================================================
-// plsplit for Orbiter:
+// plsplit for SpaceXpanse:
 // Split a bitmap file into 512x512 patches and put them into the proper
 // directory structure
 // =========================================================================
@@ -92,7 +92,7 @@ int main (int argc, char *argv[])
 		
 	char cmd;
 
-	std::cout << "plsplit: Orbiter planetary texture generation tool.\n\n";
+	std::cout << "plsplit: SpaceXpanse planetary texture generation tool.\n\n";
 	std::cout << "(S) Generate textures for a planetary surface\n";
 	std::cout << "(C) Generate cloud textures\n";
 	std::cout << "[S|C] >> ";

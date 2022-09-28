@@ -8,7 +8,7 @@
 #include "panel.h"
 #include "hsystems.h"
 #include "esystems.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 class ShipInternal
 { public:

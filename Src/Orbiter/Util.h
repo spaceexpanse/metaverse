@@ -6,10 +6,10 @@
 
 #include <windows.h>
 #include "Vecmat.h"
-#include "OrbiterAPI.h"
-#include "Orbiter.h"
+#include "SpaceXpanseAPI.h"
+#include "SpaceXpanse.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 
 LONGLONG NameToId (const char *name);
 // converts a file name into an identifier. Note that this is not guaranteed to be unique.
@@ -17,7 +17,7 @@ LONGLONG NameToId (const char *name);
 // should go into the graphics client
 inline DWORD GetSurfColour (DWORD r, DWORD g, DWORD b)
 {
-	DWORD bpp = g_pOrbiter->ViewBPP();
+	DWORD bpp = g_pSpaceXpanse->ViewBPP();
 	if (bpp >= 24) return (r << 16) + (g << 8) + b;
 	else           return (((r*319)/2559) << 11) + (((g*639)/2559) << 5) + ((b*319)/2559);
 }

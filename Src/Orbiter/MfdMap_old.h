@@ -48,7 +48,7 @@ private:
 	char title[50];
 	char datastr[2][50];
 	Planet *refplanet;
-	const RigidBody *otgt;// target orbiter
+	const RigidBody *otgt;// target spacexpanse
 	const Base *btgt;     // target base
 	SURFHANDLE map, bgmap;
 	bool needmap;      // request map load

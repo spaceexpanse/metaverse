@@ -10,7 +10,7 @@ add_custom_command(
 add_custom_target(RecorderRefDoc
 	DEPENDS ${out}
 )
-add_dependencies(OrbiterDoc
+add_dependencies(SpaceXpanseDoc
 	RecorderRefDoc
 )
 install(FILES ${out}

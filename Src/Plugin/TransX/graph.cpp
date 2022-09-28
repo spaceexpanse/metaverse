@@ -23,7 +23,7 @@
 #include <windows.h>
 #include <cstdio>
 #include <cmath>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "mfd.h"
 #include "graph.h"
 #include "TransXFunction.h"
@@ -100,7 +100,7 @@ void Graph::setprojection(const OrbitElements &torbit)
 
 void Graph::setprojection(const VECTOR3 &projection)
 //Set projection vectors using a viewpoint vector
-// Angle of peojection is set by the same method used by Orbiter
+// Angle of peojection is set by the same method used by SpaceXpanse
 {
 	if (projection.x==0 && projection.z==0)
 	{

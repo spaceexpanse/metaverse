@@ -17,8 +17,8 @@ target_link_libraries(Meshdebug
 )
 
 add_dependencies(Meshdebug
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(Meshdebug

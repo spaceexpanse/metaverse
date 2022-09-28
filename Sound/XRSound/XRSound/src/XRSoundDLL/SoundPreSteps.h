@@ -10,7 +10,7 @@
 #include <atlstr.h>             // for CString
 #include <unordered_map>
 
-#include "OrbiterSDK.h"
+#include "SpaceXpanseSDK.h"
 #include "XRSound.h"            // for enums
 #include "VesselXRSoundEngine.h"
 

@@ -10,7 +10,7 @@
 
 #define STRICT 1
 #include "Mfd.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 class Instrument_User: public Instrument {
 public:

@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
-PROJECT_NAME           = "Orbiter Visualisation Project - D3D7Client"
+PROJECT_NAME           = "SpaceXpanse Visualisation Project - D3D7Client"
 PROJECT_NUMBER         = 2007
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
@@ -25,8 +25,8 @@ ABBREVIATE_BRIEF       = "The $name class" \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = YES
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = "C:/Source/Orbiter"
-STRIP_FROM_INC_PATH    = "C:/Source/Orbiter"
+STRIP_FROM_PATH        = "C:/Source/SpaceXpanse"
+STRIP_FROM_INC_PATH    = "C:/Source/SpaceXpanse"
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
 MULTILINE_CPP_IS_BRIEF = NO
@@ -82,7 +82,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = .. ../../GDIClient ../../../Orbitersdk/include/GraphicsAPI.h ../../../Orbitersdk/include/ModuleAPI.h
+INPUT                  = .. ../../GDIClient ../../../SpaceXpansesdk/include/GraphicsAPI.h ../../../SpaceXpansesdk/include/ModuleAPI.h
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \

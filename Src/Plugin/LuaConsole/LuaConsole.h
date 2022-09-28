@@ -4,7 +4,7 @@
 #ifndef __LUACONSOLE_H
 #define __LUACONSOLE_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "ModuleAPI.h"
 #include "ConsoleInterpreter.h"
 

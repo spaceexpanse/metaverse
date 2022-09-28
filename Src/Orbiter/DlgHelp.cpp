@@ -9,16 +9,16 @@
 
 #include "DlgHelp.h"
 #include "DlgMgr.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Resource.h"
 #include <htmlhelp.h>
 #include <io.h>
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern HELPCONTEXT DefHelpContext;
 
-static char helpf[256] = "html/orbiter.chm";
-static char deftopic[256] = "html/orbiter.chm::/intro.htm";
+static char helpf[256] = "html/spacexpanse.chm";
+static char deftopic[256] = "html/spacexpanse.chm::/intro.htm";
 static char vstopic[256] = "";
 static char jmp2url[256] = "";
 static char topic[256] = "/intro.htm";
@@ -58,7 +58,7 @@ void DlgHelp::RegisterClientClass (HINSTANCE hInstance)
 	wndClass.hCursor       = NULL;
 	wndClass.hbrBackground = (HBRUSH)GetStockObject (HOLLOW_BRUSH);
 	wndClass.lpszMenuName  = NULL;
-	wndClass.lpszClassName = "OrbiterHelp";
+	wndClass.lpszClassName = "SpaceXpanseHelp";
 	RegisterClass (&wndClass);
 }
 
@@ -66,7 +66,7 @@ void DlgHelp::RegisterClientClass (HINSTANCE hInstance)
 
 void DlgHelp::UnregisterClientClass (HINSTANCE hInstance)
 {
-	UnregisterClass ("OrbiterHelp", hInstance);
+	UnregisterClass ("SpaceXpanseHelp", hInstance);
 }
 
 // ======================================================================
@@ -84,8 +84,8 @@ void DlgHelp::SetScenarioHelp (const char *_helpf)
 			return;
 		}
 	}
-	strcpy (helpf, "html/orbiter.chm");
-	strcpy (deftopic, "html/orbiter.chm::/intro.htm");
+	strcpy (helpf, "html/spacexpanse.chm");
+	strcpy (deftopic, "html/spacexpanse.chm::/intro.htm");
 	pTopic = (DWORD_PTR)topic;
 	bScnHelp = false;
 }
@@ -118,7 +118,7 @@ void DlgHelp::InitHelp (HWND hWnd, HELPCONTEXT *hcontext)
 		HHWIN_PARAM_STYLES | HHWIN_PARAM_EXSTYLES;
 	hhwt.fsWinProperties = HHWIN_PROP_TRI_PANE | HHWIN_PROP_NOTITLEBAR |
 		HHWIN_PROP_TAB_SEARCH | HHWIN_PROP_AUTO_SYNC | HHWIN_PROP_NODEF_STYLES;
-	hhwt.pszCaption = "Orbiter Help";
+	hhwt.pszCaption = "SpaceXpanse Help";
 	hhwt.dwStyles = WS_CHILD | WS_VISIBLE;
 	hhwt.dwExStyles = WS_EX_NOPARENTNOTIFY;
 	hhwt.nShowState = WS_VISIBLE;
@@ -129,15 +129,15 @@ void DlgHelp::InitHelp (HWND hWnd, HELPCONTEXT *hcontext)
 	hhwt.hwndHTML = NULL;
 	hhwt.iNavWidth = 0;
 	if (hcontext) {
-		hhwt.pszToc = (hcontext->toc ? hcontext->toc : "html/orbiter.chm::/Orbiter.hhc");
-		hhwt.pszIndex = (hcontext->index ? hcontext->index : "html/orbiter.chm::/Orbiter.hhk");
+		hhwt.pszToc = (hcontext->toc ? hcontext->toc : "html/spacexpanse.chm::/SpaceXpanse.hhc");
+		hhwt.pszIndex = (hcontext->index ? hcontext->index : "html/spacexpanse.chm::/SpaceXpanse.hhk");
 		hhwt.pszFile = hcontext->helpfile;
-		hhwt.pszHome = "html/orbiter.chm::/intro.htm";
+		hhwt.pszHome = "html/spacexpanse.chm::/intro.htm";
 	} else {
-		hhwt.pszToc = "html/orbiter.chm::/Orbiter.hhc";
-		hhwt.pszIndex = "html/orbiter.chm::/Orbiter.hhk";
+		hhwt.pszToc = "html/spacexpanse.chm::/SpaceXpanse.hhc";
+		hhwt.pszIndex = "html/spacexpanse.chm::/SpaceXpanse.hhk";
 		hhwt.pszFile = helpf;
-		hhwt.pszHome = "html/orbiter.chm::/intro.htm";
+		hhwt.pszHome = "html/spacexpanse.chm::/intro.htm";
 	}
 	hhwt.fsToolBarFlags = HHWIN_BUTTON_EXPAND | HHWIN_BUTTON_BACK |
 		HHWIN_BUTTON_FORWARD | HHWIN_BUTTON_HOME;
@@ -211,15 +211,15 @@ INT_PTR CALLBACK DlgHelp::DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 		switch (LOWORD (wParam)) {
 		case IDHELP:
 			DefHelpContext.topic = "/help.htm";
-			g_pOrbiter->OpenHelp (&DefHelpContext);
+			g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 			return TRUE;
 		case IDCANCEL:
-			g_pOrbiter->CloseDialog (hDlg);
+			g_pSpaceXpanse->CloseDialog (hDlg);
 			return TRUE;
 		}
 		break;
 	}
-	return OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam);
+	return SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam);
 }
 
 // ======================================================================
@@ -258,7 +258,7 @@ LRESULT FAR PASCAL DlgHelp::ClientProc (HWND hwnd, UINT msg, WPARAM wParam, LPAR
 	case WM_NOTIFY:
 	//	if (wParam == NEWTOPIC) {
 	//		InitHelp (hwnd);
-	//		hHelpClient = HtmlHelp (hwnd, "orbiter.chm>Default", HH_DISPLAY_TOPIC, (DWORD)topic);
+	//		hHelpClient = HtmlHelp (hwnd, "spacexpanse.chm>Default", HH_DISPLAY_TOPIC, (DWORD)topic);
 	//	}
 		return TRUE;
 	}

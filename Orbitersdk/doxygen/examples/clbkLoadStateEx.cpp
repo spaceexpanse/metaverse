@@ -15,7 +15,7 @@ void MyVessel::clbkLoadStateEx (FILEHANDLE scn, void *status)
             sscanf (line+9, "%d", &my_value);
         } else if (...) { // more items
             ...
-        } else {          // anything not recognised is passed on to Orbiter
+        } else {          // anything not recognised is passed on to SpaceXpanse
             ParseScenarioLineEx (line, vs);
         }
     }

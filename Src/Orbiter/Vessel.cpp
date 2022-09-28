@@ -20,7 +20,7 @@
 
 #define OAPI_IMPLEMENTATION
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vessel.h"
 #include "Supervessel.h"
 #include "Config.h"
@@ -48,7 +48,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern Camera *g_camera;
 extern Pane *g_pane;
@@ -89,7 +89,7 @@ Vessel::Vessel (const PlanetarySystem *psys, const char *_name, const char *_cla
 
 	ifstream classf;
 	if (!OpenConfigFile (classf))
-		g_pOrbiter->TerminateOnError(); // PANIC!
+		g_pSpaceXpanse->TerminateOnError(); // PANIC!
 
 	// Set defaults
 	DefaultGenericCaps ();
@@ -124,7 +124,7 @@ Vessel::Vessel (const PlanetarySystem *psys, const char *_name, const char *_cla
 
 	ifstream classf;
 	if (!OpenConfigFile (classf))
-		g_pOrbiter->TerminateOnError(); // PANIC!
+		g_pSpaceXpanse->TerminateOnError(); // PANIC!
 
 	// Set defaults
 	DefaultGenericCaps ();
@@ -156,7 +156,7 @@ Vessel::Vessel (const PlanetarySystem *psys, const char *_name, const char *_cla
 	char cbuf[256];
 
 	sprintf (cbuf, "%s (%s)", _classname ? _classname : _name, _name);
-	g_pOrbiter->OutputLoadStatus (cbuf, 0);
+	g_pSpaceXpanse->OutputLoadStatus (cbuf, 0);
 
 	name = new char[strlen(_name)+1]; TRACENEW
 	strcpy (name, _name);
@@ -167,7 +167,7 @@ Vessel::Vessel (const PlanetarySystem *psys, const char *_name, const char *_cla
 
 	ifstream classf;
 	if (!OpenConfigFile (classf))
-		g_pOrbiter->TerminateOnError(); // PANIC!
+		g_pSpaceXpanse->TerminateOnError(); // PANIC!
 
 	// Set defaults
 	DefaultGenericCaps ();
@@ -228,7 +228,7 @@ Vessel::~Vessel ()
 		onlinehelp = NULL;
 	}
 	ClearModule();
-	g_pOrbiter->UpdateDeallocationProgress();
+	g_pSpaceXpanse->UpdateDeallocationProgress();
 }
 
 // ==============================================================
@@ -239,15 +239,15 @@ bool Vessel::OpenConfigFile (ifstream &cfgfile) const
 	strcpy (cbuf, "Vessels\\");
 	strcat (cbuf, classname ? classname : name);
 	// first search in $CONFIGDIR\Vessels
-	cfgfile.open (g_pOrbiter->ConfigPath (cbuf));
+	cfgfile.open (g_pSpaceXpanse->ConfigPath (cbuf));
 	if (cfgfile.good()) return true;
 	else cfgfile.clear();
 	// next search in $CONFIGDIR
-	cfgfile.open (g_pOrbiter->ConfigPath (cbuf+8));
+	cfgfile.open (g_pSpaceXpanse->ConfigPath (cbuf+8));
 	if (cfgfile.good()) return true;
 	else {
 		cfgfile.clear();
-		LOGOUT_ERR_FILENOTFOUND_MSG(g_pOrbiter->ConfigPath(cbuf + 8), "No vessel class configuration file found for: %s", classname ? classname : name);
+		LOGOUT_ERR_FILENOTFOUND_MSG(g_pSpaceXpanse->ConfigPath(cbuf + 8), "No vessel class configuration file found for: %s", classname ? classname : name);
 		//LogOut (">>> ERROR: No vessel class configuration file found for:");
 		//LOGOUT_ERR(classname ? classname : name);
 		return false;
@@ -310,7 +310,7 @@ void Vessel::SetDefaultState ()
 	sp.is_in_atm        = false;
 	bThrustEngaged      = false;
 	bForceActive        = false;
-	rpressure           = g_pOrbiter->Cfg()->CfgPhysicsPrm.bRadiationPressure;
+	rpressure           = g_pSpaceXpanse->Cfg()->CfgPhysicsPrm.bRadiationPressure;
 	Lift = Drag         = 0.0;
 	attach_status.pname = 0;
 	hudskp              = NULL;
@@ -416,7 +416,7 @@ void Vessel::DefaultGenericCaps ()
 	animcount          = 0;
 	nanimseq           = 0; // obsolete
 	LiftCoeff          = 0;
-	burnfuel           = g_pOrbiter->Cfg()->CfgLogicPrm.bLimitedFuel;
+	burnfuel           = g_pSpaceXpanse->Cfg()->CfgLogicPrm.bLimitedFuel;
 	xpdr               = 0;
 
 	nmfdmode           = 0;
@@ -441,7 +441,7 @@ void Vessel::ReadGenericCaps (ifstream &ifs)
 
 	// recursively read base class specs
 	if (GetItemString (ifs, "BaseClass", cbuf)) {
-		ifstream basef (g_pOrbiter->ConfigPath (cbuf));
+		ifstream basef (g_pSpaceXpanse->ConfigPath (cbuf));
 		if (basef) ReadGenericCaps (basef);
 	}
 
@@ -450,11 +450,11 @@ void Vessel::ReadGenericCaps (ifstream &ifs)
 
 	if (GetItemString(ifs, "MeshName", cbuf)) {
 		// preload mesh template
-		MESHHANDLE mesh = (MESHHANDLE)g_pOrbiter->meshmanager.LoadMesh(cbuf);
+		MESHHANDLE mesh = (MESHHANDLE)g_pSpaceXpanse->meshmanager.LoadMesh(cbuf);
 		if (mesh)
 			AddMesh(mesh);
 		else
-			g_pOrbiter->TerminateOnError(); // we assume that vessel meshes are required
+			g_pSpaceXpanse->TerminateOnError(); // we assume that vessel meshes are required
 	}
 
 	if (GetItemString (ifs, "CollisionHull", cbuf))
@@ -740,7 +740,7 @@ void Vessel::Setup ()
 	orthoaxis = 0;
 	kill_pending = false;
 	if (bFRplayback = bRequestPlayback) {
-		const char *playbackdir = g_pOrbiter->PState()->PlaybackDir();
+		const char *playbackdir = g_pSpaceXpanse->PState()->PlaybackDir();
 		//if (!playbackdir) playbackdir = ScenarioName;
 		FRecorder_Read (playbackdir);
 	}
@@ -2181,8 +2181,8 @@ bool Vessel::DelExhaust (UINT idx)
 
 oapi::ParticleStream *Vessel::AddParticleStream (PARTICLESTREAMSPEC *pss, const Vector &pos, const Vector &dir, double *lvl)
 {
-	if (!g_pOrbiter->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
-	oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient ();
+	if (!g_pSpaceXpanse->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
+	oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient ();
 	if (!gc) return 0;
 
 	oapi::ParticleStream **tmp = new oapi::ParticleStream*[ncontrail+1]; TRACENEW
@@ -2199,8 +2199,8 @@ oapi::ParticleStream *Vessel::AddParticleStream (PARTICLESTREAMSPEC *pss, const 
 
 oapi::ParticleStream *Vessel::AddExhaustStream (ThrustSpec *ts, PARTICLESTREAMSPEC *pss, const Vector *pos, const Vector *dir)
 {
-	if (!g_pOrbiter->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
-	oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient ();
+	if (!g_pSpaceXpanse->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
+	oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient ();
 	if (!gc) return 0;
 
 	oapi::ParticleStream **tmp = new oapi::ParticleStream*[ncontrail+1]; TRACENEW
@@ -2255,8 +2255,8 @@ bool Vessel::DelExhaustStream (oapi::ParticleStream *ep)
 
 oapi::ParticleStream *Vessel::AddReentryStream (PARTICLESTREAMSPEC *pss)
 {
-	if (!g_pOrbiter->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
-	oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient ();
+	if (!g_pSpaceXpanse->Cfg()->CfgVisualPrm.bParticleStreams) return 0;
+	oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient ();
 	if (!gc) return 0;
 
 	oapi::ParticleStream **tmp = new oapi::ParticleStream*[nreentrystream+1]; TRACENEW
@@ -3220,7 +3220,7 @@ bool Vessel::DelMesh (UINT idx, bool retain_anim)
 	if (!meshlist[idx]) return false; // mesh already deleted
 	
 	BroadcastVisMsg (EVENT_VESSEL_DELMESH, idx); // notify visuals
-	//g_pOrbiter->VesselEvent (this, EVENT_VESSEL_DELMESH, (void*)idx);
+	//g_pSpaceXpanse->VesselEvent (this, EVENT_VESSEL_DELMESH, (void*)idx);
 	delete meshlist[idx];
 	meshlist[idx] = 0;
 	ScanMeshCaps();
@@ -3608,7 +3608,7 @@ int Vessel::ConsumeDirectKey (char *buffer)
 int Vessel::ConsumeBufferedKey (DWORD key, bool down, char *kstate)
 {
 	int res;
-	const Keymap &keymap = g_pOrbiter->keymap;
+	const Keymap &keymap = g_pSpaceXpanse->keymap;
 
 	// first offer the key to the module
 	if (modIntf.v->Version() >= 1)
@@ -4530,8 +4530,8 @@ bool Vessel::AddSurfaceForces (Vector *F, Vector *M, const StateVectors *s, doub
 	if (this == g_focusobj && nosesteering && py[0] < 0.5 && fabs (v1) > 0.2) {
 
 		static const double MAX_NOSE_MOVEMENT = 1.0;
-		double newdir = g_pOrbiter->ManCtrlLevel (THGROUP_ATT_YAWRIGHT, MANCTRL_ANYMODE) -
-		                g_pOrbiter->ManCtrlLevel (THGROUP_ATT_YAWLEFT, MANCTRL_ANYMODE);
+		double newdir = g_pSpaceXpanse->ManCtrlLevel (THGROUP_ATT_YAWRIGHT, MANCTRL_ANYMODE) -
+		                g_pSpaceXpanse->ManCtrlLevel (THGROUP_ATT_YAWLEFT, MANCTRL_ANYMODE);
 		double ddir = newdir-nosewheeldir;
 		if (fabs(ddir)/dt > MAX_NOSE_MOVEMENT) {
 			if (ddir > 0.0) newdir = nosewheeldir + MAX_NOSE_MOVEMENT*dt;
@@ -4940,7 +4940,7 @@ void Vessel::Timejump (double dt, int mode)
 
 		switch (mode) {
 		case PROP_ORBITAL_ELEMENTS:
-			el->PosVel (cpos, cvel, td.SimT0+g_pOrbiter->tjump.dt);
+			el->PosVel (cpos, cvel, td.SimT0+g_pSpaceXpanse->tjump.dt);
 			// fall through
 		case PROP_ORBITAL_FIXEDSTATE:
 		case PROP_SORBITAL_FIXEDSTATE:
@@ -5482,7 +5482,7 @@ bool Vessel::LoadPanel (int which) const
 bool Vessel::LoadPanel2D (int which, Panel2D *panel) const
 {
 	if (modIntf.v && modIntf.v->Version() >= 2) {
-		oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient();
+		oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient();
 		if (gc) {
 			DWORD viewW, viewH;
 			gc->clbkGetViewportSize (&viewW, &viewH);
@@ -5801,7 +5801,7 @@ bool Vessel::LoadModule (ifstream &classf)
 	hMod = 0;
 	ClearModule();
 	modIntf.v = 0;
-	flightmodel = g_pOrbiter->Cfg()->CfgLogicPrm.FlightModelLevel;
+	flightmodel = g_pSpaceXpanse->Cfg()->CfgLogicPrm.FlightModelLevel;
 	if (found = GetItemString (classf, "Module", cbuf)) {
 		found = RegisterModule (cbuf);
 		if (!found) {
@@ -6090,7 +6090,7 @@ VESSEL::VESSEL (OBJHANDLE hvessel, int fmodel)
 OBJHANDLE VESSEL::Create (const char *name, const char *classname, const VESSELSTATUS &status)
 {
 	Vessel *vessel = new Vessel (g_psys, name, classname, status); TRACENEW
-	g_pOrbiter->InsertVessel (vessel);
+	g_pSpaceXpanse->InsertVessel (vessel);
 	return (OBJHANDLE)vessel;
 }
 
@@ -6116,7 +6116,7 @@ int VESSEL::GetFlightModel () const
 
 int VESSEL::GetDamageModel () const
 {
-	return g_pOrbiter->Cfg()->CfgLogicPrm.DamageSetting;
+	return g_pSpaceXpanse->Cfg()->CfgLogicPrm.DamageSetting;
 }
 
 bool VESSEL::GetEnableFocus () const
@@ -6243,7 +6243,7 @@ double VESSEL::GetManualControlLevel (THGROUP_TYPE thgt, DWORD mode, DWORD devic
 {
 	static int revmode[3] = {0,2,1};
 
-	double lvl = g_pOrbiter->ManCtrlLevel (thgt, device);
+	double lvl = g_pSpaceXpanse->ManCtrlLevel (thgt, device);
 	int md;
 	switch (mode) {
 	case MANCTRL_ATTMODE: md = vessel->attmode; break;
@@ -7484,7 +7484,7 @@ UINT VESSEL::GetMeshCount () const
 MESHHANDLE VESSEL::GetMesh (VISHANDLE vis, UINT idx) const
 {
 #ifdef INLINEGRAPHICS
-	return g_pOrbiter->GetGraphicsClient()->clbkGetMesh (vis, idx);
+	return g_pSpaceXpanse->GetGraphicsClient()->clbkGetMesh (vis, idx);
 #else
 	return NULL;
 #endif
@@ -7492,7 +7492,7 @@ MESHHANDLE VESSEL::GetMesh (VISHANDLE vis, UINT idx) const
 
 DEVMESHHANDLE VESSEL::GetDevMesh (VISHANDLE vis, UINT idx) const
 {
-	oapi::GraphicsClient *gc = g_pOrbiter->GetGraphicsClient();
+	oapi::GraphicsClient *gc = g_pSpaceXpanse->GetGraphicsClient();
 	return (gc ? (DEVMESHHANDLE)gc->clbkGetMesh (vis, idx) : NULL);
 }
 
@@ -7684,7 +7684,7 @@ void VESSEL::ShiftCentreOfMass (const VECTOR3 &shift)
 		vessel->AddRPos (gdr);
 		if (vessel->supervessel) vessel->supervessel->NotifyShiftVesselOrigin (vessel, dr);
 	}
-	g_pOrbiter->NotifyObjectJump (vessel, gdr);
+	g_pSpaceXpanse->NotifyObjectJump (vessel, gdr);
 	if (vessel->bFRrecord) vessel->FRecorder_Save (true);
 }
 

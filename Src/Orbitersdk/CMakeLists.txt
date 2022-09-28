@@ -1,27 +1,27 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-# Static library containing the DLL entry point for Orbiter plugins.
-# To be included by all Orbiter plugin DLLs.
+# Static library containing the DLL entry point for SpaceXpanse plugins.
+# To be included by all SpaceXpanse plugin DLLs.
 
-add_library(Orbitersdk STATIC
-	Orbitersdk.cpp
+add_library(SpaceXpansesdk STATIC
+	SpaceXpansesdk.cpp
 )
 
-set_target_properties(Orbitersdk
+set_target_properties(SpaceXpansesdk
 	PROPERTIES
 	FOLDER Core
 )
 
-# Copy library to its Orbitersdk/lib location so that external project integrated into the build can find it
-add_custom_command(TARGET Orbitersdk
+# Copy library to its SpaceXpansesdk/lib location so that external project integrated into the build can find it
+add_custom_command(TARGET SpaceXpansesdk
 	POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${ORBITER_BINARY_SDK_DIR}/lib
 	COMMAND ${CMAKE_COMMAND} -E copy ${ORBITER_SDK_LIB} ${ORBITER_BINARY_SDK_DIR}/lib/ 
 )
 
-# Installation: Orbiter addon entry interface library to SDK folder to be included by addons
-install(TARGETS Orbitersdk
+# Installation: SpaceXpanse addon entry interface library to SDK folder to be included by addons
+install(TARGETS SpaceXpansesdk
 	ARCHIVE
 	DESTINATION ${ORBITER_INSTALL_SDK_DIR}/lib
 )

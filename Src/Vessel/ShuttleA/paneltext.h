@@ -12,7 +12,7 @@
 #ifndef __PANELTEXT_H
 #define __PANELTEXT_H
 
-#include "Orbitersdk.h"
+#include "SpaceXpansesdk.h"
 
 #ifndef __PANELTEXT_CPP
 extern int small_font_xpos[256];

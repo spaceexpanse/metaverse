@@ -4,12 +4,12 @@
 #ifndef __VENUSATM2006_H
 #define __VENUSATM2006_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include "CelbodyAPI.h"
 
 // ======================================================================
 // class VenusAtmosphere_2006
-// Venus atmosphere model, as used in Orbiter 2006
+// Venus atmosphere model, as used in SpaceXpanse 2006
 // ======================================================================
 
 class VenusAtmosphere_2006: public ATMOSPHERE {

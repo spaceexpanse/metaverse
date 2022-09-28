@@ -2,13 +2,13 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
-<LINK REL="stylesheet" HREF="../Orbiter.css" TYPE="TEXT/CSS" />
-<LINK REL="stylesheet" HREF="OrbiterAPI.css" TYPE="TEXT/CSS">
+<LINK REL="stylesheet" HREF="../SpaceXpanse.css" TYPE="TEXT/CSS" />
+<LINK REL="stylesheet" HREF="SpaceXpanseAPI.css" TYPE="TEXT/CSS">
 <title>Script API: MFD callback functions</title>
 </head>
 <body BGCOLOR=#FFFFFF TEXT=#000000>
 
-<p class="header"><a href="intro.htm">Orbiter</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; MFD callback functions</p>
+<p class="header"><a href="intro.htm">SpaceXpanse</a> &gt; <a href="ScriptRef.htm">Script</a> &gt; <a href="function.htm">Functions</a> &gt; MFD callback functions</p>
 
 <h1>MFD callback functions</h1>
 <p>The following callback functions in an MFD script are called by the
@@ -256,7 +256,7 @@ the oapi.keydown function in combination with an
 oapi.keydown(kstate,OAPI_KEY.X)
 </div>
 returns <i>true</i> if the X key is pressed, false otherwise.</p>
-<p>To consume an individual key (i.e. prevent Orbiter from further
+<p>To consume an individual key (i.e. prevent SpaceXpanse from further
 processing it), use the oapi.resetkey function, e.g.
 <div class="code">
 oapi.resetkey(kstate,OAPI_KEY.X)
@@ -296,7 +296,7 @@ end
 </table>
 
 <h4>Notes:</h4>
-<p>This function is called periodically by Orbiter (usually once per
+<p>This function is called periodically by SpaceXpanse (usually once per
 second) to allow the MFD to update its display.</p>
 <p>The sketchpad object passed to the function is associated with
 the MFD display surface, and can be used to draw text, lines, etc.</p>

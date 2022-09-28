@@ -79,7 +79,7 @@ void JupiterBaryFastEphemeris (double simt, double *ret, Sample *sp)
 
 // -----------------------------------------------------------
 // GalEphem:
-// Interface to galsat function. Maps results to Orbiter
+// Interface to galsat function. Maps results to SpaceXpanse
 // coordinates and units
 // -----------------------------------------------------------
 
@@ -89,7 +89,7 @@ void GalEphem (int ksat, double mjd, double *ret)
 
 	galsat (r, ret, mjd+2400000.5, ksat, 2);
 
-	// map from default to orbiter frame of reference: xyz -> xzy
+	// map from default to spacexpanse frame of reference: xyz -> xzy
 	// and change units from AU and AU/day to m and m/s
 
 	static const double AU = 299792458.0 * 499.004783806;

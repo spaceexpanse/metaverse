@@ -19,7 +19,7 @@ void RegisterPropertyList (HINSTANCE hInst)
 	wndClass.hCursor       = LoadCursor (NULL, IDC_ARROW);
 	wndClass.hbrBackground = (HBRUSH)GetStockObject (WHITE_BRUSH);
 	wndClass.lpszMenuName  = NULL;
-	wndClass.lpszClassName = "OrbiterCtrl_PropertyList";
+	wndClass.lpszClassName = "SpaceXpanseCtrl_PropertyList";
 	RegisterClass (&wndClass);
 
 	HMODULE hExeInst = GetModuleHandle (NULL);
@@ -28,7 +28,7 @@ void RegisterPropertyList (HINSTANCE hInst)
 
 void UnregisterPropertyList (HINSTANCE hInst)
 {
-	UnregisterClass ("OrbiterCtrl_PropertyList", hInst);
+	UnregisterClass ("SpaceXpanseCtrl_PropertyList", hInst);
 	DeleteObject (PropertyList::hBmpArrows);
 }
 

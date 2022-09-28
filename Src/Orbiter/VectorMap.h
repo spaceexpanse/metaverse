@@ -10,7 +10,7 @@
 
 //#define ASYNC_DRAWMAP
 
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Planet.h"
 #include "Element.h"
 
@@ -43,7 +43,7 @@
 #define TASKID_TERMINATE 0x3 // terminate thread
 #define TASKID_DRAW      0x4 // redraw canvas
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 
 struct VPoint {
 	double lng, lat;

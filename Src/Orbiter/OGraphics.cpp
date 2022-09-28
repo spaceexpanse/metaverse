@@ -2,13 +2,13 @@
 // Licensed under the MIT License
 
 // =======================================================================
-// OrbiterGraphics class
+// SpaceXpanseGraphics class
 // Inline graphics client
 // =======================================================================
 
 #include "D3dmath.h"
 #include "OGraphics.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Psys.h"
 #include "Launchpad.h"
 #include "ExtraRender.h"
@@ -31,14 +31,14 @@ extern PlanetarySystem *g_psys;
 extern TextureManager *g_texmanager;
 extern char DBG_MSG[256];
 
-TextureManager2 *g_texmanager2 = 0; // TODO: make member of OrbiterGraphics
+TextureManager2 *g_texmanager2 = 0; // TODO: make member of SpaceXpanseGraphics
 
 // =======================================================================
 
-VideoTab::VideoTab (OrbiterGraphics *og)
+VideoTab::VideoTab (SpaceXpanseGraphics *og)
 {
 	gclient = og;
-	cfg = og->orbiter->Cfg();
+	cfg = og->spacexpanse->Cfg();
 	hVid = og->hVid;
 }
 
@@ -371,9 +371,9 @@ INT_PTR VideoTab::WndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 // =======================================================================
 // =======================================================================
 
-OrbiterGraphics::OrbiterGraphics (Orbiter *po): GDIClient (po->GetInstance())
+SpaceXpanseGraphics::SpaceXpanseGraphics (SpaceXpanse *po): GDIClient (po->GetInstance())
 {
-	orbiter                = po;
+	spacexpanse                = po;
 	scene                  = NULL;
 	vtab                   = NULL;
 	clipper                = NULL;
@@ -398,7 +398,7 @@ OrbiterGraphics::OrbiterGraphics (Orbiter *po): GDIClient (po->GetInstance())
 
 // =======================================================================
 
-OrbiterGraphics::~OrbiterGraphics ()
+SpaceXpanseGraphics::~SpaceXpanseGraphics ()
 {
 	if (vtab) delete vtab;
 	if (scene) delete scene;
@@ -426,7 +426,7 @@ OrbiterGraphics::~OrbiterGraphics ()
 
 // =======================================================================
 
-bool OrbiterGraphics::SelectDevice (D3D7Enum_DeviceInfo **dev, DeviceData *dd)
+bool SpaceXpanseGraphics::SelectDevice (D3D7Enum_DeviceInfo **dev, DeviceData *dd)
 {
 	D3D7Enum_DeviceInfo *devlist, *dv;
 	DWORD ndev;
@@ -458,7 +458,7 @@ bool OrbiterGraphics::SelectDevice (D3D7Enum_DeviceInfo **dev, DeviceData *dd)
 
 // =======================================================================
 
-HRESULT OrbiterGraphics::ConfirmDevice (DDCAPS*, D3DDEVICEDESC7*)
+HRESULT SpaceXpanseGraphics::ConfirmDevice (DDCAPS*, D3DDEVICEDESC7*)
 {
 	// put checks in here
 	return S_OK;
@@ -466,7 +466,7 @@ HRESULT OrbiterGraphics::ConfirmDevice (DDCAPS*, D3DDEVICEDESC7*)
 
 // =======================================================================
 
-HRESULT OrbiterGraphics::ReEnumerate (TCHAR* fname, DeviceData *dd)
+HRESULT SpaceXpanseGraphics::ReEnumerate (TCHAR* fname, DeviceData *dd)
 {
 	HRESULT hr;
 	D3D7Enum_FreeResources ();
@@ -487,7 +487,7 @@ HRESULT OrbiterGraphics::ReEnumerate (TCHAR* fname, DeviceData *dd)
 
 // =======================================================================
 
-void OrbiterGraphics::clbkRefreshVideoData ()
+void SpaceXpanseGraphics::clbkRefreshVideoData ()
 {
 	char cbuf[128];
 	int res;
@@ -540,12 +540,12 @@ void OrbiterGraphics::clbkRefreshVideoData ()
 
 // =======================================================================
 
-bool OrbiterGraphics::clbkInitialise ()
+bool SpaceXpanseGraphics::clbkInitialise ()
 {
 	if (!GraphicsClient::clbkInitialise()) return false;
 
 	static char *DevName = "Device.dat";
-	Config *pcfg = orbiter->Cfg();
+	Config *pcfg = spacexpanse->Cfg();
 	bool force = pcfg->CfgDevPrm.bForceEnum;
 
     HRESULT hr;
@@ -583,7 +583,7 @@ bool OrbiterGraphics::clbkInitialise ()
         return false;
     }
 
-	// Output driver info to the Orbiter.log file
+	// Output driver info to the SpaceXpanse.log file
 	D3D7Enum_DeviceInfo *pDevices;
 	DWORD nDevices;
 	D3D7Enum_GetDevices (&pDevices, &nDevices);
@@ -598,8 +598,8 @@ bool OrbiterGraphics::clbkInitialise ()
 	vtab->Init();
 
 	// render parameter dialogs in extra tab
-	orbiter::LaunchpadDialog *launchpad = g_pOrbiter->Launchpad();
-	orbiter::ExtraTab *tExtra = launchpad->GetExtraTab();
+	spacexpanse::LaunchpadDialog *launchpad = g_pSpaceXpanse->Launchpad();
+	spacexpanse::ExtraTab *tExtra = launchpad->GetExtraTab();
 	HTREEITEM ht = launchpad->RegisterExtraParam (m_lpiGroup = new Extra_RenderOptions(tExtra), NULL);
 	launchpad->RegisterExtraParam (m_lpiPlanetRenderOptions = new Extra_PlanetRenderOptions(tExtra), ht);
 
@@ -608,9 +608,9 @@ bool OrbiterGraphics::clbkInitialise ()
 
 // =======================================================================
 
-void OrbiterGraphics::clbkCleanup()
+void SpaceXpanseGraphics::clbkCleanup()
 {
-	orbiter::LaunchpadDialog* launchpad = g_pOrbiter->Launchpad();
+	spacexpanse::LaunchpadDialog* launchpad = g_pSpaceXpanse->Launchpad();
 	launchpad->UnregisterExtraParam(m_lpiPlanetRenderOptions);
 	delete m_lpiPlanetRenderOptions;
 	m_lpiPlanetRenderOptions = nullptr;
@@ -621,7 +621,7 @@ void OrbiterGraphics::clbkCleanup()
 
 // =======================================================================
 
-void OrbiterGraphics::clbkRenderScene ()
+void SpaceXpanseGraphics::clbkRenderScene ()
 {
 	//static bool bOutput2DData = true; // make configurable?
 	HRESULT hr;
@@ -670,12 +670,12 @@ void OrbiterGraphics::clbkRenderScene ()
 	}
 
 	// 2D display overlay
-	//if (bOutput2DData) orbiter->Output2DData();
+	//if (bOutput2DData) spacexpanse->Output2DData();
 }
 
 // =======================================================================
 
-bool OrbiterGraphics::clbkDisplayFrame ()
+bool SpaceXpanseGraphics::clbkDisplayFrame ()
 {
 	// Special rendering in the presence of popup windows
 	if (RenderWithPopupWindows())
@@ -693,7 +693,7 @@ bool OrbiterGraphics::clbkDisplayFrame ()
 
 // =======================================================================
 
-HWND OrbiterGraphics::clbkCreateRenderWindow ()
+HWND SpaceXpanseGraphics::clbkCreateRenderWindow ()
 {
 	extern char *strWndClass;
 	VIDEODATA *vd = GetVideoData();
@@ -703,15 +703,15 @@ HWND OrbiterGraphics::clbkCreateRenderWindow ()
 		// remove window border to avoid problems with mouse coordinates
 	    hWnd = CreateWindow (strWndClass, "",
 			WS_POPUP | WS_EX_TOPMOST| WS_VISIBLE,
-			CW_USEDEFAULT, CW_USEDEFAULT, 10, 10, 0, 0, OrbiterInstance(), (LPVOID)this);
+			CW_USEDEFAULT, CW_USEDEFAULT, 10, 10, 0, 0, SpaceXpanseInstance(), (LPVOID)this);
 	} else {
 	    hWnd = CreateWindow (strWndClass, "",
 			WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_VISIBLE,
-			CW_USEDEFAULT, CW_USEDEFAULT, vd->winw, vd->winh, 0, 0, OrbiterInstance(), (LPVOID)this);
+			CW_USEDEFAULT, CW_USEDEFAULT, vd->winw, vd->winh, 0, 0, SpaceXpanseInstance(), (LPVOID)this);
 		//// Borderless:
 		//hWnd = CreateWindow(strWndClass, "",
 		//	WS_POPUP | WS_VISIBLE,
-		//	CW_USEDEFAULT, CW_USEDEFAULT, vd->winw, vd->winh, 0, 0, OrbiterInstance(), 0);
+		//	CW_USEDEFAULT, CW_USEDEFAULT, vd->winw, vd->winh, 0, 0, SpaceXpanseInstance(), 0);
 	}
 
 	if (!hWnd) {
@@ -722,14 +722,14 @@ HWND OrbiterGraphics::clbkCreateRenderWindow ()
 	}
 	UpdateWindow (hWnd);
 
-	orbiter->hRenderWnd = hWnd; // obsolete
+	spacexpanse->hRenderWnd = hWnd; // obsolete
 	bNoVSync = vd->novsync;     // obsolete
 
 	// Initialize the 3D environment for the app
 	HRESULT hr;
     if (FAILED (hr = Init3DEnvironment ())) {
 		LOGOUT("ERROR: Could not initialize 3D environment");
-		orbiter->CloseSession ();
+		spacexpanse->CloseSession ();
 		LOGOUT_DDERR (hr);
         return 0;
 	}
@@ -745,21 +745,21 @@ HWND OrbiterGraphics::clbkCreateRenderWindow ()
 
 // =======================================================================
 
-void OrbiterGraphics::clbkPostCreation ()
+void SpaceXpanseGraphics::clbkPostCreation ()
 {
 	ExitOutputLoadStatus ();
 }
 
 // =======================================================================
 
-bool OrbiterGraphics::clbkSplashLoadMsg (const char *msg, int line)
+bool SpaceXpanseGraphics::clbkSplashLoadMsg (const char *msg, int line)
 {
 	return OutputLoadStatus (msg, line);
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkCloseSession (bool fastclose)
+void SpaceXpanseGraphics::clbkCloseSession (bool fastclose)
 {
 	if (!fastclose) {
 		DestroyPatchDeviceObjects ();
@@ -776,35 +776,35 @@ void OrbiterGraphics::clbkCloseSession (bool fastclose)
 
 // =======================================================================
 
-void OrbiterGraphics::clbkDestroyRenderWindow (bool fastclose)
+void SpaceXpanseGraphics::clbkDestroyRenderWindow (bool fastclose)
 {
 	GraphicsClient::clbkDestroyRenderWindow (fastclose);
-	orbiter->bVisible = false;
-	orbiter->bRunning = false;
+	spacexpanse->bVisible = false;
+	spacexpanse->bRunning = false;
 	if (!fastclose)
 		Exit3DEnvironment();
 	else
 		TileManager::Stop();
-	orbiter->hRenderWnd = 0;
+	spacexpanse->hRenderWnd = 0;
 }
 
 // =======================================================================
 
-bool OrbiterGraphics::clbkFullscreenMode () const
+bool SpaceXpanseGraphics::clbkFullscreenMode () const
 {
 	return bFullscreen;
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkGetViewportSize (DWORD *width, DWORD *height) const
+void SpaceXpanseGraphics::clbkGetViewportSize (DWORD *width, DWORD *height) const
 {
 	*width = viewW, *height = viewH;
 }
 
 // =======================================================================
 
-bool OrbiterGraphics::clbkGetRenderParam (DWORD prm, DWORD *value) const
+bool SpaceXpanseGraphics::clbkGetRenderParam (DWORD prm, DWORD *value) const
 {
 	switch (prm) {
 	case RP_COLOURDEPTH:
@@ -831,7 +831,7 @@ bool OrbiterGraphics::clbkGetRenderParam (DWORD prm, DWORD *value) const
 
 // =======================================================================
 
-int OrbiterGraphics::clbkVisEvent (OBJHANDLE hObj, VISHANDLE vis, DWORD msg, DWORD_PTR context)
+int SpaceXpanseGraphics::clbkVisEvent (OBJHANDLE hObj, VISHANDLE vis, DWORD msg, DWORD_PTR context)
 {
 	VObject *vo = (VObject*)vis;
 	vo->clbkEvent (msg, context);
@@ -840,7 +840,7 @@ int OrbiterGraphics::clbkVisEvent (OBJHANDLE hObj, VISHANDLE vis, DWORD msg, DWO
 
 // =======================================================================
 
-MESHHANDLE OrbiterGraphics::clbkGetMesh (VISHANDLE vis, UINT idx)
+MESHHANDLE SpaceXpanseGraphics::clbkGetMesh (VISHANDLE vis, UINT idx)
 {
 	if (!vis) return NULL; // sanity check
 	return ((VVessel*)vis)->GetMesh (idx);
@@ -848,21 +848,21 @@ MESHHANDLE OrbiterGraphics::clbkGetMesh (VISHANDLE vis, UINT idx)
 
 // =======================================================================
 
-int OrbiterGraphics::clbkGetMeshGroup (DEVMESHHANDLE hMesh, DWORD grpidx, GROUPREQUESTSPEC *grs)
+int SpaceXpanseGraphics::clbkGetMeshGroup (DEVMESHHANDLE hMesh, DWORD grpidx, GROUPREQUESTSPEC *grs)
 {
 	return ((Mesh*)hMesh)->GetGroup (grpidx, grs);
 }
 
 // =======================================================================
 
-int OrbiterGraphics::clbkEditMeshGroup (DEVMESHHANDLE hMesh, DWORD grpidx, GROUPEDITSPEC *ges)
+int SpaceXpanseGraphics::clbkEditMeshGroup (DEVMESHHANDLE hMesh, DWORD grpidx, GROUPEDITSPEC *ges)
 {
 	return ((Mesh*)hMesh)->EditGroup (grpidx, ges);
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkUpdate (bool running)
+void SpaceXpanseGraphics::clbkUpdate (bool running)
 {
 	extern bool g_bForceUpdate; // (temporary?)
 	scene->Update (g_psys, &g_camera, 1, running, g_bForceUpdate);
@@ -870,42 +870,42 @@ void OrbiterGraphics::clbkUpdate (bool running)
 
 // =======================================================================
 
-void OrbiterGraphics::clbkTimeJump (double simt, double simdt, double mjd)
+void SpaceXpanseGraphics::clbkTimeJump (double simt, double simdt, double mjd)
 {
-	scene->Timejump (g_psys, &g_camera, 1, orbiter->bRunning);
+	scene->Timejump (g_psys, &g_camera, 1, spacexpanse->bRunning);
 }
 
 // ==============================================================
 
-void OrbiterGraphics::clbkPreOpenPopup ()
+void SpaceXpanseGraphics::clbkPreOpenPopup ()
 {
 	if (clipper) m_pDD->FlipToGDISurface();
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkNewVessel (OBJHANDLE hVessel)
+void SpaceXpanseGraphics::clbkNewVessel (OBJHANDLE hVessel)
 {
 	scene->AddBody ((Body*)hVessel, &g_camera, 1);
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkDeleteVessel (OBJHANDLE hVessel)
+void SpaceXpanseGraphics::clbkDeleteVessel (OBJHANDLE hVessel)
 {
 	scene->DelVisual ((Body*)hVessel);
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkVesselJump (OBJHANDLE hVessel)
+void SpaceXpanseGraphics::clbkVesselJump (OBJHANDLE hVessel)
 {
 	scene->Update (g_psys, &g_camera, 1, false, false);
 }
 
 // =======================================================================
 
-void OrbiterGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MATRIX3 *T, bool transparent)
+void SpaceXpanseGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MATRIX3 *T, bool transparent)
 {
 	static DWORD nHVTX = 1;
 	static struct HVTX {
@@ -988,7 +988,7 @@ void OrbiterGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MA
 
 // =======================================================================
 
-void OrbiterGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MATRIX3 *T, float alpha, bool additive)
+void SpaceXpanseGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MATRIX3 *T, float alpha, bool additive)
 {
 	bool reset = false;
 	DWORD alphaop, alphaarg2, tfactor;
@@ -1011,7 +1011,7 @@ void OrbiterGraphics::clbkRender2DPanel (SURFHANDLE *hSurf, MESHHANDLE hMesh, MA
 
 // =======================================================================
 
-void OrbiterGraphics::clbkSetCamera (double aspect, double tan_ap, double nearplane, double farplane)
+void SpaceXpanseGraphics::clbkSetCamera (double aspect, double tan_ap, double nearplane, double farplane)
 {
 	static D3DMATRIX mProj;
 
@@ -1029,7 +1029,7 @@ void OrbiterGraphics::clbkSetCamera (double aspect, double tan_ap, double nearpl
 
 // =======================================================================
 
-HRESULT OrbiterGraphics::Init3DEnvironment ()
+HRESULT SpaceXpanseGraphics::Init3DEnvironment ()
 {
 	HRESULT hr;
 	DWORD dwFrameworkFlags = 0L;
@@ -1037,12 +1037,12 @@ HRESULT OrbiterGraphics::Init3DEnvironment ()
 	dwFrameworkFlags |= ( m_pDeviceInfo->bStereo   ? D3DFW_STEREO     : 0L);
 	dwFrameworkFlags |= ( bUseZBuffer              ? D3DFW_ZBUFFER    : 0L);
 	dwFrameworkFlags |= ( bNoVSync                 ? D3DFW_NOVSYNC    : 0L);
-	dwFrameworkFlags |= ( orbiter->Cfg()->CfgDevPrm.bPageflip ? D3DFW_PAGEFLIP : 0L);
-	dwFrameworkFlags |= ( orbiter->Cfg()->CfgDevPrm.bTryStencil ? D3DFW_TRYSTENCIL : 0L);
+	dwFrameworkFlags |= ( spacexpanse->Cfg()->CfgDevPrm.bPageflip ? D3DFW_PAGEFLIP : 0L);
+	dwFrameworkFlags |= ( spacexpanse->Cfg()->CfgDevPrm.bTryStencil ? D3DFW_TRYSTENCIL : 0L);
 
-	dwFrameworkFlags |= D3DFW_NO_FPUSETUP; // Orbiter needs double-precision FPU
+	dwFrameworkFlags |= D3DFW_NO_FPUSETUP; // SpaceXpanse needs double-precision FPU
 
-	if (SUCCEEDED (hr = m_pFramework->Initialize (orbiter->hRenderWnd,
+	if (SUCCEEDED (hr = m_pFramework->Initialize (spacexpanse->hRenderWnd,
 		m_pDeviceInfo->pDriverGUID,
 		m_pDeviceInfo->pDeviceGUID,
 	   &m_pDeviceInfo->ddsdFullscreenMode,
@@ -1077,22 +1077,22 @@ HRESULT OrbiterGraphics::Init3DEnvironment ()
 		// Create clipper object
 		if (bFullscreen) {
 			if (m_pDD->CreateClipper (0, &clipper, NULL) == DD_OK)
-				clipper->SetHWnd (0, orbiter->hRenderWnd);
+				clipper->SetHWnd (0, spacexpanse->hRenderWnd);
 		}
 
 		// Create dialog manager instance
 		//dlgmgr = new DialogManager;
-		//dlgmgr->Init (orbiter->hRenderWnd, this);
+		//dlgmgr->Init (spacexpanse->hRenderWnd, this);
 
 		// Create scene instance
 		scene = new Scene (this);
 
 		// Let the app run its startup code which creates the 3d scene.
-        if( SUCCEEDED (hr = orbiter->InitDeviceObjects())) {
+        if( SUCCEEDED (hr = spacexpanse->InitDeviceObjects())) {
 			return S_OK;
 		} else {
 			LOGOUT_ERR("Init device objects failed");
-            orbiter->DeleteDeviceObjects();
+            spacexpanse->DeleteDeviceObjects();
             m_pFramework->DestroyObjects();
         }
 	}
@@ -1108,7 +1108,7 @@ HRESULT OrbiterGraphics::Init3DEnvironment ()
 
 // =======================================================================
 
-HRESULT OrbiterGraphics::Change3DEnvironment ()
+HRESULT SpaceXpanseGraphics::Change3DEnvironment ()
 {
     HRESULT hr;
     static BOOL  bOldWindowedState = TRUE;
@@ -1116,12 +1116,12 @@ HRESULT OrbiterGraphics::Change3DEnvironment ()
     static RECT  rcSaved;
 
     // Release all scene objects that will be re-created for the new device
-    orbiter->DeleteDeviceObjects ();
+    spacexpanse->DeleteDeviceObjects ();
 
     // Release framework objects, so a new device can be created
     if (FAILED (hr = m_pFramework->DestroyObjects())) {
 		LOGOUT_DDERR (hr);
-        SendMessage (orbiter->hRenderWnd, WM_CLOSE, 0, 0);
+        SendMessage (spacexpanse->hRenderWnd, WM_CLOSE, 0, 0);
         return hr;
     }
 
@@ -1129,15 +1129,15 @@ HRESULT OrbiterGraphics::Change3DEnvironment ()
     if (bOldWindowedState != m_pDeviceInfo->bWindowed) {
         if (m_pDeviceInfo->bWindowed) {
             // Coming from fullscreen mode, so restore window properties
-            SetWindowLongPtr (orbiter->hRenderWnd, GWL_STYLE, dwSavedStyle);
-            SetWindowPos (orbiter->hRenderWnd, HWND_NOTOPMOST, rcSaved.left, rcSaved.top,
+            SetWindowLongPtr (spacexpanse->hRenderWnd, GWL_STYLE, dwSavedStyle);
+            SetWindowPos (spacexpanse->hRenderWnd, HWND_NOTOPMOST, rcSaved.left, rcSaved.top,
                          (rcSaved.right - rcSaved.left), 
                          (rcSaved.bottom - rcSaved.top), SWP_SHOWWINDOW);
         } else {
             // Going to fullscreen mode, save/set window properties as needed
-            dwSavedStyle = GetWindowLongPtr (orbiter->hRenderWnd, GWL_STYLE);
-            GetWindowRect (orbiter->hRenderWnd, &rcSaved);
-            SetWindowLongPtr (orbiter->hRenderWnd, GWL_STYLE, WS_POPUP|WS_SYSMENU|WS_VISIBLE);
+            dwSavedStyle = GetWindowLongPtr (spacexpanse->hRenderWnd, GWL_STYLE);
+            GetWindowRect (spacexpanse->hRenderWnd, &rcSaved);
+            SetWindowLongPtr (spacexpanse->hRenderWnd, GWL_STYLE, WS_POPUP|WS_SYSMENU|WS_VISIBLE);
         }
         bOldWindowedState = m_pDeviceInfo->bWindowed;
     }
@@ -1146,7 +1146,7 @@ HRESULT OrbiterGraphics::Change3DEnvironment ()
     // re-create valid surfaces, a d3ddevice, etc.
     if (FAILED (hr = Init3DEnvironment())) {
 		LOGOUT_DDERR (hr);
-        SendMessage (orbiter->hRenderWnd, WM_CLOSE, 0, 0);
+        SendMessage (spacexpanse->hRenderWnd, WM_CLOSE, 0, 0);
         return hr;
     }
 
@@ -1155,7 +1155,7 @@ HRESULT OrbiterGraphics::Change3DEnvironment ()
 
 // =======================================================================
 
-void OrbiterGraphics::Exit3DEnvironment ()
+void SpaceXpanseGraphics::Exit3DEnvironment ()
 {
 	//g_psys->DestroyDeviceObjects();
 	TileManager::DestroyDeviceObjects ();
@@ -1169,8 +1169,8 @@ void OrbiterGraphics::Exit3DEnvironment ()
 		g_texmanager2 = NULL;
 	}
 	if (m_pFramework) {
-		bool showrefwarning = (orbiter->Cfg()->CfgDebugPrm.ShutdownMode == 0);
-		orbiter->DeleteDeviceObjects ();
+		bool showrefwarning = (spacexpanse->Cfg()->CfgDebugPrm.ShutdownMode == 0);
+		spacexpanse->DeleteDeviceObjects ();
 		if (FAILED (m_pFramework->DestroyObjects(showrefwarning)))
 			if (showrefwarning)
 				LOGOUT_ERR("Destroy framework objects failed");
@@ -1183,7 +1183,7 @@ void OrbiterGraphics::Exit3DEnvironment ()
 // Note this may not be necessary since the framework restores
 // all surfaces. But surface bitmaps may be rebuild here
 
-HRESULT OrbiterGraphics::RestoreSurfaces ()
+HRESULT SpaceXpanseGraphics::RestoreSurfaces ()
 {
 	// not implemented
 	return S_OK;
@@ -1191,7 +1191,7 @@ HRESULT OrbiterGraphics::RestoreSurfaces ()
 
 // =======================================================================
 
-bool OrbiterGraphics::RenderWithPopupWindows ()
+bool SpaceXpanseGraphics::RenderWithPopupWindows ()
 {
 	if (!bFullscreen) return false; // no special treatment required in windowed mode
 
@@ -1248,7 +1248,7 @@ bool OrbiterGraphics::RenderWithPopupWindows ()
 static const DWORD LOADHEADERCOL = 0xB0B0B0; //0xFFFFFF
 static const DWORD LOADSTATUSCOL = 0xC08080; //0xFFD0D0
 
-void OrbiterGraphics::InitOutputLoadStatus ()
+void SpaceXpanseGraphics::InitOutputLoadStatus ()
 {
 #ifdef UNDEF
 	HDC hDC;
@@ -1288,7 +1288,7 @@ void OrbiterGraphics::InitOutputLoadStatus ()
 
 // =======================================================================
 
-void OrbiterGraphics::ExitOutputLoadStatus ()
+void SpaceXpanseGraphics::ExitOutputLoadStatus ()
 {
 #ifdef UNDEF
 	DeleteObject (lstatus.hBkg);
@@ -1299,7 +1299,7 @@ void OrbiterGraphics::ExitOutputLoadStatus ()
 
 // =======================================================================
 
-bool OrbiterGraphics::OutputLoadStatus (const char *msg, int line)
+bool SpaceXpanseGraphics::OutputLoadStatus (const char *msg, int line)
 {
 	return false; // skip this for now
 
@@ -1329,13 +1329,13 @@ bool OrbiterGraphics::OutputLoadStatus (const char *msg, int line)
 
 // =======================================================================
 
-LRESULT OrbiterGraphics::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT SpaceXpanseGraphics::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 
     case WM_PAINT:
         // Handle paint messages when the app is not ready
-        if (m_pFramework && !orbiter->bRunning) {
+        if (m_pFramework && !spacexpanse->bRunning) {
 			if (m_pDeviceInfo->bWindowed)
 				m_pFramework->ShowFrame();
             //else
@@ -1351,14 +1351,14 @@ LRESULT OrbiterGraphics::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 
 	case WM_SIZE:
 		// Check to see if we are losing our window...
-		orbiter->bVisible = (wParam != SIZE_MAXHIDE && wParam != SIZE_MINIMIZED);
+		spacexpanse->bVisible = (wParam != SIZE_MAXHIDE && wParam != SIZE_MINIMIZED);
 #ifdef UNDEF // have to think about this
 		// A new window size will require a new backbuffer
 		// size, so the 3D structures must be changed accordingly.
-		if (orbiter->m_bActive && orbiter->m_bReady && m_pDeviceInfo->bWindowed) {
-			orbiter->m_bReady = FALSE;
+		if (spacexpanse->m_bActive && spacexpanse->m_bReady && m_pDeviceInfo->bWindowed) {
+			spacexpanse->m_bReady = FALSE;
 			if (FAILED (hr = Change3DEnvironment())) return 0;
-			orbiter->m_bReady = TRUE;
+			spacexpanse->m_bReady = TRUE;
         }
 #endif
 		break;
@@ -1366,7 +1366,7 @@ LRESULT OrbiterGraphics::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 #ifdef UNDEF // we allow a cursor in fullscreen mode now!
 	case WM_SETCURSOR:
 		// Prevent a cursor in fullscreen mode
-		if (orbiter->m_bVisible && !m_pDeviceInfo->bWindowed) {
+		if (spacexpanse->m_bVisible && !m_pDeviceInfo->bWindowed) {
 			SetCursor(NULL);
 			return 1;
 		}
@@ -1394,12 +1394,12 @@ LRESULT OrbiterGraphics::RenderWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 			return 0;  // trap Alt-key
 
 	}
-	return orbiter->MsgProc (hWnd, uMsg, wParam, lParam);
+	return spacexpanse->MsgProc (hWnd, uMsg, wParam, lParam);
 }
 
 // =======================================================================
 
-INT_PTR OrbiterGraphics::LaunchpadVideoWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR SpaceXpanseGraphics::LaunchpadVideoWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (vtab) return vtab->WndProc (hWnd, uMsg, wParam, lParam);
 	else return GraphicsClient::LaunchpadVideoWndProc (hWnd, uMsg, wParam, lParam);
@@ -1409,14 +1409,14 @@ INT_PTR OrbiterGraphics::LaunchpadVideoWndProc (HWND hWnd, UINT uMsg, WPARAM wPa
 // Particle stream functions
 // =======================================================================
 
-oapi::ParticleStream *OrbiterGraphics::clbkCreateParticleStream (PARTICLESTREAMSPEC *pss)
+oapi::ParticleStream *SpaceXpanseGraphics::clbkCreateParticleStream (PARTICLESTREAMSPEC *pss)
 {
 	return NULL;
 }
 
 // =======================================================================
 
-oapi::ParticleStream *OrbiterGraphics::clbkCreateExhaustStream (PARTICLESTREAMSPEC *pss,
+oapi::ParticleStream *SpaceXpanseGraphics::clbkCreateExhaustStream (PARTICLESTREAMSPEC *pss,
 	OBJHANDLE hVessel, const double *lvl, const VECTOR3 *ref, const VECTOR3 *dir)
 {
 	ExhaustStream *es = new ExhaustStream (this, hVessel, lvl, ref, dir, pss); TRACENEW
@@ -1426,7 +1426,7 @@ oapi::ParticleStream *OrbiterGraphics::clbkCreateExhaustStream (PARTICLESTREAMSP
 
 // =======================================================================
 
-oapi::ParticleStream *OrbiterGraphics::clbkCreateExhaustStream (PARTICLESTREAMSPEC *pss,
+oapi::ParticleStream *SpaceXpanseGraphics::clbkCreateExhaustStream (PARTICLESTREAMSPEC *pss,
 	OBJHANDLE hVessel, const double *lvl, const VECTOR3 &ref, const VECTOR3 &dir)
 {
 	ExhaustStream *es = new ExhaustStream (this, hVessel, lvl, ref, dir, pss); TRACENEW
@@ -1436,7 +1436,7 @@ oapi::ParticleStream *OrbiterGraphics::clbkCreateExhaustStream (PARTICLESTREAMSP
 
 // ======================================================================
 
-oapi::ParticleStream *OrbiterGraphics::clbkCreateReentryStream (PARTICLESTREAMSPEC *pss,
+oapi::ParticleStream *SpaceXpanseGraphics::clbkCreateReentryStream (PARTICLESTREAMSPEC *pss,
 	OBJHANDLE hVessel)
 {
 	ReentryStream *rs = new ReentryStream (this, hVessel, pss); TRACENEW
@@ -1446,7 +1446,7 @@ oapi::ParticleStream *OrbiterGraphics::clbkCreateReentryStream (PARTICLESTREAMSP
 
 // ======================================================================
 
-bool OrbiterGraphics::clbkParticleStreamExists (const oapi::ParticleStream *ps)
+bool SpaceXpanseGraphics::clbkParticleStreamExists (const oapi::ParticleStream *ps)
 {
 	Scene *scn = GetScene();
 	return (scn != NULL && scn->ParticleStreamExists (ps));
@@ -1456,13 +1456,13 @@ bool OrbiterGraphics::clbkParticleStreamExists (const oapi::ParticleStream *ps)
 // Texture functions
 // =======================================================================
 
-SURFHANDLE OrbiterGraphics::clbkLoadTexture (const char *fname, DWORD flags)
+SURFHANDLE SpaceXpanseGraphics::clbkLoadTexture (const char *fname, DWORD flags)
 {
 	LPDIRECTDRAWSURFACE7 tex =  NULL;
 	if (flags & 8) // managed texture
 		tex = g_texmanager->AcquireTexture (fname, (flags & 2) != 0);
 	else {
-		FILE *f = orbiter->OpenTextureFile (fname, "");
+		FILE *f = spacexpanse->OpenTextureFile (fname, "");
 		if (f) {
 			g_texmanager2->ReadTexture (f, &tex, flags);
 			fclose (f);
@@ -1473,7 +1473,7 @@ SURFHANDLE OrbiterGraphics::clbkLoadTexture (const char *fname, DWORD flags)
 
 // ==============================================================
 
-void OrbiterGraphics::clbkReleaseTexture (SURFHANDLE hTex)
+void SpaceXpanseGraphics::clbkReleaseTexture (SURFHANDLE hTex)
 {
 	LPDIRECTDRAWSURFACE7 tex = (LPDIRECTDRAWSURFACE7)hTex;
 	tex->Release();
@@ -1481,7 +1481,7 @@ void OrbiterGraphics::clbkReleaseTexture (SURFHANDLE hTex)
 
 // ==============================================================
 
-bool OrbiterGraphics::clbkSetMeshTexture (DEVMESHHANDLE hMesh, DWORD texidx, SURFHANDLE tex)
+bool SpaceXpanseGraphics::clbkSetMeshTexture (DEVMESHHANDLE hMesh, DWORD texidx, SURFHANDLE tex)
 {
 	Mesh *mesh = (Mesh*)hMesh;
 	return mesh->SetTexture (texidx-1, tex, false);
@@ -1489,7 +1489,7 @@ bool OrbiterGraphics::clbkSetMeshTexture (DEVMESHHANDLE hMesh, DWORD texidx, SUR
 
 // ==============================================================
 
-int OrbiterGraphics::clbkSetMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, const MATERIAL *mat)
+int SpaceXpanseGraphics::clbkSetMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, const MATERIAL *mat)
 {
 	Mesh *mesh = (Mesh*)hMesh;
 	DWORD nmat = mesh->nMaterial();
@@ -1501,7 +1501,7 @@ int OrbiterGraphics::clbkSetMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, con
 
 // ==============================================================
 
-int OrbiterGraphics::clbkMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, MATERIAL *mat)
+int SpaceXpanseGraphics::clbkMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, MATERIAL *mat)
 {
 	Mesh *mesh = (Mesh*)hMesh;
 	DWORD nmat = mesh->nMaterial();
@@ -1511,7 +1511,7 @@ int OrbiterGraphics::clbkMeshMaterial (DEVMESHHANDLE hMesh, DWORD matidx, MATERI
 	return 0;
 }
 
-int OrbiterGraphics::clbkSetMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatProp mat, const oapi::FVECTOR4* in)
+int SpaceXpanseGraphics::clbkSetMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatProp mat, const oapi::FVECTOR4* in)
 {
 	Mesh* mesh = (Mesh*)hMesh;
 	DWORD nmat = mesh->nMaterial();
@@ -1538,7 +1538,7 @@ int OrbiterGraphics::clbkSetMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatPro
 
 // ==============================================================
 
-int OrbiterGraphics::clbkMeshMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatProp mat, oapi::FVECTOR4* out)
+int SpaceXpanseGraphics::clbkMeshMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatProp mat, oapi::FVECTOR4* out)
 {
 	Mesh* mesh = (Mesh*)hMesh;
 	DWORD nmat = mesh->nMaterial();
@@ -1565,7 +1565,7 @@ int OrbiterGraphics::clbkMeshMaterialEx(DEVMESHHANDLE hMesh, DWORD matidx, MatPr
 
 // ==============================================================
 
-bool OrbiterGraphics::clbkSetMeshProperty (DEVMESHHANDLE hMesh, DWORD property, DWORD value)
+bool SpaceXpanseGraphics::clbkSetMeshProperty (DEVMESHHANDLE hMesh, DWORD property, DWORD value)
 {
 	Mesh *mesh = (Mesh*)hMesh;
 	switch (property) {
@@ -1580,7 +1580,7 @@ bool OrbiterGraphics::clbkSetMeshProperty (DEVMESHHANDLE hMesh, DWORD property, 
 // Surface functions
 // =======================================================================
 
-SURFHANDLE OrbiterGraphics::clbkCreateSurface (DWORD w, DWORD h, SURFHANDLE hTemplate)
+SURFHANDLE SpaceXpanseGraphics::clbkCreateSurface (DWORD w, DWORD h, SURFHANDLE hTemplate)
 {
 	LPDIRECTDRAWSURFACE7 surf;
 	DDSURFACEDESC2 ddsd;
@@ -1601,7 +1601,7 @@ SURFHANDLE OrbiterGraphics::clbkCreateSurface (DWORD w, DWORD h, SURFHANDLE hTem
 	return (SURFHANDLE)surf;
 }
 
-SURFHANDLE OrbiterGraphics::clbkCreateSurfaceEx (DWORD w, DWORD h, DWORD attrib)
+SURFHANDLE SpaceXpanseGraphics::clbkCreateSurfaceEx (DWORD w, DWORD h, DWORD attrib)
 {
 	HRESULT hr;
 	LPDIRECTDRAWSURFACE7 surf;
@@ -1650,7 +1650,7 @@ SURFHANDLE OrbiterGraphics::clbkCreateSurfaceEx (DWORD w, DWORD h, DWORD attrib)
 	return (SURFHANDLE)surf;
 }
 
-SURFHANDLE OrbiterGraphics::clbkCreateTexture (DWORD w, DWORD h)
+SURFHANDLE SpaceXpanseGraphics::clbkCreateTexture (DWORD w, DWORD h)
 {
 	LPDIRECTDRAWSURFACE7 surf;
 	DDSURFACEDESC2 ddsd;
@@ -1670,13 +1670,13 @@ SURFHANDLE OrbiterGraphics::clbkCreateTexture (DWORD w, DWORD h)
 	return surf;
 }
 
-void OrbiterGraphics::clbkIncrSurfaceRef (SURFHANDLE surf)
+void SpaceXpanseGraphics::clbkIncrSurfaceRef (SURFHANDLE surf)
 {
 	ULONG count;
 	count = ((LPDIRECTDRAWSURFACE7)surf)->AddRef();
 }
 
-bool OrbiterGraphics::clbkReleaseSurface (SURFHANDLE surf)
+bool SpaceXpanseGraphics::clbkReleaseSurface (SURFHANDLE surf)
 {
 	if (surf) {
 		ULONG count;
@@ -1686,7 +1686,7 @@ bool OrbiterGraphics::clbkReleaseSurface (SURFHANDLE surf)
 		return false;
 }
 
-bool OrbiterGraphics::clbkGetSurfaceSize (SURFHANDLE surf, DWORD *w, DWORD *h)
+bool SpaceXpanseGraphics::clbkGetSurfaceSize (SURFHANDLE surf, DWORD *w, DWORD *h)
 {
     DDSURFACEDESC2          ddsd;
     ddsd.dwSize = sizeof(ddsd);
@@ -1697,14 +1697,14 @@ bool OrbiterGraphics::clbkGetSurfaceSize (SURFHANDLE surf, DWORD *w, DWORD *h)
 	return true;
 }
 
-bool OrbiterGraphics::clbkSetSurfaceColourKey (SURFHANDLE surf, DWORD ckey)
+bool SpaceXpanseGraphics::clbkSetSurfaceColourKey (SURFHANDLE surf, DWORD ckey)
 {
 	DDCOLORKEY ck = {ckey,ckey};
 	((LPDIRECTDRAWSURFACE7)surf)->SetColorKey (DDCKEY_SRCBLT, &ck);
 	return true;
 }
 
-DWORD OrbiterGraphics::clbkGetDeviceColour (BYTE r, BYTE g, BYTE b)
+DWORD SpaceXpanseGraphics::clbkGetDeviceColour (BYTE r, BYTE g, BYTE b)
 {
 	if (viewBPP >= 24) return ((DWORD)r << 16) + ((DWORD)g << 8) + (DWORD)b;
 	else               return ((((DWORD)r*319)/2559) << 11) + ((((DWORD)g*639)/2559) << 5) + (((DWORD)b*319)/2559);
@@ -1714,7 +1714,7 @@ DWORD OrbiterGraphics::clbkGetDeviceColour (BYTE r, BYTE g, BYTE b)
 // Blitting functions
 // =======================================================================
 
-bool OrbiterGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDLE src, DWORD flag) const
+bool SpaceXpanseGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDLE src, DWORD flag) const
 {
 	LPDIRECTDRAWSURFACE7 ps_tgt = (tgt ? (LPDIRECTDRAWSURFACE7)tgt : m_pddsRenderTarget);
 	LPDIRECTDRAWSURFACE7 ps_src = (LPDIRECTDRAWSURFACE7)src;
@@ -1739,7 +1739,7 @@ bool OrbiterGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDL
 	return (hr == S_OK);
 }
 
-bool OrbiterGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDLE src, DWORD srcx, DWORD srcy, DWORD w, DWORD h, DWORD flag) const
+bool SpaceXpanseGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDLE src, DWORD srcx, DWORD srcy, DWORD w, DWORD h, DWORD flag) const
 {
 	RECT srcr = {(LONG)srcx, (LONG)srcy, (LONG)(srcx+w), (LONG)(srcy+h)};
 	LPDIRECTDRAWSURFACE7 ps_tgt = (tgt ? (LPDIRECTDRAWSURFACE7)tgt : m_pddsRenderTarget);
@@ -1761,7 +1761,7 @@ bool OrbiterGraphics::clbkBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, SURFHANDL
 	return (hr == S_OK);
 }
 
-bool OrbiterGraphics::clbkScaleBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DWORD tgtw, DWORD tgth,
+bool SpaceXpanseGraphics::clbkScaleBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DWORD tgtw, DWORD tgth,
 		                            SURFHANDLE src, DWORD srcx, DWORD srcy, DWORD srcw, DWORD srch, DWORD flag) const
 {
 	LPDIRECTDRAWSURFACE7 ps_tgt = (tgt ? (LPDIRECTDRAWSURFACE7)tgt : m_pddsRenderTarget);
@@ -1774,13 +1774,13 @@ bool OrbiterGraphics::clbkScaleBlt (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DWOR
 	return (ps_tgt->Blt (&tgtr, ps_src, &srcr, bltflag, 0) == S_OK);
 }
 
-bool OrbiterGraphics::clbkBltCK (SURFHANDLE tgt, DWORD tgtx, DWORD tgty,
+bool SpaceXpanseGraphics::clbkBltCK (SURFHANDLE tgt, DWORD tgtx, DWORD tgty,
 	SURFHANDLE src, DWORD srcx, DWORD srcy, DWORD w, DWORD h, DWORD ck) const
 {
 	return clbkScaleBltCK (tgt, tgtx, tgty, w, h, src, srcx, srcy, w, h, ck);
 }
 
-bool OrbiterGraphics::clbkScaleBltCK (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DWORD tgtw, DWORD tgth,
+bool SpaceXpanseGraphics::clbkScaleBltCK (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DWORD tgtw, DWORD tgth,
 	SURFHANDLE src, DWORD srcx, DWORD srcy, DWORD srcw, DWORD srch, DWORD ck) const
 {
 	RECT srcr = {(LONG)srcx, (LONG)srcy, (LONG)(srcx+srcw), (LONG)(srcy+srch)};
@@ -1810,7 +1810,7 @@ bool OrbiterGraphics::clbkScaleBltCK (SURFHANDLE tgt, DWORD tgtx, DWORD tgty, DW
 		DDBLT_WAIT | DDBLT_ROP | dwCC, &ddbltfx) == S_OK);
 }
 
-bool OrbiterGraphics::clbkFillSurface (SURFHANDLE surf, DWORD col) const
+bool SpaceXpanseGraphics::clbkFillSurface (SURFHANDLE surf, DWORD col) const
 {
 	DDBLTFX bltfx;
 	ZeroMemory (&bltfx, sizeof(bltfx));
@@ -1819,7 +1819,7 @@ bool OrbiterGraphics::clbkFillSurface (SURFHANDLE surf, DWORD col) const
 	return ((LPDIRECTDRAWSURFACE7)surf)->Blt (NULL, NULL, NULL, DDBLT_COLORFILL, &bltfx) == DD_OK;
 }
 
-bool OrbiterGraphics::clbkFillSurface (SURFHANDLE surf, DWORD tgtx, DWORD tgty, DWORD w, DWORD h, DWORD col) const
+bool SpaceXpanseGraphics::clbkFillSurface (SURFHANDLE surf, DWORD tgtx, DWORD tgty, DWORD w, DWORD h, DWORD col) const
 {
 	RECT r = {(LONG)tgtx, (LONG)tgty, (LONG)(tgtx+w), (LONG)(tgty+h)};
 	DDBLTFX bltfx;
@@ -1834,7 +1834,7 @@ bool OrbiterGraphics::clbkFillSurface (SURFHANDLE surf, DWORD tgtx, DWORD tgty, 
 // GDI functions
 // =======================================================================
 
-HDC OrbiterGraphics::clbkGetSurfaceDC (SURFHANDLE surf)
+HDC SpaceXpanseGraphics::clbkGetSurfaceDC (SURFHANDLE surf)
 {
 	HRESULT hr;
 	HDC hDC;
@@ -1844,7 +1844,7 @@ HDC OrbiterGraphics::clbkGetSurfaceDC (SURFHANDLE surf)
 	return hDC;
 }
 
-void OrbiterGraphics::clbkReleaseSurfaceDC (SURFHANDLE surf, HDC hDC)
+void SpaceXpanseGraphics::clbkReleaseSurfaceDC (SURFHANDLE surf, HDC hDC)
 {
 	LPDIRECTDRAWSURFACE7 ps = (surf ? (LPDIRECTDRAWSURFACE7)surf : m_pddsRenderTarget);
 	ps->ReleaseDC (hDC);
@@ -1852,7 +1852,7 @@ void OrbiterGraphics::clbkReleaseSurfaceDC (SURFHANDLE surf, HDC hDC)
 
 // =======================================================================
 
-void OrbiterGraphics::LogRenderParams () const
+void SpaceXpanseGraphics::LogRenderParams () const
 {
 	char cbuf[256];
 
@@ -1878,7 +1878,7 @@ void OrbiterGraphics::LogRenderParams () const
 
 // =======================================================================
 
-void OrbiterGraphics::WriteLog (const char *msg) const
+void SpaceXpanseGraphics::WriteLog (const char *msg) const
 {
 	static char cbuf[256] = "Graphics: ";
 	strcpy (cbuf+10, msg);

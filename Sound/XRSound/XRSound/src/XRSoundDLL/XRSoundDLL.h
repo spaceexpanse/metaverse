@@ -8,22 +8,22 @@
 
 #pragma once
 
-#include "OrbiterSDK.h"
+#include "SpaceXpanseSDK.h"
 #include "XRSoundEngine.h"
 #include "CStringHasher.h"
 
-// Defines the master map of all known Orbiter vessels (handles) -> XRSoundEngine * for it.
+// Defines the master map of all known SpaceXpanse vessels (handles) -> XRSoundEngine * for it.
 // key = vessel handle (void *), value = XRSoundEngine * for that vessel (may be nullptr).
 typedef unordered_map<OBJHANDLE, VesselXRSoundEngine *> HASHMAP_VESSELHANDLE_XRSOUNDENGINEPTR;
 typedef pair<OBJHANDLE, VesselXRSoundEngine *> vesselHandle_XRSoundEnginePtr_Pair;
 
-// Defines the master map of all known Orbiter vessels (handles) -> XRSoundEngine * for it.
+// Defines the master map of all known SpaceXpanse vessels (handles) -> XRSoundEngine * for it.
 // key = vessel handle (void *), value = XRSoundEngine * for that vessel (may be nullptr).
 typedef unordered_map<CString, ModuleXRSoundEngine *, CStringHasher, CStringHasher> HASHMAP_CSTRING_XRSOUNDENGINEPTR;
 typedef pair<CString, ModuleXRSoundEngine *> CString_XRSoundEnginePtr_Pair;
 
 
-// Orbiter module that maintains state data and methods for our DLL singleton object
+// SpaceXpanse module that maintains state data and methods for our DLL singleton object
 class XRSoundDLL : public oapi::Module
 {
 public:
@@ -34,13 +34,13 @@ public:
     static VesselXRSoundEngine *GetXRSoundEngineInstance(const OBJHANDLE hVessel, const bool bInvokedByClientVessel);  // factory method for vessel-tied engines
     static ModuleXRSoundEngine *GetXRSoundEngineInstance(const char *pUniqueModuleName);  // factory method for module-tied engines
 
-    // key = OBJHANDLE (for Orbiter vessel), value = VesselXRSoundEngine * for that vessel
+    // key = OBJHANDLE (for SpaceXpanse vessel), value = VesselXRSoundEngine * for that vessel
     HASHMAP_VESSELHANDLE_XRSOUNDENGINEPTR m_allVesselsMap;
 
     // key = CString (for unique module name), value = ModuleXRSoundEngine * for that vessel
     HASHMAP_CSTRING_XRSOUNDENGINEPTR m_allModulesMap;
 
-    // Orbiter callbacks
+    // SpaceXpanse callbacks
     virtual void clbkSimulationStart(RenderMode mode) override;
     virtual void clbkSimulationEnd() override;
     virtual void clbkPreStep(double simt, double simdt, double mjd) override;
@@ -56,7 +56,7 @@ public:
 
     // Returns the number of seconds since the system booted (realtime); typically has 10-16 millisecond accuracy (16 ms = 1/60th second),
     // which should suffice for normal realtime deltas.
-    // Note: it is OK for this method to be static without a mutex because Orbiter is single-threaded
+    // Note: it is OK for this method to be static without a mutex because SpaceXpanse is single-threaded
     static double GetSystemUptime();
 
     // worker methods
@@ -64,7 +64,7 @@ public:
     VesselXRSoundEngine *FindXRSoundEngineForVessel(const OBJHANDLE hVessel);
     ModuleXRSoundEngine *FindXRSoundEngineForModule(const char *pUniqueModuleName);
 
-    static vector<OBJHANDLE> GetAllActiveVesselsFromOrbiter();
+    static vector<OBJHANDLE> GetAllActiveVesselsFromSpaceXpanse();
     static XRSoundConfigFileParser &GetGlobalConfig() { return XRSoundEngine::s_globalConfig;  }
     static void WriteLog(const char *pMsg);
     static void ParseGlobalConfigFile();

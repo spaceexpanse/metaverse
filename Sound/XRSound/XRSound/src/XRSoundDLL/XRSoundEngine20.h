@@ -8,7 +8,7 @@
 #pragma once
 
 #include "XRSoundEngine10.h"
-#include "Orbitersdk.h"  // for OBJHANDLE
+#include "SpaceXpansesdk.h"  // for OBJHANDLE
 
 // NOTE: do not change the order of these methods!  We need to maintain compatibility with 
 // previous versions of the static client library (XRSound.lib) that uses this engine object.

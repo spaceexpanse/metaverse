@@ -10,7 +10,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "TabVideo.h"
 #include "resource.h"
 
@@ -19,13 +19,13 @@ using namespace std;
 #ifdef INLINEGRAPHICS
 static PSTR strInfo_Default = "The built-in DX7 graphics engine.";
 #else
-static PSTR strInfo_Default = "No graphics engine has been selected. Orbiter will run in console mode.";
+static PSTR strInfo_Default = "No graphics engine has been selected. SpaceXpanse will run in console mode.";
 #endif
 
 //-----------------------------------------------------------------------------
 // DefVideoTab class
 
-orbiter::DefVideoTab::DefVideoTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
+spacexpanse::DefVideoTab::DefVideoTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 {
 	idxClient = 0;
 	strInfo = 0;
@@ -34,7 +34,7 @@ orbiter::DefVideoTab::DefVideoTab (const LaunchpadDialog *lp): LaunchpadTab (lp)
 
 //-----------------------------------------------------------------------------
 
-orbiter::DefVideoTab::~DefVideoTab()
+spacexpanse::DefVideoTab::~DefVideoTab()
 {
 	if (strInfo) {
 		delete []strInfo;
@@ -44,7 +44,7 @@ orbiter::DefVideoTab::~DefVideoTab()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::Create ()
+void spacexpanse::DefVideoTab::Create ()
 {
 	hTab = CreateTab (IDD_PAGE_DEV);
 
@@ -63,7 +63,7 @@ void orbiter::DefVideoTab::Create ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::ShowInterface(HWND hTab, bool show)
+void spacexpanse::DefVideoTab::ShowInterface(HWND hTab, bool show)
 {
 	static int item[] = {
 		IDC_VID_STATIC1, IDC_VID_STATIC2, IDC_VID_STATIC3, IDC_VID_STATIC5,
@@ -83,7 +83,7 @@ void orbiter::DefVideoTab::ShowInterface(HWND hTab, bool show)
 
 //-----------------------------------------------------------------------------
 
-BOOL orbiter::DefVideoTab::InitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam)
+BOOL spacexpanse::DefVideoTab::InitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 #ifdef INLINEGRAPHICS
 	ShowInterface(hWnd, true);
@@ -96,7 +96,7 @@ BOOL orbiter::DefVideoTab::InitDialog(HWND hWnd, WPARAM wParam, LPARAM lParam)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::OnGraphicsClientLoaded(oapi::GraphicsClient* gc, const PSTR moduleName)
+void spacexpanse::DefVideoTab::OnGraphicsClientLoaded(oapi::GraphicsClient* gc, const PSTR moduleName)
 {
 	char fname[256];
 	_splitpath(moduleName, NULL, NULL, fname, NULL);
@@ -122,7 +122,7 @@ void orbiter::DefVideoTab::OnGraphicsClientLoaded(oapi::GraphicsClient* gc, cons
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::SetConfig (Config *cfg)
+void spacexpanse::DefVideoTab::SetConfig (Config *cfg)
 {
 	// retrieve standard parameters from client, if available
 	oapi::GraphicsClient *gc = pLp->App()->GetGraphicsClient();
@@ -155,7 +155,7 @@ void orbiter::DefVideoTab::SetConfig (Config *cfg)
 
 //-----------------------------------------------------------------------------
 
-bool orbiter::DefVideoTab::OpenHelp ()
+bool spacexpanse::DefVideoTab::OpenHelp ()
 {
 	OpenTabHelp ("tab_video");
 	return true;
@@ -163,7 +163,7 @@ bool orbiter::DefVideoTab::OpenHelp ()
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::EnumerateClients(HWND hTab)
+void spacexpanse::DefVideoTab::EnumerateClients(HWND hTab)
 {
 	SendDlgItemMessage(hTab, IDC_VID_COMBO_MODULE, CB_RESETCONTENT, 0, 0);
 #ifdef INLINEGRAPHICS
@@ -197,7 +197,7 @@ static std::string GetNameWithoutFileExtension(const char* filepath)
 
 //-----------------------------------------------------------------------------
 //! Find Graphics engine DLLs in dir
-void orbiter::DefVideoTab::ScanDir(HWND hTab, const PSTR dir)
+void spacexpanse::DefVideoTab::ScanDir(HWND hTab, const PSTR dir)
 {
 	char pattern[256], filepath[256];
 	sprintf(pattern, "%s\\*", dir);
@@ -237,7 +237,7 @@ void orbiter::DefVideoTab::ScanDir(HWND hTab, const PSTR dir)
 
 //-----------------------------------------------------------------------------
 
-void orbiter::DefVideoTab::SelectClientIndex(UINT idx)
+void spacexpanse::DefVideoTab::SelectClientIndex(UINT idx)
 {
 	char name[256];
 	if (idxClient) {
@@ -257,7 +257,7 @@ void orbiter::DefVideoTab::SelectClientIndex(UINT idx)
 	ShowInterface(hTab, idx > 0);
 }
 
-void orbiter::DefVideoTab::SetInfoString(PSTR str)
+void spacexpanse::DefVideoTab::SetInfoString(PSTR str)
 {
 	if (strInfo)
 		delete []strInfo;
@@ -267,7 +267,7 @@ void orbiter::DefVideoTab::SetInfoString(PSTR str)
 
 //-----------------------------------------------------------------------------
 
-INT_PTR CALLBACK orbiter::DefVideoTab::InfoProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK spacexpanse::DefVideoTab::InfoProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_INITDIALOG:
@@ -283,7 +283,7 @@ INT_PTR CALLBACK orbiter::DefVideoTab::InfoProc(HWND hWnd, UINT uMsg, WPARAM wPa
 
 //-----------------------------------------------------------------------------
 
-INT_PTR orbiter::DefVideoTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR spacexpanse::DefVideoTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg) {
 	case WM_COMMAND:

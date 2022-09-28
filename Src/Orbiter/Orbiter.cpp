@@ -34,7 +34,7 @@
 #include "Base.h"
 #include "Vessel.h"
 #include "resource.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Launchpad.h"
 #include "MenuInfoBar.h"
 #include "Dialogs.h"
@@ -76,12 +76,12 @@ const int MAX_TEXTURE_BUFSIZE = 8000000;
 // Texture manager buffer size. Should be determined from
 // memory size (System or Video?)
 
-TCHAR* g_strAppTitle = "OpenOrbiter";
+TCHAR* g_strAppTitle = "OpenSpaceXpanse";
 
 #ifdef INLINEGRAPHICS
-TCHAR* MasterConfigFile = "Orbiter.cfg";
+TCHAR* MasterConfigFile = "SpaceXpanse.cfg";
 #else
-TCHAR* MasterConfigFile = "Orbiter_NG.cfg";
+TCHAR* MasterConfigFile = "SpaceXpanse_NG.cfg";
 #endif // INLINEGRAPHICS
 
 TCHAR* CurrentScenario = "(Current state)";
@@ -93,7 +93,7 @@ char cwd[512];
 // =======================================================================
 // Global variables
 
-Orbiter*        g_pOrbiter       = NULL;  // application
+SpaceXpanse*        g_pSpaceXpanse       = NULL;  // application
 BOOL            g_bFrameMoving   = TRUE;
 extern BOOL     g_bAppUseZBuffer;
 extern BOOL     g_bAppUseBackBuffer;
@@ -146,10 +146,10 @@ char DBG_MSG[256] = "";
 
 // Default help context (for main help system)
 HELPCONTEXT DefHelpContext = {
-	"html/orbiter.chm",
+	"html/spacexpanse.chm",
 	0,
-	"html/orbiter.chm::/orbiter.hhc",
-	"html/orbiter.chm::/orbiter.hhk"
+	"html/spacexpanse.chm::/spacexpanse.hhc",
+	"html/spacexpanse.chm::/spacexpanse.hhk"
 };
 
 // =======================================================================
@@ -191,7 +191,7 @@ INT WINAPI WinMain (HINSTANCE hInstance, HINSTANCE, LPSTR strCmdLine, INT nCmdSh
 	char dir[1024];
 	GetCurrentDirectory(1024, dir);
 	// If the server version was launched from its own subdirectory, step back
-	// up to the Orbiter main directory
+	// up to the SpaceXpanse main directory
 	if (strlen(dir) >= 15 && !stricmp (dir+strlen(dir)-15, "\\Modules\\Server"))
 		SetCurrentDirectory("..\\..");
 #endif
@@ -211,13 +211,13 @@ INT WINAPI WinMain (HINSTANCE hInstance, HINSTANCE, LPSTR strCmdLine, INT nCmdSh
         ConsoleManager::ShowConsole(false);
     
     SetEnvironmentVars();
-	g_pOrbiter = new Orbiter; // application instance
+	g_pSpaceXpanse = new SpaceXpanse; // application instance
 
 	// Parse command line
-	orbiter::CommandLine::Parse(g_pOrbiter, strCmdLine);
+	spacexpanse::CommandLine::Parse(g_pSpaceXpanse, strCmdLine);
 
 	// Initialise the log
-	INITLOG("Orbiter.log", g_pOrbiter->Cfg()->CfgCmdlinePrm.bAppendLog); // init log file
+	INITLOG("SpaceXpanse.log", g_pSpaceXpanse->Cfg()->CfgCmdlinePrm.bAppendLog); // init log file
 #ifdef ISBETA
 	LOGOUT("Build %s BETA [v.%06d]", __DATE__, GetVersion());
 #else
@@ -231,18 +231,18 @@ INT WINAPI WinMain (HINSTANCE hInstance, HINSTANCE, LPSTR strCmdLine, INT nCmdSh
 
 	HRESULT hr;
 	// Create application
-	if (FAILED (hr = g_pOrbiter->Create (hInstance))) {
+	if (FAILED (hr = g_pSpaceXpanse->Create (hInstance))) {
 		LOGOUT("Application creation failed");
 		MessageBox (NULL, "Application creation failed!\nTerminating.",
-			"Orbiter Error", MB_OK | MB_ICONERROR);
+			"SpaceXpanse Error", MB_OK | MB_ICONERROR);
 		return 0;
 	}
 
 	oapiRegisterCustomControls (hInstance);
 	setlocale (LC_CTYPE, "");
 
-	g_pOrbiter->Run ();
-	delete g_pOrbiter;
+	g_pSpaceXpanse->Run ();
+	delete g_pSpaceXpanse;
 	return 0;
 }
 
@@ -266,7 +266,7 @@ void SetEnvironmentVars ()
 // InitializeWorld()
 // Create logical objects
 
-bool Orbiter::InitializeWorld (char *name)
+bool SpaceXpanse::InitializeWorld (char *name)
 {
 	if (hRenderWnd)
 		g_pane = new Pane (gclient, hRenderWnd, viewW, viewH, viewBPP); TRACENEW
@@ -293,15 +293,15 @@ VOID DestroyWorld ()
 }
 
 //=============================================================================
-// Name: class Orbiter
+// Name: class SpaceXpanse
 // Desc: Main application class
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-// Name: Orbiter()
+// Name: SpaceXpanse()
 // Desc: Application constructor. Sets attributes for the app.
 //-----------------------------------------------------------------------------
-Orbiter::Orbiter ()
+SpaceXpanse::SpaceXpanse ()
 {
 	// override base class defaults
     //m_bAppUseZBuffer  = TRUE;
@@ -364,10 +364,10 @@ Orbiter::Orbiter ()
 }
 
 //-----------------------------------------------------------------------------
-// Name: ~Orbiter()
+// Name: ~SpaceXpanse()
 // Desc: Application destructor.
 //-----------------------------------------------------------------------------
-Orbiter::~Orbiter ()
+SpaceXpanse::~SpaceXpanse ()
 {
 	CloseApp ();
 }
@@ -376,7 +376,7 @@ Orbiter::~Orbiter ()
 // Name: Create()
 // Desc: This method selects a D3D device
 //-----------------------------------------------------------------------------
-HRESULT Orbiter::Create (HINSTANCE hInstance)
+HRESULT SpaceXpanse::Create (HINSTANCE hInstance)
 {
 	if (m_pLaunchpad) return S_OK; // already created
 
@@ -428,11 +428,11 @@ HRESULT Orbiter::Create (HINSTANCE hInstance)
 	}
 	
 	// Create the "launchpad" main dialog window
-	m_pLaunchpad = new orbiter::LaunchpadDialog (this); TRACENEW
+	m_pLaunchpad = new spacexpanse::LaunchpadDialog (this); TRACENEW
 	m_pLaunchpad->Create (bStartVideoTab);
 
 #ifdef INLINEGRAPHICS
-	oclient = new OrbiterGraphics (this); TRACENEW
+	oclient = new SpaceXpanseGraphics (this); TRACENEW
 	gclient = oclient;
 	gclient->clbkInitialise();
 #endif // INLINEGRAPHICS
@@ -469,7 +469,7 @@ HRESULT Orbiter::Create (HINSTANCE hInstance)
 // Name: SaveConfig()
 // Desc: Save configuration files (before closedown)
 //-----------------------------------------------------------------------------
-void Orbiter::SaveConfig ()
+void SpaceXpanse::SaveConfig ()
 {
 	pConfig->Write (); // save current settings
 	m_pLaunchpad->WriteExtraParams ();
@@ -479,7 +479,7 @@ void Orbiter::SaveConfig ()
 // Name: CloseApp()
 // Desc: Cleanup for program end
 //-----------------------------------------------------------------------------
-VOID Orbiter::CloseApp (bool fast_shutdown)
+VOID SpaceXpanse::CloseApp (bool fast_shutdown)
 {
 	SaveConfig();
 	while (m_Plugin.size()) UnloadModule (m_Plugin.begin()->hDLL);
@@ -518,9 +518,9 @@ VOID Orbiter::CloseApp (bool fast_shutdown)
 
 //-----------------------------------------------------------------------------
 // Name: GetVersion()
-// Desc: Returns orbiter build version as integer in YYMMDD format
+// Desc: Returns spacexpanse build version as integer in YYMMDD format
 //-----------------------------------------------------------------------------
-int Orbiter::GetVersion () const
+int SpaceXpanse::GetVersion () const
 {
 	static int v = 0;
 	if (!v) {
@@ -539,7 +539,7 @@ int Orbiter::GetVersion () const
 // Name: LoadFixedModules()
 // Desc: Load all plugin modules from the "startup" directory
 //-----------------------------------------------------------------------------
-void Orbiter::LoadFixedModules ()
+void SpaceXpanse::LoadFixedModules ()
 {
 	char cbuf[256];
 	char *path = "Modules\\Startup";
@@ -581,7 +581,7 @@ static bool FindDllInPluginFolder(const char *path, const char *name, char* cbuf
 // Name: LoadModule()
 // Desc: Load a named plugin DLL
 //-----------------------------------------------------------------------------
-HINSTANCE Orbiter::LoadModule (const char *path, const char *name)
+HINSTANCE SpaceXpanse::LoadModule (const char *path, const char *name)
 {
 	register_module = NULL; // Clear the module. The loaded library may optionally populate it on LoadLibrary() call below.
 
@@ -625,7 +625,7 @@ HINSTANCE Orbiter::LoadModule (const char *path, const char *name)
 // Name: UnloadModule()
 // Desc: Unload a named plugin DLL
 //-----------------------------------------------------------------------------
-bool Orbiter::UnloadModule (const std::string &name)
+bool SpaceXpanse::UnloadModule (const std::string &name)
 {
 	for (auto it = m_Plugin.begin(); it != m_Plugin.end(); it++) {
 		if (iequal(it->sName, name)) {
@@ -644,7 +644,7 @@ bool Orbiter::UnloadModule (const std::string &name)
 // Name: UnloadModule()
 // Desc: Unload a module by its instance
 //-----------------------------------------------------------------------------
-bool Orbiter::UnloadModule (HINSTANCE hDLL)
+bool SpaceXpanse::UnloadModule (HINSTANCE hDLL)
 {
 	for (auto it = m_Plugin.begin(); it != m_Plugin.end(); it++) {
 		if (it->hDLL == hDLL) {
@@ -663,7 +663,7 @@ bool Orbiter::UnloadModule (HINSTANCE hDLL)
 // Name: FindModuleProc()
 // Desc: Returns address of a procedure in a plugin module
 //-----------------------------------------------------------------------------
-OPC_Proc Orbiter::FindModuleProc (HINSTANCE hDLL, const char *procname)
+OPC_Proc SpaceXpanse::FindModuleProc (HINSTANCE hDLL, const char *procname)
 {
 	return (OPC_Proc)GetProcAddress (hDLL, procname);
 }
@@ -672,7 +672,7 @@ OPC_Proc Orbiter::FindModuleProc (HINSTANCE hDLL, const char *procname)
 // Name: Launch()
 // Desc: Launch simulator
 //-----------------------------------------------------------------------------
-VOID Orbiter::Launch (const char *scenario)
+VOID SpaceXpanse::Launch (const char *scenario)
 {
 	HCURSOR hCursor = SetCursor (LoadCursor (NULL, IDC_WAIT));
 	bool have_state = false;
@@ -695,7 +695,7 @@ VOID Orbiter::Launch (const char *scenario)
 // Name: CreateRenderWindow()
 // Desc: Create the window used for rendering the scene
 //-----------------------------------------------------------------------------
-HWND Orbiter::CreateRenderWindow (Config *pCfg, const char *scenario)
+HWND SpaceXpanse::CreateRenderWindow (Config *pCfg, const char *scenario)
 {
 	DWORD i;
 
@@ -710,7 +710,7 @@ HWND Orbiter::CreateRenderWindow (Config *pCfg, const char *scenario)
 		GetRenderParameters ();
 	} else {
 		hRenderWnd = NULL;
-		m_pConsole = new orbiter::ConsoleNG(this);
+		m_pConsole = new spacexpanse::ConsoleNG(this);
 	}
 
 	if (hRenderWnd) {
@@ -764,7 +764,7 @@ HWND Orbiter::CreateRenderWindow (Config *pCfg, const char *scenario)
 		td.SetFixedStep(Cfg()->CfgDebugPrm.FixedStep);
 
 	if (!InitializeWorld (pState->Solsys())) {
-		LOGOUT_ERR_FILENOTFOUND_MSG(g_pOrbiter->ConfigPath (pState->Solsys()), "while initialising solar system %s", pState->Solsys());
+		LOGOUT_ERR_FILENOTFOUND_MSG(g_pSpaceXpanse->ConfigPath (pState->Solsys()), "while initialising solar system %s", pState->Solsys());
 		TerminateOnError();
 		return 0;
 	}
@@ -878,7 +878,7 @@ HWND Orbiter::CreateRenderWindow (Config *pCfg, const char *scenario)
 	return hRenderWnd;
 }
 
-void Orbiter::PreCloseSession()
+void SpaceXpanse::PreCloseSession()
 {
 	// DEBUG
 	if (pDlgMgr)  { pDlgMgr->Clear(); }
@@ -891,7 +891,7 @@ void Orbiter::PreCloseSession()
 // Name: CloseSession()
 // Desc: Destroy render window and associated devices
 //-----------------------------------------------------------------------------
-void Orbiter::CloseSession ()
+void SpaceXpanse::CloseSession ()
 {
 	DWORD i;
 
@@ -964,11 +964,11 @@ void Orbiter::CloseSession ()
 			LOGOUT("**** Fast process shutdown\r\n");
 			exit (0); // just kill the process
 		} else {
-			LOGOUT("**** Respawning Orbiter process\r\n");
+			LOGOUT("**** Respawning SpaceXpanse process\r\n");
 #ifdef INLINEGRAPHICS
-			char *name = "orbiter.exe";
+			char *name = "spacexpanse.exe";
 #else
-			char *name = "modules\\server\\orbiter.exe";
+			char *name = "modules\\server\\spacexpanse.exe";
 #endif
 #ifdef INLINEGRAPHICS
 			CloseHandle (hMutex);        // delete mutex so that we don't block the child
@@ -982,7 +982,7 @@ void Orbiter::CloseSession ()
 // =======================================================================
 // Query graphics client for render parameters
 
-void Orbiter::GetRenderParameters ()
+void SpaceXpanse::GetRenderParameters ()
 {
 	if (!gclient) return; // sanity check
 
@@ -997,7 +997,7 @@ void Orbiter::GetRenderParameters ()
 // =======================================================================
 // Send session initialisation signal to various components
 
-void Orbiter::BroadcastGlobalInit ()
+void SpaceXpanse::BroadcastGlobalInit ()
 {
 	Instrument::GlobalInit (gclient);
 	DlgMap::GlobalInit();
@@ -1007,7 +1007,7 @@ void Orbiter::BroadcastGlobalInit ()
 // Render3DEnvironment()
 // Draws the scene
 
-HRESULT Orbiter::Render3DEnvironment ()
+HRESULT SpaceXpanse::Render3DEnvironment ()
 {
 	if (gclient) {
 		gclient->clbkRenderScene ();
@@ -1021,7 +1021,7 @@ HRESULT Orbiter::Render3DEnvironment ()
 // Name: ScreenToClient()
 // Desc: Converts screen to client coordinates. In fullscreen mode they are identical
 //-----------------------------------------------------------------------------
-void Orbiter::ScreenToClient (POINT *pt) const
+void SpaceXpanse::ScreenToClient (POINT *pt) const
 {
 	if (!IsFullscreen() && hRenderWnd)
 		::ScreenToClient (hRenderWnd, pt);
@@ -1031,7 +1031,7 @@ void Orbiter::ScreenToClient (POINT *pt) const
 // Name: Run()
 // Desc: Message-processing loop. Idle time is used to render the scene.
 //-----------------------------------------------------------------------------
-INT Orbiter::Run ()
+INT SpaceXpanse::Run ()
 {
     // Recieve and process Windows messages
     BOOL  bGotMsg, bCanRender, bpCanRender = TRUE;
@@ -1097,7 +1097,7 @@ INT Orbiter::Run ()
     return msg.wParam;
 }
 
-void Orbiter::SingleFrame ()
+void SpaceXpanse::SingleFrame ()
 {
 	if (bSession) {
 		if (bAllowInput) bActive = true, bAllowInput = false;
@@ -1112,17 +1112,17 @@ void Orbiter::SingleFrame ()
 	}
 }
 
-void Orbiter::TerminateOnError ()
+void SpaceXpanse::TerminateOnError ()
 {
 	LogOut (">>> TERMINATING <<<");
 	if (hRenderWnd) ShowWindow (hRenderWnd, FALSE);
 	MessageBox (NULL,
-		"Terminating after critical error. See Orbiter.log for details.",
-		"Orbiter: Critical Error", MB_OK | MB_ICONERROR);
+		"Terminating after critical error. See SpaceXpanse.log for details.",
+		"SpaceXpanse: Critical Error", MB_OK | MB_ICONERROR);
 	exit (1);
 }
 
-void Orbiter::UpdateServerWnd (HWND hWnd)
+void SpaceXpanse::UpdateServerWnd (HWND hWnd)
 {
 	char cbuf[256];
 	sprintf (cbuf, "%0.0fs", td.SysT0);
@@ -1141,7 +1141,7 @@ void Orbiter::UpdateServerWnd (HWND hWnd)
 	SetWindowText (GetDlgItem (hWnd, IDC_STATIC7), cbuf);
 }
 
-void Orbiter::InitRotationMode ()
+void SpaceXpanse::InitRotationMode ()
 {
 	bKeepFocus = true;
 	ShowCursor (FALSE);
@@ -1160,7 +1160,7 @@ void Orbiter::InitRotationMode ()
 	}
 }
 
-void Orbiter::ExitRotationMode ()
+void SpaceXpanse::ExitRotationMode ()
 {
 	bKeepFocus = false;
 	ReleaseCapture ();
@@ -1176,13 +1176,13 @@ void Orbiter::ExitRotationMode ()
 // Name: Pause()
 // Desc: Stop/continue simulation
 //-----------------------------------------------------------------------------
-void Orbiter::Pause (bool bPause)
+void SpaceXpanse::Pause (bool bPause)
 {
 	if (bRunning != bPause) return;  // nothing to do
 	bRequestRunning = !bPause;
 }
 
-void Orbiter::Freeze (bool bFreeze)
+void SpaceXpanse::Freeze (bool bFreeze)
 {
 	if (bRunning != bFreeze) return; // nothing to do
 	bRunning = !bFreeze;
@@ -1201,7 +1201,7 @@ void Orbiter::Freeze (bool bFreeze)
 // Desc: Select a new user-controlled vessel
 //       Return value is the previous focus object
 //-----------------------------------------------------------------------------
-Vessel *Orbiter::SetFocusObject (Vessel *vessel, bool setview)
+Vessel *SpaceXpanse::SetFocusObject (Vessel *vessel, bool setview)
 {
 	if (vessel == g_focusobj) return 0; // nothing to do
 
@@ -1231,7 +1231,7 @@ Vessel *Orbiter::SetFocusObject (Vessel *vessel, bool setview)
 // SetView()
 // Change camera target, or camera mode (cockpit/external)
 
-void Orbiter::SetView (Body *body, int mode)
+void SpaceXpanse::SetView (Body *body, int mode)
 {
 	g_camera->Attach (body, mode);
 	g_bForceUpdate = true;
@@ -1241,7 +1241,7 @@ void Orbiter::SetView (Body *body, int mode)
 // Name: InsertVessels
 // Desc: Insert a newly created vessel into the simulation
 //-----------------------------------------------------------------------------
-void Orbiter::InsertVessel (Vessel *vessel)
+void SpaceXpanse::InsertVessel (Vessel *vessel)
 {
 	g_psys->AddVessel (vessel);
 
@@ -1269,7 +1269,7 @@ void Orbiter::InsertVessel (Vessel *vessel)
 // Desc: Kill the vessels that have been marked for deletion in the last time
 //       step
 //-----------------------------------------------------------------------------
-bool Orbiter::KillVessels ()
+bool SpaceXpanse::KillVessels ()
 {
 	int i, n = g_psys->nVessel();
 	DWORD j;
@@ -1333,7 +1333,7 @@ bool Orbiter::KillVessels ()
 	return true;
 }
 
-void Orbiter::NotifyObjectJump (const Body *obj, const Vector &shift)
+void SpaceXpanse::NotifyObjectJump (const Body *obj, const Vector &shift)
 {
 	if (obj == g_camera->Target()) g_camera->Drag (-shift);
 	if (g_camera->Target()) g_camera->Update ();
@@ -1350,7 +1350,7 @@ void Orbiter::NotifyObjectJump (const Body *obj, const Vector &shift)
 #endif // INLINEGRAPHICS
 }
 
-void Orbiter::NotifyObjectSize (const Body *obj)
+void SpaceXpanse::NotifyObjectSize (const Body *obj)
 {
 	if (obj == g_camera->Target()) g_camera->Drag (Vector(0,0,0));
 }
@@ -1359,7 +1359,7 @@ void Orbiter::NotifyObjectSize (const Body *obj)
 // Name: SetWarpFactor()
 // Desc: Set time acceleration factor
 //-----------------------------------------------------------------------------
-void Orbiter::SetWarpFactor (double warp, bool force, double delay)
+void SpaceXpanse::SetWarpFactor (double warp, bool force, double delay)
 {
 	if (warp == td.Warp())
 		return; // nothing to do
@@ -1392,7 +1392,7 @@ void Orbiter::SetWarpFactor (double warp, bool force, double delay)
 // Name: IncWarpFactor()
 // Desc: Increment time acceleration factor to next power of 10
 //-----------------------------------------------------------------------------
-void Orbiter::IncWarpFactor ()
+void SpaceXpanse::IncWarpFactor ()
 {
 	const double EPS = 1e-6;
 	double logw = log10 (td.Warp());
@@ -1403,7 +1403,7 @@ void Orbiter::IncWarpFactor ()
 // Name: DecWarpFactor()
 // Desc: Decrement time acceleration factor to next lower power of 10
 //-----------------------------------------------------------------------------
-void Orbiter::DecWarpFactor ()
+void SpaceXpanse::DecWarpFactor ()
 {
 	const double EPS = 1e-6;
 	double logw = log10 (td.Warp());
@@ -1414,7 +1414,7 @@ void Orbiter::DecWarpFactor ()
 // Name: ApplyWarpFactor()
 // Desc: Broadcast new warp factor to components and modules
 //-----------------------------------------------------------------------------
-void Orbiter::ApplyWarpFactor ()
+void SpaceXpanse::ApplyWarpFactor ()
 {
 	double nwarp = td.Warp();
 
@@ -1431,7 +1431,7 @@ void Orbiter::ApplyWarpFactor ()
 // Desc: Set field of view. Argument is FOV for vertical half-screen [rad]
 //-----------------------------------------------------------------------------
 
-VOID Orbiter::SetFOV (double fov, bool limit_range)
+VOID SpaceXpanse::SetFOV (double fov, bool limit_range)
 {
 	if (g_camera->Aperture() == fov) return;
 
@@ -1450,7 +1450,7 @@ VOID Orbiter::SetFOV (double fov, bool limit_range)
 // Desc: Increase field of view. Argument is delta FOV for vertical half-screen [rad]
 //-----------------------------------------------------------------------------
 
-VOID Orbiter::IncFOV (double dfov)
+VOID SpaceXpanse::IncFOV (double dfov)
 {
 	double fov = g_camera->IncrAperture (dfov);
 	if (g_pane) g_pane->SetFOV (fov);
@@ -1466,7 +1466,7 @@ VOID Orbiter::IncFOV (double dfov)
 // Name: SaveScenario()
 // Desc: save current status in-game
 //-----------------------------------------------------------------------------
-bool Orbiter::SaveScenario (const char *fname, const char *desc, int desc_type)
+bool SpaceXpanse::SaveScenario (const char *fname, const char *desc, int desc_type)
 {
 	pState->Update ();
 
@@ -1497,11 +1497,11 @@ bool Orbiter::SaveScenario (const char *fname, const char *desc, int desc_type)
 // Name: Quicksave()
 // Desc: save current status in-game
 //-----------------------------------------------------------------------------
-VOID Orbiter::Quicksave ()
+VOID SpaceXpanse::Quicksave ()
 {
 	int i;
 	char desc[256], fname[256];
-	sprintf (desc, "Orbiter saved state at T = %0.0f", td.SimT0);
+	sprintf (desc, "SpaceXpanse saved state at T = %0.0f", td.SimT0);
 	for (i = strlen(ScenarioName)-1; i > 0; i--)
 		if (ScenarioName[i-1] == '\\') break;
 	sprintf (fname, "Quicksave\\%s %04d", ScenarioName+i, ++g_qsaveid);
@@ -1511,7 +1511,7 @@ VOID Orbiter::Quicksave ()
 //-----------------------------------------------------------------------------
 // write a single frame to bmp file (or to clipboard, if fname==NULL)
 
-void Orbiter::CaptureVideoFrame ()
+void SpaceXpanse::CaptureVideoFrame ()
 {
 	if (gclient) {
 		if (video_skip_count == pConfig->CfgCapturePrm.SequenceSkip) {
@@ -1529,15 +1529,15 @@ void Orbiter::CaptureVideoFrame ()
 // Name: PlaybackSave()
 // Desc: save the start scenario for a recorded simulation
 //-----------------------------------------------------------------------------
-VOID Orbiter::SavePlaybackScn (const char *fname)
+VOID SpaceXpanse::SavePlaybackScn (const char *fname)
 {
 	char desc[256], scn[256] = "Playback\\";
-	sprintf (desc, "Orbiter playback scenario at T = %0.0f", td.SimT0);
+	sprintf (desc, "SpaceXpanse playback scenario at T = %0.0f", td.SimT0);
 	strcat (scn, fname);
 	SaveScenario (scn, desc, 0);
 }
 
-const char *Orbiter::GetDefRecordName (void) const
+const char *SpaceXpanse::GetDefRecordName (void) const
 {
 	const char *playbackdir = pState->PlaybackDir();
 	int i;
@@ -1546,7 +1546,7 @@ const char *Orbiter::GetDefRecordName (void) const
 	return playbackdir+i;
 }
 
-void Orbiter::ToggleRecorder (bool force, bool append)
+void SpaceXpanse::ToggleRecorder (bool force, bool append)
 {
 	if (bPlayback) return; // don't allow recording during playback
 
@@ -1574,7 +1574,7 @@ void Orbiter::ToggleRecorder (bool force, bool append)
 	if (pDlg) PostMessage (pDlg->GetHwnd(), WM_USER+1, 0, 0);
 }
 
-void Orbiter::EndPlayback ()
+void SpaceXpanse::EndPlayback ()
 {
 	for (DWORD i = 0; i < g_psys->nVessel(); i++)
 		g_psys->GetVessel(i)->FRecorder_EndPlayback ();
@@ -1588,7 +1588,7 @@ void Orbiter::EndPlayback ()
 	if (g_pane && g_pane->MIBar()) g_pane->MIBar()->SetPlayback(false);
 }
 
-oapi::ScreenAnnotation *Orbiter::CreateAnnotation (bool exclusive, double size, COLORREF col)
+oapi::ScreenAnnotation *SpaceXpanse::CreateAnnotation (bool exclusive, double size, COLORREF col)
 {
 	if (!gclient) return NULL;
 	oapi::ScreenAnnotation *sn = gclient->clbkCreateAnnotation();
@@ -1625,7 +1625,7 @@ oapi::ScreenAnnotation *Orbiter::CreateAnnotation (bool exclusive, double size, 
 	//return sn;
 }
 
-bool Orbiter::DeleteAnnotation (oapi::ScreenAnnotation *sn)
+bool SpaceXpanse::DeleteAnnotation (oapi::ScreenAnnotation *sn)
 {
 	DWORD i, j, k;
 
@@ -1652,7 +1652,7 @@ bool Orbiter::DeleteAnnotation (oapi::ScreenAnnotation *sn)
 // Name: InitDeviceObjects()
 // Desc: Initialize scene objects.
 //-----------------------------------------------------------------------------
-HRESULT Orbiter::InitDeviceObjects ()
+HRESULT SpaceXpanse::InitDeviceObjects ()
 {
 	// All of this should be moved into the inline graphics client!
 #ifdef INLINEGRAPHICS
@@ -1662,7 +1662,7 @@ HRESULT Orbiter::InitDeviceObjects ()
 
     // Turn on lighting. Light will be set during FrameMove() call
 	oclient->m_pD3DDevice->SetRenderState (D3DRENDERSTATE_LIGHTING, bEnableLighting);
-	oclient->m_pD3DDevice->SetRenderState (D3DRENDERSTATE_AMBIENT, g_pOrbiter->Cfg()->AmbientColour);
+	oclient->m_pD3DDevice->SetRenderState (D3DRENDERSTATE_AMBIENT, g_pSpaceXpanse->Cfg()->AmbientColour);
 
 	//if (!pCWorld->LoadRRTextures(m_hWnd, "textures.dat"))
 	//	LOGOUT("LoadRRTextures failed");
@@ -1706,7 +1706,7 @@ HRESULT Orbiter::InitDeviceObjects ()
 // Desc: Restore objects created for a specific device
 //-----------------------------------------------------------------------------
 
-HRESULT Orbiter::RestoreDeviceObjects ()
+HRESULT SpaceXpanse::RestoreDeviceObjects ()
 {
 #ifdef INLINEGRAPHICS
 	RestorePatchDeviceObjects (oclient->m_pD3D, oclient->m_pD3DDevice);
@@ -1720,7 +1720,7 @@ HRESULT Orbiter::RestoreDeviceObjects ()
 // Name: DeleteDeviceObjects()
 // Desc: Delete objects created for a specific device
 //-----------------------------------------------------------------------------
-HRESULT Orbiter::DeleteDeviceObjects ()
+HRESULT SpaceXpanse::DeleteDeviceObjects ()
 {
 #ifdef INLINEGRAPHICS
 	//ReleaseGDIResources ();
@@ -1732,7 +1732,7 @@ HRESULT Orbiter::DeleteDeviceObjects ()
 
 static char linebuf[2][70] = {"", ""};
 
-void Orbiter::OutputLoadStatus (const char *msg, int line)
+void SpaceXpanse::OutputLoadStatus (const char *msg, int line)
 {
 	if (gclient) {
 		strncpy (linebuf[line], msg, 64); linebuf[line][63] = '\0';
@@ -1740,7 +1740,7 @@ void Orbiter::OutputLoadStatus (const char *msg, int line)
 	}
 }
 
-void Orbiter::OutputLoadTick (int line, bool ok)
+void SpaceXpanse::OutputLoadTick (int line, bool ok)
 {
 	if (gclient) {
 		char cbuf[256];
@@ -1754,7 +1754,7 @@ void Orbiter::OutputLoadTick (int line, bool ok)
 // Name: InitializeGDIResources()
 // Desc: Allocate resources required for GDI display (HUD, MFD)
 //-----------------------------------------------------------------------------
-void Orbiter::InitializeGDIResources (HWND hWnd)
+void SpaceXpanse::InitializeGDIResources (HWND hWnd)
 {
 	// Allocate global GDI resources
 	if (g_gdires) delete g_gdires;
@@ -1765,7 +1765,7 @@ void Orbiter::InitializeGDIResources (HWND hWnd)
 // Name: ReleaseGDIResources()
 // Desc: Release resources used by GDI
 //-----------------------------------------------------------------------------
-void Orbiter::ReleaseGDIResources ()
+void SpaceXpanse::ReleaseGDIResources ()
 {
 	if (g_gdires) delete g_gdires, g_gdires = 0;
 }
@@ -1775,7 +1775,7 @@ void Orbiter::ReleaseGDIResources ()
 // Desc: Return file handle for texture file (0=error)
 //       First searches in hightex dir, then in standard dir
 //-----------------------------------------------------------------------------
-FILE *Orbiter::OpenTextureFile (const char *name, const char *ext)
+FILE *SpaceXpanse::OpenTextureFile (const char *name, const char *ext)
 {
 	FILE *ftex = 0;
 	char *pch = HTexPath (name, ext); // first try high-resolution directory
@@ -1788,7 +1788,7 @@ FILE *Orbiter::OpenTextureFile (const char *name, const char *ext)
 	return fopen (pch, "rb");
 }
 
-SURFHANDLE Orbiter::RegisterExhaustTexture (char *name)
+SURFHANDLE SpaceXpanse::RegisterExhaustTexture (char *name)
 {
 	if (gclient) {
 		char path[256];
@@ -1803,14 +1803,14 @@ SURFHANDLE Orbiter::RegisterExhaustTexture (char *name)
 //-----------------------------------------------------------------------------
 // Load a mesh from file, and store it persistently in the mesh manager
 //-----------------------------------------------------------------------------
-const Mesh *Orbiter::LoadMeshGlobal (const char *fname)
+const Mesh *SpaceXpanse::LoadMeshGlobal (const char *fname)
 {
 	const Mesh *mesh =  meshmanager.LoadMesh (fname);
 	if (gclient) gclient->clbkStoreMeshPersistent ((MESHHANDLE)mesh, fname);
 	return mesh;
 }
 
-const Mesh *Orbiter::LoadMeshGlobal (const char *fname, LoadMeshClbkFunc fClbk)
+const Mesh *SpaceXpanse::LoadMeshGlobal (const char *fname, LoadMeshClbkFunc fClbk)
 {
 	bool firstload;
 	const Mesh *mesh =  meshmanager.LoadMesh (fname, &firstload);
@@ -1823,7 +1823,7 @@ const Mesh *Orbiter::LoadMeshGlobal (const char *fname, LoadMeshClbkFunc fClbk)
 // Name: Output2DData()
 // Desc: Output HUD and other 2D information on top of the render window
 //-----------------------------------------------------------------------------
-VOID Orbiter::Output2DData ()
+VOID SpaceXpanse::Output2DData ()
 {
 	g_pane->Draw ();
 	if (g_pane) {
@@ -1849,7 +1849,7 @@ VOID Orbiter::Output2DData ()
 // Name: BeginTimeStep()
 // Desc: Update timings for the current frame step
 //-----------------------------------------------------------------------------
-bool Orbiter::BeginTimeStep (bool running)
+bool SpaceXpanse::BeginTimeStep (bool running)
 {
 	// Check for a pause/resume request
 	if (bRequestRunning != running) {
@@ -1921,7 +1921,7 @@ bool Orbiter::BeginTimeStep (bool running)
 	return true;
 }
 
-void Orbiter::EndTimeStep (bool running)
+void SpaceXpanse::EndTimeStep (bool running)
 {
 	if (running) {
 		if (g_psys) g_psys->FinaliseUpdate ();
@@ -1945,7 +1945,7 @@ void Orbiter::EndTimeStep (bool running)
 		else CloseSession();
 }
 
-bool Orbiter::SessionLimitReached() const
+bool SpaceXpanse::SessionLimitReached() const
 {
 	if (pConfig->CfgCmdlinePrm.FrameLimit && td.FrameCount() >= pConfig->CfgCmdlinePrm.FrameLimit)
 		return true;
@@ -1959,7 +1959,7 @@ bool Orbiter::SessionLimitReached() const
 	return false;
 }
 
-bool Orbiter::Timejump (double _mjd, int pmode)
+bool SpaceXpanse::Timejump (double _mjd, int pmode)
 {
 	tjump.mode = pmode;
 	tjump.dt = td.JumpTo (_mjd);
@@ -1981,12 +1981,12 @@ bool Orbiter::Timejump (double _mjd, int pmode)
 	return true;
 }
 
-void Orbiter::Suspend (void)
+void SpaceXpanse::Suspend (void)
 {
 	ms_suspend = timeGetTime ();
 }
 
-void Orbiter::Resume (void)
+void SpaceXpanse::Resume (void)
 {
 	DWORD dt = timeGetTime() - ms_suspend;
 	ms_prev += dt;
@@ -1998,7 +1998,7 @@ void Orbiter::Resume (void)
 // Custom command registration
 //-----------------------------------------------------------------------------
 
-DWORD Orbiter::RegisterCustomCmd (char *label, char *desc, CustomFunc func, void *context)
+DWORD SpaceXpanse::RegisterCustomCmd (char *label, char *desc, CustomFunc func, void *context)
 {
 	DWORD id;
 	CUSTOMCMD *tmp = new CUSTOMCMD[ncustomcmd+1]; TRACENEW
@@ -2018,7 +2018,7 @@ DWORD Orbiter::RegisterCustomCmd (char *label, char *desc, CustomFunc func, void
 	return id;
 }
 
-bool Orbiter::UnregisterCustomCmd (int cmdId)
+bool SpaceXpanse::UnregisterCustomCmd (int cmdId)
 {
 	DWORD i;
 	CUSTOMCMD *tmp = 0;
@@ -2042,7 +2042,7 @@ bool Orbiter::UnregisterCustomCmd (int cmdId)
 // Name: ModulePreStep()
 // Desc: call module pre-timestep callbacks
 //-----------------------------------------------------------------------------
-void Orbiter::ModulePreStep ()
+void SpaceXpanse::ModulePreStep ()
 {
 	// broadcast to modules
 	for (auto it = m_Plugin.begin(); it != m_Plugin.end(); it++)
@@ -2057,7 +2057,7 @@ void Orbiter::ModulePreStep ()
 // Name: ModulePostStep()
 // Desc: call module post-timestep callbacks
 //-----------------------------------------------------------------------------
-void Orbiter::ModulePostStep ()
+void SpaceXpanse::ModulePostStep ()
 {
 	// broadcast to vessels
 	for (DWORD i = 0; i < g_psys->nVessel(); i++)
@@ -2072,7 +2072,7 @@ void Orbiter::ModulePostStep ()
 // Name: UpdateWorld()
 // Desc: Update world to current time
 //-----------------------------------------------------------------------------
-VOID Orbiter::UpdateWorld ()
+VOID SpaceXpanse::UpdateWorld ()
 {
 	// module pre-timestep callbacks
 	if (bRunning) ModulePreStep ();
@@ -2096,7 +2096,7 @@ VOID Orbiter::UpdateWorld ()
 	//g_texmanager->OutputInfo();
 }
 
-const char *Orbiter::KeyState() const
+const char *SpaceXpanse::KeyState() const
 {
 	return simkstate;
 }
@@ -2106,7 +2106,7 @@ const char *Orbiter::KeyState() const
 // Desc: Process user input via DirectInput keyboard and joystick (but not
 //       keyboard messages sent via window message queue)
 //-----------------------------------------------------------------------------
-HRESULT Orbiter::UserInput ()
+HRESULT SpaceXpanse::UserInput ()
 {
 	static char buffer[256];
 	DIDEVICEOBJECTDATA dod[10];
@@ -2173,7 +2173,7 @@ HRESULT Orbiter::UserInput ()
 // Desc: Simulate a buffered keyboard event
 //-----------------------------------------------------------------------------
 
-bool Orbiter::SendKbdBuffered(DWORD key, DWORD *mod, DWORD nmod, bool onRunningOnly)
+bool SpaceXpanse::SendKbdBuffered(DWORD key, DWORD *mod, DWORD nmod, bool onRunningOnly)
 {
 	if (onRunningOnly && !bRunning) return false;
 
@@ -2195,7 +2195,7 @@ bool Orbiter::SendKbdBuffered(DWORD key, DWORD *mod, DWORD nmod, bool onRunningO
 // Desc: Simulate an immediate key state
 //-----------------------------------------------------------------------------
 
-bool Orbiter::SendKbdImmediate(char kstate[256], bool onRunningOnly)
+bool SpaceXpanse::SendKbdImmediate(char kstate[256], bool onRunningOnly)
 {
 	if (onRunningOnly && !bRunning) return false;
 	for (int i = 0; i < 256; i++)
@@ -2209,7 +2209,7 @@ bool Orbiter::SendKbdImmediate(char kstate[256], bool onRunningOnly)
 // Desc: General user keyboard immediate key interpretation. Processes keys
 //       which are also interpreted when simulation is paused (movably)
 //-----------------------------------------------------------------------------
-void Orbiter::KbdInputImmediate_System (char *kstate)
+void SpaceXpanse::KbdInputImmediate_System (char *kstate)
 {
 	bool smooth_cam = true; // make user-selectable
 
@@ -2319,7 +2319,7 @@ void Orbiter::KbdInputImmediate_System (char *kstate)
 // Name: KbdInputImmediate_OnRunning ()
 // Desc: User keyboard input query for running simulation (ship controls etc.)
 //-----------------------------------------------------------------------------
-void Orbiter::KbdInputImmediate_OnRunning (char *kstate)
+void SpaceXpanse::KbdInputImmediate_OnRunning (char *kstate)
 {
 	if (g_focusobj->ConsumeDirectKey (kstate)) return;  // key is consumed by focus vessel
 
@@ -2383,7 +2383,7 @@ void Orbiter::KbdInputImmediate_OnRunning (char *kstate)
 // Desc: General user keyboard buffered key interpretation. Processes keys
 //       which are also interpreted when simulation is paused
 //-----------------------------------------------------------------------------
-void Orbiter::KbdInputBuffered_System (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
+void SpaceXpanse::KbdInputBuffered_System (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
 {
 	for (DWORD i = 0; i < n; i++) {
 
@@ -2445,7 +2445,7 @@ void Orbiter::KbdInputBuffered_System (char *kstate, DIDEVICEOBJECTDATA *dod, DW
 // Name: KbdInputBuffered_OnRunning ()
 // Desc: User keyboard buffered key interpretation in running simulation
 //-----------------------------------------------------------------------------
-void Orbiter::KbdInputBuffered_OnRunning (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
+void SpaceXpanse::KbdInputBuffered_OnRunning (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
 {
 	for (DWORD i = 0; i < n; i++) {
 
@@ -2492,7 +2492,7 @@ void Orbiter::KbdInputBuffered_OnRunning (char *kstate, DIDEVICEOBJECTDATA *dod,
 // Name: UserJoyInput_System ()
 // Desc: General user joystick input (also functional when paused)
 //-----------------------------------------------------------------------------
-void Orbiter::UserJoyInput_System (DIJOYSTATE2 *js)
+void SpaceXpanse::UserJoyInput_System (DIJOYSTATE2 *js)
 {
 	if (LOWORD (js->rgdwPOV[0]) != 0xFFFF) {
 		DWORD dir = js->rgdwPOV[0];
@@ -2528,7 +2528,7 @@ void Orbiter::UserJoyInput_System (DIJOYSTATE2 *js)
 // Name: UserJoyInput_OnRunning ()
 // Desc: User joystick input query for running simulation (ship controls etc.)
 //-----------------------------------------------------------------------------
-void Orbiter::UserJoyInput_OnRunning (DIJOYSTATE2 *js)
+void SpaceXpanse::UserJoyInput_OnRunning (DIJOYSTATE2 *js)
 {
 	if (bEnableAtt) {
 		if (js->lX) {
@@ -2565,7 +2565,7 @@ void Orbiter::UserJoyInput_OnRunning (DIJOYSTATE2 *js)
 	}
 }
 
-bool Orbiter::MouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
+bool SpaceXpanse::MouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
 {
 	if (g_pane->MIBar() && g_pane->MIBar()->ProcessMouse (event, state, x, y)) return true;
 	if (BroadcastMouseEvent (event, state, x, y)) return true;
@@ -2583,7 +2583,7 @@ bool Orbiter::MouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
 	return false;
 }
 
-bool Orbiter::BroadcastMouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
+bool SpaceXpanse::BroadcastMouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
 {
 	bool consume = false;
 
@@ -2594,7 +2594,7 @@ bool Orbiter::BroadcastMouseEvent (UINT event, DWORD state, DWORD x, DWORD y)
 	return consume;
 }
 
-bool Orbiter::BroadcastImmediateKeyboardEvent (char *kstate)
+bool SpaceXpanse::BroadcastImmediateKeyboardEvent (char *kstate)
 {
 	bool consume = false;
 
@@ -2605,7 +2605,7 @@ bool Orbiter::BroadcastImmediateKeyboardEvent (char *kstate)
 	return consume;
 }
 
-void Orbiter::BroadcastBufferedKeyboardEvent (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
+void SpaceXpanse::BroadcastBufferedKeyboardEvent (char *kstate, DIDEVICEOBJECTDATA *dod, DWORD n)
 {
 	for (DWORD i = 0; i < n; i++) {
 		bool consume = false;
@@ -2625,7 +2625,7 @@ void Orbiter::BroadcastBufferedKeyboardEvent (char *kstate, DIDEVICEOBJECTDATA *
 // Desc: Render window message handler
 //-----------------------------------------------------------------------------
 
-LRESULT Orbiter::MsgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT SpaceXpanse::MsgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	WORD kmod;
 
@@ -2775,7 +2775,7 @@ LRESULT Orbiter::MsgProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 // Name: ActivateRoughType()
 // Desc: Suppress font smoothing
 //-----------------------------------------------------------------------------
-bool Orbiter::ActivateRoughType ()
+bool SpaceXpanse::ActivateRoughType ()
 {
 	//if (!bSysClearType) return false; // ClearType isn't user-enabled anyway
 	if (bRoughType) return false; // active already
@@ -2793,7 +2793,7 @@ bool Orbiter::ActivateRoughType ()
 // Name: DeactivateRoughType()
 // Desc: Re-enable font smoothing
 //-----------------------------------------------------------------------------
-bool Orbiter::DeactivateRoughType ()
+bool SpaceXpanse::DeactivateRoughType ()
 {
 	bool bEnforceClearType = pConfig->CfgDebugPrm.bForceReenableSmoothFont;
 	if (!bSysClearType && !bEnforceClearType) return false; // ClearType isn't user-enabled anyway
@@ -2809,7 +2809,7 @@ bool Orbiter::DeactivateRoughType ()
 // Name: AttachGraphicsClient()
 // Desc: Link an external graphics render interface
 //-----------------------------------------------------------------------------
-bool Orbiter::AttachGraphicsClient (oapi::GraphicsClient *gc)
+bool SpaceXpanse::AttachGraphicsClient (oapi::GraphicsClient *gc)
 {
 	if (gclient) return false; // another client is already attached
 	register_module = gc;
@@ -2822,7 +2822,7 @@ bool Orbiter::AttachGraphicsClient (oapi::GraphicsClient *gc)
 // Name: RemoveGraphicsClient()
 // Desc: Unlink an external graphics render interface
 //-----------------------------------------------------------------------------
-bool Orbiter::RemoveGraphicsClient (oapi::GraphicsClient *gc)
+bool SpaceXpanse::RemoveGraphicsClient (oapi::GraphicsClient *gc)
 {
 	if (!gclient || gclient != gc) return false; // no client attached
 	gclient = NULL;
@@ -2830,37 +2830,37 @@ bool Orbiter::RemoveGraphicsClient (oapi::GraphicsClient *gc)
 }
 #endif // !INLINEGRAPHICS
 
-bool Orbiter::RegisterWindow (HINSTANCE hInstance, HWND hWnd, DWORD flag)
+bool SpaceXpanse::RegisterWindow (HINSTANCE hInstance, HWND hWnd, DWORD flag)
 {
 	return (pDlgMgr ? (pDlgMgr->AddWindow (hInstance, hWnd, hRenderWnd, flag) != NULL) : NULL);
 }
 
-void Orbiter::UpdateDeallocationProgress()
+void SpaceXpanse::UpdateDeallocationProgress()
 {
 	m_pLaunchpad->UpdateWaitProgress();
 }
 
-HWND Orbiter::OpenDialog (int id, DLGPROC pDlg, void *context)
+HWND SpaceXpanse::OpenDialog (int id, DLGPROC pDlg, void *context)
 {
 	return OpenDialog (hInst, id, pDlg, context);
 }
 
-HWND Orbiter::OpenDialogEx (int id, DLGPROC pDlg, DWORD flag, void *context)
+HWND SpaceXpanse::OpenDialogEx (int id, DLGPROC pDlg, DWORD flag, void *context)
 {
 	return OpenDialogEx (hInst, id, pDlg, flag, context);
 }
 
-HWND Orbiter::OpenDialog (HINSTANCE hInstance, int id, DLGPROC pDlg, void *context)
+HWND SpaceXpanse::OpenDialog (HINSTANCE hInstance, int id, DLGPROC pDlg, void *context)
 {
 	return (pDlgMgr ? pDlgMgr->OpenDialog (hInstance, id, hRenderWnd, pDlg, context) : NULL);
 }
 
-HWND Orbiter::OpenDialogEx (HINSTANCE hInstance, int id, DLGPROC pDlg, DWORD flag, void *context)
+HWND SpaceXpanse::OpenDialogEx (HINSTANCE hInstance, int id, DLGPROC pDlg, DWORD flag, void *context)
 {
 	return (pDlgMgr ? pDlgMgr->OpenDialogEx (hInstance, id, hRenderWnd, pDlg, flag, context) : NULL);
 }
 
-HWND Orbiter::OpenHelp (HELPCONTEXT *hcontext)
+HWND SpaceXpanse::OpenHelp (HELPCONTEXT *hcontext)
 {
 	if (pDlgMgr) {
 		DlgHelp *pHelp = pDlgMgr->EnsureEntry<DlgHelp> ();
@@ -2870,17 +2870,17 @@ HWND Orbiter::OpenHelp (HELPCONTEXT *hcontext)
 	} else return NULL;
 }
 
-void Orbiter::OpenLaunchpadHelp (HELPCONTEXT *hcontext)
+void SpaceXpanse::OpenLaunchpadHelp (HELPCONTEXT *hcontext)
 {
 	::OpenHelp (0, hcontext->helpfile, hcontext->topic);
 }
 
-void Orbiter::CloseDialog (HWND hDlg)
+void SpaceXpanse::CloseDialog (HWND hDlg)
 {
 	if (pDlgMgr) pDlgMgr->CloseDialog (hDlg);
 }
 
-HWND Orbiter::IsDialog (HINSTANCE hInstance, DWORD resId)
+HWND SpaceXpanse::IsDialog (HINSTANCE hInstance, DWORD resId)
 {
 	return (pDlgMgr ? pDlgMgr->IsEntry (hInstance, resId) : NULL);
 }

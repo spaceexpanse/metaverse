@@ -12,7 +12,7 @@
 // ==============================================================
 
 #include "FDGraph.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "resource.h"
 
 FlightDataGraph* FlightDataGraph::CreateGraph(const std::string& title)

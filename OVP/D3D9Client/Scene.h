@@ -10,7 +10,7 @@
 //
 // A "Scene" represents the 3-D world as seen from a specific
 // viewpoint ("camera"). Each scene therefore has a camera object
-// associated with it. The Orbiter core supports a single
+// associated with it. The SpaceXpanse core supports a single
 // camera, but in principle a graphics client could define
 // multiple scenes and render them simultaneously into separate
 // windows (or into MFD display surfaces, etc.)
@@ -312,8 +312,8 @@ public:
 	void			SetCameraFrustumLimits(double nearlimit, double farlimit);
 	float			GetDepthResolution(float dist) const;
 
-					// Acquire camera information from the Orbiter and initialize internal camera setup
-	void			UpdateCameraFromOrbiter(DWORD dwPass);
+					// Acquire camera information from the SpaceXpanse and initialize internal camera setup
+	void			UpdateCameraFromSpaceXpanse(DWORD dwPass);
 
 					// Manually initialize client's internal camera setup
 	void			SetupInternalCamera(D3DXMATRIX *mView, VECTOR3 *pos, double apr, double asp);

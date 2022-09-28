@@ -87,7 +87,7 @@ jobs:
 
     - name: Pack
 #      if: ${{ github.ref == 'refs/heads/0.1.1' }}
-      working-directory: ${{ github.workspace }}\out\install\Orbiter
+      working-directory: ${{ github.workspace }}\out\install\SpaceXpanse
       shell: cmd
       run: '7z a "${{ github.workspace }}\out\SpaceXpanse-${{ matrix.architecture }}.zip" .'
 

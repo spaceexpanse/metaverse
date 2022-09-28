@@ -12,7 +12,7 @@
 // ==============================================================
 
 #include "D3D7Config.h"
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 
 static char *cfgfile = "D3D7Client.cfg";
 

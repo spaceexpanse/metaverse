@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // =======================================================================
-// OrbiterGraphics class
+// SpaceXpanseGraphics class
 // Inline graphics client
 // =======================================================================
 
@@ -24,8 +24,8 @@ struct DeviceData {
 	BOOL  bStereo;
 };
 
-class Orbiter;
-class OrbiterGraphics;
+class SpaceXpanse;
+class SpaceXpanseGraphics;
 class Scene;
 class Config;
 
@@ -33,7 +33,7 @@ class Config;
 
 class VideoTab {
 public:
-	VideoTab (OrbiterGraphics *og);
+	VideoTab (SpaceXpanseGraphics *og);
 	void Init();
 	INT_PTR WndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -49,7 +49,7 @@ protected:
 	void ForceDeviceEnum ();
 
 private:
-	OrbiterGraphics *gclient;
+	SpaceXpanseGraphics *gclient;
 	Config *cfg;
 	HWND hVid;
 	int aspect_idx;
@@ -57,14 +57,14 @@ private:
 
 // =======================================================================
 
-class OrbiterGraphics: public GDIClient {
-	friend class Orbiter;
+class SpaceXpanseGraphics: public GDIClient {
+	friend class SpaceXpanse;
 	friend class Scene;
 	friend class VideoTab;
 
 public:
-	OrbiterGraphics (Orbiter *po);
-	~OrbiterGraphics ();
+	SpaceXpanseGraphics (SpaceXpanse *po);
+	~SpaceXpanseGraphics ();
 	void clbkRefreshVideoData ();
 	bool clbkInitialise ();
 	void clbkCleanup();
@@ -190,7 +190,7 @@ protected:
 	bool OutputLoadStatus (const char *msg, int line);
 
 private:
-	Orbiter *orbiter;
+	SpaceXpanse *spacexpanse;
 	Scene *scene;
 	VideoTab *vtab;
     D3D7Enum_DeviceInfo* m_pDeviceInfo;

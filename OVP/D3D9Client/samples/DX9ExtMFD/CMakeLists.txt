@@ -12,8 +12,8 @@ add_dependencies(DX9ExtMFD
 )
 
 target_link_libraries(DX9ExtMFD
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 target_include_directories(DX9ExtMFD

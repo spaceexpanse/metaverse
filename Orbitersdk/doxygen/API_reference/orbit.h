@@ -206,7 +206,7 @@
 
   \section kepler Kepler's equation
   Consider a vector rotating around C at constant angular velocity n, given by
-  the orbiter's mean motion. If the vector passes A at time t<sub>0</sub>, then
+  the spacexpanse's mean motion. If the vector passes A at time t<sub>0</sub>, then
   its angle with A at time t is given by
   \f[
   M(t) = n(t-t_0)

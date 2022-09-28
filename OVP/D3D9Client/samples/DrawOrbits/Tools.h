@@ -9,7 +9,7 @@
 
 #include <float.h>
 #include <math.h>
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 
 /*
 Notes:
@@ -285,7 +285,7 @@ double  dVByBurnTime(double time, double mass, double thr, double rate);
 
 
 // -------------------------------------------------------------------------
-/*! \defgroup oapiext Orbiter API extensions */
+/*! \defgroup oapiext SpaceXpanse API extensions */
 // -------------------------------------------------------------------------
 //@{
 /*!

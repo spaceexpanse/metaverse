@@ -10,7 +10,7 @@
 #include <windows.h>
 #include "DlgMap.h"
 #include "Dialogs.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Psys.h"
 #include "Planet.h"
 #include "Resource.h"
@@ -18,7 +18,7 @@
 #include "Pane.h"
 #include "Util.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern Vessel *g_focusobj;
 extern PlanetarySystem *g_psys;
@@ -336,8 +336,8 @@ DlgMap::DlgMap (HINSTANCE hInstance, HWND hParent, void *context)
 : DialogWin (hInstance, hParent, IDD_MAP, 0, 0, context)
 {
 	map = new MapWin (this);
-	prm = &g_pOrbiter->Cfg()->CfgMapPrm;
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgMap;
+	prm = &g_pSpaceXpanse->Cfg()->CfgMapPrm;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgMap;
 	memset (&MapPrm, 0, sizeof(MAP_PARAM));
 }
 
@@ -368,10 +368,10 @@ void DlgMap::GlobalInit ()
 
 HWND DlgMap::Open ()
 {
-	DialogManager *dlgmgr = g_pOrbiter->DlgMgr();
+	DialogManager *dlgmgr = g_pSpaceXpanse->DlgMgr();
 	if (!dlgmgr) return 0;
-	HINSTANCE hInst = g_pOrbiter->GetInstance();
-	HWND hParent = g_pOrbiter->GetRenderWnd();
+	HINSTANCE hInst = g_pSpaceXpanse->GetInstance();
+	HWND hParent = g_pSpaceXpanse->GetRenderWnd();
 	if (dlgmgr->IsEntry (hInst, IDD_MAP)) return 0; // already open
 	DlgMap *dlg = new DlgMap (hInst, hParent);
 	return dlgmgr->AddEntry (dlg);
@@ -631,7 +631,7 @@ void DlgMap::OpenInfo ()
 {
 	VectorMap::OBJTYPE obj = map->GetSelection ();
 	if (obj.type == DISP_BASE || obj.type == DISP_VESSEL || obj.type == DISP_MOON) {
-		DlgInfo *pInfo = g_pOrbiter->DlgMgr()->EnsureEntry<DlgInfo> ();
+		DlgInfo *pInfo = g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgInfo> ();
 		pInfo->SetBody ((Body*)obj.obj);
 
 		RECT r;
@@ -648,8 +648,8 @@ BOOL DlgMap::OnInitDialog (HWND hDlg, WPARAM wParam, LPARAM lParam)
 	RECT rect;
 	char cbuf[64];
 
-	SendDlgItemMessage (hDlg, IDC_MAP_SELECT, BM_SETIMAGE, IMAGE_ICON, (LPARAM)LoadIcon (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(IDI_CROSS)));
-	SendDlgItemMessage (hDlg, IDC_MAP_DRAG, BM_SETIMAGE, IMAGE_ICON, (LPARAM)LoadIcon (g_pOrbiter->GetInstance(), MAKEINTRESOURCE(IDI_FINGER)));
+	SendDlgItemMessage (hDlg, IDC_MAP_SELECT, BM_SETIMAGE, IMAGE_ICON, (LPARAM)LoadIcon (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(IDI_CROSS)));
+	SendDlgItemMessage (hDlg, IDC_MAP_DRAG, BM_SETIMAGE, IMAGE_ICON, (LPARAM)LoadIcon (g_pSpaceXpanse->GetInstance(), MAKEINTRESOURCE(IDI_FINGER)));
 	SendDlgItemMessage (hDlg, IDC_MAP_DRAG, BM_SETCHECK, BST_CHECKED, 0);
 	map->SetZoom (prm_store.zoom);
 	sprintf (cbuf, "Zoom %dx", prm_store.zoom);
@@ -718,10 +718,10 @@ BOOL DlgMap::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDHELP:
 		DefHelpContext.topic = "/map.htm";
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	case IDC_MAP_OPTIONS:
-		g_pOrbiter->DlgMgr()->EnsureEntry<DlgMapOpt> (0, this);
+		g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgMapOpt> (0, this);
 		return TRUE;
 	case IDC_MAP_INFO:
 		OpenInfo();

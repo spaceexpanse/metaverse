@@ -186,11 +186,11 @@ BEGIN
     PUSHBUTTON      "Repair all",IDC_REPAIR,161,221,50,14
     PUSHBUTTON      "Refresh",IDC_REFRESH,213,221,50,14
     GROUPBOX        "Damage",IDC_STATIC,0,0,263,81
-    CONTROL         "",IDC_LEFTWING_SLIDER,"OrbiterCtrl_Gauge",0x0,93,18,120,10
+    CONTROL         "",IDC_LEFTWING_SLIDER,"SpaceXpanseCtrl_Gauge",0x0,93,18,120,10
     LTEXT           "Airframe",IDC_STATIC,20,24,26,8
     LTEXT           "100 %",IDC_LEFTWING_STATUS,219,18,20,8
     RTEXT           "left wing",IDC_STATIC,55,18,31,8
-    CONTROL         "",IDC_RIGHTWING_SLIDER,"OrbiterCtrl_Gauge",0x0,93,31,120,10
+    CONTROL         "",IDC_RIGHTWING_SLIDER,"SpaceXpanseCtrl_Gauge",0x0,93,31,120,10
     LTEXT           "100 %",IDC_RIGHTWING_STATUS,219,31,20,8
     RTEXT           "right wing",IDC_STATIC,55,31,31,8
     LTEXT           "fail",IDC_STATIC,93,8,10,8

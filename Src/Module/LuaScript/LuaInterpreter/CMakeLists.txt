@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-# Core library to go to the Orbiter main directory
+# Core library to go to the SpaceXpanse main directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_ROOT_DIR})
 set(BUILD_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/out)
 
@@ -21,8 +21,8 @@ target_link_libraries(LuaInterpreter
 )
 
 add_dependencies(LuaInterpreter
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 )
 
 set_target_properties(LuaInterpreter
@@ -30,7 +30,7 @@ set_target_properties(LuaInterpreter
 	FOLDER Modules/Lua
 )
 
-# Copy library to its Orbitersdk/lib location so that external project integrated into the build can find it
+# Copy library to its SpaceXpansesdk/lib location so that external project integrated into the build can find it
 add_custom_command(TARGET LuaInterpreter
 	POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${ORBITER_BINARY_SDK_DIR}/include
@@ -49,21 +49,21 @@ if(ORBITER_MAKE_DOC)
 		JOB_POOL htmlhelp
 )
 	add_custom_command(
-		OUTPUT ${ORBITER_BINARY_SDK_DIR}/doc/orbiter_lua.chm
+		OUTPUT ${ORBITER_BINARY_SDK_DIR}/doc/spacexpanse_lua.chm
 		DEPENDS ${BUILD_OUT_DIR}/index.html
 		WORKING_DIRECTORY ${BUILD_OUT_DIR}
 		COMMAND ${HHC_CMD} interpreter.hhp
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different ./interpreter.chm ${ORBITER_BINARY_SDK_DIR}/doc/orbiter_lua.chm
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different ./interpreter.chm ${ORBITER_BINARY_SDK_DIR}/doc/spacexpanse_lua.chm
 		JOB_POOL htmlhelp
 )
-	add_custom_target(orbiter_lua
-		DEPENDS ${ORBITER_BINARY_SDK_DIR}/doc/orbiter_lua.chm
+	add_custom_target(spacexpanse_lua
+		DEPENDS ${ORBITER_BINARY_SDK_DIR}/doc/spacexpanse_lua.chm
 	)
-	add_dependencies(${OrbiterTgt}
-		orbiter_lua
+	add_dependencies(${SpaceXpanseTgt}
+		spacexpanse_lua
 	)
 
-	install(FILES ${ORBITER_BINARY_SDK_DIR}/doc/orbiter_lua.chm
+	install(FILES ${ORBITER_BINARY_SDK_DIR}/doc/spacexpanse_lua.chm
 		DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc
 	)
 endif()

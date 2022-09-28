@@ -3,7 +3,7 @@
 
 #include "internal.h"
 #include <stdio.h>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "dragonfly.h"
 ShipInternal::ShipInternal()
 {Dk[0]=NULL;

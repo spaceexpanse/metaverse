@@ -115,8 +115,8 @@ add_custom_command(
 )
 
 add_dependencies(DeltaGlider
-	${OrbiterTgt}
-	Orbitersdk
+	${SpaceXpanseTgt}
+	SpaceXpansesdk
 	DlgCtrl
 	DeltaGlider_Prerequisites
 )

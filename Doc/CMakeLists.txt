@@ -1,19 +1,19 @@
-# Orbiter.pdf ------------------------------------------------------------
+# SpaceXpanse.pdf ------------------------------------------------------------
 
-odt_to_pdf_arglist("Orbiter" arglist src out)
+odt_to_pdf_arglist("SpaceXpanse" arglist src out)
 add_custom_command(
 	OUTPUT ${out}
 	COMMAND ${ODT_TO_PDF_COMPILER} ${arglist}
 	DEPENDS ${src}
 	JOB_POOL soffice
 )
-add_custom_target(OrbiterDoc
+add_custom_target(SpaceXpanseDoc
 	DEPENDS ${out}
 )
-add_dependencies(${OrbiterTgt}
-	OrbiterDoc
+add_dependencies(${SpaceXpanseTgt}
+	SpaceXpanseDoc
 )
-set_target_properties(OrbiterDoc
+set_target_properties(SpaceXpanseDoc
 	PROPERTIES
 	FOLDER Doc
 )
@@ -21,22 +21,22 @@ install(FILES ${out}
 	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
 )
 
-# OrbiterConfig.pdf ------------------------------------------------------
+# SpaceXpanseConfig.pdf ------------------------------------------------------
 
-odt_to_pdf_arglist("OrbiterConfig" arglist src out)
+odt_to_pdf_arglist("SpaceXpanseConfig" arglist src out)
 add_custom_command(
 	OUTPUT ${out}
 	COMMAND ${ODT_TO_PDF_COMPILER} ${arglist}
 	DEPENDS ${src}
 	JOB_POOL soffice
 )
-add_custom_target(OrbiterConfigDoc
+add_custom_target(SpaceXpanseConfigDoc
 	DEPENDS ${out}
 )
-add_dependencies(${OrbiterTgt}
-	OrbiterConfigDoc
+add_dependencies(${SpaceXpanseTgt}
+	SpaceXpanseConfigDoc
 )
-set_target_properties(OrbiterConfigDoc
+set_target_properties(SpaceXpanseConfigDoc
 	PROPERTIES
 	FOLDER Doc
 )
@@ -56,7 +56,7 @@ add_custom_command(
 add_custom_target(PlanetTexturesDoc
 	DEPENDS ${out}
 )
-add_dependencies(${OrbiterTgt}
+add_dependencies(${SpaceXpanseTgt}
 	PlanetTexturesDoc
 )
 set_target_properties(PlanetTexturesDoc
@@ -76,11 +76,11 @@ add_custom_command(
 	DEPENDS ${src}
 	JOB_POOL soffice
 )
-add_custom_target(OrbiterCreditDoc
+add_custom_target(SpaceXpanseCreditDoc
 	DEPENDS ${out}
 )
-add_dependencies(OrbiterDoc
-	OrbiterCreditDoc
+add_dependencies(SpaceXpanseDoc
+	SpaceXpanseCreditDoc
 )
 install(FILES ${out}
 	DESTINATION ${ORBITER_INSTALL_DOC_DIR}

@@ -117,12 +117,12 @@ DLLCLBK void DeleteAtmosphere (ATMOSPHERE *atm)
 
 DLLCLBK char *ModelName ()
 {
-	static char *name = "Orbiter 2006 Legacy Model";
+	static char *name = "SpaceXpanse 2006 Legacy Model";
 	return name;
 }
 
 DLLCLBK char *ModelDesc ()
 {
-	static char *desc = "A simple static atmosphere model. This model was used in Orbiter 2006. It underestimates atmospheric density and pressure above ~120km and terminates at 200km, which simplifies orbit-keeping for LEO objects.";
+	static char *desc = "A simple static atmosphere model. This model was used in SpaceXpanse 2006. It underestimates atmospheric density and pressure above ~120km and terminates at 200km, which simplifies orbit-keeping for LEO objects.";
 	return desc;
 }
