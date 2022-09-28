@@ -14,7 +14,7 @@
 #include "Dialogs.h"
 #include "Resource.h"
 #include "DlgMgr.h" // to be removed
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vessel.h"
 #include "Camera.h"
 #include "Psys.h"
@@ -24,7 +24,7 @@
 #include <Richedit.h>
 #include "Element.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern Camera *g_camera;
 extern PlanetarySystem *g_psys;
@@ -43,7 +43,7 @@ DlgInfo::DlgInfo (HINSTANCE hInstance, HWND hParent, void *context)
 	upd_dt = 1.0;
 	body = NULL;
 	listmode = LIST_NONE;
-	pos = &g_pOrbiter->Cfg()->CfgWindowPos.DlgInfo;
+	pos = &g_pSpaceXpanse->Cfg()->CfgWindowPos.DlgInfo;
 
 	// note: shared icon resources should probably be loaded globally by orbiter
 	hIcon_dd = LoadIcon (hInstance, MAKEINTRESOURCE(IDI_DDOWN));
@@ -207,7 +207,7 @@ int DlgInfo::Size (DWORD width, DWORD height)
 void DlgInfo::OpenMap ()
 {
 	if (body) {
-		DlgMap *pMap = g_pOrbiter->DlgMgr()->EnsureEntry<DlgMap> ();
+		DlgMap *pMap = g_pSpaceXpanse->DlgMgr()->EnsureEntry<DlgMap> ();
 		pMap->SetSelection (body);
 	}
 }
@@ -515,7 +515,7 @@ void DlgInfo::UpdateItems_vessel ()
 	vlist.prm->GetItem (2)->SetValue (cbuf);
 	strcpy (cbuf, DistStr (vessel->Size())+1); strcat (cbuf, "m");
 	vlist.prm->GetItem (3)->SetValue (cbuf);
-	sprintf (cbuf, "(%4g, %4g, %4g) m²", vessel->PMI().x, vessel->PMI().y, vessel->PMI().z);
+	sprintf (cbuf, "(%4g, %4g, %4g) mï¿½", vessel->PMI().x, vessel->PMI().y, vessel->PMI().z);
 	vlist.prm->GetItem (4)->SetValue (cbuf);
 
 	if (vlist.thr) {
@@ -538,13 +538,13 @@ void DlgInfo::UpdateItems_vessel ()
 		vlist.els->GetItem (1)->SetValue (cbuf);
 		sprintf (cbuf, "%g", el->e);
 		vlist.els->GetItem (2)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->i*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->i*DEG);
 		vlist.els->GetItem (3)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->theta*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->theta*DEG);
 		vlist.els->GetItem (4)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->omegab*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->omegab*DEG);
 		vlist.els->GetItem (5)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->MeanLng()*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->MeanLng()*DEG);
 		vlist.els->GetItem (6)->SetValue (cbuf);
 	} else {
 		for (i = 0; i < 7; i++)
@@ -554,7 +554,7 @@ void DlgInfo::UpdateItems_vessel ()
 	const SurfParam *sp = vessel->GetSurfParam();
 	if (sp) {
 		vlist.srf->GetItem (0)->SetValue (sp->ref->Name());
-		sprintf (cbuf, "%07.3f°%c  %06.3f°%c", fabs(sp->lng)*DEG, sp->lng >= 0.0 ? 'E':'W', fabs(sp->lat)*DEG, sp->lat >= 0.0 ? 'N':'S');
+		sprintf (cbuf, "%07.3fï¿½%c  %06.3fï¿½%c", fabs(sp->lng)*DEG, sp->lng >= 0.0 ? 'E':'W', fabs(sp->lat)*DEG, sp->lat >= 0.0 ? 'N':'S');
 		vlist.srf->GetItem (1)->SetValue (cbuf);
 		strcpy (cbuf, DistStr (sp->alt)); strcat (cbuf, "m");
 		vlist.srf->GetItem (2)->SetValue (cbuf+1);
@@ -563,11 +563,11 @@ void DlgInfo::UpdateItems_vessel ()
 		Vector V (mul (sp->L2H, tmul (vessel->ProxyBody()->GRot(), sp->groundvel_glob)));
 		sprintf (cbuf, "%sm/s", FloatStr (V.y)+1);
 		vlist.srf->GetItem (4)->SetValue (cbuf);
-		sprintf (cbuf, "%0.0f°", sp->dir*DEG);
+		sprintf (cbuf, "%0.0fï¿½", sp->dir*DEG);
 		vlist.srf->GetItem (5)->SetValue (cbuf);
-		sprintf (cbuf, "%0.0f°", sp->pitch*DEG);
+		sprintf (cbuf, "%0.0fï¿½", sp->pitch*DEG);
 		vlist.srf->GetItem (6)->SetValue (cbuf);
-		sprintf (cbuf, "%0.0f° %s", fabs(sp->bank)*DEG, sp->bank >= 0.0 ? "left":"right");
+		sprintf (cbuf, "%0.0fï¿½ %s", fabs(sp->bank)*DEG, sp->bank >= 0.0 ? "left":"right");
 		vlist.srf->GetItem (7)->SetValue (cbuf);
 	} else {
 		for (i = 0; i < 8; i++)
@@ -611,7 +611,7 @@ void DlgInfo::UpdateItems_vessel ()
 		if (D) sprintf (cbuf, "%g", L/D);
 		else   strcpy (cbuf, na);
 		vlist.aer->GetItem (6)->SetValue (cbuf);
-		if (sp) sprintf (cbuf, "%+0.1f°", -atan2 (sp->groundvel_ship.y, sp->groundvel_ship.z)*DEG);
+		if (sp) sprintf (cbuf, "%+0.1fï¿½", -atan2 (sp->groundvel_ship.y, sp->groundvel_ship.z)*DEG);
 		else    strcpy (cbuf, na);
 		vlist.aer->GetItem (7)->SetValue (cbuf);
 	} else {
@@ -801,7 +801,7 @@ void DlgInfo::UpdateItems_celbody ()
 	if (el) sprintf (cbuf, "%s s", SciStr (el->OrbitT(), 4));
 	else    strcpy (cbuf, na);
 	cblist.prm->GetItem (4)->SetValue (cbuf);
-	if (planet) sprintf (cbuf, "%0.2f°", planet->Obliquity()*DEG);
+	if (planet) sprintf (cbuf, "%0.2fï¿½", planet->Obliquity()*DEG);
 	else strcpy (cbuf, na);
 	cblist.prm->GetItem (5)->SetValue (cbuf);
 	cblist.prm->GetItem (6)->SetValue (planet && cblist.atm ? "Yes":"No");
@@ -835,13 +835,13 @@ void DlgInfo::UpdateItems_celbody ()
 		cblist.els->GetItem (0)->SetValue (cbuf);
 		sprintf (cbuf, "%0.5g", el->e);
 		cblist.els->GetItem (1)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->i*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->i*DEG);
 		cblist.els->GetItem (2)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->theta*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->theta*DEG);
 		cblist.els->GetItem (3)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->omegab*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->omegab*DEG);
 		cblist.els->GetItem (4)->SetValue (cbuf);
-		sprintf (cbuf, "%0.2f°", el->MeanLng()*DEG);
+		sprintf (cbuf, "%0.2fï¿½", el->MeanLng()*DEG);
 		cblist.els->GetItem (5)->SetValue (cbuf);
 	} else {
 		for (i = 0; i < 6; i++)
@@ -865,7 +865,7 @@ void DlgInfo::UpdateItems_celbody ()
 			dcs = modf (dcm, &dcm) * 60.0;
 			sprintf (cbuf, "%02.0fh %02.0fm %02.2fs", rah, ram, ras);
 			cblist.loc->GetItem (0)->SetValue (cbuf);
-			sprintf (cbuf, "%+02.0f° %02.0f' %02.2f''", dcd, dcm, dcs);
+			sprintf (cbuf, "%+02.0fï¿½ %02.0f' %02.2f''", dcd, dcm, dcs);
 			cblist.loc->GetItem (1)->SetValue (cbuf);
 		} else {
 			for (i = 0; i < 2; i++)
@@ -879,9 +879,9 @@ void DlgInfo::UpdateItems_celbody ()
 			double r   = p.length();
 			double lng = atan2 (p.z, p.x);
 			double lat = p.y/r;
-			sprintf (cbuf, "%0.3f°", DEG*posangle(lng));
+			sprintf (cbuf, "%0.3fï¿½", DEG*posangle(lng));
 			cblist.ecl->GetItem (0)->SetValue (cbuf);
-			sprintf (cbuf, "%0.3f°", DEG*lat);
+			sprintf (cbuf, "%0.3fï¿½", DEG*lat);
 			cblist.ecl->GetItem (1)->SetValue (cbuf);
 			sprintf (cbuf, "%s m", SciStr (r));
 			cblist.ecl->GetItem (2)->SetValue (cbuf);
@@ -988,7 +988,7 @@ void DlgInfo::UpdateItems_base ()
 	blist.des->GetItem (0)->SetValue (base->Name());
 	blist.des->GetItem (1)->SetValue (base->RefPlanet()->Name());
 	base->EquPos (lng, lat);
-	sprintf (cbuf, "%07.3f°%c  %06.3f°%c",
+	sprintf (cbuf, "%07.3fï¿½%c  %06.3fï¿½%c",
 		fabs(lng)*DEG, lng >= 0.0 ? 'E':'W',
 		fabs(lat)*DEG, lat >= 0.0 ? 'N':'S'
 	);
@@ -1058,7 +1058,7 @@ BOOL DlgInfo::OnCommand (HWND hDlg, WORD id, WORD code, HWND hControl)
 	switch (id) {
 	case IDHELP:
 		DefHelpContext.topic = "/objinfo.htm";
-		g_pOrbiter->OpenHelp (&DefHelpContext);
+		g_pSpaceXpanse->OpenHelp (&DefHelpContext);
 		return TRUE;
 	case IDC_INFO_MAP:
 		OpenMap();
