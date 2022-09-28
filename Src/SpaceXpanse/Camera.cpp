@@ -18,11 +18,11 @@
 #include "Pane.h"
 #include "Dialogs.h"
 #include "DlgMgr.h"
-#include "Orbiter.h"
-#include "Orbitersdk.h"
+#include "SpaceXpanse.h"
+#include "SpaceXpansesdk.h"
 #include "Util.h"
 #include "Log.h"
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include <zmouse.h>
 
 #ifdef INLINEGRAPHICS
@@ -32,7 +32,7 @@
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern TimeData td;
 extern PlanetarySystem *g_psys;
 extern Pane *g_pane;
@@ -62,9 +62,9 @@ Camera::Camera (double _nearplane, double _farplane)
 	SetCockpitDir (0,0);
 	SetCatchAngle (RAD*5.0);
 	memset (&cockpitprm, 0, sizeof(cockpitprm));
-	go.panspeed = g_pOrbiter->Cfg()->CfgCameraPrm.Panspeed;
+	go.panspeed = g_pSpaceXpanse->Cfg()->CfgCameraPrm.Panspeed;
 	go.tgtlock = true;
-	go.terrain_limit = g_pOrbiter->Cfg()->CfgCameraPrm.TerrainLimit;
+	go.terrain_limit = g_pSpaceXpanse->Cfg()->CfgCameraPrm.TerrainLimit;
 	gos.planet[0] = gos.site[0] = gos.addr[0] = '\0';
 	planet_proxy = 0;
 	npreset = 0;
@@ -105,7 +105,7 @@ bool Camera::ProcessMouse (UINT event, DWORD state, DWORD x, DWORD y, const char
 		return true;
 	case WM_RBUTTONDOWN:
 		mbdown[1] = true;
-		g_pOrbiter->InitRotationMode();
+		g_pSpaceXpanse->InitRotationMode();
 		return true;
 	case WM_LBUTTONUP:
 		if (mbdown[0]) {
@@ -116,7 +116,7 @@ bool Camera::ProcessMouse (UINT event, DWORD state, DWORD x, DWORD y, const char
 	case WM_RBUTTONUP:
 		if (mbdown[1]) {
 			mbdown[1] = false;
-			g_pOrbiter->ExitRotationMode();
+			g_pSpaceXpanse->ExitRotationMode();
 			return true;
 		}
 		break;
@@ -128,7 +128,7 @@ bool Camera::ProcessMouse (UINT event, DWORD state, DWORD x, DWORD y, const char
 			if (external_view)
 				ShiftDist(-zDelta*0.001);
 			else
-				g_pOrbiter->IncFOV(zDelta*(-2.0 / 120.0*RAD));
+				g_pSpaceXpanse->IncFOV(zDelta*(-2.0 / 120.0*RAD));
 		} return true;
 		break;
 	}
@@ -147,8 +147,8 @@ void Camera::UpdateMouse ()
 	if (mbdown[1]) {
 		int dx, dy, x0, y0;
 		x0 = pt.x, y0 = pt.y;
-		if (!g_pOrbiter->IsFullscreen())
-			ScreenToClient (g_pOrbiter->GetRenderWnd(), &pt);
+		if (!g_pSpaceXpanse->IsFullscreen())
+			ScreenToClient (g_pSpaceXpanse->GetRenderWnd(), &pt);
 		dx = pt.x - mx;
 		dy = pt.y - my;
 		SetCursorPos (x0-dx, y0-dy);
@@ -177,7 +177,7 @@ void Camera::SetViewInternal ()
 		ap = &ap_int;
 		double a = ap_int;
 		ap_int = 0.0; // force update
-		g_pOrbiter->SetFOV(a);
+		g_pSpaceXpanse->SetFOV(a);
 	}
 }
 
@@ -188,7 +188,7 @@ void Camera::SetViewExternal ()
 		ap = &ap_ext;
 		double a = ap_ext;
 		ap_ext = 0.0; // force update
-		g_pOrbiter->SetFOV(a);
+		g_pSpaceXpanse->SetFOV(a);
 	}
 }
 
@@ -237,7 +237,7 @@ void Camera::SetCMode (const CameraMode *cm)
 		Attach (tgt, ext ? 1:0);
 	}
 	if (tgt && !ext && tgt != g_focusobj)
-		g_pOrbiter->SetFocusObject ((Vessel*)tgt);
+		g_pSpaceXpanse->SetFocusObject ((Vessel*)tgt);
 
 	switch (cm->GetMode()) {
 	case CameraMode::CM_COCKPIT: {
@@ -297,7 +297,7 @@ void Camera::SetCMode (const CameraMode *cm)
 	}
 
 	double newap = cm->GetFOV()*0.5*RAD;
-	if (newap && fabs(newap - *ap) > 1e-6) g_pOrbiter->SetFOV (newap);
+	if (newap && fabs(newap - *ap) > 1e-6) g_pSpaceXpanse->SetFOV (newap);
 	SendDlgMessage (3, 0);
 }
 
@@ -792,7 +792,7 @@ void Camera::SetGroundMode (ExtCamMode mode, const Body *ref, double lng, double
 void Camera::SetGroundObserver_PanSpeed (double speed)
 {
 	go.panspeed = max (0.1, min (1e5, speed));
-	g_pOrbiter->Cfg()->CfgCameraPrm.Panspeed = go.panspeed;
+	g_pSpaceXpanse->Cfg()->CfgCameraPrm.Panspeed = go.panspeed;
 }
 
 void Camera::SetGroundObserver_TargetLock (bool lock)
@@ -820,7 +820,7 @@ void Camera::SetGroundObserver_TerrainLimit (double altlimit)
 			go.alt0 = elev + go.alt; // recalibrate target alt0 to current pos
 		}
 		go.terrain_limit = altlimit;
-		g_pOrbiter->Cfg()->CfgCameraPrm.TerrainLimit = go.terrain_limit;
+		g_pSpaceXpanse->Cfg()->CfgCameraPrm.TerrainLimit = go.terrain_limit;
 	}
 }
 
@@ -852,9 +852,9 @@ void Camera::GroundObserverTilt (double dphi, double dtht)
 
 void Camera::SendDlgMessage (int msgid, void *msg) const
 {
-	DialogManager *dlgmgr = g_pOrbiter->DlgMgr();
+	DialogManager *dlgmgr = g_pSpaceXpanse->DlgMgr();
 	if (dlgmgr) {
-		HWND dlg = dlgmgr->IsEntry (g_pOrbiter->GetInstance(), IDD_CAMERA);
+		HWND dlg = dlgmgr->IsEntry (g_pSpaceXpanse->GetInstance(), IDD_CAMERA);
 		if (dlg)
 			PostMessage (dlg, WM_APP, msgid, (LPARAM)msg);
 	}
@@ -862,12 +862,12 @@ void Camera::SendDlgMessage (int msgid, void *msg) const
 
 void Camera::OutputGroundObserverParams () const
 {
-	DialogManager *dlgmgr = g_pOrbiter->DlgMgr();
+	DialogManager *dlgmgr = g_pSpaceXpanse->DlgMgr();
 	if (dlgmgr) {
-		HWND dlg = dlgmgr->IsEntry (g_pOrbiter->GetInstance(), IDD_CAMERA);
+		HWND dlg = dlgmgr->IsEntry (g_pSpaceXpanse->GetInstance(), IDD_CAMERA);
 		if (dlg) {
 			char cbuf[256];
-			sprintf (cbuf, "Lng = %+0.6f°\r\nLat = %+0.6f°\r\nAlt = %0.2fm\r\nPhi = %0.2f°\r\nTheta = %0.2f°",
+			sprintf (cbuf, "Lng = %+0.6fï¿½\r\nLat = %+0.6fï¿½\r\nAlt = %0.2fm\r\nPhi = %0.2fï¿½\r\nTheta = %0.2fï¿½",
 				DEG*go.lng, DEG*go.lat, go.alt, DEG*go.phi, DEG*go.tht);
 			SendDlgMessage (1, cbuf);
 		}
@@ -1015,7 +1015,7 @@ void Camera::Update ()
 	const Body *bd;
 	int i, nobj;
 #ifdef INLINEGRAPHICS
-	nobj = g_pOrbiter->GetInlineGraphicsClient()->GetScene()->GetObjects (&vobj);
+	nobj = g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->GetObjects (&vobj);
 #else
 	nobj = 0; vobj = 0;
 #endif // INLINEGRAPHICS
@@ -1039,7 +1039,7 @@ void Camera::Update ()
 	}
 #ifdef INLINEGRAPHICS
 	if (dist_proxy > 0.0)
-		dist_proxy = min(dist_proxy, g_pOrbiter->GetInlineGraphicsClient()->GetScene()->MinParticleCameraDist());
+		dist_proxy = min(dist_proxy, g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->MinParticleCameraDist());
 #endif
 
 	// find the largest apparent planet
@@ -1332,7 +1332,7 @@ void Camera::UpdateProjectionMatrix ()
 	proj_mat._34 = 1.0f;
 
 #ifdef INLINEGRAPHICS
-	OrbiterGraphics *og = g_pOrbiter->GetInlineGraphicsClient();
+	SpaceXpanseGraphics *og = g_pSpaceXpanse->GetInlineGraphicsClient();
 	if (og) og->clbkSetCamera (aspect, tan_ap, nearplane, farplane);
 #endif
 
@@ -1350,7 +1350,7 @@ void Camera::InitState (const char *scn, Body *default_target)
 
 	// read state from scenario file
 	if (scn) {
-		ifstream ifs (g_pOrbiter->ScnPath(scn));
+		ifstream ifs (g_pSpaceXpanse->ScnPath(scn));
 		if (ifs) Read (ifs);
 	}
 	Body *newtgt = target; target = NULL;
