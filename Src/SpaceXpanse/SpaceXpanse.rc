@@ -1734,7 +1734,7 @@ END
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-#include "orbiter.rc2"
+#include "SpaceXpanse.rc2"
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
