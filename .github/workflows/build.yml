@@ -44,7 +44,7 @@ jobs:
     - name: Cache irrKlang package
       uses: actions/cache@v2
       with:
-        path: ${{ github.workspace }}/out/build/Extern/irrKlang/${{ matrix.architecture }}
+        path: ${{ github.workspace }}\out\build\Extern\irrKlang/${{ matrix.architecture }}
         key: irrKlang-${{ matrix.architecture }}
         
     - name: Cache DirectX SDK
@@ -65,26 +65,26 @@ jobs:
          dir /S /B DXSDK
 
     - name: Configure
-      working-directory: ${{ github.workspace }}/out/build
+      working-directory: ${{ github.workspace }}\out\build
       run: cmake -G Ninja ../.. -DORBITER_MAKE_DOC=OFF -DIRRKLANG_DIR:STRING="irrKlang_DOWNLOAD" -DDXSDK_DIR:PATH="${{ github.workspace }}\\DXSDK"
 
     - name: Build
-      working-directory: ${{ github.workspace }}/out/build
+      working-directory: ${{ github.workspace }}\out\build
       run: cmake --build . --config RelWithDebInfo
 
     - name: Test
-      working-directory: ${{ github.workspace }}/out/build
+      working-directory: ${{ github.workspace }}\out\build
       run: ctest --config RelWithDebInfo .
 
     - name: Install
-      working-directory: ${{ github.workspace }}/out/build
+      working-directory: ${{ github.workspace }}\out\build
       run: cmake --install . --prefix  ${{ github.workspace }}/out/install
 
     - name: Pack
       if: ${{ github.ref == 'refs/heads/0.1.1' }}
-      working-directory: ${{ github.workspace }}/out/install/Orbiter
+      working-directory: ${{ github.workspace }}\out\install\rbiter
       shell: cmd
-      run: '7z a "${{ github.workspace }}/out/Orbiter-${{ matrix.architecture }}.zip" .'
+      run: '7z a "${{ github.workspace }}\out\Orbiter-${{ matrix.architecture }}.zip" .'
 
     - name: Upload Build Artifact
       if: ${{ github.ref == 'refs/heads/0.1.1' }}
@@ -92,5 +92,5 @@ jobs:
       with:
         name: Orbiter-${{ matrix.architecture }}
         # A file, directory or wildcard pattern that describes what to upload
-        path: ${{ github.workspace }}/out/Orbiter-${{ matrix.architecture }}.zip
+        path: ${{ github.workspace }}\out\Orbiter-${{ matrix.architecture }}.zip
         retention-days: 60
