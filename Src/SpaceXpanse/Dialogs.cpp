@@ -3,13 +3,13 @@
 
 // ======================================================================
 // Dialogs.cpp
-// Orbiter in-game dialog functions
+// SpaceXpanse in-game dialog functions
 // ======================================================================
 
 #define STRICT 1
 #define OEMRESOURCE
 #include <io.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Vessel.h"
 #include "Psys.h"
 #include "Camera.h"
@@ -19,7 +19,7 @@
 #include "Dialogs.h"
 #include "DlgMgr.h" // to be removed
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern PlanetarySystem *g_psys;
 extern Camera *g_camera;
 extern Vessel *g_focusobj;
@@ -45,7 +45,7 @@ void Navaid_BuildNavList (HWND hDlg)
 			case TRANSMITTER_VOR: {
 				const Nav_VOR *vor = (const Nav_VOR*)nav;
 				vor->GetEquPos (lng, lat);
-				sprintf (cbuf, "%s\t%06.2f\t%06.3f°%c\t%07.3f°%c\t%0.0fkm\r\n",
+				sprintf (cbuf, "%s\t%06.2f\t%06.3fï¿½%c\t%07.3fï¿½%c\t%0.0fkm\r\n",
 					nav->GetId(), nav->GetFreq(),
 					fabs(lat)*DEG, lat >= 0.0 ? 'N':'S',
 					fabs(lng)*DEG, lng >= 0.0 ? 'E':'W',
@@ -96,7 +96,7 @@ INT_PTR CALLBACK Navaid_DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case IDCANCEL:
-			g_pOrbiter->CloseDialog (hDlg);
+			g_pSpaceXpanse->CloseDialog (hDlg);
 			return TRUE;
 		case IDC_INFO_NAME:
 			if (HIWORD(wParam) == CBN_SELCHANGE)
@@ -105,7 +105,7 @@ INT_PTR CALLBACK Navaid_DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		}
 		break;
 	}
-	return OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam);
+	return SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam);
 }
 #endif
 
@@ -119,15 +119,15 @@ INT_PTR CALLBACK FRecorderMsg_DlgProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPAR
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case IDOK:
-			g_pOrbiter->ToggleRecorder (true);
+			g_pSpaceXpanse->ToggleRecorder (true);
 			// fall through
 		case IDCANCEL:
-			g_pOrbiter->CloseDialog (hDlg);
+			g_pSpaceXpanse->CloseDialog (hDlg);
 			break;
 		}
 		break;
 	}
-	return OrbiterDefDialogProc (hDlg, uMsg, wParam, lParam);
+	return SpaceXpanseDefDialogProc (hDlg, uMsg, wParam, lParam);
 }
 
 // =========================================================================
