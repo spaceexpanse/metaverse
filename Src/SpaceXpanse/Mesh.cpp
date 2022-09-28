@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include <stdio.h>
 #include "D3dmath.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Log.h"
 #include "Util.h"
 
@@ -17,7 +17,7 @@ extern TextureManager *g_texmanager;
 
 using namespace std;
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern DWORD g_vtxcount;
 extern char DBG_MSG[256];
 
@@ -287,10 +287,10 @@ bool Mesh::MakeGroupVertexBuffer (DWORD grp)
 #ifdef INLINEGRAPHICS
 	GroupSpec &g = Grp[grp];
 	if (g.VtxBuf) return false; // buffer already exists
-	if (!g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->IsTLDevice()) return false; // no T&L capability
+	if (!g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->IsTLDevice()) return false; // no T&L capability
 
-	LPDIRECT3D7 d3d = g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7();
-	LPDIRECT3DDEVICE7 dev = g_pOrbiter->GetInlineGraphicsClient()->GetDevice();
+	LPDIRECT3D7 d3d = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7();
+	LPDIRECT3DDEVICE7 dev = g_pSpaceXpanse->GetInlineGraphicsClient()->GetDevice();
 	LPVOID data;
 	D3DVERTEXBUFFERDESC vbd = 
 		{ sizeof(D3DVERTEXBUFFERDESC), D3DVBCAPS_WRITEONLY, D3DFVF_VERTEX, g.nVtx };
@@ -776,8 +776,8 @@ bool Mesh::SetTexture (DWORD texidx, SURFHANDLE tex, bool release_old)
 #ifdef INLINEGRAPHICS
 		g_texmanager->ReleaseTexture ((LPDIRECTDRAWSURFACE7)Tex[texidx]);
 #else
-		if (g_pOrbiter->GetGraphicsClient())
-			g_pOrbiter->GetGraphicsClient()->clbkReleaseTexture (Tex[texidx]);
+		if (g_pSpaceXpanse->GetGraphicsClient())
+			g_pSpaceXpanse->GetGraphicsClient()->clbkReleaseTexture (Tex[texidx]);
 #endif // INLINEGRAPHICS
 	}
 	Tex[texidx] = tex;
@@ -792,8 +792,8 @@ void Mesh::ReleaseTextures ()
 #ifdef INLINEGRAPHICS
 				g_texmanager->ReleaseTexture ((LPDIRECTDRAWSURFACE7)Tex[i]);
 #else
-				if (g_pOrbiter->GetGraphicsClient())
-					g_pOrbiter->GetGraphicsClient()->clbkReleaseTexture (Tex[i]);
+				if (g_pSpaceXpanse->GetGraphicsClient())
+					g_pSpaceXpanse->GetGraphicsClient()->clbkReleaseTexture (Tex[i]);
 #endif // INLINEGRAPHICS
 			}
 		delete []Tex;
@@ -895,7 +895,7 @@ DWORD Mesh::Render (LPDIRECT3DDEVICE7 dev)
 			LPDIRECTDRAWSURFACE7 tx = 0;
 			if (ti != SPEC_DEFAULT) {
 				if (ti < TEXIDX_MFD0) tx = (LPDIRECTDRAWSURFACE7)Tex[ti];
-				else                  tx = (LPDIRECTDRAWSURFACE7)g_pOrbiter->GetGraphicsClient()->GetMFDSurface(ti-TEXIDX_MFD0);
+				else                  tx = (LPDIRECTDRAWSURFACE7)g_pSpaceXpanse->GetGraphicsClient()->GetMFDSurface(ti-TEXIDX_MFD0);
 			}
 			dev->SetTexture (0, tx);
 			pti = ti;
@@ -963,7 +963,7 @@ DWORD Mesh::Render (LPDIRECT3DDEVICE7 dev)
 	}
 
 	if (nGrp > 1 || Grp[0].MtrlIdx != SPEC_INHERIT)
-		g_pOrbiter->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
 	if (zb)        dev->SetRenderState (D3DRENDERSTATE_ZBIAS, 0);
 	if (owrap)     dev->SetRenderState (D3DRENDERSTATE_WRAP0, 0);
 	if (specular)  dev->SetRenderState (D3DRENDERSTATE_SPECULARENABLE, FALSE);
@@ -1009,7 +1009,7 @@ void Mesh::RenderGroup (LPDIRECT3DDEVICE7 dev, DWORD grp, bool setstate) const
 	}
 
 	if (setstate) {
-		g_pOrbiter->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->SetDefaultMaterial();
 		if (specular) dev->SetRenderState (D3DRENDERSTATE_SPECULARENABLE, FALSE);
 		if (!lighting) dev->SetRenderState (D3DRENDERSTATE_LIGHTING, TRUE);
 	}
@@ -1176,8 +1176,8 @@ istream &operator>> (istream &is, Mesh &mesh)
 #ifdef INLINEGRAPHICS
 				mesh.Tex[i] = g_texmanager->AcquireTexture (texname, uncompress);
 #else
-				if (g_pOrbiter->GetGraphicsClient())
-					mesh.Tex[i] = g_pOrbiter->GetGraphicsClient()->clbkLoadTexture (texname, 8 | (uncompress ? 2:0));
+				if (g_pSpaceXpanse->GetGraphicsClient())
+					mesh.Tex[i] = g_pSpaceXpanse->GetGraphicsClient()->clbkLoadTexture (texname, 8 | (uncompress ? 2:0));
 #endif // INLINEGRAPHICS
 			}
 		}
@@ -1299,13 +1299,13 @@ const Mesh *MeshManager::LoadMesh (const char *fname, bool *firstload)
 		}
 	}
 	// not found, so load from file
-	ifstream ifs (g_pOrbiter->MeshPath (fname), ios::in);
+	ifstream ifs (g_pSpaceXpanse->MeshPath (fname), ios::in);
 	Mesh *mesh = new Mesh; TRACENEW
 	ifs >> *mesh;
 	if (!mesh->nGroup()) { // load error
 		if (!fname[0]) LOGOUT_ERR ("Mesh file name not provided");
-		else LOGOUT_ERR ("Mesh not found: %s", g_pOrbiter->MeshPath (fname));
-		//g_pOrbiter->TerminateOnError ();
+		else LOGOUT_ERR ("Mesh not found: %s", g_pSpaceXpanse->MeshPath (fname));
+		//g_pSpaceXpanse->TerminateOnError ();
 		delete mesh;
 		return 0;
 	}
@@ -1332,14 +1332,14 @@ const Mesh *MeshManager::LoadMesh (const char *fname, bool *firstload)
 
 bool LoadMesh (const char *meshname, Mesh &mesh)
 {
-	ifstream ifs (g_pOrbiter->MeshPath (meshname), ios::in);
+	ifstream ifs (g_pSpaceXpanse->MeshPath (meshname), ios::in);
 	ifs >> mesh;
 	if (ifs.good()) {
 		mesh.SetName(meshname);
 		return true;
 	} else {
-		LOGOUT_ERR ("Mesh not found: %s", g_pOrbiter->MeshPath (meshname));
-		//g_pOrbiter->TerminateOnError ();
+		LOGOUT_ERR ("Mesh not found: %s", g_pSpaceXpanse->MeshPath (meshname));
+		//g_pSpaceXpanse->TerminateOnError ();
 		return false;
 	}
 }
@@ -1347,13 +1347,13 @@ bool LoadMesh (const char *meshname, Mesh &mesh)
 
 // =======================================================================
 // Create a sphere patch.
-// nlng is the number of patches required to span the full 360° in longitude
-// nlat is the number of patches required to span the latitude range from 0 to 90°
+// nlng is the number of patches required to span the full 360ï¿½ in longitude
+// nlat is the number of patches required to span the latitude range from 0 to 90ï¿½
 // 0 <= ilat < nlat is the actual latitude strip the patch is to cover
 // res >= 1 is the resolution of the patch (= number of internal latitude strips in the patch)
 // bseg, if given, is the number of of polygon segments on the lower base line of the patch.
 // Default is (nlat-ilat)*res. bseg is ignored for triangular patches (i.e. where upper
-// latitude is 90°)
+// latitude is 90ï¿½)
 
 void CreateSpherePatch (Mesh &mesh, int nlng, int nlat, int ilat, int res, int bseg, bool reduce, bool outside)
 {
