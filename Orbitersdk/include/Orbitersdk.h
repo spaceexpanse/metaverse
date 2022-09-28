@@ -2,13 +2,13 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // SpaceXpansesdk.h
-// ORBITER Application Programming Interface (OAPI)
+// SPACEXPANSE Application Programming Interface (OAPI)
 // ======================================================================
 
-#ifndef __ORBITERSDK_H
-#define __ORBITERSDK_H
+#ifndef __SPACEXPANSESDK_H
+#define __SPACEXPANSESDK_H
 
 #include "DrawAPI.h"
 #include "SpaceXpanseAPI.h"
@@ -18,4 +18,4 @@
 #include "VesselAPI.h"
 #include "MFDAPI.h"
 
-#endif // !__ORBITERSDK_H
+#endif // !__SPACEXPANSESDK_H

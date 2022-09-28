@@ -1,5 +1,5 @@
 // ==============================================================
-//   ORBITER VISUALISATION PROJECT (OVP)
+//   SPACEXPANSE VISUALISATION PROJECT (OVP)
 //   Copyright (C) 2006-2016 Martin Schweiger
 //   Dual licensed under GPL v3 and LGPL v3
 // ==============================================================
@@ -216,7 +216,7 @@ INT16 *SurfTile::ReadElevationFile (const char *name, int lvl, int ilat, int iln
 			if (ehdr.hdrsize != sizeof(ELEVFILEHEADER)) fseek (f, ehdr.hdrsize, SEEK_SET);
 			LogClr("Teal", "NewTile[%s]: Lvl=%d, Scale=%g, Offset=%g", name, lvl-4, ehdr.scale, ehdr.offset);
 
-#ifdef ORBITER2016
+#ifdef SPACEXPANSE2016
 			ehdr.scale = 1.0;
 #endif
 			switch (ehdr.dtype) {
@@ -249,7 +249,7 @@ INT16 *SurfTile::ReadElevationFile (const char *name, int lvl, int ilat, int iln
 			memcpy(&ehdr, p, sizeof(ELEVFILEHEADER));
 			LogClr("Teal", "NewTileA[%s]: Lvl=%d, Scale=%g, Offset=%g", name, lvl-4, ehdr.scale, ehdr.offset);
 
-#ifdef ORBITER2016
+#ifdef SPACEXPANSE2016
 			ehdr.scale = 1.0;
 #endif
 			p += ehdr.hdrsize;
@@ -304,7 +304,7 @@ INT16 *SurfTile::ReadElevationFile (const char *name, int lvl, int ilat, int iln
 				if (hdr.hdrsize != sizeof(ELEVFILEHEADER)) fseek (f, hdr.hdrsize, SEEK_SET);
 				LogClr("Teal", "NewElevMod[%s]: Lvl=%d, Scale=%g, Offset=%g", name, lvl - 4, hdr.scale, hdr.offset);
 
-#ifdef ORBITER2016
+#ifdef SPACEXPANSE2016
 				hdr.scale = 1.0;
 #endif
 				rescale = (do_rescale = (hdr.scale != 1.0)) ? hdr.scale : 1.0;
@@ -357,7 +357,7 @@ INT16 *SurfTile::ReadElevationFile (const char *name, int lvl, int ilat, int iln
 				ELEVFILEHEADER *phdr = (ELEVFILEHEADER*)p;
 				LogClr("Teal", "NewElevModA[%s]: Lvl=%d, Scale=%g, Offset=%g", name, lvl - 4, phdr->scale, phdr->offset);
 
-#ifdef ORBITER2016
+#ifdef SPACEXPANSE2016
 				phdr->scale = 1.0;
 #endif
 				p += phdr->hdrsize;

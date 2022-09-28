@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//           ORBITER MODULE: LUA Inline Interpreter
-//                  Part of the ORBITER SDK
+//           SPACEXPANSE MODULE: LUA Inline Interpreter
+//                  Part of the SPACEXPANSE SDK
 //            Copyright (C) 2007 Martin Schweiger
 //                   All rights reserved
 //
@@ -21,7 +21,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "spacexpansesdk.h"
 #include "LuaInline.h"
 #include <direct.h>

@@ -2,7 +2,7 @@
 # Licensed under the MIT License
 
 # The target location for all vessel modules
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_VESSEL_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_VESSEL_DIR})
 
 # Common tools for vessels
 set(VESSEL_COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Common)

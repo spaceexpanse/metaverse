@@ -30,7 +30,7 @@ public:
     // You can also replace or disable/re-enable any default sound by calling SetDefaultSoundEnabled(...) from your
     // custom vessel code, and you can call LoadWav with any default sound ID here to replace a default sound.
     //
-    // Refer to each sound ID's comments in $ORBITER_ROOT\XRSound\XRSound.cfg for details about each sound.
+    // Refer to each sound ID's comments in $SPACEXPANSE_ROOT\XRSound\XRSound.cfg for details about each sound.
     //
     // Note: when you are writing vessel code, do not use any custom sound IDs that are >= 10000 and < 12000; they are reserved for use (and future use) by XRSound's default sounds.
     // Note: we cannot make this enum a class because it must be converted to/from integer sound IDs.
@@ -121,7 +121,7 @@ public:
     // If you load a different sound file with the same ID as an existing loaded sound file, the previous sound file is
     // automatically stopped if it is playing and replaced by this sound.
     //   soundID: sound ID to be assigned to this sound file (vessel-instance unique)
-    //   pSoundFilename: path relatve to $ORBITER_ROOT of sound file to load; may not be nullptr or empty.
+    //   pSoundFilename: path relatve to $SPACEXPANSE_ROOT of sound file to load; may not be nullptr or empty.
     //   playbackType: denotes how sound will be faded.  Note: for module sounds, you should pass XRSound::PlaybackType::Global for this since other values have no effect when playing sounds from an SpaceXpanse module (as opposed to an SpaceXpanse vessel).
     //
     // Returns true on success, false if file not found or XRSound.dll not present.
@@ -167,14 +167,14 @@ public:
     //   option: which default sound ID to check.
     virtual bool GetDefaultSoundEnabled(const DefaultSoundID soundID) const = 0;
 
-    // Set the default subfolder path for a default sound group, relative to $ORBITER_ROOT.
+    // Set the default subfolder path for a default sound group, relative to $SPACEXPANSE_ROOT.
     // Not supported for module sounds.
     //   defaultSoundID: which default XRSound group to update (only DefaultSoundIDs that end in "Group" are valid for this call).
-    //   pSubfolderPath: subfolder path relative to $ORBITER_ROOT; may not be nullptr or empty.
+    //   pSubfolderPath: subfolder path relative to $SPACEXPANSE_ROOT; may not be nullptr or empty.
     // Returns true on success, false if defaultSoundID is not a valid default group sound ID, no default sounds loaded for the supplied defaultSoundID, or XRSound.dll not present.
     virtual bool SetDefaultSoundGroupFolder(const DefaultSoundID defaultSoundID, const char *pSubfolderPath) = 0;
 
-    // Returns the default subfolder path for a default sound group, relative to $ORBITER_ROOT, 
+    // Returns the default subfolder path for a default sound group, relative to $SPACEXPANSE_ROOT, 
     // or nullptr if no default sounds loaded for the supplied defaultSoundID or XRSoundDLL not present.
     // Not supported for module sounds.
     //   groupdefaultSoundID: which default XRSound group to update (only DefaultSoundIDs that end in "Group" are valid for this call).

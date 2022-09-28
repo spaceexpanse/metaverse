@@ -1,6 +1,6 @@
 // ==============================================================
 // Junction.h
-// Part of the ORBITER VISUALISATION PROJECT (OVP)
+// Part of the SPACEXPANSE VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
 // Copyright (C) 2012-2016 Peter Schneider (Kuddel)
 //

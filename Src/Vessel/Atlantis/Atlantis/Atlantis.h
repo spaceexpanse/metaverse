@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Atlantis
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Atlantis
+//                  Part of the SPACEXPANSE SDK
 //
 // Atlantis.h
 // Class interface of Atlantis (Space Shuttle) vessel class
@@ -32,34 +32,34 @@
 // Some SpaceXpanse-related parameters
 // ==========================================================
 
-const double ORBITER_EMPTY_MASS = 77564.3;
+const double SPACEXPANSE_EMPTY_MASS = 77564.3;
 // SpaceXpanse empty mass [kg]
 
-const double ORBITER_MAX_PROPELLANT_MASS = 11284.23 + 2162.622;
+const double SPACEXPANSE_MAX_PROPELLANT_MASS = 11284.23 + 2162.622;
 // Amount of fuel the spacexpanse can hold in internal OMS tanks
 
-const double ORBITER_MAIN_THRUST = 2170732.15; // 1668652.0 * 1.25;
+const double SPACEXPANSE_MAIN_THRUST = 2170732.15; // 1668652.0 * 1.25;
 // Vacuum thrust rating per main engine [N] (x3 for total)
 // assuming vacuum thrust is 5/4 liftoff thrust
 
-const double ORBITER_OMS_THRUST = 26700.0;
+const double SPACEXPANSE_OMS_THRUST = 26700.0;
 // Vacuum thrust per unit for Orbital Maneuvering System [N] (x2 for total)
 
-const double ORBITER_RCS_THRUST = 7740.0;
+const double SPACEXPANSE_RCS_THRUST = 7740.0;
 // Vacuum thrust rating for attitude thrusters (Reaction Control System) [N]
 
-const double ORBITER_MAIN_ISP0 = 453 * 9.80665;
-const double ORBITER_MAIN_ISP1 = 363 * 9.80665;
+const double SPACEXPANSE_MAIN_ISP0 = 453 * 9.80665;
+const double SPACEXPANSE_MAIN_ISP1 = 363 * 9.80665;
 // Vacuum and sea-level fuel-specific impulse for spacexpanse main engines [m/s]
 // using H2/O2 (hydrogen/oxygen)
 
-const double ORBITER_OMS_ISP0 = 316 * 9.80665;
-const double ORBITER_OMS_ISP1 = ORBITER_OMS_ISP0*0.75;
+const double SPACEXPANSE_OMS_ISP0 = 316 * 9.80665;
+const double SPACEXPANSE_OMS_ISP1 = SPACEXPANSE_OMS_ISP0*0.75;
 // Vacuum and sea-level fuel-specific impulse for Orbital Maneuvering System [m/s]
 // using MMH/N2O4 (monomethyl hydrazine/nitrogen tetroxide)
 
-const double ORBITER_RCS_ISP0 = ORBITER_OMS_ISP0;
-const double ORBITER_RCS_ISP1 = ORBITER_RCS_ISP0*0.75;
+const double SPACEXPANSE_RCS_ISP0 = SPACEXPANSE_OMS_ISP0;
+const double SPACEXPANSE_RCS_ISP1 = SPACEXPANSE_RCS_ISP0*0.75;
 // Vacuum and sea-level fuel-specific impulse for Reaction Control System [m/s]
 
 const double GEAR_OPERATING_SPEED = 0.3;
@@ -90,10 +90,10 @@ const double SPEEDBRAKE_OPERATING_SPEED = 0.20284;
 const double ARM_OPERATING_SPEED = 0.005;
 // RMS arm joint rotation speed (rad/sec)
 
-const VECTOR3 ORBITER_CS = {234.8,389.1,68.2};
+const VECTOR3 SPACEXPANSE_CS = {234.8,389.1,68.2};
 // SpaceXpanse cross sections (projections into principal axes) [m^2]
 
-const VECTOR3 ORBITER_CS_GEAR = {10.0,0.0,3.0};
+const VECTOR3 SPACEXPANSE_CS_GEAR = {10.0,0.0,3.0};
 // Contribution of fully extended landing gear to cross sections
 
 const double MAX_GRAPPLING_DIST = 0.5;
@@ -167,7 +167,7 @@ const VECTOR3 THRUSTDIR_OMSR = {-0.19299542, -0.24495572, 0.95013129};
 // Docking port position
 // ==========================================================
 
-const VECTOR3 ORBITER_DOCKPOS      = { 0.0, 2.40, 10.15};
+const VECTOR3 SPACEXPANSE_DOCKPOS      = { 0.0, 2.40, 10.15};
 
 // ==========================================================
 // panel area identifiers

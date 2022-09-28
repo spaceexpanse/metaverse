@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: Quadcopter
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: Quadcopter
+//                  Part of the SPACEXPANSE SDK
 //
 // Quadcopter.cpp
 // Implementation of Quadcopter vessel class module

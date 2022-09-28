@@ -1,7 +1,7 @@
 # Atlantis_MMU_Sat_30.pdf ------------------------------------------------
 
 set(document "Atlantis_MMU_Sat_30.pdf")
-set(out ${ORBITER_BINARY_DOC_DIR}/${document})
+set(out ${SPACEXPANSE_BINARY_DOC_DIR}/${document})
 add_custom_command(
 	OUTPUT ${out}
 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${document} ${out}
@@ -13,5 +13,5 @@ add_dependencies(MMU
 	MMUDoc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )

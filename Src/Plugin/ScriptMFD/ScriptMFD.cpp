@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ScriptMFD
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ScriptMFD
+//                  Part of the SPACEXPANSE SDK
 //
 // ScriptMFD.cpp
 //
@@ -11,7 +11,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "windows.h"
 #include "spacexpansesdk.h"
 #include "ScriptMFD.h"

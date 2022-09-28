@@ -6,7 +6,7 @@
 // Legacy atmospheric model
 // ======================================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "EarthAtm2006.h"
 
 bool EarthAtmosphere_2006::clbkConstants (ATMCONST *atmc) const

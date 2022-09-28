@@ -8,27 +8,27 @@ set(TEXTURE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Textures)
 set(CONFIG_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Config)
 set(THUMBNAIL_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Thumbnail)
 
-srcdir_to_tgtlist("${CMAKE_CURRENT_SOURCE_DIR}/Config" "${ORBITER_BINARY_CONFIG_DIR}/Vessels" srclist tgtlist)
+srcdir_to_tgtlist("${CMAKE_CURRENT_SOURCE_DIR}/Config" "${SPACEXPANSE_BINARY_CONFIG_DIR}/Vessels" srclist tgtlist)
 set(cfg_tgtlist ${tgtlist})
 add_custom_command(
 	OUTPUT ${tgtlist}
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONFIG_SOURCE_DIR}/ ${ORBITER_BINARY_CONFIG_DIR}/Vessels
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONFIG_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_CONFIG_DIR}/Vessels
 	DEPENDS ${srclist}
 )
 
-srcdir_to_tgtlist("${MESH_SOURCE_DIR}" "${ORBITER_BINARY_MESH_DIR}/ISS" srclist tgtlist)
+srcdir_to_tgtlist("${MESH_SOURCE_DIR}" "${SPACEXPANSE_BINARY_MESH_DIR}/ISS" srclist tgtlist)
 set(msh_tgtlist ${tgtlist})
 add_custom_command(
 	OUTPUT ${tgtlist}
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${MESH_SOURCE_DIR}/ ${ORBITER_BINARY_MESH_DIR}/ISS
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${MESH_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_MESH_DIR}/ISS
 	DEPENDS ${srclist}
 )
 
-srcdir_to_tgtlist("${TEXTURE_SOURCE_DIR}" "${ORBITER_BINARY_TEXTURES_DIR}/ISS" srclist tgtlist)
+srcdir_to_tgtlist("${TEXTURE_SOURCE_DIR}" "${SPACEXPANSE_BINARY_TEXTURES_DIR}/ISS" srclist tgtlist)
 set(tex_tgtlist ${tgtlist})
 add_custom_command(
 	OUTPUT ${tgtlist}
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${ORBITER_BINARY_TEXTURES_DIR}/ISS
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_TEXTURES_DIR}/ISS
 	DEPENDS ${srclist}
 )
 
@@ -55,14 +55,14 @@ add_dependencies(${SpaceXpanseTgt}
 
 # Installation
 install(DIRECTORY ${CONFIG_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Vessels
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Vessels
 )
 install(DIRECTORY ${MESH_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_MESH_DIR}/ISS
+	DESTINATION ${SPACEXPANSE_INSTALL_MESH_DIR}/ISS
 )
 install(DIRECTORY ${TEXTURE_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_TEXTURES_DIR}/ISS
+	DESTINATION ${SPACEXPANSE_INSTALL_TEXTURES_DIR}/ISS
 )
 install(DIRECTORY ${THUMBNAIL_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Images/Vessels/Default
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Images/Vessels/Default
 )

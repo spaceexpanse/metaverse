@@ -140,7 +140,7 @@ float XRSoundEngine::GetVersion() const
 // Loads the specified wav file and assigns the supplied sound ID to it.
 // If you load a different wav file with the same ID as the previous wav file, the previous wav file is unloaded.
 //   soundID: sound ID to be assigned to this wav file
-//   pSoundFilename: path under $ORBITER_ROOT\XRSound of wav file to load
+//   pSoundFilename: path under $SPACEXPANSE_ROOT\XRSound of wav file to load
 //   playbackType: denotes how sound will be faded (has no effect for sounds bound to a module; i.e., it is treated as XRSound::PlaybackType::Global)
 //
 // Returns true on success, false if file not found or pSoundFileName is nullptr or empty

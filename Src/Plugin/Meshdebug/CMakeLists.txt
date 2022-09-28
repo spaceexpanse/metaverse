@@ -7,13 +7,13 @@ add_library(Meshdebug SHARED
 )
 
 target_include_directories(Meshdebug
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${MODULE_COMMON_DIR}
 )
 
 target_link_libraries(Meshdebug
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_dependencies(Meshdebug
@@ -29,5 +29,5 @@ set_target_properties(Meshdebug
 # Installation
 install(TARGETS Meshdebug
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )

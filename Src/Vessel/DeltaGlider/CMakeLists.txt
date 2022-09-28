@@ -47,34 +47,34 @@ set_target_properties(DeltaGlider
 )
 
 target_include_directories(DeltaGlider
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${VESSEL_COMMON_DIR}
-	PUBLIC ${ORBITER_SOURCE_MODULE_DIR}/ScnEditor      # for ScnEditorAPI.h
+	PUBLIC ${SPACEXPANSE_SOURCE_MODULE_DIR}/ScnEditor      # for ScnEditorAPI.h
 	PUBLIC ${CMAKE_CURRENT_BINARY_DIR}                 # for the dynamically generated header files
 )
 
 target_link_libraries(DeltaGlider
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
-	${ORBITER_DLGCTRL_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
+	${SPACEXPANSE_DLGCTRL_LIB}
 	${LUA_LIB}
 )
 
 # scan mesh files for labels and output to header file
 add_custom_command(OUTPUT meshres.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/deltaglider.msh /P - /O meshres.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/deltaglider.msh /P - /O meshres.h
 	DEPENDS ${MESH_SOURCE_DIR}/deltaglider.msh
 )
 add_custom_command(OUTPUT meshres_vc.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/deltaglider_vc.msh /P _VC /O meshres_vc.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/deltaglider_vc.msh /P _VC /O meshres_vc.h
 	DEPENDS ${MESH_SOURCE_DIR}/deltaglider_vc.msh
 )
 add_custom_command(OUTPUT meshres_p0.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/dg_2dpanel0.msh /P _P0 /O meshres_p0.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/dg_2dpanel0.msh /P _P0 /O meshres_p0.h
 	DEPENDS ${MESH_SOURCE_DIR}/dg_2dpanel0.msh
 )
 add_custom_command(OUTPUT meshres_p1.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/dg_2dpanel1.msh /P _P1 /O meshres_p1.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/dg_2dpanel1.msh /P _P1 /O meshres_p1.h
 	DEPENDS ${MESH_SOURCE_DIR}/dg_2dpanel1.msh
 )
 add_custom_target(DeltaGlider_Prerequisites
@@ -96,12 +96,12 @@ add_custom_command(
 
 add_custom_command(
 	TARGET DeltaGlider PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${ORBITER_BINARY_TEXTURES_DIR}/DG
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_TEXTURES_DIR}/DG
 )
 
 add_custom_command(
 	TARGET DeltaGlider PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE2_SOURCE_DIR}/ ${ORBITER_BINARY_TEXTURES2_DIR}/DG
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE2_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_TEXTURES2_DIR}/DG
 )
 
 add_custom_command(
@@ -129,29 +129,29 @@ set_target_properties(DeltaGlider_Prerequisites
 # Installation
 install(TARGETS DeltaGlider
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )
 install(DIRECTORY ${CONFIG_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Vessels
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Vessels
 )
 install(DIRECTORY ${MESH_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Meshes/DG
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Meshes/DG
 )
 install(DIRECTORY ${TEXTURE_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_TEXTURES_DIR}/DG
+	DESTINATION ${SPACEXPANSE_INSTALL_TEXTURES_DIR}/DG
 )
 install(DIRECTORY ${TEXTURE2_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_TEXTURES2_DIR}/DG
+	DESTINATION ${SPACEXPANSE_INSTALL_TEXTURES2_DIR}/DG
 )
 install(DIRECTORY ${SCRIPT_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Script/DG
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Script/DG
 )
 install(DIRECTORY ${THUMBNAIL_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Images/Vessels/Default
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Images/Vessels/Default
 )
 
 add_subdirectory(DGConfigurator)
-if(ORBITER_MAKE_DOC)
+if(SPACEXPANSE_MAKE_DOC)
 	add_subdirectory(Doc)
 	add_subdirectory(Help)
 endif()

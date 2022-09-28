@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Atlantis
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Atlantis
+//                  Part of the SPACEXPANSE SDK
 //
 // Atlantis_SRB.cpp
 // Reference implementation of Atlantis SRB(Space Shuttle - Solid
@@ -12,7 +12,7 @@
 // from the Shuttle's main tank.
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #define ATLANTIS_SRB_MODULE
 
 #include "Atlantis.h"

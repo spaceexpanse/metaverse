@@ -1,6 +1,6 @@
 // ==============================================================
-//                 ORBITER MODULE: Atlantis
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Atlantis
+//                  Part of the SPACEXPANSE SDK
 //          Copyright (C) 2001-2003 Martin Schweiger
 //                   All rights reserved
 //

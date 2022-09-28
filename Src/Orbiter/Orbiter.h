@@ -1,8 +1,8 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#ifndef ORBITER_H
-#define ORBITER_H
+#ifndef SPACEXPANSE_H
+#define SPACEXPANSE_H
 
 #include "Config.h"
 #include "Input.h"
@@ -508,4 +508,4 @@ public:
 
 };
 
-#endif // !ORBITER_H
+#endif // !SPACEXPANSE_H

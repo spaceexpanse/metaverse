@@ -2,20 +2,20 @@
 # Licensed under the MIT License
 
 # Core library to go to the SpaceXpanse main directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_ROOT_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_ROOT_DIR})
 
 add_library(LuaInline SHARED
 	LuaInline.cpp
 )
 
 target_include_directories(LuaInline
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
-	PUBLIC ${ORBITER_SOURCE_ROOT_DIR}/Src/Module/LuaScript/LuaInterpreter
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_ROOT_DIR}/Src/Module/LuaScript/LuaInterpreter
 )
 
 target_link_libraries(LuaInline
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 	LuaInterpreter
 	${LUA_LIB}
 )
@@ -34,5 +34,5 @@ set_target_properties(LuaInline
 # Installation
 install(TARGETS LuaInline
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
 )

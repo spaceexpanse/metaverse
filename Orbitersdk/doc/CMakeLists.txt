@@ -14,7 +14,7 @@ add_dependencies(${SpaceXpanseTgt}
 	APIGuideDoc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc
+	DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/doc
 )
 
 # 3DModel.pdf ------------------------------------------------------------
@@ -33,5 +33,5 @@ add_dependencies(${SpaceXpanseTgt}
 	3DModelDoc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc
+	DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/doc
 )

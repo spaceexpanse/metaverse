@@ -7,13 +7,13 @@ add_library(Rcontrol SHARED
 )
 
 target_include_directories(Rcontrol
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 )
 
 target_link_libraries(Rcontrol
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
-	${ORBITER_DLGCTRL_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
+	${SPACEXPANSE_DLGCTRL_LIB}
 )
 
 add_dependencies(Rcontrol
@@ -30,5 +30,5 @@ set_target_properties(Rcontrol
 # Installation
 install(TARGETS Rcontrol
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )

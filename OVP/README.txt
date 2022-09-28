@@ -1,4 +1,4 @@
-ORBITER VISUALISATION PROJECT
+SPACEXPANSE VISUALISATION PROJECT
 Graphics Client Plugins for SpaceXpanse Space Flight Simulator
 Copyright (C) 2006-2014  Martin Schweiger
 

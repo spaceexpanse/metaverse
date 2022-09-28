@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Atlantis
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Atlantis
+//                  Part of the SPACEXPANSE SDK
 //
 // Atlantis.cpp
 // Reference implementation of Atlantis (Space Shuttle) vessel
@@ -13,7 +13,7 @@
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "Atlantis.h"
 #include "PlBayOp.h"
 #include "AscentAP.h"
@@ -94,7 +94,7 @@ Atlantis::Atlantis (OBJHANDLE hObj, int fmodel)
 		mfdbright[i] = 1.0;
 
 	// propellant resources
-	ph_oms  = CreatePropellantResource (ORBITER_MAX_PROPELLANT_MASS); // OMS propellant
+	ph_oms  = CreatePropellantResource (SPACEXPANSE_MAX_PROPELLANT_MASS); // OMS propellant
 	SetDefaultPropellantResource (ph_oms); // display OMS tank level in generic HUD
 
 	// SpaceXpanse engines	
@@ -108,7 +108,7 @@ Atlantis::Atlantis (OBJHANDLE hObj, int fmodel)
 	// Aerodynamics
 	CreateAirfoils();
 
-	CreateDock (ORBITER_DOCKPOS, _V(0,1,0), _V(0,0,-1));
+	CreateDock (SPACEXPANSE_DOCKPOS, _V(0,1,0), _V(0,0,-1));
 	hDockET = CreateDock (_V(0.0,-2.48, 8.615), _V(0,-1,0), _V(0,0,1));
 	pET = NULL; // ET reference
 
@@ -194,9 +194,9 @@ void Atlantis::CreateSSME()
 {
 	// Not connected to a propellant resource - they connect to the ET's tank as long
 	// as it is attached (checked in clbkPreStep)
-	th_main[0] = CreateThruster (THRUSTREF_SSME0, THRUSTGIMBAL_LAUNCH, ORBITER_MAIN_THRUST, NULL, ORBITER_MAIN_ISP0, ORBITER_MAIN_ISP1);
-	th_main[1] = CreateThruster (THRUSTREF_SSME1, THRUSTGIMBAL_LAUNCH, ORBITER_MAIN_THRUST, NULL, ORBITER_MAIN_ISP0, ORBITER_MAIN_ISP1);
-	th_main[2] = CreateThruster (THRUSTREF_SSME2, THRUSTGIMBAL_LAUNCH, ORBITER_MAIN_THRUST, NULL, ORBITER_MAIN_ISP0, ORBITER_MAIN_ISP1);
+	th_main[0] = CreateThruster (THRUSTREF_SSME0, THRUSTGIMBAL_LAUNCH, SPACEXPANSE_MAIN_THRUST, NULL, SPACEXPANSE_MAIN_ISP0, SPACEXPANSE_MAIN_ISP1);
+	th_main[1] = CreateThruster (THRUSTREF_SSME1, THRUSTGIMBAL_LAUNCH, SPACEXPANSE_MAIN_THRUST, NULL, SPACEXPANSE_MAIN_ISP0, SPACEXPANSE_MAIN_ISP1);
+	th_main[2] = CreateThruster (THRUSTREF_SSME2, THRUSTGIMBAL_LAUNCH, SPACEXPANSE_MAIN_THRUST, NULL, SPACEXPANSE_MAIN_ISP0, SPACEXPANSE_MAIN_ISP1);
 	thg_main = CreateThrusterGroup (th_main, 3, THGROUP_MAIN);
 	gimbal_pos = THRUSTGIMBAL_LAUNCH; // the initial pitch gimbal setting positions the SSMEs to cancel pitch moment in launch configuration
 
@@ -210,8 +210,8 @@ void Atlantis::CreateSSME()
 // --------------------------------------------------------------
 void Atlantis::CreateOMS()
 {
-	th_oms[0] = CreateThruster (THRUSTREF_OMSL, THRUSTDIR_OMSL, ORBITER_OMS_THRUST, ph_oms, ORBITER_OMS_ISP0, ORBITER_OMS_ISP1);
-	th_oms[1] = CreateThruster (THRUSTREF_OMSR, THRUSTDIR_OMSR, ORBITER_OMS_THRUST, ph_oms, ORBITER_OMS_ISP0, ORBITER_OMS_ISP1);
+	th_oms[0] = CreateThruster (THRUSTREF_OMSL, THRUSTDIR_OMSL, SPACEXPANSE_OMS_THRUST, ph_oms, SPACEXPANSE_OMS_ISP0, SPACEXPANSE_OMS_ISP1);
+	th_oms[1] = CreateThruster (THRUSTREF_OMSR, THRUSTDIR_OMSR, SPACEXPANSE_OMS_THRUST, ph_oms, SPACEXPANSE_OMS_ISP0, SPACEXPANSE_OMS_ISP1);
 	// we don't yet define a thruster group for the OMS engines
 	// They will be assigned to the MAIN group as soon as the ET is jettisoned
 	for (int i = 0; i < 2; i++)
@@ -231,10 +231,10 @@ void Atlantis::CreateRCS()
 	// set of attitude thrusters (idealised). The arrangement is such that no angular
 	// momentum is created in linear mode, and no linear momentum is created in rotational mode.
 	THRUSTER_HANDLE th_att_rot[4], th_att_lin[4];
-	th_att_rot[0] = th_att_lin[0] = CreateThruster (_V(0,0, 15.5), _V(0, 1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[1] = th_att_lin[3] = CreateThruster (_V(0,0,-15.5), _V(0,-1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[2] = th_att_lin[2] = CreateThruster (_V(0,0, 15.5), _V(0,-1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[3] = th_att_lin[1] = CreateThruster (_V(0,0,-15.5), _V(0, 1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
+	th_att_rot[0] = th_att_lin[0] = CreateThruster (_V(0,0, 15.5), _V(0, 1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[1] = th_att_lin[3] = CreateThruster (_V(0,0,-15.5), _V(0,-1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[2] = th_att_lin[2] = CreateThruster (_V(0,0, 15.5), _V(0,-1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[3] = th_att_lin[1] = CreateThruster (_V(0,0,-15.5), _V(0, 1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
 	CreateThrusterGroup (th_att_rot,   2, THGROUP_ATT_PITCHUP);
 	CreateThrusterGroup (th_att_rot+2, 2, THGROUP_ATT_PITCHDOWN);
 	CreateThrusterGroup (th_att_lin,   2, THGROUP_ATT_UP);
@@ -265,10 +265,10 @@ void Atlantis::CreateRCS()
 	AddExhaust (th_att_rot[3], eh, ew1, _V( 3.15, 1.6 ,-12.8 ), _V( 0.2844,-0.9481,-0.1422), tex_rcs);//R2D
 	AddExhaust (th_att_rot[3], eh, ew1, _V( 3.15, 1.65,-13.15), _V( 0.2844,-0.9481,-0.1422), tex_rcs);//R3D
 
-	th_att_rot[0] = th_att_lin[0] = CreateThruster (_V(0,0, 15.5), _V(-1,0,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[1] = th_att_lin[3] = CreateThruster (_V(0,0,-15.5), _V( 1,0,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[2] = th_att_lin[2] = CreateThruster (_V(0,0, 15.5), _V( 1,0,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[3] = th_att_lin[1] = CreateThruster (_V(0,0,-15.5), _V(-1,0,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
+	th_att_rot[0] = th_att_lin[0] = CreateThruster (_V(0,0, 15.5), _V(-1,0,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[1] = th_att_lin[3] = CreateThruster (_V(0,0,-15.5), _V( 1,0,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[2] = th_att_lin[2] = CreateThruster (_V(0,0, 15.5), _V( 1,0,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[3] = th_att_lin[1] = CreateThruster (_V(0,0,-15.5), _V(-1,0,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
 	CreateThrusterGroup (th_att_rot,   2, THGROUP_ATT_YAWLEFT);
 	CreateThrusterGroup (th_att_rot+2, 2, THGROUP_ATT_YAWRIGHT);
 	CreateThrusterGroup (th_att_lin,   2, THGROUP_ATT_LEFT);
@@ -289,10 +289,10 @@ void Atlantis::CreateRCS()
 	AddExhaust (th_att_rot[3], eh, ew2, _V( 4.0 , 2.35,-13.0 ), _V( 1,0,0), tex_rcs);//R3R
 	AddExhaust (th_att_rot[3], eh, ew2, _V( 4.0,  2.35,-13.35), _V( 1,0,0), tex_rcs);//R1R
 
-	th_att_rot[0] = CreateThruster (_V( 2.7,0,0), _V(0, 1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[1] = CreateThruster (_V(-2.7,0,0), _V(0,-1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[2] = CreateThruster (_V(-2.7,0,0), _V(0, 1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_rot[3] = CreateThruster (_V( 2.7,0,0), _V(0,-1,0), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
+	th_att_rot[0] = CreateThruster (_V( 2.7,0,0), _V(0, 1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[1] = CreateThruster (_V(-2.7,0,0), _V(0,-1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[2] = CreateThruster (_V(-2.7,0,0), _V(0, 1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_rot[3] = CreateThruster (_V( 2.7,0,0), _V(0,-1,0), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
 	CreateThrusterGroup (th_att_rot,   2, THGROUP_ATT_BANKLEFT);
 	CreateThrusterGroup (th_att_rot+2, 2, THGROUP_ATT_BANKRIGHT);
 
@@ -317,8 +317,8 @@ void Atlantis::CreateRCS()
 	AddExhaust (th_att_rot[0], eh, ew1, _V( 3.15, 1.6 ,-12.8 ), _V( 0.2844,-0.9481,-0.1422), tex_rcs);//R2D
 	AddExhaust (th_att_rot[0], eh, ew1, _V( 3.15, 1.65,-13.15), _V( 0.2844,-0.9481,-0.1422), tex_rcs);//R3D
 
-	th_att_lin[0] = CreateThruster (_V(0,0,-16), _V(0,0, 1), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
-	th_att_lin[1] = CreateThruster (_V(0,0, 16), _V(0,0,-1), ORBITER_RCS_THRUST, NULL, ORBITER_RCS_ISP0, ORBITER_RCS_ISP1);
+	th_att_lin[0] = CreateThruster (_V(0,0,-16), _V(0,0, 1), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
+	th_att_lin[1] = CreateThruster (_V(0,0, 16), _V(0,0,-1), SPACEXPANSE_RCS_THRUST, NULL, SPACEXPANSE_RCS_ISP0, SPACEXPANSE_RCS_ISP1);
 	CreateThrusterGroup (th_att_lin,   1, THGROUP_ATT_FORWARD);
 	CreateThrusterGroup (th_att_lin+1, 1, THGROUP_ATT_BACK);
 
@@ -1306,10 +1306,10 @@ void Atlantis::clbkSetClassCaps (FILEHANDLE cfg)
 	// *********************** physical parameters *********************************
 	
 	SetSize (19.6);
-	SetEmptyMass (ORBITER_EMPTY_MASS);
+	SetEmptyMass (SPACEXPANSE_EMPTY_MASS);
 	SetPMI (_V(78.2,82.1,10.7));
 	SetGravityGradientDamping (20.0);
-	SetCrossSections (ORBITER_CS);
+	SetCrossSections (SPACEXPANSE_CS);
 	SetRotDrag (_V(0.43,0.43,0.29)); // angular drag
 	SetTrimScale (0.05);
 	launchelev = 0.0;
@@ -1468,14 +1468,14 @@ void Atlantis::clbkPostCreation ()
 	VESSEL4::clbkPostCreation();
 
 	OBJHANDLE payload;
-	double drymass = ORBITER_EMPTY_MASS;
+	double drymass = SPACEXPANSE_EMPTY_MASS;
 	payload = GetAttachmentStatus(sat_attach);
 	if (payload)
 		drymass += oapiGetEmptyMass(payload);
 	payload = GetAttachmentStatus(rms_attach);
 	if (payload)
 		drymass += oapiGetEmptyMass(payload);
-	if (drymass != ORBITER_EMPTY_MASS)
+	if (drymass != SPACEXPANSE_EMPTY_MASS)
 		SetEmptyMass(drymass);
 
 	if (status < 3) {

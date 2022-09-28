@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ShuttleA
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ShuttleA
+//                  Part of the SPACEXPANSE SDK
 //
 // rcsswitch.cpp
 // User interface RCS switch

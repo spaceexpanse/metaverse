@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // VesselAPI.h
 // - VESSEL class interface
 // - VESSEL2 class extensions

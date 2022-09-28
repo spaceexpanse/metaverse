@@ -5,7 +5,7 @@
 
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "SpaceXpanseAPI.h"
 #include "VesselAPI.h"

@@ -2,15 +2,15 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE:  ShuttleA
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE:  ShuttleA
+//                  Part of the SPACEXPANSE SDK
 //
 // ShuttleA.cpp
 // Reference implementation of Shuttle-A vessel class module
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "ShuttleA.h"
 #include "ScnEditorAPI.h"

@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ScriptVessel
-//                   Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ScriptVessel
+//                   Part of the SPACEXPANSE SDK
 //
 // ScriptVessel.cpp
 // Control module for ScriptVessel vessel class
@@ -17,7 +17,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 extern "C" {
 #include "Lua\lua.h"

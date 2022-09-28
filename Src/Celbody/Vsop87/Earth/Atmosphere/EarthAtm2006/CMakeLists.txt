@@ -3,7 +3,7 @@
 
 set(ATM_TARGET EarthAtm2006)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_CELBODY_DIR}/${CELBODY}/Atmosphere)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_CELBODY_DIR}/${CELBODY}/Atmosphere)
 
 add_library(${ATM_TARGET} SHARED
 	EarthAtm2006.cpp
@@ -19,8 +19,8 @@ target_include_directories(${ATM_TARGET}
 )
 
 target_link_libraries(${ATM_TARGET}
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 set_target_properties(${ATM_TARGET}
@@ -31,5 +31,5 @@ set_target_properties(${ATM_TARGET}
 # Installation
 install(TARGETS ${ATM_TARGET}
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_CELBODY_DIR}/${CELBODY}/Atmosphere
+	DESTINATION ${SPACEXPANSE_INSTALL_CELBODY_DIR}/${CELBODY}/Atmosphere
 )

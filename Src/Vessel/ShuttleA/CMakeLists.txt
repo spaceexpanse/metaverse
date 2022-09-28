@@ -37,22 +37,22 @@ set_target_properties(ShuttleA
 )
 
 target_include_directories(ShuttleA
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${VESSEL_COMMON_DIR}
-	PUBLIC ${ORBITER_SOURCE_MODULE_DIR}/ScnEditor      # for ScnEditorAPI.h
+	PUBLIC ${SPACEXPANSE_SOURCE_MODULE_DIR}/ScnEditor      # for ScnEditorAPI.h
 	PUBLIC ${CMAKE_CURRENT_BINARY_DIR}                 # for the dynamically generated header files
 )
 
 target_link_libraries(ShuttleA
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
-	${ORBITER_DLGCTRL_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
+	${SPACEXPANSE_DLGCTRL_LIB}
 	${LUA_LIB}
 )
 
 # scan mesh files for labels and output to header file
 add_custom_command(OUTPUT meshres.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/ShuttleA.msh /P - /O meshres.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/ShuttleA.msh /P - /O meshres.h
 	DEPENDS ${MESH_SOURCE_DIR}/ShuttleA.msh
 )
 add_custom_target(ShuttleA_Prerequisites
@@ -74,7 +74,7 @@ add_custom_command(
 
 add_custom_command(
 	TARGET ShuttleA PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${ORBITER_BINARY_TEXTURES_DIR}/ShuttleA
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_TEXTURES_DIR}/ShuttleA
 )
 
 add_custom_command(
@@ -100,25 +100,25 @@ add_subdirectory(ShuttleA_PL)
 # Installation
 install(TARGETS ShuttleA
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )
 install(DIRECTORY ${CONFIG_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Vessels
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Vessels
 )
 install(DIRECTORY ${MESH_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Meshes/ShuttleA
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Meshes/ShuttleA
 )
 install(DIRECTORY ${TEXTURE_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_TEXTURES_DIR}/ShuttleA
+	DESTINATION ${SPACEXPANSE_INSTALL_TEXTURES_DIR}/ShuttleA
 )
 install(DIRECTORY ${SCRIPT_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Script/ShuttleA
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Script/ShuttleA
 )
 install(DIRECTORY ${THUMBNAIL_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Images/Vessels/Default
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Images/Vessels/Default
 )
 
-if(ORBITER_MAKE_DOC)
+if(SPACEXPANSE_MAKE_DOC)
 	add_subdirectory(Doc)
 	add_subdirectory(Help)
 endif()

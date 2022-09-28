@@ -19,7 +19,7 @@
 ** THE SOFTWARE.*/
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include <cstdio>
 #include <cmath>

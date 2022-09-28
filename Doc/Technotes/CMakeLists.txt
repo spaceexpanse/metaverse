@@ -14,7 +14,7 @@ add_dependencies(SpaceXpanseDoc
 	RecorderRefDoc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}/Technotes
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}/Technotes
 )
 
 if(LATEX_FOUND)

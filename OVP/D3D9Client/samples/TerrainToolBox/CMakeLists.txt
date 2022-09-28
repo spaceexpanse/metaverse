@@ -38,5 +38,5 @@ set_target_properties(TerrainToolBox
 
 install(TARGETS TerrainToolBox
 	LIBRARY	
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 ) 

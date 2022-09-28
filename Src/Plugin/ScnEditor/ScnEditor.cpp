@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//              ORBITER MODULE: Scenario Editor
-//                  Part of the ORBITER SDK
+//              SPACEXPANSE MODULE: Scenario Editor
+//                  Part of the SPACEXPANSE SDK
 //
 // ScnEditor.cpp
 //
@@ -12,7 +12,7 @@
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "spacexpansesdk.h"
 #include "resource.h"
 #include "Editor.h"

@@ -2,14 +2,14 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: DeltaGlider
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: DeltaGlider
+//                  Part of the SPACEXPANSE SDK
 //
 // DeltaGlider.cpp
 // Reference implementation of delta glider vessel class module
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "DeltaGlider.h"
 #include "HudCtrl.h"

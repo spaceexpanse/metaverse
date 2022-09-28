@@ -534,7 +534,7 @@ bool XRSoundConfigFileParser::AddOrUpdateAnimationState(const int animationID, c
         if (!IsFileReadable(pValue))
         {
             CString msg;
-            msg.Format("ERROR: Sound file does not exist or is not readable: '%s' (remember that sound paths are relative to $ORBITER_ROOT)", pValue);
+            msg.Format("ERROR: Sound file does not exist or is not readable: '%s' (remember that sound paths are relative to $SPACEXPANSE_ROOT)", pValue);
             WriteLog(msg);
             return false;
         }

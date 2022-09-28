@@ -16,13 +16,13 @@ set_target_properties(Solarsail
 )
 
 target_include_directories(Solarsail
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${CMAKE_CURRENT_BINARY_DIR}                 # for the dynamically generated header files
 )
 
 target_link_libraries(Solarsail
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 	${LUA_LIB}
 )
 
@@ -38,12 +38,12 @@ add_custom_command(
 
 #add_custom_command(
 #	TARGET Solarsail PRE_BUILD
-#	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${ORBITER_BINARY_TEXTURES_DIR}   # this should really go to its own subdirectory
+#	COMMAND ${CMAKE_COMMAND} -E copy_directory ${TEXTURE_SOURCE_DIR}/ ${SPACEXPANSE_BINARY_TEXTURES_DIR}   # this should really go to its own subdirectory
 #)
 
 # scan mesh files for labels and output to header file
 add_custom_command(OUTPUT meshres.h
-	COMMAND ${ORBITER_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/SolarSail.msh /P - /O meshres.h
+	COMMAND ${SPACEXPANSE_TOOL_MESHC} /I ${MESH_SOURCE_DIR}/SolarSail.msh /P - /O meshres.h
 	DEPENDS ${MESH_SOURCE_DIR}/SolarSail.msh
 )
 add_custom_target(Solarsail_Prerequisites
@@ -68,14 +68,14 @@ set_target_properties(Solarsail_Prerequisites
 # Installation
 install(TARGETS Solarsail
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )
 install(DIRECTORY ${CONFIG_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Vessels
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Vessels
 )
 install(DIRECTORY ${MESH_SOURCE_DIR}/
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Meshes
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Meshes
 )
 #install(DIRECTORY ${TEXTURE_SOURCE_DIR}/
-#	DESTINATION ${ORBITER_INSTALL_TEXTURES_DIR}
+#	DESTINATION ${SPACEXPANSE_INSTALL_TEXTURES_DIR}
 #)

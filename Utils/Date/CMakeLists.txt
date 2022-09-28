@@ -26,7 +26,7 @@ if(MFC_FOUND)
     install(TARGETS
             Date
             RUNTIME
-            DESTINATION ${ORBITER_INSTALL_UTILS_DIR}
+            DESTINATION ${SPACEXPANSE_INSTALL_UTILS_DIR}
     )
 else()
     message(WARNING "MFC not found: not building Date utility")

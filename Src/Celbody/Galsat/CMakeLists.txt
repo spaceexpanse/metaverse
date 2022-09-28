@@ -23,8 +23,8 @@ target_include_directories(Galsat
 )
 
 target_link_libraries(Galsat
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_custom_command(
@@ -44,8 +44,8 @@ add_subdirectory(Callisto)
 install(TARGETS
 	Galsat
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )
 install(FILES ephem_e15.dat
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Jupiter/Data
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Jupiter/Data
 )

@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                    ORBITER MODULE: HST
-//                  Part of the ORBITER SDK
+//                    SPACEXPANSE MODULE: HST
+//                  Part of the SPACEXPANSE SDK
 //
 // HST.cpp
 // HST basic specs and animations
@@ -11,7 +11,7 @@
 // HST mesh and textures by David Sundstrom
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "HST.h"
 #include <stdio.h>

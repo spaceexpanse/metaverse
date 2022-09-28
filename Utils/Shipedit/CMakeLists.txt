@@ -13,7 +13,7 @@ if(MFC_FOUND)
     )
 
     target_include_directories(Shipedit
-            PUBLIC ${ORBITER_SOURCE_DIR}
+            PUBLIC ${SPACEXPANSE_SOURCE_DIR}
     )
 
     set_target_properties(Shipedit
@@ -32,7 +32,7 @@ if(MFC_FOUND)
     install(TARGETS
             Shipedit
             RUNTIME
-            DESTINATION ${ORBITER_INSTALL_SDK_DIR}/Utils
+            DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/Utils
     )
 else()
     message(WARNING "MFC not found: not building Shipedit utility")

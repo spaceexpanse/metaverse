@@ -30,5 +30,5 @@ set_target_properties(GenericCamera
 
 install(TARGETS GenericCamera
 	LIBRARY	
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 ) 

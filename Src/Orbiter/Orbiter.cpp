@@ -200,8 +200,8 @@ INT WINAPI WinMain (HINSTANCE hInstance, HINSTANCE, LPSTR strCmdLine, INT nCmdSh
 	// determine whether another instance already exists
 	hMutex = CreateMutex (NULL, TRUE, "Test");
 	if (GetLastError() == ERROR_ALREADY_EXISTS) {
-		MessageBox (NULL, "Another ORBITER application is already running.",
-			"ORBITER Error", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox (NULL, "Another SPACEXPANSE application is already running.",
+			"SPACEXPANSE Error", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
 	}
 #endif

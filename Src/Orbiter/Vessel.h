@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//              This file is part of ORBITER
+//              This file is part of SPACEXPANSE
 //          Copyright 2000-2007 Martin Schweiger
 //
 // Vessel.h

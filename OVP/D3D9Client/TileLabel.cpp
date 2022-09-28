@@ -1,6 +1,6 @@
 // ==============================================================
 // TileLabel.cpp
-// Part of the ORBITER VISUALISATION PROJECT (OVP)
+// Part of the SPACEXPANSE VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
 // Copyright (C) 2017 Martin Schweiger (martins/apogee)
 //                    Peter Schneider (Kuddel)

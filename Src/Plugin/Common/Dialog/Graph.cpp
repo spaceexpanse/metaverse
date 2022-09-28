@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: FlightData
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: FlightData
+//                  Part of the SPACEXPANSE SDK
 //
 // Graph.cpp
 // Generic data graph class implementation.

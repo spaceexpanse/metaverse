@@ -2,7 +2,7 @@
 # Licensed under the MIT License
 
 # The target directory for plugin DLLs
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_PLUGIN_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_PLUGIN_DIR})
 
 add_library(AscentMFD SHARED
 	AscentMFD.cpp
@@ -10,12 +10,12 @@ add_library(AscentMFD SHARED
 )
 
 target_include_directories(AscentMFD
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 )
 
 target_link_libraries(AscentMFD
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_dependencies(AscentMFD

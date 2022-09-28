@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                  ORBITER MODULE: ExtMFD
-//                  Part of the ORBITER SDK
+//                  SPACEXPANSE MODULE: ExtMFD
+//                  Part of the SPACEXPANSE SDK
 //            Copyright (C) 2006 Martin Schweiger
 //                   All rights reserved
 //

@@ -18,7 +18,7 @@ set_target_properties(SpaceXpanseDoc
 	FOLDER Doc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )
 
 # SpaceXpanseConfig.pdf ------------------------------------------------------
@@ -41,7 +41,7 @@ set_target_properties(SpaceXpanseConfigDoc
 	FOLDER Doc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )
 
 # PlanetTextures.pdf -----------------------------------------------------
@@ -64,7 +64,7 @@ set_target_properties(PlanetTexturesDoc
 	FOLDER Doc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )
 
 # Credit.pdf -------------------------------------------------------------
@@ -83,7 +83,7 @@ add_dependencies(SpaceXpanseDoc
 	SpaceXpanseCreditDoc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )
 
 # Technotes --------------------------------------------------------------

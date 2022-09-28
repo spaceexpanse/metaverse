@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Atlantis
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Atlantis
+//                  Part of the SPACEXPANSE SDK
 //
 // Atlantis_Tank.cpp
 // Reference implementation of Atlantis Tank vessel class module
@@ -11,7 +11,7 @@
 // from the spacexpanse.
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #define ATLANTIS_TANK_MODULE
 
 #include "Atlantis.h"

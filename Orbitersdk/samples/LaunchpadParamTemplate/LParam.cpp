@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//           ORBITER MODULE: LaunchpadParamTemplate
-//                  Part of the ORBITER SDK
+//           SPACEXPANSE MODULE: LaunchpadParamTemplate
+//                  Part of the SPACEXPANSE SDK
 //
 // LParam.cpp
 //
@@ -15,7 +15,7 @@
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "spacexpansesdk.h"
 #include "resource.h"
 #include <stdio.h>

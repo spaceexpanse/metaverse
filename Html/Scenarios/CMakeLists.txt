@@ -11,9 +11,9 @@ add_dependencies(${SpaceXpanseTgt}
 )
 
 install(FILES CurrentState.htm CurrentState_img.htm
-	DESTINATION ${ORBITER_INSTALL_HTML_DIR}/Scenarios
+	DESTINATION ${SPACEXPANSE_INSTALL_HTML_DIR}/Scenarios
 )
 
-if(ORBITER_MAKE_DOC)
+if(SPACEXPANSE_MAKE_DOC)
 	add_subdirectory(Default)
 endif()

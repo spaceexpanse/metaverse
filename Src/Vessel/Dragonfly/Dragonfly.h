@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Dragonfly
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Dragonfly
+//                  Part of the SPACEXPANSE SDK
 //
 // Dragonfly.h
 // Class interface of "Dragonfly" class space tug

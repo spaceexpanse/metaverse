@@ -1,4 +1,4 @@
-ORBITER VISUALISATION PROJECT -
+SPACEXPANSE VISUALISATION PROJECT -
 D3D9 Client Build Instructions
 
 This Document describes the steps needed to build D3D9Client from the sources.

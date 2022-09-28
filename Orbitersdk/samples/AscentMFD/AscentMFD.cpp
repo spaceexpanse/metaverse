@@ -2,15 +2,15 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: AscentMFD
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: AscentMFD
+//                  Part of the SPACEXPANSE SDK
 //
 // AscentMFD.cpp
 // Reference implementation of generic user-defined MFD mode
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include <stdio.h>
 #include <math.h>

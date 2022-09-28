@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: DialogTemplate
-//                    Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: DialogTemplate
+//                    Part of the SPACEXPANSE SDK
 //
 // DialogTemplate.cpp
 //
@@ -13,7 +13,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "windows.h"
 #include "spacexpansesdk.h"
 #include "resource.h"

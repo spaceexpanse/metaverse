@@ -1,6 +1,6 @@
 // ==============================================================
 // D3D9Client.cpp
-// Part of the ORBITER VISUALISATION PROJECT (OVP)
+// Part of the SPACEXPANSE VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
 // Copyright (C) 2006-2016 Martin Schweiger
 //				 2012-2016 Jarmo Nikkanen
@@ -8,7 +8,7 @@
 
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include <set> // ...for Brush-, Pen- and Font-accounting
 #include "SpaceXpansesdk.h"
@@ -2945,7 +2945,7 @@ void D3D9Client::SplashScreen()
 	int xc = viewW*750/1280;
 	int yc = viewH*545/800;
 
-	TextOut(hDC, xc, yc + 0*20, "ORBITER Space Flight Simulator",30);
+	TextOut(hDC, xc, yc + 0*20, "SPACEXPANSE Space Flight Simulator",30);
 	TextOut(hDC, xc, yc + 1*20, dataB, lstrlen(dataB));
 	TextOut(hDC, xc, yc + 2*20, dataA, lstrlen(dataA));
 

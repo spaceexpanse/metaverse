@@ -1,5 +1,5 @@
 // ==============================================================
-// Part of the ORBITER VISUALISATION PROJECT (OVP)
+// Part of the SPACEXPANSE VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
 // Copyright (C) 2016 Jarmo Nikkanen
 //				 2016 SolarLiner (Nathan Graule)

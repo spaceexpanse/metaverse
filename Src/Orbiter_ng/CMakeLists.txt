@@ -17,5 +17,5 @@ set_target_properties(SpaceXpanse_ng
 install(TARGETS
 	SpaceXpanse_ng
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
 	)

@@ -9,7 +9,7 @@
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include "MFDWindow.h"
 #include "spacexpansesdk.h"

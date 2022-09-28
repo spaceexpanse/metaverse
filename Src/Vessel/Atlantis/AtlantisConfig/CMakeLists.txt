@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_STARTUP_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_STARTUP_DIR})
 
 add_library(AtlantisConfig SHARED
 	AtlantisConfig.cpp
@@ -9,12 +9,12 @@ add_library(AtlantisConfig SHARED
 )
 
 target_include_directories(AtlantisConfig
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 )
 
 target_link_libraries(AtlantisConfig
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_dependencies(AtlantisConfig
@@ -30,5 +30,5 @@ set_target_properties(AtlantisConfig
 # Installation
 install(TARGETS AtlantisConfig
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}/Startup
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}/Startup
 )

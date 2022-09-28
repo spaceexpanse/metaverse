@@ -6,7 +6,7 @@
 // Implementation of Jacchia71-Gill atmosphere model
 // ======================================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "EarthAtmJ71G.h"
 
 #define pow10(x) (pow(10.0,(x))) // VC++ doesn't seem to support this directly

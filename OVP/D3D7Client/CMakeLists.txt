@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_PLUGIN_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_PLUGIN_DIR})
 
 # SAFESEH linker flag must be turned off because the DX7 libraries don't support it'
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -SAFESEH:NO")
@@ -55,8 +55,8 @@ add_dependencies(D3D7Client
 )
 
 target_link_libraries(D3D7Client
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 	${GDICLIENT_LIB}
 	dxguid.lib
 	${DX7SDK_LIB_DIR}/d3dim.lib
@@ -74,5 +74,5 @@ set_target_properties(D3D7Client
 install(TARGETS
 	D3D7Client
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )

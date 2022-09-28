@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-if (ORBITER_MAKE_SDK_SAMPLES)
+if (SPACEXPANSE_MAKE_SDK_SAMPLES)
 
 add_subdirectory(AscentMFD)
 add_subdirectory(DialogTemplate)

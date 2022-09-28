@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // ScnEditorAPI.h
 // Scenario editor plugin interface
 // ======================================================================

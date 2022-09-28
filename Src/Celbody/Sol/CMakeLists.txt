@@ -1,10 +1,10 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-srcdir_to_tgtlist("${CMAKE_CURRENT_SOURCE_DIR}/Config" "${ORBITER_BINARY_CONFIG_DIR}" srclist tgtlist)
+srcdir_to_tgtlist("${CMAKE_CURRENT_SOURCE_DIR}/Config" "${SPACEXPANSE_BINARY_CONFIG_DIR}" srclist tgtlist)
 add_custom_command(
 	OUTPUT ${tgtlist}
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Config/ ${ORBITER_BINARY_CONFIG_DIR}
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Config/ ${SPACEXPANSE_BINARY_CONFIG_DIR}
 	DEPENDS ${srclist}
 )
 add_custom_target(Sol
@@ -21,5 +21,5 @@ set_target_properties(Sol
 
 # Installation
 install(DIRECTORY Config
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
 )

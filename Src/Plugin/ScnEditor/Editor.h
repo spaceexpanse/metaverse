@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//              ORBITER MODULE: Scenario Editor
-//                  Part of the ORBITER SDK
+//              SPACEXPANSE MODULE: Scenario Editor
+//                  Part of the SPACEXPANSE SDK
 //
 // Editor.h
 //

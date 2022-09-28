@@ -2,14 +2,14 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: SolarSail
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: SolarSail
+//                  Part of the SPACEXPANSE SDK
 //
 // SolarSail.cpp
 // Control module for SolarSail vessel class
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "SolarSail.h"
 #include "meshres.h"

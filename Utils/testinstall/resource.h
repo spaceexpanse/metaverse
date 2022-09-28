@@ -3,7 +3,7 @@
 // Used by testinstall.rc
 //
 #define IDD_VERINST_DIALOG              102
-#define IDI_ORBITER                     129
+#define IDI_SPACEXPANSE                     129
 #define IDC_LIST1                       1000
 #define IDC_EDIT1                       1001
 #define IDC_BUTTON1                     1002

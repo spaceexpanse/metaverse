@@ -18,7 +18,7 @@ target_include_directories(Vsop87
 )
 
 target_link_libraries(Vsop87
-	${ORBITER_LIB}
+	${SPACEXPANSE_LIB}
 )
 
 set(VSOP87_LIB $<TARGET_LINKER_FILE:Vsop87>)
@@ -37,5 +37,5 @@ add_subdirectory(Neptune)
 install(TARGETS
 	Vsop87
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )

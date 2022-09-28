@@ -5,7 +5,7 @@
 // Licensed under the MIT License
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "SpaceXpanseSDK.h"
 #include "XRSoundDLL.h"
 #include "VesselXRSoundEngine.h"

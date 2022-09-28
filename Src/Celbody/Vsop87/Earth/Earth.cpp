@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "Earth.h"
 

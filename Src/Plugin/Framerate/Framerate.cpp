@@ -2,14 +2,14 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Framerate
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Framerate
+//                  Part of the SPACEXPANSE SDK
 //
 // Framerate.cpp
 // Dialog box for displaying simulation frame rate.
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include "SpaceXpansesdk.h"
 #include "Dialog\Graph.h"

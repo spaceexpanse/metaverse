@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                    ORBITER MODULE: HST
-//                  Part of the ORBITER SDK
+//                    SPACEXPANSE MODULE: HST
+//                  Part of the SPACEXPANSE SDK
 //
 // HST_Lua.cpp
 // Script extensions to HST module

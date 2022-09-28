@@ -134,7 +134,7 @@ float XRSoundImpl::GetVersion() const
 // Loads the specified wav file and assigns the supplied sound ID to it.
 // If you load a different wav file with the same ID as the previous wav file, the previous wav file is unloaded.
 //   soundID: sound ID to be assigned to this wav file
-//   pSoundFilename: path under $ORBITER_ROOT\XRSound of wav file to load; may not be nullptr
+//   pSoundFilename: path under $SPACEXPANSE_ROOT\XRSound of wav file to load; may not be nullptr
 //   playbackType: denotes how sound will be faded
 //
 // Returns true on success, false if file not found or XRSound.dll not present.
@@ -250,9 +250,9 @@ bool XRSoundImpl::GetDefaultSoundEnabled(const DefaultSoundID soundID) const
     return false;
 }
 
-// Set the default subfolder path for a default sound group, relative to $ORBITER_ROOT.
+// Set the default subfolder path for a default sound group, relative to $SPACEXPANSE_ROOT.
 //   group: which XRSound group to update
-//   pSubfolderPath: subfolder path relative to $ORBITER_ROOT; may not be nullptr or empty
+//   pSubfolderPath: subfolder path relative to $SPACEXPANSE_ROOT; may not be nullptr or empty
 //
 // Returns true on success, false if XRSound.dll not present.
 bool XRSoundImpl::SetDefaultSoundGroupFolder(const DefaultSoundID defaultSoundID, const char *pSubfolderPath)
@@ -270,7 +270,7 @@ bool XRSoundImpl::SetDefaultSoundGroupFolder(const DefaultSoundID defaultSoundID
     return false;
 }
 
-// Returns the default subfolder path for a default sound group, relative to $ORBITER_ROOT, 
+// Returns the default subfolder path for a default sound group, relative to $SPACEXPANSE_ROOT, 
 // or nullptr if XRSoundDLL not present.
 //   group: which default XRSound group to check
 const char *XRSoundImpl::GetDefaultSoundGroupFolder(const DefaultSoundID defaultSoundID) const

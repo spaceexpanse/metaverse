@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ScriptMFD
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ScriptMFD
+//                  Part of the SPACEXPANSE SDK
 //
 // ScriptMFD.h
 //

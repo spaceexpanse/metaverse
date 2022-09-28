@@ -6,7 +6,7 @@
 // Venus atmosphere model, as used in SpaceXpanse 2006
 // ======================================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "VenusAtm2006.h"
 
 bool VenusAtmosphere_2006::clbkConstants (ATMCONST *atmc) const

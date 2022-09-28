@@ -34,7 +34,7 @@ public:
 
 protected:
     FileList *m_pSoundFilesList;      // contains list of all files for this group of sounds
-    CString m_csFolderSubpath;        // Relative to $ORBITER_ROOT; e.g., "XRSound\Default\Cabin Ambience"
+    CString m_csFolderSubpath;        // Relative to $SPACEXPANSE_ROOT; e.g., "XRSound\Default\Cabin Ambience"
     int m_currentSoundFileIndex;      // used by GetNextSoundFile
 };
 

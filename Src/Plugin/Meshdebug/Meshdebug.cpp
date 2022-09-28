@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Meshdebug
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Meshdebug
+//                  Part of the SPACEXPANSE SDK
 //
 // Meshdebug.cpp
 //
@@ -12,7 +12,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include <commctrl.h>
 #include "spacexpansesdk.h"

@@ -1,4 +1,4 @@
-if(ORBITER_BUILD_XRSOUND)
+if(SPACEXPANSE_BUILD_XRSOUND)
 
 	add_subdirectory(XRSound)
 

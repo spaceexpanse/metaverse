@@ -8,13 +8,13 @@ add_library(ExtMFD SHARED
 )
 
 target_include_directories(ExtMFD
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${MODULE_COMMON_DIR}
 )
 
 target_link_libraries(ExtMFD
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_dependencies(ExtMFD
@@ -30,5 +30,5 @@ set_target_properties(ExtMFD
 # Installation
 install(TARGETS ExtMFD
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )

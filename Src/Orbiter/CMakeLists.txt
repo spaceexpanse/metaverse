@@ -189,7 +189,7 @@ set(SpaceXpanse_depends
 )
 
 # SpaceXpanse executable (DX7 inline graphics version)
-if(BUILD_ORBITER_DX7)
+if(BUILD_SPACEXPANSE_DX7)
 
 	add_executable(SpaceXpanse
 		${common_src}
@@ -200,7 +200,7 @@ if(BUILD_ORBITER_DX7)
 		PROPERTIES
 		LINK_FLAGS "/SUBSYSTEM:WINDOWS"
 		COMPILE_FLAGS "${CompileFlags}"
-		RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_ROOT_DIR}
+		RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_ROOT_DIR}
 		COMPILE_DEFINITIONS "INLINEGRAPHICS;DIRECTINPUT_VERSION=0x0800"
 		ENABLE_EXPORTS 1
 		FOLDER Core
@@ -223,18 +223,18 @@ if(BUILD_ORBITER_DX7)
 	install(TARGETS
 		SpaceXpanse
 		RUNTIME
-		DESTINATION ${ORBITER_INSTALL_ROOT_DIR}
+		DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
 	)
 
 	# Installation: SpaceXpanse SDK interface library to SDK folder to be included by addons
 	install(FILES $<TARGET_LINKER_FILE:SpaceXpanse>
-		DESTINATION ${ORBITER_INSTALL_SDK_DIR}/lib
+		DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/lib
 	)
 	
 endif()
 
 # SpaceXpanse executable (graphics server version)
-if(BUILD_ORBITER_SERVER)
+if(BUILD_SPACEXPANSE_SERVER)
 
 	add_executable(SpaceXpanse_server
 		${common_src}
@@ -244,9 +244,9 @@ if(BUILD_ORBITER_SERVER)
 		PROPERTIES
 		LINK_FLAGS "/SUBSYSTEM:CONSOLE /ENTRY:WinMainCRTStartup"
 		COMPILE_FLAGS "${CompileFlags}"
-		RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_MODULE_DIR}/Server
+		RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_MODULE_DIR}/Server
 		OUTPUT_NAME SpaceXpanse
-		VS_DEBUGGER_WORKING_DIRECTORY ${ORBITER_BINARY_ROOT_DIR}
+		VS_DEBUGGER_WORKING_DIRECTORY ${SPACEXPANSE_BINARY_ROOT_DIR}
 		COMPILE_DEFINITIONS "NOGRAPHICS;DIRECTINPUT_VERSION=0x0800"
 		FOLDER Core
 	)
@@ -268,22 +268,22 @@ if(BUILD_ORBITER_SERVER)
 	install(TARGETS
 		SpaceXpanse_server
 		RUNTIME
-		DESTINATION ${ORBITER_INSTALL_MODULE_DIR}/Server
+		DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}/Server
 	)
 	# If the standard SpaceXpanse executable is not built...
-	if(NOT BUILD_ORBITER_DX7)
+	if(NOT BUILD_SPACEXPANSE_DX7)
 		set_target_properties(SpaceXpanse_server
 			PROPERTIES
 			ENABLE_EXPORTS 1
 		)
 		# ...we have to use the NG version to export the API links
 		install(FILES $<TARGET_LINKER_FILE:SpaceXpanse_server>
-			DESTINATION ${ORBITER_INSTALL_SDK_DIR}/lib
+			DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/lib
 		)
 		# ...and copy SpaceXpanse.exe into build dir (not install dir) so that tests work
 		add_custom_command(TARGET SpaceXpanse_server
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:SpaceXpanse_server> ${ORBITER_BINARY_ROOT_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:SpaceXpanse_server> ${SPACEXPANSE_BINARY_ROOT_DIR}
 		)
 	endif()
 	
@@ -292,8 +292,8 @@ endif()
 # Copy library to its SpaceXpansesdk/lib location so that external project integrated into the build can find it
 add_custom_command(TARGET ${SpaceXpanseTgt}
 	POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E make_directory ${ORBITER_BINARY_SDK_DIR}/lib
-	COMMAND ${CMAKE_COMMAND} -E copy ${ORBITER_LIB} ${ORBITER_BINARY_SDK_DIR}/lib/ 
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${SPACEXPANSE_BINARY_SDK_DIR}/lib
+	COMMAND ${CMAKE_COMMAND} -E copy ${SPACEXPANSE_LIB} ${SPACEXPANSE_BINARY_SDK_DIR}/lib/ 
 )
 
 add_custom_command(

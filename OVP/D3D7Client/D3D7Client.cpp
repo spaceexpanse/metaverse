@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//   ORBITER VISUALISATION PROJECT (OVP)
+//   SPACEXPANSE VISUALISATION PROJECT (OVP)
 //   D3D7 Client module
 // ==============================================================
 
@@ -15,7 +15,7 @@
 // --------------------------------------------------------------
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "spacexpansesdk.h"
 #include "D3D7Client.h"
 #include "D3D7Config.h"

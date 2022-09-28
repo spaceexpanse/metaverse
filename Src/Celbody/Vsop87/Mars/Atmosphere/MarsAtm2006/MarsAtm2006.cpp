@@ -6,7 +6,7 @@
 // Mars atmosphere model, as used in SpaceXpanse 2006
 // ======================================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "MarsAtm2006.h"
 
 bool MarsAtmosphere_2006::clbkConstants (ATMCONST *atmc) const

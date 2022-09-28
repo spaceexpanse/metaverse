@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // ModuleAPI.h
 // Defines generic base class SpaceXpanse::Module which can be used by
 // plugins to define a set of interface functions to the SpaceXpanse core.

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ==============================================================
-// ORBITER vessel module: NASA Manned Manuveuring Unit (MMU)
+// SPACEXPANSE vessel module: NASA Manned Manuveuring Unit (MMU)
 // ==============================================================
 
 #include "spacexpansesdk.h"

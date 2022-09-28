@@ -2,9 +2,9 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // GraphicsAPI.h
-// ORBITER Application Programming Interface (OAPI)
+// SPACEXPANSE Application Programming Interface (OAPI)
 // Interface for external graphics clients
 // ======================================================================
 

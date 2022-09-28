@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER SDK Utility: TabDlg
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE SDK Utility: TabDlg
+//                  Part of the SPACEXPANSE SDK
 //
 // TabDlg.h
 // A helper class for supporting tabs in dialog boxes

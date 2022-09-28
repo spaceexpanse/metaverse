@@ -6,7 +6,7 @@
 // MSIS atmosphere model implementation
 // ======================================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "EarthAtmNRLMSISE00.h"
 #include "nrlmsise-00.h"
 

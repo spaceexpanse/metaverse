@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ShuttleA
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ShuttleA
+//                  Part of the SPACEXPANSE SDK
 //
 // hudbutton.h
 // User interface for HUD button controls

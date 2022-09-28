@@ -57,7 +57,7 @@
 #define IDB_TREEICON_SCN1               208
 #define IDB_TREEICON_SCN2               209
 #define IDD_DEMOBK                      223
-#define IDD_ORBITERHELP                 224
+#define IDD_SPACEXPANSEHELP                 224
 #define IDD_HELP                        225
 #define IDD_CUSTOMLABELS                227
 #define IDD_CUSTOMCLABELS               228
@@ -221,7 +221,7 @@
 #define IDC_ABT_CONTRIB                 1702
 #define IDC_ABT_DISCLAIM                1703
 #define IDC_ABT_TXT_BUILDDATE           1704
-#define IDC_ABT_GRP_ORBITER             1705
+#define IDC_ABT_GRP_SPACEXPANSE             1705
 #define IDC_ABT_GRP_WEB                 1706
 #define IDC_ABT_ICON_DG                 1707
 #define IDC_ABT_TXT_NAME                1708

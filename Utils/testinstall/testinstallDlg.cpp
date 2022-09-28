@@ -30,7 +30,7 @@ CverinstDlg::CverinstDlg(const CverinstApp* pParent)
 	: CDialog(CverinstDlg::IDD, NULL)
 {
 	app = pParent;
-	m_hIcon = AfxGetApp()->LoadIcon(IDI_ORBITER);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_SPACEXPANSE);
 }
 
 void CverinstDlg::DoDataExchange(CDataExchange* pDX)

@@ -2,15 +2,15 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: FlightData
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: FlightData
+//                  Part of the SPACEXPANSE SDK
 //
 // FlightData.cpp
 // Dialog box for displaying vessel flight data during the
 // simulation.
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include <list>
 #include "spacexpansesdk.h"

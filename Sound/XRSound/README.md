@@ -30,35 +30,35 @@ If you're looking for an excellent GUI that makes working with Git easier, I rec
 
 5. Create six environment variables pointing to where you plan to install each of the following software packages:
 
-* `ORBITER_ROOT` => your 32-bit Debug* SpaceXpanse root folder
-* `ORBITER_ROOT_X64` => your 64-bit Debug* SpaceXpanse root folder
-* `ORBITER_ROOT_RELEASE` => your 32-bit Release SpaceXpanse root folder
-* `ORBITER_ROOT_RELEASE_X64` => your 64-bit Release SpaceXpanse root folder
-* `ORBITER_EXE` => `path\filename` relative to SpaceXpanse root folder of your preferred 32-bit SpaceXpanse executable; e.g., `spacexpanse.exe`
-* `ORBITER_EXE_X64` => `path\filename` relative to SpaceXpanse root folder of your preferred 64-bit SpaceXpanse executable; e.g., `Modules\Server\spacexpanse.exe`
+* `SPACEXPANSE_ROOT` => your 32-bit Debug* SpaceXpanse root folder
+* `SPACEXPANSE_ROOT_X64` => your 64-bit Debug* SpaceXpanse root folder
+* `SPACEXPANSE_ROOT_RELEASE` => your 32-bit Release SpaceXpanse root folder
+* `SPACEXPANSE_ROOT_RELEASE_X64` => your 64-bit Release SpaceXpanse root folder
+* `SPACEXPANSE_EXE` => `path\filename` relative to SpaceXpanse root folder of your preferred 32-bit SpaceXpanse executable; e.g., `spacexpanse.exe`
+* `SPACEXPANSE_EXE_X64` => `path\filename` relative to SpaceXpanse root folder of your preferred 64-bit SpaceXpanse executable; e.g., `Modules\Server\spacexpanse.exe`
 
-6. Install or build 32-bit Debug* SpaceXpanse to `%ORBITER_ROOT%`.
-7. Install or build 64-bit Debug* SpaceXpanse to `%ORBITER_ROOT_X64%`.
-8. Install or build 32-bit Release SpaceXpanse to `%ORBITER_ROOT_RELEASE%`.
-9. Install or build 64-bit Release SpaceXpanse to `%ORBITER_ROOT_RELEASE_X64%`.
+6. Install or build 32-bit Debug* SpaceXpanse to `%SPACEXPANSE_ROOT%`.
+7. Install or build 64-bit Debug* SpaceXpanse to `%SPACEXPANSE_ROOT_X64%`.
+8. Install or build 32-bit Release SpaceXpanse to `%SPACEXPANSE_ROOT_RELEASE%`.
+9. Install or build 64-bit Release SpaceXpanse to `%SPACEXPANSE_ROOT_RELEASE_X64%`.
 
-\* Note: you can always compile and test debug (as well as release) versions of the XR vessels against _release_ builds of SpaceXpanse, so can always set `ORBITER_ROOT` to match `ORBITER_ROOT_RELEASE` and `ORBITER_ROOT_X64` to match `ORBITER_ROOT_RELEASE_X64` if you prefer.
+\* Note: you can always compile and test debug (as well as release) versions of the XR vessels against _release_ builds of SpaceXpanse, so can always set `SPACEXPANSE_ROOT` to match `SPACEXPANSE_ROOT_RELEASE` and `SPACEXPANSE_ROOT_X64` to match `SPACEXPANSE_ROOT_RELEASE_X64` if you prefer.
 
 10. Extract 32-bit irrKlang to %IRRKLANG_ROOT%.
 11. Extract 64-bit irrKlang to %IRRKLANG_ROOT_X64%.
-12. Copy `%IRRKLANG_ROOT%\bin\win32-visualStudio\*.dll` to `%ORBITER_ROOT%` and `%ORBITER_ROOT_RELEASE%`.
-13. Copy `%IRRKLANG_ROOT_X64%\bin\winx64-visualStudio\*.dll` to `%ORBITER_ROOT_X64%` and `%ORBITER_ROOT_RELEASE_X64`.
-14. Copy everything under `XRSound\assets\XRSound\` to `%ORBITER_ROOT%\XRSound` (or create a symbolic link if you prefer).
-15. Copy everything under `XRSound\assets\XRSound\` to `%ORBITER_ROOT_X64%\XRSound` (or create a symbolic link if you prefer).
-16. Copy everything under `XRSound\assets\XRSound\` to `%ORBITER_ROOT_RELEASE%\XRSound` (or create a symbolic link if you prefer).
-17. Copy everything under `XRSound\assets\XRSound\` to `%ORBITER_ROOT_RELEASE_X64%\XRSound` (or create a symbolic link if you prefer).
+12. Copy `%IRRKLANG_ROOT%\bin\win32-visualStudio\*.dll` to `%SPACEXPANSE_ROOT%` and `%SPACEXPANSE_ROOT_RELEASE%`.
+13. Copy `%IRRKLANG_ROOT_X64%\bin\winx64-visualStudio\*.dll` to `%SPACEXPANSE_ROOT_X64%` and `%SPACEXPANSE_ROOT_RELEASE_X64`.
+14. Copy everything under `XRSound\assets\XRSound\` to `%SPACEXPANSE_ROOT%\XRSound` (or create a symbolic link if you prefer).
+15. Copy everything under `XRSound\assets\XRSound\` to `%SPACEXPANSE_ROOT_X64%\XRSound` (or create a symbolic link if you prefer).
+16. Copy everything under `XRSound\assets\XRSound\` to `%SPACEXPANSE_ROOT_RELEASE%\XRSound` (or create a symbolic link if you prefer).
+17. Copy everything under `XRSound\assets\XRSound\` to `%SPACEXPANSE_ROOT_RELEASE_X64%\XRSound` (or create a symbolic link if you prefer).
 
 Now you are ready to compile and link XRSound.
 
 18. Bring up Visual Studio 2019 and open the solution `spacexpanse\Sound\XRSound\XRSound\src\XRSound.sln`.
-19. Set the build target to `Debug` and `x86` (i.e., 32-bit) to start. Click `Build -> Rebuild Solution`. This will build `XRSoundD.lib` and `XRSound.dll` and copy those files to their proper locations under `%ORBITER_ROOT%` via a Post-Build step. If you get build errors, double-check that the above environment variables are set correctly and that you restarted Visual Studio 2019 _after_ you defined those environment variables.
+19. Set the build target to `Debug` and `x86` (i.e., 32-bit) to start. Click `Build -> Rebuild Solution`. This will build `XRSoundD.lib` and `XRSound.dll` and copy those files to their proper locations under `%SPACEXPANSE_ROOT%` via a Post-Build step. If you get build errors, double-check that the above environment variables are set correctly and that you restarted Visual Studio 2019 _after_ you defined those environment variables.
 20. After the build succeeds, bring up SpaceXpanse and activate the XRSound module as detailed in the [XRSound User Manual](./XRSound/assets/Doc/XRSound%20User%20Manual.pdf).
-21. Launch a DeltaGlider scenario -- you should hear an audio greeting from your ship's new A.I. If you don't hear any sound, check your `%ORBITER_ROOT%\XRSound.log` file for error messages.
+21. Launch a DeltaGlider scenario -- you should hear an audio greeting from your ship's new A.I. If you don't hear any sound, check your `%SPACEXPANSE_ROOT%\XRSound.log` file for error messages.
 
 For more information and support about SpaceXpanse and XRSound, visit https://www.spacexpanse-forum.com/.
 

@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: DialogTemplate
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: DialogTemplate
+//                  Part of the SPACEXPANSE SDK
 //
 // MFDTemplate.h
 //

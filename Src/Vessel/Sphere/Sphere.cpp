@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: Sphere
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: Sphere
+//                  Part of the SPACEXPANSE SDK
 //
 // Sphere.cpp
 // Control module for Sphere vessel class
@@ -16,7 +16,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "spacexpansesdk.h"
 

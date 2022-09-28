@@ -77,7 +77,7 @@ int main (int argc, char *argv[])
 	Param param;
 
 	cout << "+-----------------------------------------------------------------------+\n";
-	cout << "|                   meshc: Mesh compiler for ORBITER                    |\n";
+	cout << "|                   meshc: Mesh compiler for SPACEXPANSE                    |\n";
 	cout << "|        Build: " << __DATE__ << "      (c) 2001-2018 Martin Schweiger         |\n";
 	cout << "+-----------------------------------------------------------------------+\n\n";
 

@@ -2,14 +2,14 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE:  ShuttleA Payload
+//                 SPACEXPANSE MODULE:  ShuttleA Payload
 //
 // ShuttleA_pl.cpp
 // Reference implementation of Shuttle-A Payload vessel class module
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "ShuttleA_pl.h"
 #include <math.h>

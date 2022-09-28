@@ -61,7 +61,7 @@ If you want to build the documentation, you need a few additional tools:
   documentation for developers.
 
 By default, the build is configured to create both graphics flavours of the
-SpaceXpanse executable (although this can be configured with the ORBITER_GRAPHICS CMake flag):
+SpaceXpanse executable (although this can be configured with the SPACEXPANSE_GRAPHICS CMake flag):
 - ``spacexpanse.exe`` is the standalone SpaceXpanse application with built-in DX7 graphics.
 - ``spacexpanse_ng.exe`` is a launcher for ``./Modules/Server/spacexpanse.exe`` which is the
 graphics server version of SpaceXpanse. It requires an external graphics client
@@ -83,7 +83,7 @@ You should keep the SpaceXpanse 2016 installation separate from your SpaceXpanse
 repository.
 
 To configure SpaceXpanse to use the 2016 texture installation, set the
-ORBITER_PLANET_TEXTURE_INSTALL_DIR entry in CMake. For example, if SpaceXpanse 2016
+SPACEXPANSE_PLANET_TEXTURE_INSTALL_DIR entry in CMake. For example, if SpaceXpanse 2016
 was installed in `C:\SpaceXpanse2016`, the CMake option should be set to
 `C:/SpaceXpanse2016/Textures`.
 Alternatively, you can configure the texture directory after building SpaceXpanse

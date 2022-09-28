@@ -1,4 +1,4 @@
-ORBITER VISUALISATION PROJECT -
+SPACEXPANSE VISUALISATION PROJECT -
 D3D7 Client Installation Instructions
 
 1. Required components

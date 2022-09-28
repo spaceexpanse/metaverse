@@ -11,12 +11,12 @@ set_target_properties(ScriptVessel
 )
 
 target_include_directories(ScriptVessel
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 )
 
 target_link_libraries(ScriptVessel
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 	${LUA_LIB}
 )
 
@@ -28,5 +28,5 @@ add_dependencies(ScriptVessel
 # Installation
 install(TARGETS ScriptVessel
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )

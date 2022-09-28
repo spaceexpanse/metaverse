@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//             ORBITER MODULE: Common vessel tools
-//                  Part of the ORBITER SDK
+//             SPACEXPANSE MODULE: Common vessel tools
+//                  Part of the SPACEXPANSE SDK
 //
 // Instrument.cpp
 // Implementation for class PanelElement:

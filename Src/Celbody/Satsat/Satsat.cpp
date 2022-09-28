@@ -1,7 +1,7 @@
 // Copyright (c) Martin Schweiger
 // Licensed under the MIT License
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "Satsat.h"
 
 #include <stdio.h> // temp

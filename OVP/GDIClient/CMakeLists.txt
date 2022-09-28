@@ -1,7 +1,7 @@
 # Copyright (c) Martin Schweiger
 # Licensed under the MIT License
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_BINARY_MODULE_DIR}/Server)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SPACEXPANSE_BINARY_MODULE_DIR}/Server)
 
 add_definitions(-DGDICLIENT_EXPORTS)
 
@@ -19,13 +19,13 @@ add_dependencies(GDIClient
 )
 
 target_link_libraries(GDIClient
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 # Installation
 install(TARGETS
 	GDIClient
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}/Server
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}/Server
 )

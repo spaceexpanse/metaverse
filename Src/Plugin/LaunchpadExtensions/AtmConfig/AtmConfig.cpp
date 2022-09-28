@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "spacexpansesdk.h"
 #include "resource.h"

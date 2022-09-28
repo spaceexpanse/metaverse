@@ -250,7 +250,7 @@ int main (int argc, char *argv[])
 	}
 
 	cout << "+-----------------------------------------------------------------------+\n";
-	cout << "|             pltex: Planetary texture manager for ORBITER              |\n";
+	cout << "|             pltex: Planetary texture manager for SPACEXPANSE              |\n";
 	cout << "|        Build: " << __DATE__ << "      (c) 2001-2008 Martin Schweiger         |\n";
 	cout << "+-----------------------------------------------------------------------+\n\n";
 

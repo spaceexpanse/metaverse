@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: DeltaGlider
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: DeltaGlider
+//                  Part of the SPACEXPANSE SDK
 //
 // DGSwitches.cpp
 // Prototypes for DG-specific cockpit switches and dials

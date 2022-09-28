@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                  ORBITER MODULE: Rcontrol
-//                  Part of the ORBITER SDK
+//                  SPACEXPANSE MODULE: Rcontrol
+//                  Part of the SPACEXPANSE SDK
 //
 // Rcontrol.cpp
 //
@@ -11,7 +11,7 @@
 // retro controls via a dialog box.
 // ==============================================================
 
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include "SpaceXpansesdk.h"
 #include "DlgCtrl.h"
 #include "resource.h"

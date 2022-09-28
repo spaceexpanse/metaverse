@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // MFDAPI.h
 // Class interfaces for MFD instruments and MFD modes
 // ======================================================================

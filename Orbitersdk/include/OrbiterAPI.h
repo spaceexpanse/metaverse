@@ -2,9 +2,9 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // SpaceXpanseAPI.h
-// ORBITER Application Programming Interface (OAPI)
+// SPACEXPANSE Application Programming Interface (OAPI)
 // ======================================================================
 
 /**
@@ -15,8 +15,8 @@
  * \todo class CameraMode documentation 
 */
 
-#ifndef __ORBITERAPI_H
-#define __ORBITERAPI_H
+#ifndef __SPACEXPANSEAPI_H
+#define __SPACEXPANSEAPI_H
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1300 ) // Microsoft Visual Studio Version 2003 and higher
 #if !defined(_CRT_SECURE_NO_DEPRECATE)
@@ -7461,10 +7461,10 @@ inline VECTOR3 POINTERTOREF (VECTOR3 *p)
 // Internal data structures
 // ======================================================================
 
-#ifdef ORBITER_MODULE
+#ifdef SPACEXPANSE_MODULE
 void dummy();
 void calldummy () { dummy(); }
 DLLCLBK char *ModuleDate () { return __DATE__; }
 #endif
 
-#endif // !__ORBITERAPI_H
+#endif // !__SPACEXPANSEAPI_H

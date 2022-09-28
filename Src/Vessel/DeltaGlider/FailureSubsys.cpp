@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: DeltaGlider
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: DeltaGlider
+//                  Part of the SPACEXPANSE SDK
 //
 // FailureSubsys.cpp
 // Subsystem for failure and warning displays

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ======================================================================
-//                     ORBITER SOFTWARE DEVELOPMENT KIT
+//                     SPACEXPANSE SOFTWARE DEVELOPMENT KIT
 // CelBodyAPI.h
 // - CELBODY class interface
 // - This is the base class for celestial body module implementations
@@ -79,7 +79,7 @@ struct Sample {
 	*  file for your project, and add the essential API interface functions:
 	*
 	* \code
-	*  #define ORBITER_MODULE
+	*  #define SPACEXPANSE_MODULE
 	*  #include "SpaceXpanseAPI.h"
 	*  #include "CelbodyAPI.h"
 	*
@@ -106,7 +106,7 @@ struct Sample {
 	*  }
 	* \endcode
 	*
-	* The first line defining \c ORBITER_MODULE is required to ensure that all initialisation functions
+	* The first line defining \c SPACEXPANSE_MODULE is required to ensure that all initialisation functions
 	* are properly called by SpaceXpanse.
 	*
 	* SpaceXpanseAPI.h contains the general API interface, and CelBodyAPI.h contains the planet module-

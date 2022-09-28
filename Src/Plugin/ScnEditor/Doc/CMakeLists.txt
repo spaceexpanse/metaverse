@@ -1,7 +1,7 @@
 # ScenarioEditor.pdf -----------------------------------------------------
 
 set(document "ScenarioEditor")
-set(outdir ${ORBITER_BINARY_DOC_DIR})
+set(outdir ${SPACEXPANSE_BINARY_DOC_DIR})
 set(src ${CMAKE_CURRENT_SOURCE_DIR}/${document}.odt)
 set(out ${outdir}/${document}.pdf)
 
@@ -22,5 +22,5 @@ set_target_properties(ScnEditorDoc
 	FOLDER Doc
 )
 install(FILES ${out}
-	DESTINATION ${ORBITER_INSTALL_DOC_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
 )

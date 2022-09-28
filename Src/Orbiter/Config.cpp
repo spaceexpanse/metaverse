@@ -984,7 +984,7 @@ BOOL Config::Write (const char *fname) const
 	ofstream ofs (fname);
 	if (!ofs) return FALSE;
 
-	ofs << "; === ORBITER Master Configuration File ===\n";
+	ofs << "; === SPACEXPANSE Master Configuration File ===\n";
 	ofs << "EchoAllParams = " << BoolStr (bEchoAll) << '\n';
 	if (rLaunchpad.right > rLaunchpad.left)
 		ofs << "LPadRect = " << rLaunchpad.left << ' ' << rLaunchpad.top

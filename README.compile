@@ -23,7 +23,7 @@ To build the code-level documentation, you need doxygen.
 https://www.doxygen.nl/index.html
 
 
-BUILDING ORBITER
+BUILDING SPACEXPANSE
 ================
 After cloning the SpaceXpanse Git repository, you can either
 
@@ -60,7 +60,7 @@ The SpaceXpanse git repository does not include the planetary texture files for 
 celestial bodies. You need to install these separately (e.g. by installing SpaceXpanse
 2016 and optionally downloading high-res texture packs from the SpaceXpanse website).
 During CMake configuration, specify the location of the texture files in the
-ORBITER_PLANET_TEXTURE_INSTALL_DIR entry. For example, if SpaceXpanse 2016 is installed
+SPACEXPANSE_PLANET_TEXTURE_INSTALL_DIR entry. For example, if SpaceXpanse 2016 is installed
 in c:\spacexpanse2016, the texture directory would be c:\spacexpanse2016\Textures.
 
 Alternatively, you can set the planetary texture directory after building

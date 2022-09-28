@@ -1,5 +1,5 @@
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include <stdio.h>
 #include "TrackIR.h"

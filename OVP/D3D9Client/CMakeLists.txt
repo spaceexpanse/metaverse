@@ -11,7 +11,7 @@ set(DXSDK_LIB_DIR ${DXSDK_DIR}/lib/${ARCH})
 
 set(D3D9_SOURCE_DIR ${CMAKE_SOURCE_DIR}/OVP/D3D9Client)
 set(ShaderDir ${D3D9_SOURCE_DIR}/shaders)
-set(INCLUDE_TARGET_DIR ${ORBITER_BINARY_SDK_DIR}/include)
+set(INCLUDE_TARGET_DIR ${SPACEXPANSE_BINARY_SDK_DIR}/include)
 
 set(InterfaceBuilder ${D3D9_SOURCE_DIR}/samples/InterfaceBuilder/InterfaceBuilder.exe)
 
@@ -166,12 +166,12 @@ add_library(D3D9Client MODULE
 )
 
 target_include_directories(D3D9Client PUBLIC
-	${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	${DXSDK_DIR}/Include
 )
 
 target_link_directories(D3D9Client PUBLIC
-	${ORBITER_BINARY_SDK_DIR}/lib
+	${SPACEXPANSE_BINARY_SDK_DIR}/lib
 	${DXSDK_LIB_DIR}
 )
 
@@ -208,7 +208,7 @@ set_target_properties(D3D9Client
 
 add_custom_command(
 	TARGET D3D9Client PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${D3D9_SOURCE_DIR}/shaders/ ${ORBITER_BINARY_MODULE_DIR}/D3D9Client
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${D3D9_SOURCE_DIR}/shaders/ ${SPACEXPANSE_BINARY_MODULE_DIR}/D3D9Client
 )
 
 add_custom_command(OUTPUT ${INCLUDE_TARGET_DIR}/gcCoreAPI.h ${INCLUDE_TARGET_DIR}/gcGUI.h
@@ -229,7 +229,7 @@ add_dependencies(D3D9Client
 
 install(TARGETS D3D9Client
 	LIBRARY	
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )
 
 add_subdirectory(samples/DrawOrbits)
@@ -237,11 +237,11 @@ add_subdirectory(samples/DX9ExtMFD)
 add_subdirectory(samples/GenericCamera)
 add_subdirectory(samples/TerrainToolBox)
 
-install(DIRECTORY ${D3D9_SOURCE_DIR}/shaders/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Modules/D3D9Client)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DrawOrbits/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DrawOrbits)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DX9ExtMFD/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DX9ExtMFD)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/GenericCamera/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/GenericCamera)
-install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/TerrainToolBox/ DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/TerrainToolBox)
-install(FILES ${INCLUDE_TARGET_DIR}/gcCoreAPI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
-install(FILES ${INCLUDE_TARGET_DIR}/gcGUI.h DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
-install(FILES ${ORBITER_SOURCE_SDK_DIR}/doc/SpaceXpanse2DGraphics.pdf DESTINATION ${ORBITER_INSTALL_SDK_DIR}/doc)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/shaders/ DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Modules/D3D9Client)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DrawOrbits/ DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DrawOrbits)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/DX9ExtMFD/ DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/DX9ExtMFD)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/GenericCamera/ DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/GenericCamera)
+install(DIRECTORY ${D3D9_SOURCE_DIR}/samples/TerrainToolBox/ DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/samples/TerrainToolBox)
+install(FILES ${INCLUDE_TARGET_DIR}/gcCoreAPI.h DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
+install(FILES ${INCLUDE_TARGET_DIR}/gcGUI.h DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/SpaceXpansesdk/include)
+install(FILES ${SPACEXPANSE_SOURCE_SDK_DIR}/doc/SpaceXpanse2DGraphics.pdf DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/doc)

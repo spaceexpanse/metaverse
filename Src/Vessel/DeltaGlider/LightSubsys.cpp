@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: DeltaGlider
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: DeltaGlider
+//                  Part of the SPACEXPANSE SDK
 //
 // LightSubsys.cpp
 // Cockpit and external light control: instrument/overhead lights,

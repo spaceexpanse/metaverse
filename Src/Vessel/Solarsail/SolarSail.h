@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: SolarSail
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: SolarSail
+//                  Part of the SPACEXPANSE SDK
 //
 // SolarSail.h
 // SolarSail class interface

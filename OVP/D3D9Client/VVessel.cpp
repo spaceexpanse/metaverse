@@ -1,6 +1,6 @@
 // ==============================================================
 // VVessel.cpp
-// Part of the ORBITER VISUALISATION PROJECT (OVP)
+// Part of the SPACEXPANSE VISUALISATION PROJECT (OVP)
 // Dual licensed under GPL v3 and LGPL v3
 // Copyright (C) 2006-2016 Martin Schweiger
 //				 2010-2019 Jarmo Nikkanen (D3D9Client modification)

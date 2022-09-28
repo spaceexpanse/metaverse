@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                ORBITER MODULE: Quadcopter
-//                  Part of the ORBITER SDK
+//                SPACEXPANSE MODULE: Quadcopter
+//                  Part of the SPACEXPANSE SDK
 //
 // QuadcopterLua.cpp
 // Implementation of Quadcopter-specific Lua interface methods

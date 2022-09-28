@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE: ShuttlePB
-//                  Part of the ORBITER SDK
+//                 SPACEXPANSE MODULE: ShuttlePB
+//                  Part of the SPACEXPANSE SDK
 //
 // ShuttlePB.cpp
 // Control module for ShuttlePB vessel class
@@ -16,7 +16,7 @@
 // ==============================================================
 
 #define STRICT
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 
 #include "spacexpansesdk.h"
 

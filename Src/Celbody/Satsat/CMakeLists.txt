@@ -23,8 +23,8 @@ target_include_directories(Satsat
 )
 
 target_link_libraries(Satsat
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_custom_command(
@@ -48,8 +48,8 @@ add_subdirectory(Iapetus)
 install(TARGETS
 	Satsat
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_MODULE_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_MODULE_DIR}
 )
 install(FILES tass17.dat
-	DESTINATION ${ORBITER_INSTALL_ROOT_DIR}/Config/Saturn/Data
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Config/Saturn/Data
 )

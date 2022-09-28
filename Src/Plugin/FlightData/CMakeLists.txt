@@ -9,13 +9,13 @@ add_library(FlightData SHARED
 )
 
 target_include_directories(FlightData
-	PUBLIC ${ORBITER_SOURCE_SDK_INCLUDE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_SDK_INCLUDE_DIR}
 	PUBLIC ${MODULE_COMMON_DIR}
 )
 
 target_link_libraries(FlightData
-	${ORBITER_LIB}
-	${ORBITER_SDK_LIB}
+	${SPACEXPANSE_LIB}
+	${SPACEXPANSE_SDK_LIB}
 )
 
 add_dependencies(FlightData
@@ -31,5 +31,5 @@ set_target_properties(FlightData
 # Installation
 install(TARGETS FlightData
 	RUNTIME
-	DESTINATION ${ORBITER_INSTALL_PLUGIN_DIR}
+	DESTINATION ${SPACEXPANSE_INSTALL_PLUGIN_DIR}
 )

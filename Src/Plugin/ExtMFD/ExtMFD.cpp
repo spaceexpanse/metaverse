@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                  ORBITER MODULE: ExtMFD
-//                  Part of the ORBITER SDK
+//                  SPACEXPANSE MODULE: ExtMFD
+//                  Part of the SPACEXPANSE SDK
 //            Copyright (C) 2006 Martin Schweiger
 //                   All rights reserved
 //
@@ -13,7 +13,7 @@
 // ==============================================================
 
 #define STRICT 1
-#define ORBITER_MODULE
+#define SPACEXPANSE_MODULE
 #include <windows.h>
 #include "MFDWindow.h"
 #include "spacexpansesdk.h"

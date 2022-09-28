@@ -7,7 +7,7 @@ add_executable(meshc
 )
 
 target_include_directories(meshc
-	PUBLIC ${ORBITER_SOURCE_DIR}
+	PUBLIC ${SPACEXPANSE_SOURCE_DIR}
 )
 
 set_target_properties(meshc
@@ -16,5 +16,5 @@ set_target_properties(meshc
 )
 
 install(TARGETS meshc
-	DESTINATION ${ORBITER_INSTALL_SDK_DIR}/Utils
+	DESTINATION ${SPACEXPANSE_INSTALL_SDK_DIR}/Utils
 )

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//   ORBITER VISUALISATION PROJECT (OVP)
+//   SPACEXPANSE VISUALISATION PROJECT (OVP)
 //   D3D7 Client module
 // ==============================================================
 

@@ -2,7 +2,7 @@
 // Licensed under the MIT License
 
 // ==============================================================
-//                 ORBITER MODULE:  ShuttleA Payload
+//                 SPACEXPANSE MODULE:  ShuttleA Payload
 //                 
 //
 // ShuttleA_pl.h
