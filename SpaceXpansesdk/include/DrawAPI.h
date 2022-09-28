@@ -19,7 +19,7 @@
 #ifndef __DRAWAPI_H
 #define __DRAWAPI_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include <assert.h>
 
 #ifdef D3D9CLIENT_EXPORTS
@@ -1360,7 +1360,7 @@ public:
 	* \param scale Text scale factor (0.0f to 1.0f)
 	* \param angle Rotation angle in radians.
 	* \sa Text()
-	* \note Rotation and scaling can result a blurry text if used with a small fonts. Rotation of ±PI/2 or PI should work fine.
+	* \note Rotation and scaling can result a blurry text if used with a small fonts. Rotation of ï¿½PI/2 or PI should work fine.
 	* \note Rotation spefified during font creation is ignored in this function.
 	*/
 	virtual void TextEx(float x, float y, const char* str, float scale = 1.0f, float angle = 0.0f) { assert(false); }
