@@ -8,7 +8,7 @@
 
 #include "D3dmath.h"
 #include "D3d7util.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Scene.h"
 #include "VPlanet.h"
 #include "CSphereMgr.h"
@@ -20,7 +20,7 @@
 // =======================================================================
 // Externals
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 extern int patchidx[9];
@@ -43,7 +43,7 @@ double CSphereManager::diagscale;
 
 CSphereManager::CSphereManager ()
 {
-	char *c = g_pOrbiter->Cfg()->CfgVisualPrm.CSphereBgPath;
+	char *c = g_pSpaceXpanse->Cfg()->CfgVisualPrm.CSphereBgPath;
 	if (!c[0]) {
 		disabled = true;
 		return;
@@ -52,12 +52,12 @@ CSphereManager::CSphereManager ()
 		disabled = false;
 	}
 
-	intensity = (float)g_pOrbiter->Cfg()->CfgVisualPrm.CSphereBgIntens;
+	intensity = (float)g_pSpaceXpanse->Cfg()->CfgVisualPrm.CSphereBgIntens;
 
-	maxlvl = 8; // g_pOrbiter->Cfg()->CSphereMaxLevel;
+	maxlvl = 8; // g_pSpaceXpanse->Cfg()->CSphereMaxLevel;
 	maxbaselvl = min (8, maxlvl);
 	int maxidx = patchidx[maxbaselvl];
-	bPreloadTile = (g_pOrbiter->Cfg()->CfgPRenderPrm.PreloadMode > 0);
+	bPreloadTile = (g_pSpaceXpanse->Cfg()->CfgPRenderPrm.PreloadMode > 0);
 	nhitex = nhispec = 0;
 	diagscale = 0.0;
 
@@ -101,7 +101,7 @@ CSphereManager::~CSphereManager ()
 		for (i = 0; i < ntex; i++) {
 			texbuf[i]->Release();
 			if (!(++counter % 100))
-				g_pOrbiter->UpdateDeallocationProgress();
+				g_pSpaceXpanse->UpdateDeallocationProgress();
 		}
 		delete []texbuf;
 	}
@@ -109,11 +109,11 @@ CSphereManager::~CSphereManager ()
 	for (i = 0; i < maxidx; i++) {
 		if (tiledesc[i].vtx) tiledesc[i].vtx->Release();
 		if (!(++counter % 100))
-			g_pOrbiter->UpdateDeallocationProgress();
+			g_pSpaceXpanse->UpdateDeallocationProgress();
 	}
 	delete []tiledesc;	
 
-	g_pOrbiter->UpdateDeallocationProgress();
+	g_pSpaceXpanse->UpdateDeallocationProgress();
 }
 
 // =======================================================================
@@ -307,7 +307,7 @@ void CSphereManager::ProcessTile (int lvl, int hemisp, int ilat, int nlat, int i
 
 MATRIX4 CSphereManager::WorldMatrix (int ilng, int nlng, int ilat, int nlat)
 {
-	double lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180°
+	double lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180ï¿½
 	double slng = sin(lng), clng = cos(lng);
 	MATRIX4 lrot = {clng,0,slng,0,  0,1.0,0,0,  -slng,0,clng,0,  0,0,0,1.0};
 	return mul(lrot,RenderParam.dwmat);
@@ -336,7 +336,7 @@ void CSphereManager::RenderTile (int lvl, int hemisp, int ilat, int nlat, int il
 		if (!tile->vtx) {
 			D3DVERTEXBUFFERDESC vbd = 
 				{ sizeof(D3DVERTEXBUFFERDESC), VB_MemFlag | D3DVBCAPS_WRITEONLY, FVF_2TEX, mesh.nv };
-			g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbd, &tile->vtx, 0);
+			g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbd, &tile->vtx, 0);
 			ApplyPatchTextureCoordinates (mesh, tile->vtx, range);
 			tile->vtx->Optimize (RenderParam.dev, 0); // no more change, so we can optimize
 		}
