@@ -462,8 +462,8 @@ BEGIN
     PUSHBUTTON      "Joystick ",IDC_MNU_JOY,6,118,59,14,BS_RIGHT
     PUSHBUTTON      "Extra ",IDC_MNU_EXT,6,133,59,14,BS_RIGHT
     PUSHBUTTON      "About ",IDC_MNU_ABT,6,148,59,14,BS_RIGHT
-    CTEXT           "\r\nspacexpanse.org\r\n(c) 2022\r\nSpaceXpanse Team",IDC_BLACKBOX,218,0,138,37,0,WS_EX_RIGHT
-    CONTROL         IDB_BANNER,IDC_LOGO,"Static",SS_BITMAP,0,0,249,37
+//    CTEXT           "\r\nspacexpanse.org\r\n(c) 2022\r\nSpaceXpanse Team",IDC_BLACKBOX,218,0,138,37,0,WS_EX_RIGHT
+//    CONTROL         IDB_BANNER,IDC_LOGO,"Static",SS_BITMAP,0,0,249,37
     CONTROL         "",IDC_SHADOW,"Static",SS_OWNERDRAW,0,37,5,5
     CTEXT           "v.123456",IDC_VERSION,4,315,44,8,WS_DISABLED
 END
