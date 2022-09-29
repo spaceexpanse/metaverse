@@ -500,14 +500,14 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
     GROUPBOX        "",IDC_ABT_GRP_SPACEXPANSE,4,4,269,54
     CONTROL         IDB_ICON64, IDC_ABT_ICON_DG, "Static", SS_BITMAP, 27, 14, 43, 39
-    LTEXT           "", IDC_ABT_TXT_NAME, 94, 16, 132, 8
+//    LTEXT           "", IDC_ABT_TXT_NAME, 94, 16, 132, 8
     LTEXT           "", IDC_ABT_TXT_BUILDDATE, 94, 28, 166, 8
-    LTEXT           "", IDC_ABT_TXT_CPR, 94, 41, 140, 13
+//    LTEXT           "", IDC_ABT_TXT_CPR, 94, 41, 140, 13
     GROUPBOX        "Installed components", IDC_ABT_GRP_COMPONENT,4,63,269,50
     LISTBOX         IDC_ABT_LBOX_COMPONENT,17,75,243,40, LBS_NOTIFY | WS_BORDER | WS_VSCROLL
-    GROUPBOX        "On the web", IDC_ABT_GRP_WEB, 4, 118, 269, 43
-    LTEXT           "Homepage:\nSpaceXpanse ROD:\nYoutube channel:",IDC_ABT_TXT_WEB,17,130,63,30,0,WS_EX_TRANSPARENT
-    LTEXT           "",IDC_ABT_TXT_WEBADDR,94,130,158,30
+//    GROUPBOX        "On the web", IDC_ABT_GRP_WEB, 4, 118, 269, 43
+//    LTEXT           "Homepage:\nSpaceXpanse ROD:\nYoutube channel:",IDC_ABT_TXT_WEB,17,130,63,30,0,WS_EX_TRANSPARENT
+//    LTEXT           "",IDC_ABT_TXT_WEBADDR,94,130,158,30
     LTEXT           "SpaceXpanse is published under the MIT License.\r\nDetails can be found under 'License' below.", IDC_ABT_TXT_LICENSE, 11, 177, 254, 28
     PUSHBUTTON      "License",IDC_ABT_DISCLAIM,94,210,88,14
     PUSHBUTTON      "Credits and Contributions",IDC_ABT_CREDIT,184,210,88,14
