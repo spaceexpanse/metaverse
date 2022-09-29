@@ -24,7 +24,7 @@
 #include <cstdio>
 #include <cmath>
 #include <string>
-#include "orbitersdk.h"
+#include "spacexpansesdk.h"
 #include "mfd.h"
 #include "mfdvartypes.h"
 #include "doublelink.h"
@@ -471,7 +471,7 @@ void MFDvarfloat::showadjustment(oapi::Sketchpad *sketchpad, int width, int line
 		length=sprintf(buffer,"Micro");
 		break;
 	case AutoMin:
-		length=sprintf(buffer,"Auto-Min™");
+		length=sprintf(buffer,"Auto-Minï¿½");
 		break;
 	case Reset:
 		length=sprintf(buffer,"Reset");
