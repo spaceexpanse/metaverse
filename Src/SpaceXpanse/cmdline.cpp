@@ -240,7 +240,7 @@ void spacexpanse::CommandLine::PrintHelpAndExit() const
 		freopen("CONOUT$", "w", stdout);
 	}
 
-	std::cout << "\nSpaceXpanse Space Flight Simulator" << std::endl;
+	std::cout << "\nSpaceXpanse Metaverse Simulator" << std::endl;
 	std::cout << "spacexpanse.exe [options]\n\n";
 	std::cout << "Options:\n";
 	std::cout << "  --help, -h: Print this help page and exit.\n";

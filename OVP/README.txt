@@ -1,10 +1,10 @@
 SPACEXPANSE VISUALISATION PROJECT
-Graphics Client Plugins for SpaceXpanse Space Flight Simulator
+Graphics Client Plugins for SpaceXpanse Metaverse Simulator
 Copyright (C) 2006-2014  Martin Schweiger
 
 
 The aim of the SpaceXpanse Visualisation Project (OVP) is to provide 3-D
-visualisation support for SpaceXpanse Space Flight Simulator via external plugin
+visualisation support for SpaceXpanse Metaverse Simulator via external plugin
 modules.
 
 The next SpaceXpanse release distribution will include a "non-graphics" version

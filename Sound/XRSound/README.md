@@ -1,5 +1,5 @@
 # XRSound
-XRSound is an add-on for the SpaceXpanse Space Flight Simulator that automatically plays sounds for all SpaceXpanse vessels, as well as enabling custom SpaceXpanse vessels to play custom sounds.
+XRSound is an add-on for the SpaceXpanse Metaverse Simulator that automatically plays sounds for all SpaceXpanse vessels, as well as enabling custom SpaceXpanse vessels to play custom sounds.
 
 
 ## License
