@@ -573,7 +573,7 @@ VBMESH *Tile::CreateMesh_hemisphere (int grd, INT16 *elev, double globelev)
 		FLOAT tv = (D3DVALUE)(lat/Pi);
 
         for (x = 0; x < x2; x++) {
-            lng = x*fDAng - Pi;  // subtract Pi to wrap at +-180°
+            lng = x*fDAng - Pi;  // subtract Pi to wrap at +-180ï¿½
 			if (ilng) lng += Pi;
 			slng = sin(lng), clng = cos(lng);
 			eradius = radius + globelev; // radius including node elevation
@@ -815,7 +815,7 @@ bool TileLoader::Unqueue (Tile *tile)
 DWORD WINAPI TileLoader::Load_ThreadProc (void *data)
 {
 	const int tile_packet_size = 8; // max number of tiles to process from queue
-	DWORD idle = 1000/g_pOrbiter->Cfg()->CfgPRenderPrm.LoadFrequency;
+	DWORD idle = 1000/g_pSpaceXpanse->Cfg()->CfgPRenderPrm.LoadFrequency;
 	Tile *tile[tile_packet_size];
 	int nload, i;
 
@@ -871,7 +871,7 @@ TileManager2Base::TileManager2Base (const Planet *_cbody, int _maxres, int _grid
 	prm.maxlvl = max (0, _maxres-4);
 	gridRes = _gridres;
 	char path[1024];
-	g_pOrbiter->Cfg()->PTexPath(path, cbody->Name());
+	g_pSpaceXpanse->Cfg()->PTexPath(path, cbody->Name());
 	m_dataRootDir = path;
 }
 
@@ -881,14 +881,14 @@ void TileManager2Base::CreateDeviceObjects (LPDIRECT3D7 _d3d, LPDIRECT3DDEVICE7 
 {
 	d3d = _d3d;
 	dev = _dev;
-	resolutionBias     = 4.0 + g_pOrbiter->Cfg()->CfgPRenderPrm.ResolutionBias;
-	bTileLoadThread    = g_pOrbiter->Cfg()->CfgPRenderPrm.bLoadOnThread;
-	cprm.bSpecular     = g_pOrbiter->Cfg()->CfgVisualPrm.bWaterreflect;
-	cprm.bLights       = g_pOrbiter->Cfg()->CfgVisualPrm.bNightlights;
-	cprm.bCloudShadow  = g_pOrbiter->Cfg()->CfgVisualPrm.bClouds && g_pOrbiter->Cfg()->CfgVisualPrm.bCloudShadows;
-	cprm.lightfac      = g_pOrbiter->Cfg()->CfgVisualPrm.LightBrightness;
-	cprm.elevMode      = g_pOrbiter->Cfg()->CfgVisualPrm.ElevMode;
-	cprm.tileLoadFlags = g_pOrbiter->Cfg()->CfgPRenderPrm.TileLoadFlags;
+	resolutionBias     = 4.0 + g_pSpaceXpanse->Cfg()->CfgPRenderPrm.ResolutionBias;
+	bTileLoadThread    = g_pSpaceXpanse->Cfg()->CfgPRenderPrm.bLoadOnThread;
+	cprm.bSpecular     = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bWaterreflect;
+	cprm.bLights       = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bNightlights;
+	cprm.bCloudShadow  = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bClouds && g_pSpaceXpanse->Cfg()->CfgVisualPrm.bCloudShadows;
+	cprm.lightfac      = g_pSpaceXpanse->Cfg()->CfgVisualPrm.LightBrightness;
+	cprm.elevMode      = g_pSpaceXpanse->Cfg()->CfgVisualPrm.ElevMode;
+	cprm.tileLoadFlags = g_pSpaceXpanse->Cfg()->CfgPRenderPrm.TileLoadFlags;
 	loader = new TileLoader;
 }
 
@@ -946,7 +946,7 @@ MATRIX4 TileManager2Base::WorldMatrix (int ilng, int nlng, int ilat, int nlat)
 		return prm.dwmat;
 	}
 
-	double lat, lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180°
+	double lat, lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180ï¿½
 	double slng = sin(lng), clng = cos(lng);
 	MATRIX4 lrot = {clng,0,slng,0,  0,1.0,0,0,  -slng,0,clng,0,  0,0,0,1.0};
 
