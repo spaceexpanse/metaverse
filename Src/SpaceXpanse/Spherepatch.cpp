@@ -11,7 +11,7 @@
 #include "Texture.h"
 #include "Planet.h"
 #include "VPlanet.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Scene.h"
 #include "Camera.h"
 #include "Log.h"
@@ -21,7 +21,7 @@
 // =======================================================================
 // Externals
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 extern int patchidx[9];
@@ -77,7 +77,7 @@ int *NLNG[9] = {0,0,0,0,0,NLNG5,NLNG6,NLNG7,NLNG8};
 
 void CreatePatchDeviceObjects (LPDIRECT3D7 d3d, LPDIRECT3DDEVICE7 dev)
 {
-	VB_MemFlag = (g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->IsTLDevice() ? 0 : D3DVBCAPS_SYSTEMMEMORY);
+	VB_MemFlag = (g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->IsTLDevice() ? 0 : D3DVBCAPS_SYSTEMMEMORY);
 	// Set vertex buffer memory flag: video memory for T&L devices,  system memory for all others
 
 	// Level 1 patch template
@@ -224,7 +224,7 @@ PatchManager::~PatchManager ()
 
 bool PatchManager::SetReflectionColour (D3DCOLORVALUE *col)
 {
-	if (g_pOrbiter->Cfg()->CfgVisualPrm.bWaterreflect && ref && ref->Type() == OBJTP_PLANET) {
+	if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bWaterreflect && ref && ref->Type() == OBJTP_PLANET) {
 		Planet *planet = (Planet*)ref;  // should be generalised for CelesitalBody
 		const ATMCONST* ap = planet->AtmParams();
 		if (ap) {
@@ -273,7 +273,7 @@ void PatchManager::Render (LPDIRECT3DDEVICE7 dev, D3DMATRIX &wmat, double visrad
 		dev->SetTextureStageState (1, D3DTSS_COLOROP, D3DTOP_ADD);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG1, D3DTA_CURRENT);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG2, D3DTA_TFACTOR);
-		Vector bgc = g_pOrbiter->GetInlineGraphicsClient()->GetScene()->BGcol();
+		Vector bgc = g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->BGcol();
 		dev->SetRenderState (D3DRENDERSTATE_TEXTUREFACTOR, D3DRGBA(bgc.x, bgc.y, bgc.z, 1));
 	}
 
@@ -410,7 +410,7 @@ void PatchManager::RenderNightlights (LPDIRECT3DDEVICE7 dev, D3DMATRIX &wmat, do
 	static D3DMATERIAL7 pmat, lightmat = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,1},0};
 	static D3DMATERIAL7 lightmat_dim = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,1},0};
 	D3DMATRIX wtrans;
-	lightmat.emissive.b = (lightmat.emissive.r = lightmat.emissive.g = (float)g_pOrbiter->Cfg()->CfgVisualPrm.LightBrightness);
+	lightmat.emissive.b = (lightmat.emissive.r = lightmat.emissive.g = (float)g_pSpaceXpanse->Cfg()->CfgVisualPrm.LightBrightness);
 	dVERIFY (dev->GetMaterial (&pmat), "LPDIRECT3DDEVICE7::GetMaterial failed");
 	dVERIFY (dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, TRUE), "LPDIRECT3DDEVICE7::SetRenderState failed");
 	int i, j, hemisphere, idx;
@@ -485,7 +485,7 @@ void PatchManager::RenderSimple (LPDIRECT3DDEVICE7 dev, D3DMATRIX &wmat, double 
 		dev->SetTextureStageState (1, D3DTSS_COLOROP, D3DTOP_ADD);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG1, D3DTA_CURRENT);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG2, D3DTA_TFACTOR);
-		Vector bgc = g_pOrbiter->GetInlineGraphicsClient()->GetScene()->BGcol();
+		Vector bgc = g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->BGcol();
 		dev->SetRenderState (D3DRENDERSTATE_TEXTUREFACTOR, D3DRGBA(bgc.x, bgc.y, bgc.z, 1));
 	}
 
@@ -516,7 +516,7 @@ void PatchManager::SetupPatchBand (int ilat, D3DMATRIX *trans, Vector *pcnt, dou
 	slat2 = sin(lat2), clat2 = cos(lat2);
 
 	for (i = 0; i < nl; i++) {
-		lng1  = Pi2 * (double)i/(double)nl + Pi; // subtract Pi so texture wraps at +- 180°
+		lng1  = Pi2 * (double)i/(double)nl + Pi; // subtract Pi so texture wraps at +- 180ï¿½
 		lng2  = lng1 + Pi2/(double)nl;
 		slng1 = sin(lng1), clng1 = cos(lng1);
 		slng2 = sin(lng2), clng2 = cos(lng2);
@@ -550,7 +550,7 @@ void PatchManager::SetupPatchBands (D3DMATRIX *trans, Vector *pcnt, double *prad
 
 void PatchManager::CreateDeviceObjects (LPDIRECT3D7 d3d, LPDIRECT3DDEVICE7 dev)
 {
-	g_pOrbiter->OutputLoadStatus ("Creating surface patches", 1);
+	g_pSpaceXpanse->OutputLoadStatus ("Creating surface patches", 1);
 	
 	static D3DVERTEXBUFFERDESC bbvbd = 
 	{ sizeof(D3DVERTEXBUFFERDESC), D3DVBCAPS_SYSTEMMEMORY, D3DFVF_XYZRHW, 8 };
@@ -567,14 +567,14 @@ void PatchManager::CreateDeviceObjects (LPDIRECT3D7 d3d, LPDIRECT3DDEVICE7 dev)
 
 	FILE *f;
 #ifdef MICROLIGHTTEX
-	if (f = g_pOrbiter->OpenTextureFile ("lights1", ".dds")) {
+	if (f = g_pSpaceXpanse->OpenTextureFile ("lights1", ".dds")) {
 		g_texmanager2->ReadTexture (f, &lightstruct1);
 		fclose (f);
 	} else
 		lightstruct1 = 0;
 #endif
 
-	if (f = g_pOrbiter->OpenTextureFile ("cloud1", ".dds")) {
+	if (f = g_pSpaceXpanse->OpenTextureFile ("cloud1", ".dds")) {
 		g_texmanager2->ReadTexture (f, &cloudstruct);
 		fclose (f);
 	} else
@@ -778,7 +778,7 @@ void CreateSphere (LPDIRECT3D7 d3d, LPDIRECT3DDEVICE7 dev, VBMESH &mesh, DWORD n
 		FLOAT tv = fDAngY0/(FLOAT)Pi;
 
         for (x = 0; x < x2; x++) {
-            FLOAT fDAngX0 = x*fDAng - (FLOAT)Pi;  // subtract Pi to wrap at +-180°
+            FLOAT fDAngX0 = x*fDAng - (FLOAT)Pi;  // subtract Pi to wrap at +-180ï¿½
 			if (hemisphere && which_half) fDAngX0 += (FLOAT)Pi;
 
 			D3DVECTOR v( r0*(FLOAT)cos(fDAngX0), y0, r0*(FLOAT)sin(fDAngX0) );
@@ -1170,7 +1170,7 @@ void HorizonManager::Render (LPDIRECT3DDEVICE7 dev, D3DMATRIX &wmat, bool dual)
 
 	dev->SetTextureStageState (0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 	dev->SetTransform (D3DTRANSFORMSTATE_WORLD, &transm);
-	dev->SetTexture (0, g_pOrbiter->GetInlineGraphicsClient()->GetScene()->HazeTex());
+	dev->SetTexture (0, g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->HazeTex());
 
 	dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, TRUE);
 	dev->SetRenderState (D3DRENDERSTATE_LIGHTING, FALSE);
