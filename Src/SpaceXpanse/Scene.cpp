@@ -4,7 +4,7 @@
 #include "OGraphics.h"
 #include <memory.h>
 #include <stdio.h>
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Util.h"
 #include "Scene.h"
 #include "Particle.h"
@@ -30,7 +30,7 @@
 #define VORLABEL_LIMIT 0.6  // apparent planet radius limit for displaying VOR transmitter labels
 
 const int chunksize = 16;
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Vessel *g_focusobj;
 extern TextureManager2 *g_texmanager2;
 extern Camera *g_camera;
@@ -88,7 +88,7 @@ static D3DMATRIX ident = {
 
 struct VB_XYZ { float x, y, z; };
 
-Scene::Scene (OrbiterGraphics *og)
+Scene::Scene (SpaceXpanseGraphics *og)
 {
 	int i;
 	DWORD val;
@@ -109,24 +109,24 @@ Scene::Scene (OrbiterGraphics *og)
 	InitGDI();
 	sunvis = false;
 	if (!og->clbkGetRenderParam (RP_MAXLIGHTS, &maxlight) || (LONG)maxlight < 0) maxlight = 8;
-	if (g_pOrbiter->Cfg()->CfgVisualPrm.MaxLight)
-		maxlight = min (maxlight, g_pOrbiter->Cfg()->CfgVisualPrm.MaxLight);
-	locallight = g_pOrbiter->Cfg()->CfgVisualPrm.bLocalLight;
+	if (g_pSpaceXpanse->Cfg()->CfgVisualPrm.MaxLight)
+		maxlight = min (maxlight, g_pSpaceXpanse->Cfg()->CfgVisualPrm.MaxLight);
+	locallight = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bLocalLight;
 	if (locallight)
 		lightlist = new LIGHTLIST[maxlight];
 
 	bglvl = 0;
 
 	zclearflag = D3DCLEAR_ZBUFFER;
-	bool bstencil = (g_pOrbiter->Cfg()->CfgDevPrm.bTryStencil &&
+	bool bstencil = (g_pSpaceXpanse->Cfg()->CfgDevPrm.bTryStencil &&
 		og->clbkGetRenderParam (RP_STENCILDEPTH, &val) && val >= 1);
 	if (bstencil) zclearflag |= D3DCLEAR_STENCIL;
 	// use stencil buffers (for shadow rendering etc.)
 
-	//Vector cc (g_pOrbiter->Cfg()->ConstellationCol);
+	//Vector cc (g_pSpaceXpanse->Cfg()->ConstellationCol);
 	cnstlimit = (int)((cc.x + cc.y + cc.z)/3.0*256.0);
-	star_lght = (g_pOrbiter->Cfg()->CfgVisualPrm.bSpecular ? &starlight_specular : &starlight_nospecular);
-	Mesh::GlobalEnableSpecular (g_pOrbiter->Cfg()->CfgVisualPrm.bSpecular);
+	star_lght = (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bSpecular ? &starlight_specular : &starlight_nospecular);
+	Mesh::GlobalEnableSpecular (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bSpecular);
 
 	//csphere = new CSphereManager;
 
@@ -137,15 +137,15 @@ Scene::Scene (OrbiterGraphics *og)
 	// some general-use textures
 	char cbuf[256];
 	FILE *file;
-	strcpy (cbuf, g_pOrbiter->Cfg()->CfgDirPrm.TextureDir);
+	strcpy (cbuf, g_pSpaceXpanse->Cfg()->CfgDirPrm.TextureDir);
 	strcat (cbuf, "\\exhaust.dds");
 
 	static char *gtex_name[4] = {"Exhaust", "Horizon", "Reentry", "Contrail1"};
 	for (i = 0; i < 4; i++) {
 		gtex[i] = 0;
-		if (file = g_pOrbiter->OpenTextureFile (gtex_name[i], ".dds")) {
+		if (file = g_pSpaceXpanse->OpenTextureFile (gtex_name[i], ".dds")) {
 			if (FAILED (g_texmanager2->ReadTexture (file, gtex+i)))
-				LOGOUT_ERR (g_pOrbiter->TexPath (gtex_name[i]));
+				LOGOUT_ERR (g_pSpaceXpanse->TexPath (gtex_name[i]));
 			fclose (file);
 		}
 	}
@@ -236,7 +236,7 @@ void Scene::Init()
 {
 	if (csphere) delete csphere;
 	if (csphere2) delete csphere2;
-	CreateCSphere(g_pOrbiter->Cfg()->CfgVisualPrm.CSphereBgPath);
+	CreateCSphere(g_pSpaceXpanse->Cfg()->CfgVisualPrm.CSphereBgPath);
 }
 
 void Scene::InitGDI ()
@@ -572,7 +572,7 @@ void Scene::CreateCSphere(const char *path)
 	if (!path[0]) return;
 
 	char cbuf[256];
-	g_pOrbiter->Cfg()->TexPath(cbuf, path);
+	g_pSpaceXpanse->Cfg()->TexPath(cbuf, path);
 	DWORD fa = GetFileAttributes(cbuf);
 	if (fa & FILE_ATTRIBUTE_DIRECTORY) {
 		csphere2 = new CsphereManager(path, 8, 8);
@@ -637,10 +637,10 @@ static int lvlid[256];
 DWORD Scene::LoadStars ()
 {
 	// parameters for mapping an apparent magnitude value to a pixel colour intensity
-	double mag_hi = g_pOrbiter->Cfg()->CfgVisualPrm.StarPrm.mag_hi;  // visual magnitude for max display brightness
-	double mag_lo = g_pOrbiter->Cfg()->CfgVisualPrm.StarPrm.mag_lo;  // highest magnitude to be displayed
-	double brt_min = g_pOrbiter->Cfg()->CfgVisualPrm.StarPrm.brt_min;// lowest display brightness
-	bool logmap = g_pOrbiter->Cfg()->CfgVisualPrm.StarPrm.map_log;   // linear/log mapping flag
+	double mag_hi = g_pSpaceXpanse->Cfg()->CfgVisualPrm.StarPrm.mag_hi;  // visual magnitude for max display brightness
+	double mag_lo = g_pSpaceXpanse->Cfg()->CfgVisualPrm.StarPrm.mag_lo;  // highest magnitude to be displayed
+	double brt_min = g_pSpaceXpanse->Cfg()->CfgVisualPrm.StarPrm.brt_min;// lowest display brightness
+	bool logmap = g_pSpaceXpanse->Cfg()->CfgVisualPrm.StarPrm.map_log;   // linear/log mapping flag
 
 	if (mag_lo <= mag_hi) {
 		LOGOUT_ERR("Inconsistent magnitude limits for background star brightness. Disabling background stars.");
@@ -700,7 +700,7 @@ DWORD Scene::LoadStars ()
 				bufsize += 16;
 			}
 			vbdesc.dwNumVertices = nv;
-			g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, svtx+nsbuf, 0);
+			g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, svtx+nsbuf, 0);
 			VERTEX_XYZC *vbuf;
 			svtx[nsbuf]->Lock (DDLOCK_WAIT | DDLOCK_WRITEONLY | DDLOCK_DISCARDCONTENTS, (LPVOID*)&vbuf, NULL);
 			for (j = 0; j < nv; j++) {
@@ -794,8 +794,8 @@ int Scene::LoadConstellations ()
 		// NOTE: without buffersize "+1", after calling ProcessVertices a CTD occurs on exit
 		// at rare occasions (device bug?)
 		VB_XYZ *vbpos;
-		g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &vb_cnstlabel, 0);
-		g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &vb_target, 0);
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &vb_cnstlabel, 0);
+		g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &vb_target, 0);
 		vb_cnstlabel->Lock (DDLOCK_WAIT | DDLOCK_WRITEONLY | DDLOCK_DISCARDCONTENTS, (LPVOID*)&vbpos, NULL);
 		for (i = 0; i < MAXCONST; i++) {
 			if (!fread (&buf, sizeof(buf), 1, f)) break;
@@ -829,10 +829,10 @@ void Scene::AllocGrids ()
 
 	D3DVERTEXBUFFERDESC vbdesc;
 	vbdesc.dwSize = sizeof (D3DVERTEXBUFFERDESC);
-	vbdesc.dwCaps = (g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->IsTLDevice() ? 0 : D3DVBCAPS_SYSTEMMEMORY);
+	vbdesc.dwCaps = (g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->IsTLDevice() ? 0 : D3DVBCAPS_SYSTEMMEMORY);
 	vbdesc.dwFVF  = D3DFVF_XYZ;
 	vbdesc.dwNumVertices = (NSEG+1) * 11;
-	g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &grdlng, 0);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &grdlng, 0);
 	VERTEX_XYZ *vbuf;
 	grdlng->Lock (DDLOCK_WAIT | DDLOCK_WRITEONLY | DDLOCK_DISCARDCONTENTS, (LPVOID*)&vbuf, NULL);
 	for (j = idx = 0; j <= 10; j++) {
@@ -851,7 +851,7 @@ void Scene::AllocGrids ()
 	grdlng->Optimize (dev, 0);
 
 	vbdesc.dwNumVertices = (NSEG+1) * 12;
-	g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &grdlat, 0);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbdesc, &grdlat, 0);
 	grdlat->Lock (DDLOCK_WAIT | DDLOCK_WRITEONLY | DDLOCK_DISCARDCONTENTS, (LPVOID*)&vbuf, NULL);
 	for (j = idx = 0; j < 12; j++) {
 		lng = j*15*RAD;
@@ -957,7 +957,7 @@ void Scene::RenderEqLine ()
 HDC Scene::GetLabelDC (int mode)
 {
 	HDC hDC;
-	g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
 	SelectObject (hDC, GetStockObject (NULL_BRUSH));
 			SelectObject (hDC, GetStockObject (NULL_PEN));
 	SelectObject (hDC, gdires.hPen[mode]);
@@ -972,7 +972,7 @@ void Scene::ReleaseLabelDC (HDC hDC)
 {
 	SelectObject (hDC, GetStockObject (SYSTEM_FONT));
 	SelectObject (hDC, GetStockObject (BLACK_PEN));
-	g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
+	g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
 }
 
 double Scene::MinParticleCameraDist() const
@@ -1074,8 +1074,8 @@ void Scene::Render (D3DRECT* vp_rect)
 			double coss = (pc & ps) / cdist;
 			//double intens = min (1.0,(0.9*coss+0.5)) * sqrt (dns/atmp->rho0);
 			double intens = min (1.0,(1.0839*coss+0.4581)) * sqrt (prm.rho/atmp->rho0);
-			// => intensity=0 at sun zenith distance 115°
-			//    intensity=1 at sun zenith distance 60°
+			// => intensity=0 at sun zenith distance 115ï¿½
+			//    intensity=1 at sun zenith distance 60ï¿½
 			if (intens > 0.0) {
 				col += Vector (atmp->color0.x*intens, atmp->color0.y*intens, atmp->color0.z*intens);
 			}
@@ -1167,7 +1167,7 @@ void Scene::Render (D3DRECT* vp_rect)
 	dev->SetRenderState (D3DRENDERSTATE_LIGHTING, FALSE);
 
 	// render background stars, celestial markers and grids
-	DWORD flagPItem = g_pOrbiter->Cfg()->CfgVisHelpPrm.flagPlanetarium;
+	DWORD flagPItem = g_pSpaceXpanse->Cfg()->CfgVisHelpPrm.flagPlanetarium;
 	if (ns || flagPItem & PLN_ENABLE) {
 		g_camera->SetFrustumLimits (fpl*0.1, fpl);
 		// set limits to some arbitrary values (everything in there is
@@ -1242,7 +1242,7 @@ void Scene::Render (D3DRECT* vp_rect)
 				res = vb_target->ProcessVertices (D3DVOP_TRANSFORM, 0, ncnstlabel, vb_cnstlabel, 0, dev, 0);
 				if (res == D3D_OK) {
 					HDC hDC;
-					g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
+					g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->GetDC (&hDC);
 					SelectObject (hDC, gdires.hFont1);
 					SetTextAlign (hDC, TA_CENTER | TA_BOTTOM);
 					SetTextColor (hDC, 0xA0A0A0);
@@ -1257,7 +1257,7 @@ void Scene::Render (D3DRECT* vp_rect)
 					}
 					vb_target->Unlock();
 					SelectObject (hDC, GetStockObject (SYSTEM_FONT));
-					g_pOrbiter->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
+					g_pSpaceXpanse->GetInlineGraphicsClient()->GetRenderTarget()->ReleaseDC (hDC);
 				}
 			}
 			dev->SetRenderState (D3DRENDERSTATE_DESTBLEND, dstblend);
@@ -1521,7 +1521,7 @@ void Scene::RenderVesselShadows ()
 	static D3DMATERIAL7 shmat_black = {{0,0,0,1},{0,0,0,0},{0,0,0,0},{0,0,0,0},0};
 	dev->SetTexture (0,0);
 
-	if (g_pOrbiter->UseStencil()) { // use alpha-blended shadows with stencil buffer
+	if (g_pSpaceXpanse->UseStencil()) { // use alpha-blended shadows with stencil buffer
 		dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, TRUE);
 		dev->SetRenderState (D3DRENDERSTATE_STENCILENABLE, TRUE);
 		dev->SetRenderState (D3DRENDERSTATE_STENCILREF, 1);
@@ -1539,7 +1539,7 @@ void Scene::RenderVesselShadows ()
 		if (vobj[i]->GetBody()->Type() == OBJTP_VESSEL)
 			((VVessel*)vobj[i])->RenderGroundShadow (dev, planet);
 
-	if (g_pOrbiter->UseStencil())
+	if (g_pSpaceXpanse->UseStencil())
 		dev->SetRenderState (D3DRENDERSTATE_STENCILENABLE, FALSE);
 	else
 		dev->SetRenderState (D3DRENDERSTATE_ALPHABLENDENABLE, TRUE);
