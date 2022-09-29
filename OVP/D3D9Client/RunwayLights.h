@@ -2,7 +2,7 @@
 // RunwayLights.h
 // Part of the ORBITER VISUALISATION PROJECT (OVP) D3D9 Client
 // Dual licensed under GPL v3 and LGPL v3
-// Copyright (C) 2012-2016 Émile "Bibi Uncle" Grégoire
+// Copyright (C) 2012-2016 ï¿½mile "Bibi Uncle" Grï¿½goire
 //				 2012-2016 Jarmo Nikkanen
 // ==============================================================
 
@@ -15,7 +15,7 @@
 #ifndef __RUNWAYLIGHTS_H
 #define __RUNWAYLIGHTS_H
 
-#include "OrbiterAPI.h"
+#include "SpaceXpanseAPI.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
