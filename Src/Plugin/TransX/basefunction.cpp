@@ -20,8 +20,8 @@
 
 #define STRICT
 
-#include "orbitersdk.h"
-#include "orbiterapi.h"
+#include "spacexpansesdk.h"
+#include "spacexpanseapi.h"
 #include "basefunction.h"
 #include "transxstate.h"
 #include "TransXFunction.h"
