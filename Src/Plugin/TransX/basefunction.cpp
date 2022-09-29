@@ -610,7 +610,7 @@ void basefunction::calculate(VECTOR3 *targetvel)
 	}
 	//Get current graph parameters from current MFD
 	hypormaj.setinvalid();
-	if (!m_target.validate()) hmajtarget=NULL;//Ensure handle still exists in Orbiter
+	if (!m_target.validate()) hmajtarget=NULL;//Ensure handle still exists in SpaceXpanse
 	VECTOR3 temp={0,0,0};
 	// Get positions of major, minor bodies and spacecraft
 	if (previousfunc==NULL)
@@ -625,7 +625,7 @@ void basefunction::calculate(VECTOR3 *targetvel)
 			context.setinvalid();//No body above this one
 			hcontext=NULL;
 		}
-		// Initialise orbit info for craft from Orbiter data
+		// Initialise orbit info for craft from SpaceXpanse data
 		previousexists=false;
 		VECTOR3 pos,vel;
 		oapiGetRelativeVel(hcraft,hmajor,&vel);
@@ -964,7 +964,7 @@ void basefunction::doupdate(oapi::Sketchpad *sketchpad,int tw, int th,int viewmo
 				sketchpad->Text(wpos,hpos,buffer, length);
 				hpos+=linespacing;
 				VECTOR3 south = {0, -1, 0};
-				length = snprintf(buffer, sizeof(buffer) - 1, "Inc:      %.4g°", 180/PI*acos(cosangle(south, craft.getplanevector())));
+				length = snprintf(buffer, sizeof(buffer) - 1, "Inc:      %.4gï¿½", 180/PI*acos(cosangle(south, craft.getplanevector())));
 				sketchpad->Text(wpos,hpos,buffer, length);
 				hpos+=linespacing;
 			}
