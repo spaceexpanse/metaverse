@@ -1,8 +1,8 @@
 ![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)
 
-# SpaceXpanse Space Flight Simulator
+# SpaceXpanse Metaverse Simulator
 
-SpaceXpanse is a spaceflight simulator based on Newtonian mechanics. Its playground
+SpaceXpanse is a simulator based on Newtonian mechanics. Its playground
 is our solar system with many of its major bodies – the sun, planets and moons.
 You take control of a spacecraft – either historic, hypothetical, or purely
 science fiction. SpaceXpanse is unlike most commercial computer games with a space
@@ -26,11 +26,11 @@ D3D9Client graphics engine is licensed under LGPL, see [LGPL](./OVP/D3D9Client/L
 
 Get the SpaceXpanse source repository from github
 ```bash
-git clone git@github.com:spacexpansesim/spacexpanse.git
+git clone git@github.com:spacexpanse/metaverse.git
 ```
 or
 ```bash
-git clone https://github.com/spacexpansesim/spacexpanse.git
+git clone https://github.com/spacexpanse/metaverse.git
 ```
 
 To configure and generate the makefiles, you need a recent
@@ -77,7 +77,7 @@ See [README.compile](./README.compile) for details on building SpaceXpanse.
 The SpaceXpanse git repository does not include most of the planetary texture files
 required for running SpaceXpanse.
 You need to install those separately. The easiest way to do so is by installing
-[SpaceXpanse 2016](http://orbit.medphys.ucl.ac.uk/download.html). Optionally you can
+[SpaceXpanse Metaverse](https://github.com/spacexpanse/metaverse). Optionally you can
 also install high-resolution versions of the textures from the SpaceXpanse website.
 You should keep the SpaceXpanse 2016 installation separate from your SpaceXpanse git
 repository.
@@ -99,4 +99,4 @@ the SpaceXpanse Launchpad dialog, or with Alt-F1 while running
 SpaceXpanse.
 
 Remaining questions can be posted on the SpaceXpanse user forum at
-[spacexpanse-forum.com](https://www.spacexpanse-forum.com).
+[spacexpanse-forum.com](https://forum.spacexpanse.org).

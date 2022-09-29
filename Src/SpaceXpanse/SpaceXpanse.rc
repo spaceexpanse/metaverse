@@ -445,9 +445,9 @@ IDD_MAIN DIALOGEX 0, 0, 356, 329
 STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 #ifdef INLINEGRAPHICS
-CAPTION "OpenSpaceXpanse Launchpad"
+CAPTION "SpaceXpanse Metaverse Launchpad"
 #else
-CAPTION "OpenSpaceXpanse Server Launchpad"
+CAPTION "SpaceXpanse Metaverse Server Launchpad"
 #endif
 FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
@@ -461,8 +461,8 @@ BEGIN
     PUSHBUTTON      "Video ",IDC_MNU_VID,6,103,59,14,BS_RIGHT
     PUSHBUTTON      "Joystick ",IDC_MNU_JOY,6,118,59,14,BS_RIGHT
     PUSHBUTTON      "Extra ",IDC_MNU_EXT,6,133,59,14,BS_RIGHT
-    PUSHBUTTON      "About SpaceXpanse ",IDC_MNU_ABT,6,148,59,14,BS_RIGHT
-    CTEXT           "\r\norbit.medphys.ucl.ac.uk\r\n(c) 2000-2016\r\nMartin Schweiger",IDC_BLACKBOX,218,0,138,37,0,WS_EX_RIGHT
+    PUSHBUTTON      "About ",IDC_MNU_ABT,6,148,59,14,BS_RIGHT
+    CTEXT           "\r\nspacexpanse.org\r\n(c) 2022\r\nSpaceXpanse Team",IDC_BLACKBOX,218,0,138,37,0,WS_EX_RIGHT
     CONTROL         IDB_BANNER,IDC_LOGO,"Static",SS_BITMAP,0,0,249,37
     CONTROL         "",IDC_SHADOW,"Static",SS_OWNERDRAW,0,37,5,5
     CTEXT           "v.123456",IDC_VERSION,4,315,44,8,WS_DISABLED
@@ -506,12 +506,12 @@ BEGIN
     GROUPBOX        "Installed components", IDC_ABT_GRP_COMPONENT,4,63,269,50
     LISTBOX         IDC_ABT_LBOX_COMPONENT,17,75,243,40, LBS_NOTIFY | WS_BORDER | WS_VSCROLL
     GROUPBOX        "On the web", IDC_ABT_GRP_WEB, 4, 118, 269, 43
-    LTEXT           "SpaceXpanse home:\nSpaceXpanse web forum:\nYoutube channel:",IDC_ABT_TXT_WEB,17,130,63,30,0,WS_EX_TRANSPARENT
+    LTEXT           "Homepage:\nSpaceXpanse ROD:\nYoutube channel:",IDC_ABT_TXT_WEB,17,130,63,30,0,WS_EX_TRANSPARENT
     LTEXT           "",IDC_ABT_TXT_WEBADDR,94,130,158,30
     LTEXT           "SpaceXpanse is published under the MIT License.\r\nDetails can be found under 'License' below.", IDC_ABT_TXT_LICENSE, 11, 177, 254, 28
     PUSHBUTTON      "License",IDC_ABT_DISCLAIM,94,210,88,14
     PUSHBUTTON      "Credits and Contributions",IDC_ABT_CREDIT,184,210,88,14
-    PUSHBUTTON      "SpaceXpanse Homepage", IDC_ABT_WEB, 4, 210, 88, 14
+    PUSHBUTTON      "Homepage", IDC_ABT_WEB, 4, 210, 88, 14
 END
 
 IDD_PAGE_JOY DIALOGEX 68, 43, 277, 254

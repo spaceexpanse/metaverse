@@ -72,7 +72,7 @@ INT_PTR spacexpanse::AboutTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case IDC_ABT_WEB:
-			ShellExecute (NULL, "open", "http://orbit.medphys.ucl.ac.uk/", NULL, NULL, SW_SHOWNORMAL);
+			ShellExecute (NULL, "open", "http://spacexpanse.org/", NULL, NULL, SW_SHOWNORMAL);
 			return true;
 		case IDC_ABT_DISCLAIM:
 			DialogBoxParam (AppInstance(), MAKEINTRESOURCE(IDD_MSG), LaunchpadWnd(), AboutProc,

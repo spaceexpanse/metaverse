@@ -76,7 +76,7 @@ const int MAX_TEXTURE_BUFSIZE = 8000000;
 // Texture manager buffer size. Should be determined from
 // memory size (System or Video?)
 
-TCHAR* g_strAppTitle = "OpenSpaceXpanse";
+TCHAR* g_strAppTitle = "SpaceXpanse Metaverse";
 
 #ifdef INLINEGRAPHICS
 TCHAR* MasterConfigFile = "SpaceXpanse.cfg";

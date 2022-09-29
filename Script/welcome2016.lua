@@ -252,7 +252,7 @@ if mjd < 57457.66028 then
 		tstep()
 	end
 	oapi.set_cameramode({mode='cockpit', cockpitmode='vc', pos=0, lean=0})
-	h:set_text('>>> Check out the spacexpansesim channel on youtube!')
+	h:set_text('>>> Check out the SpaceXpanese channel on YouTube!')
 	while t1 < 1067 do
 		tstep()
 	end
