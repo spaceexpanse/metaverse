@@ -2,11 +2,11 @@
 // Licensed under the MIT License
 
 #include "cspheremgr2.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Camera.h"
 #include "Texture.h"
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 extern DWORD g_vtxcount;
@@ -170,7 +170,7 @@ template<>
 MATRIX4 CsphereManager::WorldMatrix(int ilng, int nlng, int ilat, int nlat)
 {
 
-	double lat, lng = Pi2 * (double)ilng / (double)nlng + Pi; // add pi so texture wraps at +-180°
+	double lat, lng = Pi2 * (double)ilng / (double)nlng + Pi; // add pi so texture wraps at +-180ï¿½
 	double slng = sin(lng), clng = cos(lng);
 	MATRIX4 lrot = { clng,0,slng,0,  0,1.0,0,0,  -slng,0,clng,0,  0,0,0,1.0 };
 
@@ -216,7 +216,7 @@ void CsphereManager::LoadZTrees()
 		char cbuf[256];
 		//char path[256] = "csphere\\";
 		//strcat(path, m_name);
-		g_pOrbiter->Cfg()->PTexPath(cbuf, m_name);
+		g_pSpaceXpanse->Cfg()->PTexPath(cbuf, m_name);
 		treeMgr[0] = ZTreeMgr::CreateFromFile(cbuf, ZTreeMgr::LAYER_SURF);
 	}
 	else {
