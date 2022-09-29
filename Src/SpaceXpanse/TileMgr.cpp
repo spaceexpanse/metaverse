@@ -8,7 +8,7 @@
 
 #include "D3dmath.h"
 #include "D3d7util.h"
-#include "Orbiter.h"
+#include "SpaceXpanse.h"
 #include "Scene.h"
 #include "VPlanet.h"
 #include "TileMgr.h"
@@ -20,7 +20,7 @@
 // =======================================================================
 // Externals
 
-extern Orbiter *g_pOrbiter;
+extern SpaceXpanse *g_pSpaceXpanse;
 extern Camera *g_camera;
 extern TextureManager2 *g_texmanager2;
 extern DWORD g_vtxcount;
@@ -66,14 +66,14 @@ TileBuffer *TileManager::tilebuf = NULL;
 TileManager::TileManager (const Planet *_cbody)
 {
 	cbody = _cbody;
-	maxlvl = min (g_pOrbiter->Cfg()->CfgVisualPrm.PlanetMaxLevel, cbody->max_patch_level);
+	maxlvl = min (g_pSpaceXpanse->Cfg()->CfgVisualPrm.PlanetMaxLevel, cbody->max_patch_level);
 	maxlvl = min (maxlvl, SURF_MAX_PATCHLEVEL);
 	maxbaselvl = min (8, maxlvl);
 	int maxidx = patchidx[maxbaselvl];
 	pcdir.Set (1,0,0);
-	bRipple = (g_pOrbiter->Cfg()->CfgVisualPrm.bSpecularRipple && cbody->bWaterMicrotex);
-	bPreloadTile = (g_pOrbiter->Cfg()->CfgPRenderPrm.PreloadMode > 0);
-	lightfac = g_pOrbiter->Cfg()->CfgVisualPrm.LightBrightness;
+	bRipple = (g_pSpaceXpanse->Cfg()->CfgVisualPrm.bSpecularRipple && cbody->bWaterMicrotex);
+	bPreloadTile = (g_pSpaceXpanse->Cfg()->CfgPRenderPrm.PreloadMode > 0);
+	lightfac = g_pSpaceXpanse->Cfg()->CfgVisualPrm.LightBrightness;
 	nmask = 0;
 	nhitex = nhispec = 0;
 	wavetex = 0;
@@ -103,7 +103,7 @@ TileManager::~TileManager ()
 		for (i = 0; i < ntex; i++) {
 			texbuf[i]->Release();
 			if (!(++counter % 100))
-				g_pOrbiter->UpdateDeallocationProgress();
+				g_pSpaceXpanse->UpdateDeallocationProgress();
 		}
 		delete []texbuf;
 	}
@@ -111,18 +111,18 @@ TileManager::~TileManager ()
 		for (i = 0; i < nmask; i++) {
 			specbuf[i]->Release();
 			if (!(++counter % 100))
-				g_pOrbiter->UpdateDeallocationProgress();
+				g_pSpaceXpanse->UpdateDeallocationProgress();
 		}
 		delete []specbuf;
 	}
 	for (i = 0; i < maxidx; i++) {
 		if (tiledesc[i].vtx) tiledesc[i].vtx->Release();
 		if (!(++counter % 100))
-			g_pOrbiter->UpdateDeallocationProgress();
+			g_pSpaceXpanse->UpdateDeallocationProgress();
 	}
 	delete []tiledesc;
 	if (wavetex) wavetex->Release();
-	g_pOrbiter->UpdateDeallocationProgress();
+	g_pSpaceXpanse->UpdateDeallocationProgress();
 }
 
 // =======================================================================
@@ -138,7 +138,7 @@ bool TileManager::LoadPatchData ()
 	nmask = 0;
 
 	if (!(bSpecular || bLights) ||
-		!(binf = g_pOrbiter->OpenTextureFile (cbody->Name(), "_lmask.bin"))) {
+		!(binf = g_pSpaceXpanse->OpenTextureFile (cbody->Name(), "_lmask.bin"))) {
 
 		for (i = 0; i < patchidx[maxbaselvl]; i++)
 			tiledesc[i].flag = 1;
@@ -193,7 +193,7 @@ bool TileManager::LoadTileData ()
 
 	if (maxlvl <= 8) // no tile data required
 		return false;
-	if (!(file = g_pOrbiter->OpenTextureFile (cbody->Name(), "_tile.bin")))
+	if (!(file = g_pSpaceXpanse->OpenTextureFile (cbody->Name(), "_tile.bin")))
 		return false;
 
 	DWORD n, i, j;
@@ -324,7 +324,7 @@ void TileManager::LoadTextures ()
 	// load specular ripple microtexture
 	if (bSpecular && bRipple) {
 		FILE *file;
-		if (file = g_pOrbiter->OpenTextureFile ("waves", ".dds")) {
+		if (file = g_pSpaceXpanse->OpenTextureFile ("waves", ".dds")) {
 			g_texmanager2->ReadTexture (file, &wavetex);
 			fclose (file);
 		}
@@ -414,7 +414,7 @@ void TileManager::LoadSpecularMasks ()
 	if (nmask) {
 		FILE *file;
 
-		if (file = g_pOrbiter->OpenTextureFile (cbody->Name(), "_lmask.tex")) {
+		if (file = g_pSpaceXpanse->OpenTextureFile (cbody->Name(), "_lmask.tex")) {
 			specbuf = new LPDIRECTDRAWSURFACE7[nmask]; TRACENEW
 			n = g_texmanager2->ReadTextures (file, specbuf, nmask);
 			fclose (file);
@@ -456,8 +456,8 @@ void TileManager::CreateDeviceObjects (LPDIRECT3D7 d3d, LPDIRECT3DDEVICE7 dev)
 	vpY0 = vp.dwY, vpY1 = vpY0 + vp.dwHeight;
 	// viewport size for clipping calculations
 
-	bSpecular = g_pOrbiter->Cfg()->CfgVisualPrm.bWaterreflect;
-	bLights = g_pOrbiter->Cfg()->CfgVisualPrm.bNightlights;
+	bSpecular = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bWaterreflect;
+	bLights = g_pSpaceXpanse->Cfg()->CfgVisualPrm.bNightlights;
 
 	VMAT_rotx (Rsouth, Pi);
 	// rotation matrix for flipping patches onto southern hemisphere
@@ -529,7 +529,7 @@ void TileManager::Render (LPDIRECT3DDEVICE7 dev, D3DMATRIX &wmat, double scale, 
 		dev->SetTextureStageState (1, D3DTSS_COLOROP, D3DTOP_ADD);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG1, D3DTA_CURRENT);
 		dev->SetTextureStageState (1, D3DTSS_COLORARG2, D3DTA_TFACTOR);
-		Vector bgc = g_pOrbiter->GetInlineGraphicsClient()->GetScene()->BGcol();
+		Vector bgc = g_pSpaceXpanse->GetInlineGraphicsClient()->GetScene()->BGcol();
 		dev->SetRenderState (D3DRENDERSTATE_TEXTUREFACTOR, D3DRGBA(bgc.x, bgc.y, bgc.z, 1));
 	}
 
@@ -705,7 +705,7 @@ void TileManager::RenderTile (int lvl, int hemisp, int ilat, int nlat, int ilng,
 		if (!tile->vtx) {
 			D3DVERTEXBUFFERDESC vbd = 
 				{ sizeof(D3DVERTEXBUFFERDESC), VB_MemFlag | D3DVBCAPS_WRITEONLY, FVF_2TEX, mesh.nv };
-			g_pOrbiter->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbd, &tile->vtx, 0);
+			g_pSpaceXpanse->GetInlineGraphicsClient()->GetDirect3D7()->CreateVertexBuffer (&vbd, &tile->vtx, 0);
 			ApplyPatchTextureCoordinates (mesh, tile->vtx, range);
 			tile->vtx->Optimize (RenderParam.dev, 0); // no more change, so we can optimize
 		}
@@ -953,7 +953,7 @@ void TileManager::SetWorldMatrix (int ilng, int nlng, int ilat, int nlat)
 {
 	// set up world transformation matrix
 	D3DMATRIX rtile, wtrans;
-	double lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180°
+	double lng = Pi2 * (double)ilng/(double)nlng + Pi; // add pi so texture wraps at +-180ï¿½
 	VMAT_roty (rtile, lng);
 
 	if (nlat > 8) {
@@ -1007,8 +1007,8 @@ TileBuffer::TileBuffer()
 	nused = 0;
 	last = 0;
 
-	bLoadMip = g_pOrbiter->GetInlineGraphicsClient()->GetFramework()->SupportsMipmaps() &&
-	   		   g_pOrbiter->Cfg()->CfgPRenderPrm.MipmapMode != 0;
+	bLoadMip = g_pSpaceXpanse->GetInlineGraphicsClient()->GetFramework()->SupportsMipmaps() &&
+	   		   g_pSpaceXpanse->Cfg()->CfgPRenderPrm.MipmapMode != 0;
 	bRunThread = true;
 	nqueue = queue_in = queue_out = 0;
 	hQueueMutex = CreateMutex (0, FALSE, NULL);
@@ -1178,7 +1178,7 @@ DWORD WINAPI TileBuffer::LoadTile_ThreadProc (void *data)
 	static QUEUEDESC qd;
 	static int nloaded = 0; // temporary
 	DWORD flag = (tb->bLoadMip ? 0:4);
-	DWORD idle = 1000/g_pOrbiter->Cfg()->CfgPRenderPrm.LoadFrequency;
+	DWORD idle = 1000/g_pSpaceXpanse->Cfg()->CfgPRenderPrm.LoadFrequency;
 
 	while (bRunThread) {
 		Sleep (idle);
