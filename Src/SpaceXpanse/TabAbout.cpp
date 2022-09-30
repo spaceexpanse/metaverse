@@ -79,8 +79,7 @@ INT_PTR spacexpanse::AboutTab::TabProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 				IDT_DISCLAIMER);
 			return TRUE;
 		case IDC_ABT_CREDIT:
-			ShellExecute (NULL, "open", "html\\Credit.htm", NULL, NULL, SW_SHOWNORMAL);
-//			::OpenHelp(hWnd, "html\\Credit.chm", "Credit");
+			::OpenHelp(hWnd, "html\\Credit.chm", "Credit");
 			return TRUE;
 		}
 		break;
