@@ -182,7 +182,7 @@ if(BUILD64) # only allow graphics server version on x64 builds
 else()
 
 	set(SPACEXPANSE_GRAPHICS
-		${SpaceXpanseExe_both}
+		${SpaceXpanseExe_graphics}
 		CACHE
 		STRING
 		"SpaceXpanse executables to be built."
@@ -257,7 +257,7 @@ option(SPACEXPANSE_BUILD_WITH_DX7
 option(
 	SPACEXPANSE_BUILD_D3D9CLIENT
 	"Build the D3D9 graphics client"
-	ON
+	OFF
 )
 
 option(
