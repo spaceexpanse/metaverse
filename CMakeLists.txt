@@ -45,7 +45,7 @@ else()
 	message(STATUS "USING: Ninja Configuration")
 	set(CompileFlags "")
 endif()
- 
+
 # Define directories and file paths for some common binaries
 set(OVP_DIR "${CMAKE_SOURCE_DIR}/OVP")
 set(GDICLIENT_DIR "${OVP_DIR}/GDIClient")
@@ -182,7 +182,7 @@ if(BUILD64) # only allow graphics server version on x64 builds
 else()
 
 	set(SPACEXPANSE_GRAPHICS
-		${SpaceXpanseExe_both}
+		${SpaceXpanseExe_graphics}
 		CACHE
 		STRING
 		"SpaceXpanse executables to be built."
