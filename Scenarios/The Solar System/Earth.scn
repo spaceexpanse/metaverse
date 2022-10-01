@@ -1,6 +1,6 @@
-BEGIN_DESC
-Homeworld: The Blue Planet.
-END_DESC
+BEGIN_HYPERDESC
+<h1>Our homeworld: The Blue Planet.</h1>
+END_HYPERDESC
 
 BEGIN_ENVIRONMENT
   System Sol
