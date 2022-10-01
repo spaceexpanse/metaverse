@@ -287,29 +287,29 @@ option(SPACEXPANSE_ENABLE_ASAN
 	OFF
 )
 
-if(SPACEXPANSE_BUILD_XRSOUND)
-	set(IRRKLANG_DIR
-		irrKlang_NOTFOUND
-		CACHE
-		PATH
-		"Root folder of irrKlang installation."
-	)
-endif()
+#if(SPACEXPANSE_BUILD_XRSOUND)
+#	set(IRRKLANG_DIR
+#		irrKlang_NOTFOUND
+#		CACHE
+#		PATH
+#		"Root folder of irrKlang installation."
+#	)
+#endif()
 
-if(SPACEXPANSE_BUILD_D3D9CLIENT)
-	find_package(DXSDK
-	)
-	set(DXSDK_DIR
-		${DXSDK_DIR}
-		CACHE
-		PATH
-		"Installation directory of DirectX SDK (June 2010)"
-	)
-	if(${DXSDK_DIR} STREQUAL "DXSDK_DIR-NOTFOUND")
-		message(WARNING "DirectX SDK not found. The D3D9 graphics client will not be built.")
-		set(SPACEXPANSE_BUILD_D3D9CLIENT OFF)
-	endif()
-endif()
+#if(SPACEXPANSE_BUILD_D3D9CLIENT)
+#	find_package(DXSDK
+#	)
+#	set(DXSDK_DIR
+#		${DXSDK_DIR}
+#		CACHE
+#		PATH
+#		"Installation directory of DirectX SDK (June 2010)"
+#	)
+#	if(${DXSDK_DIR} STREQUAL "DXSDK_DIR-NOTFOUND")
+#		message(WARNING "DirectX SDK not found. The D3D9 graphics client will not be built.")
+#		set(SPACEXPANSE_BUILD_D3D9CLIENT OFF)
+#	endif()
+#endif()
 
 if (SPACEXPANSE_MAKE_DOC)
 
