@@ -1,5 +1,5 @@
 ![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)
-
+ 
 # SpaceXpanse Metaverse Simulator
 
 SpaceXpanse is a simulator based on Newtonian mechanics. Its playground
