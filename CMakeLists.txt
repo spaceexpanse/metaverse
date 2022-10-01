@@ -274,7 +274,7 @@ option(SPACEXPANSE_MAKE_DOC
 
 option(SPACEXPANSE_MAKE_TESTS
 	"Build unit tests"
-	ON
+	OFF
 )
 
 option(SPACEXPANSE_MAKE_SDK_SAMPLES
