@@ -1,8 +1,7 @@
 BEGIN_HYPERDESC
 <h1>Venus</h1>
-<p>The DeltaGlider in low orbit around Venus (courtesy Jim "BigJimW" Williams).
-Drop below the cloud layer to get a glimpse at the new surface textures. But
-beware of the dense atmosphere!</p>
+<p>A glider in low orbit around Venus.
+Drop below the cloud layer but beware of the dense atmosphere!</p>
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT
@@ -11,7 +10,7 @@ BEGIN_ENVIRONMENT
 END_ENVIRONMENT
 
 BEGIN_FOCUS
-  Ship GL-01
+  Ship Glider
 END_FOCUS
 
 BEGIN_CAMERA
@@ -40,18 +39,7 @@ ISS:ProjectAlpha_ISS
   ELEMENTS 6734919.2 0.00090 74.51300 169.03400 328.32497 560.71341 51982.906
   AROT 30.00 0.00 50.00
 END
-Mir
-  STATUS Orbiting Earth
-  ELEMENTS 6670999.7 0.00060 3.50000 360.00000 0.03290 132.19809 51982.906
-  AROT 5.00 10.00 15.00
-END
-Luna-OB1:Wheel
-  STATUS Orbiting Moon
-  ELEMENTS 2237990.3 0.00001 89.99950 0.00059 317.37509 574.48880 51982.906
-  AROT 0.00 0.00 88.25
-  VROT 0.00 0.00 10.00
-END
-GL-01:DeltaGlider
+Glider:ShuttlePB
   STATUS Orbiting Venus
   RPOS 6236406.28 310155.03 324218.75
   RVEL -506.157 5053.116 5282.246

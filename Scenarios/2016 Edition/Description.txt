@@ -1,5 +1,0 @@
-BEGIN_HYPERDESC
-<h1>SpaceXpanse 2016 Edition</h1>
-<p>SpaceXpanse Metaverse is the latest edition of the simulator.</p>
-<p>Here are a few scenarios highlighting some of the new features, including new textures for Earth and other planetary bodies, surface terrain support, new cockpit layout for various vessels, and more.</p>
-END_HYPERDESC
