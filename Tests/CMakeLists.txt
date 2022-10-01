@@ -53,7 +53,7 @@ add_test_file(Lua.Interpreter)
 # Sanity check for scenario tests
 add_test(
 	NAME "Scenario.SanityCheck"
-	COMMAND $<TARGET_FILE:SpaceXpanse_server> "--scenariox=${CMAKE_SOURCE_DIR}/Scenarios/Delta-glider/Smack!.scn" "--maxframes=60"
+	COMMAND $<TARGET_FILE:SpaceXpanse_server> "--scenariox=${CMAKE_SOURCE_DIR}/Scenarios/Today.scn" "--maxframes=60"
 	WORKING_DIRECTORY ${SPACEXPANSE_BINARY_ROOT_DIR}
 )
 set_tests_properties(Scenario.SanityCheck PROPERTIES TIMEOUT 60)
