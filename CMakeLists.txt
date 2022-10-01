@@ -45,7 +45,7 @@ else()
 	message(STATUS "USING: Ninja Configuration")
 	set(CompileFlags "")
 endif()
-
+ 
 # Define directories and file paths for some common binaries
 set(OVP_DIR "${CMAKE_SOURCE_DIR}/OVP")
 set(GDICLIENT_DIR "${OVP_DIR}/GDIClient")
