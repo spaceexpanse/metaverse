@@ -182,7 +182,7 @@ if(BUILD64) # only allow graphics server version on x64 builds
 else()
 
 	set(SPACEXPANSE_GRAPHICS
-		${SpaceXpanseExe_both}
+		${SpaceXpanseExe_graphics}
 		CACHE
 		STRING
 		"SpaceXpanse executables to be built."
@@ -249,15 +249,15 @@ endif()
 # =====================================================================================
 # Find required and optional build tools
 
-#option(SPACEXPANSE_BUILD_WITH_DX7
-#	"Compile SpaceXpanse with built-in DX7 graphics. If off, the server version for external graphics clients will be built."
-#	ON
-#)
+option(SPACEXPANSE_BUILD_WITH_DX7
+	"Compile SpaceXpanse with built-in DX7 graphics. If off, the server version for external graphics clients will be built."
+	ON
+)
 
 option(
 	SPACEXPANSE_BUILD_D3D9CLIENT
 	"Build the D3D9 graphics client"
-	ON
+	OFF
 )
 
 option(
