@@ -28,13 +28,13 @@ BEGIN_HUD
 END_HUD
 
 BEGIN_MFD Left
-  TYPE Launch
+  TYPE Surface
 END_MFD
 
 BEGIN_MFD Right
-  TYPE Map
+  TYPE Orbit
+  PROJ Ship
   REF Moon
-  BTARGET Brighton Beach
 END_MFD
 
 BEGIN_SHIPS
