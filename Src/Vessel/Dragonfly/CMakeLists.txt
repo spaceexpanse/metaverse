@@ -66,11 +66,11 @@ add_custom_command(
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${THUMBNAIL_SOURCE_DIR}/ ${CMAKE_BINARY_DIR}/Images/Vessels/Default
 )
 
-add_custom_command(
-	TARGET Dragonfly PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E make_directory ${SPACEXPANSE_BINARY_DOC_DIR}
-	COMMAND ${CMAKE_COMMAND} -E copy ${DOC_SOURCE_DIR}/Dragonfly.pdf ${SPACEXPANSE_BINARY_DOC_DIR}
-)
+#add_custom_command(
+#	TARGET Dragonfly PRE_BUILD
+#	COMMAND ${CMAKE_COMMAND} -E make_directory ${SPACEXPANSE_BINARY_DOC_DIR}
+#	COMMAND ${CMAKE_COMMAND} -E copy ${DOC_SOURCE_DIR}/Dragonfly.pdf ${SPACEXPANSE_BINARY_DOC_DIR}
+#)
 
 install(TARGETS Dragonfly
 	RUNTIME
@@ -91,9 +91,9 @@ install(DIRECTORY ${TEXTURE2_SOURCE_DIR}/
 install(DIRECTORY ${THUMBNAIL_SOURCE_DIR}/
 	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}/Images/Vessels/Default
 )
-install(FILES ${DOC_SOURCE_DIR}/Dragonfly.pdf
-	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
-)
+#install(FILES ${DOC_SOURCE_DIR}/Dragonfly.pdf
+#	DESTINATION ${SPACEXPANSE_INSTALL_DOC_DIR}
+#)
 
 else()
 
