@@ -79,13 +79,13 @@ required for running SpaceXpanse.
 You need to install those separately. The easiest way to do so is by installing
 [SpaceXpanse Metaverse](https://github.com/spacexpanse/metaverse). Optionally you can
 also install high-resolution versions of the textures from the SpaceXpanse website.
-You should keep the SpaceXpanse 2016 installation separate from your SpaceXpanse git
+You should keep the SpaceXpanse installation separate from your SpaceXpanse git
 repository.
 
-To configure SpaceXpanse to use the 2016 texture installation, set the
-SPACEXPANSE_PLANET_TEXTURE_INSTALL_DIR entry in CMake. For example, if SpaceXpanse 2016
-was installed in `C:\SpaceXpanse2016`, the CMake option should be set to
-`C:/SpaceXpanse2016/Textures`.
+To configure SpaceXpanse to use the texture installation, set the
+SPACEXPANSE_PLANET_TEXTURE_INSTALL_DIR entry in CMake. For example, if SpaceXpanse 
+was installed in `C:\SpaceXpanse`, the CMake option should be set to
+`C:/SpaceXpanse/Textures`.
 Alternatively, you can configure the texture directory after building SpaceXpanse
 by setting the `PlanetTexDir` entry in `SpaceXpanse.cfg`.
 
@@ -99,4 +99,4 @@ the SpaceXpanse Launchpad dialog, or with Alt-F1 while running
 SpaceXpanse.
 
 Remaining questions can be posted on the SpaceXpanse user forum at
-[spacexpanse-forum.com](https://forum.spacexpanse.org).
+[forum.spacexpanse.org](https://forum.spacexpanse.org).
