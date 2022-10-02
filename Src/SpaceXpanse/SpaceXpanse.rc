@@ -500,6 +500,7 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
     GROUPBOX        "",IDC_ABT_GRP_SPACEXPANSE,4,4,269,54
     CONTROL         IDB_ICON64, IDC_ABT_ICON_DG, "Static", SS_BITMAP, 27, 14, 43, 39
+    LTEXT           "SpaceXpanse Metaverse Simulator", IDC_ABT_TXT_NAME, 94, 16, 132, 8
 //    LTEXT           "", IDC_ABT_TXT_NAME, 94, 16, 132, 8
     LTEXT           "", IDC_ABT_TXT_BUILDDATE, 94, 28, 166, 8
 //    LTEXT           "", IDC_ABT_TXT_CPR, 94, 41, 140, 13
