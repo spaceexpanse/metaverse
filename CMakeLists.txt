@@ -146,8 +146,18 @@ add_custom_target(CopyData ALL
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Flights/ ${CMAKE_BINARY_DIR}/Flights
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${SPACEXPANSE_BINARY_SDK_DIR}/lib/Lua
 	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_DLL_DIR}/lua5.1.lib ${SPACEXPANSE_BINARY_SDK_DIR}/lib/Lua/
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_DLL_DIR}/lua5.1.dll ${CMAKE_BINARY_DIR}
+	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_DLL_DIR}/lua5.1.dll ${CMAKE_BINARY_DIR} 
+) 
+
+add_custom_command(
+	OUTPUT SpaceXpanse.cfg
+	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/SpaceXpanse.cfg.
 )
+
+install(FILES SpaceXpanse.cfg
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
+)        
+        
 set_target_properties(CopyData
 	PROPERTIES
 	FOLDER Data
