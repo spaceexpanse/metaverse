@@ -26,11 +26,11 @@ D3D9Client graphics engine is licensed under LGPL, see [LGPL](./OVP/D3D9Client/L
 
 Get the SpaceXpanse source repository from github
 ```bash
-git clone git@github.com:spacexpanse/metaverse.git
+git clone git@github.com:SpaceXpanse/Metaverse.git
 ```
 or
 ```bash
-git clone https://github.com/spacexpanse/metaverse.git
+git clone https://github.com/SpaceXpanse/Metaverse.git
 ```
 
 To configure and generate the makefiles, you need a recent
@@ -77,7 +77,7 @@ See [README.compile](./README.compile) for details on building SpaceXpanse.
 The SpaceXpanse git repository does not include most of the planetary texture files
 required for running SpaceXpanse.
 You need to install those separately. The easiest way to do so is by installing
-[SpaceXpanse Metaverse](https://github.com/spacexpanse/metaverse). Optionally you can
+[SpaceXpanse Metaverse](https://github.com/SpaceXpanse/Metaverse). Optionally you can
 also install high-resolution versions of the textures from the SpaceXpanse website.
 You should keep the SpaceXpanse installation separate from your SpaceXpanse git
 repository.
