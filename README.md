@@ -62,8 +62,8 @@ If you want to build the documentation, you need a few additional tools:
 
 By default, the build is configured to create both graphics flavours of the
 SpaceXpanse executable (although this can be configured with the SPACEXPANSE_GRAPHICS CMake flag):
-- ``spacexpanse.exe`` is the standalone SpaceXpanse application with built-in DX7 graphics.
-- ``spacexpanse_ng.exe`` is a launcher for ``./Modules/Server/spacexpanse.exe`` which is the
+- ``SpaceXpanse.exe`` is the standalone SpaceXpanse application with built-in DX7 graphics.
+- ``SpaceXpanse_ng.exe`` is a launcher for ``./Modules/Server/spacexpanse.exe`` which is the
 graphics server version of SpaceXpanse. It requires an external graphics client
 plugin to be loaded via the Modules tab of the SpaceXpanse Launchpad dialog.
 The reference D3D7Client is included with the build with essentially the same
