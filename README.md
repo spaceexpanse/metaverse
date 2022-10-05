@@ -76,16 +76,16 @@ See [README.compile](./README.compile) for details on building SpaceXpanse.
 
 The SpaceXpanse git repository does not include most of the planetary texture files
 required for running SpaceXpanse.
-You need to install those separately. The easiest way to do so is by installing
-[SpaceXpanse Metaverse](https://github.com/SpaceXpanse/Metaverse). Optionally you can
-also install high-resolution versions of the textures from the SpaceXpanse website.
+You need to install those separately. The easiest way to do so is by downloading them 
+[Textures](https://drive.google.com/file/d/1_Cv78D4ZpNGVI9AVtDS7nSDVbHWJ11K7/view?usp=sharing). Optionally you can
+also install high-resolution versions of the textures from the SpaceXpanse website later.
 You should keep the SpaceXpanse installation separate from your SpaceXpanse git
 repository.
 
 To configure SpaceXpanse to use the texture installation, set the
 SPACEXPANSE_PLANET_TEXTURE_INSTALL_DIR entry in CMake. For example, if SpaceXpanse 
 was installed in `C:\SpaceXpanse`, the CMake option should be set to
-`C:/SpaceXpanse/Textures`.
+`C:/Textures`.
 Alternatively, you can configure the texture directory after building SpaceXpanse
 by setting the `PlanetTexDir` entry in `SpaceXpanse.cfg`.
 
