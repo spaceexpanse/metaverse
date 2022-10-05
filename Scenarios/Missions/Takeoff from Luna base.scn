@@ -1,7 +1,7 @@
 BEGIN_HYPERDESC
 <h1>Luna base</h1>
 <p>Take action and launch from the Moon: a glider ready for takeoff from a pad at Luna Spaceport. Try to get it to Moon's orbit. ;) </p>
-<p>Use F1 to change view, mouse to look around, 0 an . to take off and fall back, + to fly forward. The arrows change orientation.</p>
+<p>Use F1 to toggle view point, mouse to look around, 0 an . to take off and fall back, + to fly forward. Right mouse button to change view angle. Arrows change orientation.</p>
 <p>For menu - move mouse to top of the screen.</p>
 END_HYPERDESC
 
