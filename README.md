@@ -96,7 +96,7 @@ main SpaceXpanse user manual.
 
 The in-game help system can be opened via the "Help" button on
 the SpaceXpanse Launchpad dialog, or with Alt-F1 while running
-SpaceXpanse.
+SpaceXpanse (WIP).
 
 Remaining questions can be posted on the SpaceXpanse user forum at
 [forum.spacexpanse.org](https://forum.spacexpanse.org).
