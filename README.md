@@ -13,7 +13,7 @@ ascent into orbit, how to rendezvous with a space station, or how to fly to
 another planet. It is more difficult, but also more of a challenge. Some people
 get hooked, others get bored. Finding out for yourself is easy – simply give it
 a try. SpaceXpanse is free, so you don’t need to invest more than a bit of your
-spare time.
+spare time. Enjoy!
 
 ## License 
 
