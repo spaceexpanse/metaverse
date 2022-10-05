@@ -17,7 +17,7 @@ spare time. Enjoy!
 
 ## License 
 
-SpaceXpanse is now published as an Open Source project under the MIT License (see
+SpaceXpanse is published as an Open Source project under the MIT License (see
 [LICENSE](./LICENSE) file for details).
 
 D3D9Client graphics engine is licensed under LGPL, see [LGPL](./OVP/D3D9Client/LGPL.txt)
