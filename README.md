@@ -3,8 +3,8 @@
 # SpaceXpanse Metaverse Simulator
 
 SpaceXpanse is a simulator based on Newtonian mechanics. Its playground
-is our solar system with many of its major bodies – the sun, planets and many moons.
-You take control of a spacecraft – either historic, hypothetical, or purely
+is our solar system with many of its major bodies – the sun, planets and many moons 
+where you can take control of a spacecraft – either historic, hypothetical, or purely
 science fiction. SpaceXpanse is unlike most commercial computer games with a space
 theme – there are no predefined missions to complete (except the ones you set
 yourself), no aliens to destroy and no goods to trade. Instead, you will get a
