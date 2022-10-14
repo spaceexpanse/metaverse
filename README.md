@@ -51,7 +51,7 @@ only a single thread for the build. This is because some of the build tools (esp
 those for generating the SpaceXpanse documentation) are not threadsafe, and the VS2019
 generator doesn't understand the CMake JOB_POOL directive.
 
-SpaceXpanse is a 32-bit application and uses DirectX 7, for the moment, for visualizetion. Be sure to configure vspkg and CMake accordingly.
+SpaceXpanse is a 32-bit application and uses DirectX 7 for visualizetion. Be sure to configure vspkg and CMake accordingly.
 
 If you want to build the documentation, you need a few additional tools:
 - a filter to convert ODT and DOC sources to PDF, such as
