@@ -157,7 +157,16 @@ add_custom_command(
 install(FILES SpaceXpanse.cfg
 	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
 )        
-        
+  
+add_custom_command(
+	OUTPUT keymap.cfg
+	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/keymap.cfg.
+)
+
+install(FILES keymap.cfg
+	DESTINATION ${SPACEXPANSE_INSTALL_ROOT_DIR}
+)  
+      
 set_target_properties(CopyData
 	PROPERTIES
 	FOLDER Data
