@@ -26,7 +26,7 @@ ph1 = -2.631
 th0 = -0.301
 th1 = -0.342
 h:set_text('Mercury')
-par1:set_text('Radius: 2,440km  Mass: 3.285?0^23kg  Mean orbital radius: 57.91?0^6km (0.387AU)  Orbital period: 7.601?0^6s (88.0 days)')
+par1:set_text('Radius: 2,440km  Mass: 3.285×0^23kg  Mean orbital radius: 57.91×0^6km (0.387AU)  Orbital period: 7.601×0^6s (88.0 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Mercury'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 while t1 < 20 do
@@ -72,7 +72,7 @@ ph1 = 2.60
 th0 = -1.56
 th1 = -1.48
 h:set_text('Venus')
-par1:set_text('Radius: 6,052km  Mass: 4.867?0^24kg  Mean orbital radius: 108.2?0^6km (0.723AU)  Orbital period: 1.941?0^7s (224.7 days)')
+par1:set_text('Radius: 6,052km  Mass: 4.867×0^24kg  Mean orbital radius: 108.2×0^6km (0.723AU)  Orbital period: 1.941×0^7s (224.7 days)')
 oapi.set_cameramode({mode='ground',ref='Venus',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 60 do
 	tstep()
@@ -92,7 +92,7 @@ ph1 = 0.326
 th0 = -0.340
 th1 = 0.714
 h:set_text("Earth")
-par1:set_text('Radius: 6,371km  Mass: 5.972?0^24kg  Mean orbital radius: 149.6?0^6km (1AU)  Orbital period: 3.156?0^7s (365.24 days)')
+par1:set_text('Radius: 6,371km  Mass: 5.972×0^24kg  Mean orbital radius: 149.6×0^6km (1AU)  Orbital period: 3.156×0^7s (365.24 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Earth'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(25*RAD)
@@ -156,7 +156,7 @@ ph1 = 2.62
 th0 = -1.30
 th1 = -1.51
 h:set_text('Moon')
-par1:set_text('Natural satellite of Earth  Radius: 1,737km  Mass: 7.348?0^22kg  Mean orbital radius: 3.8?0^5km  Orbital period: 2.317?0^6s (27.32 days)')
+par1:set_text('Natural satellite of Earth  Radius: 1,737km  Mass: 7.348×0^22kg  Mean orbital radius: 3.8×0^5km  Orbital period: 2.317×0^6s (27.32 days)')
 oapi.set_cameraaperture(5*RAD)
 oapi.set_cameramode({mode='ground',ref='Moon',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 140 do
@@ -216,7 +216,7 @@ ph1 = 2.442
 th0 = -0.272
 th1 = -0.360
 h:set_text('Mars')
-par1:set_text('Radius: 3,390km  Mass: 6.39?0^23kg  Mean orbital radius: 227.9?0^6km (1.52AU)  Orbital period: 5.94?0^7s (687.0 days)')
+par1:set_text('Radius: 3,390km  Mass: 6.39×0^23kg  Mean orbital radius: 227.9×0^6km (1.52AU)  Orbital period: 5.94×0^7s (687.0 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Mars'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d,phi=ph0,tht=th0})
 while t1 < 200 do
@@ -285,7 +285,7 @@ ph1 = 1.583
 th0 = -0.391
 th1 = 0.168
 h:set_text('Phobos')
-par1:set_text('Natural satellite of Mars    Mean radius: 11.27km  Mass: 1.066?0^16kg  Mean orbital radius: 9,374km  Orbital period: 2.755?0^4s (0.32 days)')
+par1:set_text('Natural satellite of Mars    Mean radius: 11.27km  Mass: 1.066×0^16kg  Mean orbital radius: 9,374km  Orbital period: 2.755×0^4s (0.32 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Phobos'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -303,7 +303,7 @@ ph1 = 4.443
 th0 = 0.774
 th1 = -0.373
 h:set_text('Deimos')
-par1:set_text('Natural satellite of Mars    Mean radius: 6.2km  Mass: 1.48?0^15kg  Mean orbital radius: 23,463km  Orbital period: 1.091?0^5s (1.263 days)')
+par1:set_text('Natural satellite of Mars    Mean radius: 6.2km  Mass: 1.48×0^15kg  Mean orbital radius: 23,463km  Orbital period: 1.091×0^5s (1.263 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Deimos'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -326,7 +326,7 @@ ph1 = 0.64
 th0 = -1.60
 th1 = -1.56
 h:set_text('Vesta')
-par1:set_text('Asteriod belt object  Mean radius: 262.5km  Mass: 2.589?0^20kg  Mean orbital radius: 3.533?0^8km (2.3618AU)  Orbital period: 1.145?0^8s (3.63 years)')
+par1:set_text('Asteriod belt object  Mean radius: 262.5km  Mass: 2.589×0^20kg  Mean orbital radius: 3.533×0^8km (2.3618AU)  Orbital period: 1.145×0^8s (3.63 years)')
 oapi.set_cameramode({mode='ground',ref='Vesta',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 300 do
 	tstep()
@@ -347,7 +347,7 @@ ph1 = 2.483
 th0 = 1.482
 th1 = 3.048
 h:set_text('Jupiter')
-par1:set_text('Radius: 69,911km  Mass: 1.898?0^27kg  Mean orbital radius: 778.5?0^6km (5.20AU)  Orbital period: 3.743?0^8s (11.86 years)')
+par1:set_text('Radius: 69,911km  Mass: 1.898×0^27kg  Mean orbital radius: 778.5×0^6km (5.20AU)  Orbital period: 3.743×0^8s (11.86 years)')
 oapi.set_cameratarget(oapi.get_objhandle('Jupiter'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -373,7 +373,7 @@ ph1 = 3.43
 th0 = -1.58
 th1 = -1.18
 h:set_text('Io')
-par1:set_text('Natural satellite of Jupiter  Radius: 1,821.6km  Mass: 8.932?0^22kg  Mean orbital radius: 421,700km  Orbital period: 1.529?0^5s (1.769 days)')
+par1:set_text('Natural satellite of Jupiter  Radius: 1,821.6km  Mass: 8.932×0^22kg  Mean orbital radius: 421,700km  Orbital period: 1.529×0^5s (1.769 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Io'))
 oapi.set_cameramode({mode='ground',ref='Io',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 340 do
@@ -395,7 +395,7 @@ ph1 = 5.212
 th0 = 3.140
 th1 = 3.105
 h:set_text('Europa')
-par1:set_text('Natural satellite of Jupiter  Radius: 1,560.8km  Mass: 4.800?0^22kg  Mean orbital radius: 670,900km  Orbital period: 3.068?0^5s (3.551 days)')
+par1:set_text('Natural satellite of Jupiter  Radius: 1,560.8km  Mass: 4.800×0^22kg  Mean orbital radius: 670,900km  Orbital period: 3.068×0^5s (3.551 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Europa'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -419,7 +419,7 @@ ph1 = -0.93
 th0 = -1.59
 th1 = -1.47
 h:set_text('Ganymede')
-par1:set_text('Natural satellite of Jupiter  Radius: 2,634.1km  Mass: 1.482?0^23kg  Mean orbital radius: 1.0703?0^6km  Orbital period: 6.182?0^5s (7.155 days)')
+par1:set_text('Natural satellite of Jupiter  Radius: 2,634.1km  Mass: 1.482×0^23kg  Mean orbital radius: 1.0703×0^6km  Orbital period: 6.182×0^5s (7.155 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Ganymede'))
 oapi.set_cameramode({mode='ground',ref='Ganymede',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 380 do
@@ -444,7 +444,7 @@ ph1 = -2.81
 th0 = -1.57
 th1 = -1.41
 h:set_text('Callisto')
-par1:set_text('Natural satellite of Jupiter  Radius: 2,410.3km  Mass: 1.076?0^23kg  Mean orbital radius: 1.883?0^6km  Orbital period: 1.442?0^6s (16.690 days)')
+par1:set_text('Natural satellite of Jupiter  Radius: 2,410.3km  Mass: 1.076×0^23kg  Mean orbital radius: 1.883×0^6km  Orbital period: 1.442×0^6s (16.690 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Callisto'))
 oapi.set_cameramode({mode='ground',ref='Callisto',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(10*RAD)
@@ -466,7 +466,7 @@ ph1 = -2.770
 th0 = -1.082
 th1 = 0.467
 h:set_text('Saturn')
-par1:set_text('Radius: 58,232km  Mass:  5.683?0^26kg  Mean orbital radius: 1.433?0^9km (9.58AU)  Orbital period: 9.2960?0^8s (29.46 years)')
+par1:set_text('Radius: 58,232km  Mass:  5.683×0^26kg  Mean orbital radius: 1.433×0^9km (9.58AU)  Orbital period: 9.2960×0^8s (29.46 years)')
 oapi.set_cameratarget(oapi.get_objhandle('Saturn'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -487,7 +487,7 @@ ph1 = 2.341
 th0 = 0.317
 th1 = 0.623
 h:set_text('Mimas')
-par1:set_text('Natural satellite of Saturn  Radius: 198.2km  Mass:  3.7493?0^19kg  Mean orbital radius: 185,320km  Orbital period: 81389s (0.942 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 198.2km  Mass:  3.7493×0^19kg  Mean orbital radius: 185,320km  Orbital period: 81389s (0.942 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Mimas'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -508,7 +508,7 @@ ph1 = 3.063
 th0 = -0.162
 th1 = 0.922
 h:set_text('Enceladus')
-par1:set_text('Natural satellite of Saturn  Radius: 252.1km  Mass: 1.0802?0^20kg  Mean orbital radius: 237,912km  Orbital period: 1.184?0^5s (1.370 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 252.1km  Mass: 1.0802×0^20kg  Mean orbital radius: 237,912km  Orbital period: 1.184×0^5s (1.370 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Enceladus'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(20*RAD)
@@ -532,7 +532,7 @@ ph1 = -6.42
 th0 = -1.52
 th1 = -1.28
 h:set_text('Tethys')
-par1:set_text('Natural satellite of Saturn  Radius: 531.1km  Mass: 6.1745?0^20kg  Mean orbital radius: 294,572km  Orbital period: 1.631?0^5s (1.888 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 531.1km  Mass: 6.1745×0^20kg  Mean orbital radius: 294,572km  Orbital period: 1.631×0^5s (1.888 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Tethys'))
 oapi.set_cameramode({mode='ground',ref='Tethys',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 while t1 < 480 do
@@ -553,7 +553,7 @@ ph1 = 2.295
 th0 = 0.304
 th1 = 0.276
 h:set_text('Dione')
-par1:set_text('Natural satellite of Saturn  Radius: 561.4km  Mass: 1.0955?0^21kg  Mean orbital radius: 377,336km  Orbital period: 2.365?0^5s (2.737 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 561.4km  Mass: 1.0955×0^21kg  Mean orbital radius: 377,336km  Orbital period: 2.365×0^5s (2.737 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Dione'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(20*RAD)
@@ -578,7 +578,7 @@ ph1 = 1.50
 th0 = -1.63
 th1 = -1.10
 h:set_text('Rhea')
-par1:set_text('Natural satellite of Saturn  Radius: 763.8km  Mass: 2.306518?0^21kg  Mean orbital radius: 527,067km  Orbital period: 3.904?0^5s (4.518 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 763.8km  Mass: 2.306518×0^21kg  Mean orbital radius: 527,067km  Orbital period: 3.904×0^5s (4.518 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Rhea'))
 oapi.set_cameramode({mode='ground',ref='Rhea',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(15*RAD)
@@ -604,7 +604,7 @@ ph1 = 3.77
 th0 = -1.56
 th1 = -0.60
 h:set_text('Titan')
-par1:set_text('Natural satellite of Saturn  Radius: 2575.5km  Mass: 1.3452?0^23kg  Mean orbital radius: 1.2217?0^6km  Orbital period: 1.378?0^6s (15.945 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 2575.5km  Mass: 1.3452×0^23kg  Mean orbital radius: 1.2217×0^6km  Orbital period: 1.378×0^6s (15.945 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Titan'))
 oapi.set_cameramode({mode='ground',ref='Titan',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(15*RAD)
@@ -628,7 +628,7 @@ ph1 = 4.9212
 th0 = 0.318
 th1 = 0.376
 h:set_text('Iapetus')
-par1:set_text('Natural satellite of Saturn  Radius: 734.5km  Mass: 1.8056?0^21kg  Mean orbital radius: 3.5601?0^6km  Orbital period: 6.853?0^6s (79.322 days)')
+par1:set_text('Natural satellite of Saturn  Radius: 734.5km  Mass: 1.8056×0^21kg  Mean orbital radius: 3.5601×0^6km  Orbital period: 6.853×0^6s (79.322 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Iapetus'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(25*RAD)
@@ -649,7 +649,7 @@ ph1 = 0.164
 th0 = 0.494
 th1 = 0.534
 h:set_text('Uranus')
-par1:set_text('Radius: 25,362km  Mass: 8.681?0^25kg  Mean orbital radius: 2.877?0^9km (19.23AU)  Orbital period: 2.6515?0^9s (84.0205 years)')
+par1:set_text('Radius: 25,362km  Mass: 8.681×0^25kg  Mean orbital radius: 2.877×0^9km (19.23AU)  Orbital period: 2.6515×0^9s (84.0205 years)')
 oapi.set_cameratarget(oapi.get_objhandle('Uranus'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(20*RAD)
@@ -669,7 +669,7 @@ ph1 = -1.656
 th0 = 0.671
 th1 = -0.617
 h:set_text('Miranda')
-par1:set_text('Natural satellite of Uranus  Radius: 235.8km  Mass: 6.59?0^19kg  Mean orbital radius: 129,840km  Orbital period: 1.2212?0^5s (1.413 days)')
+par1:set_text('Natural satellite of Uranus  Radius: 235.8km  Mass: 6.59×0^19kg  Mean orbital radius: 129,840km  Orbital period: 1.2212×0^5s (1.413 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Miranda'))
 oapi.set_cameramode({mode='track',trackmode='global',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(10*RAD)
@@ -689,7 +689,7 @@ ph1 = 2.494
 th0 = -0.765
 th1 = -0.021
 h:set_text('Ariel')
-par1:set_text('Natural satellite of Uranus  Radius: 578.9km  Mass: 1.353?0^21kg  Mean orbital radius: 190,900km  Orbital period: 2.17728?0^5s (2.520 days)')
+par1:set_text('Natural satellite of Uranus  Radius: 578.9km  Mass: 1.353×0^21kg  Mean orbital radius: 190,900km  Orbital period: 2.17728×0^5s (2.520 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Ariel'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(10*RAD)
@@ -709,7 +709,7 @@ ph1 = 4.247
 th0 = -0.163
 th1 = 0.622
 h:set_text('Umbriel')
-par1:set_text('Natural satellite of Uranus  Radius: 584.7km  Mass: 1.172?0^21kg  Mean orbital radius: 265,967km  Orbital period: 3.5804?0^5s (4.144 days)')
+par1:set_text('Natural satellite of Uranus  Radius: 584.7km  Mass: 1.172×0^21kg  Mean orbital radius: 265,967km  Orbital period: 3.5804×0^5s (4.144 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Umbriel'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(5*RAD)
@@ -733,7 +733,7 @@ ph1 = 5.07
 th0 = -1.55
 th1 = -1.50
 h:set_text('Titania')
-par1:set_text('Natural satellite of Uranus  Radius: 788.4km  Mass: 3.527?0^21kg  Mean orbital radius: 436,282km  Orbital period: 7.522?0^5s (8.706 days)')
+par1:set_text('Natural satellite of Uranus  Radius: 788.4km  Mass: 3.527×0^21kg  Mean orbital radius: 436,282km  Orbital period: 7.522×0^5s (8.706 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Titania'))
 oapi.set_cameramode({mode='ground',ref='Titania',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(20*RAD)
@@ -759,7 +759,7 @@ ph1 = 1.29
 th0 = -1.59
 th1 = -1.56
 h:set_text('Oberon')
-par1:set_text('Natural satellite of Uranus  Radius: 761.4km  Mass: 3.014?0^21kg  Mean orbital radius: 583,416km  Orbital period: 1.163?0^6s (13.463 days)')
+par1:set_text('Natural satellite of Uranus  Radius: 761.4km  Mass: 3.014×0^21kg  Mean orbital radius: 583,416km  Orbital period: 1.163×0^6s (13.463 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Oberon'))
 oapi.set_cameramode({mode='ground',ref='Oberon',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(10*RAD)
@@ -785,7 +785,7 @@ ph1 = -4.02
 th0 = -1.58
 th1 = -1.58
 h:set_text('Neptune')
-par1:set_text('Radius: 24,622km  Mass: 1.024?0^26kg  Mean orbital radius: 4.498?0^9km (30.07AU)  Orbital period: 5.1997?0^9s (164.8 years)')
+par1:set_text('Radius: 24,622km  Mass: 1.024×0^26kg  Mean orbital radius: 4.498×0^9km (30.07AU)  Orbital period: 5.1997×0^9s (164.8 years)')
 oapi.set_cameratarget(oapi.get_objhandle('Neptune'))
 oapi.set_cameramode({mode='ground',ref='Neptune',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(15*RAD)
@@ -807,7 +807,7 @@ ph1 = 3.543
 th0 = 0.988
 th1 = 0.617
 h:set_text('Triton')
-par1:set_text('Natural satellite of Neptune  Radius: 1353.4km  Mass: 2.14?0^22kg  Mean orbital radius: 354,757km  Orbital period: -5.0776?0^5s (-5.877 days) - retrograde')
+par1:set_text('Natural satellite of Neptune  Radius: 1353.4km  Mass: 2.14×0^22kg  Mean orbital radius: 354,757km  Orbital period: -5.0776×0^5s (-5.877 days) - retrograde')
 oapi.set_cameratarget(oapi.get_objhandle('Triton'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -827,7 +827,7 @@ ph1 = -2.101
 th0 = -0.015
 th1 = 0.001
 h:set_text('Proteus')
-par1:set_text('Natural satellite of Neptune  Radius: 210km  Mass: 4.4?0^19kg  Mean orbital radius: 117,647km  Orbital period: 9.6968?0^4s (1.12231477 days)')
+par1:set_text('Natural satellite of Neptune  Radius: 210km  Mass: 4.4×0^19kg  Mean orbital radius: 117,647km  Orbital period: 9.6968×0^4s (1.12231477 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Proteus'))
 oapi.set_cameramode({mode='track',trackmode='relative',reldist=d0,phi=ph0,tht=th0})
 oapi.set_cameraaperture(15*RAD)
@@ -851,7 +851,7 @@ ph1 = -2.41
 th0 = -1.58
 th1 = -1.60
 h:set_text('Nereid')
-par1:set_text('Natural satellite of Neptune  Radius: 170km  Mean orbital radius: 5.5141?0^6km  Orbital period: 3.1115?0^7s (360.1362 days)')
+par1:set_text('Natural satellite of Neptune  Radius: 170km  Mean orbital radius: 5.5141×0^6km  Orbital period: 3.1115×0^7s (360.1362 days)')
 oapi.set_cameratarget(oapi.get_objhandle('Nereid'))
 oapi.set_cameramode({mode='ground',ref='Nereid',lng=lng0, lat=lat0, alt=alt0, phi=ph0, tht=th0, alt_above_ground=0})
 oapi.set_cameraaperture(10*RAD)
