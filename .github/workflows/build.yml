@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Setup Problem Matcher
       uses: ammaraskar/msvc-problem-matcher@master
@@ -47,14 +47,14 @@ jobs:
         mkdir out\install
     
     - name: Cache irrKlang package
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ github.workspace }}\out\build\Extern\irrKlang/${{ matrix.architecture }}
         key: irrKlang-${{ matrix.architecture }}
         
     - name: Cache DirectX SDK
       id:   cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: "${{ github.workspace }}\\DXSDK"
         key:  dxsdk_jun10
@@ -93,7 +93,7 @@ jobs:
 
     - name: Upload Build Artifact
 #      if: ${{ github.ref == 'refs/heads/0.1.1' }}
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v3.2.4
       with:
         name: SpaceXpanse-${{ matrix.architecture }}
         # A file, directory or wildcard pattern that describes what to upload
