@@ -282,8 +282,8 @@ option(
 option(
 	SPACEXPANSE_BUILD_XRSOUND
 	"Build XRSound module to enable sound in SpaceXpanse"
-#	ON
-    OFF
+	ON
+#   OFF
 )
 
 option(SPACEXPANSE_MAKE_DOC
