@@ -1,4 +1,5 @@
 ![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)  
+
 [![Build](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml/badge.svg)](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml)
  
 # SpaceXpanse Metaverse Simulator
