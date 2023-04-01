@@ -1,8 +1,9 @@
 BEGIN_HYPERDESC
 <h1>A Space Cruiser Demonstration</h1>
-<p>Introducing SpaceXpanse Metaverse Simulator's space glider flight capabilities.</p>
-<p>And a lively tour of the Kennedy Space Center.</p>
-<p>For menu - move mouse to top of the screen.</p>
+<p>Introducing SpaceXpanse Metaverse Simulator's Space Cruiser (SC) flight capabilities.</p>
+<p>An lively tour of the Kennedy Space Center included.</p>
+<p>For menu - move mouse to top of the screen or press F4.</p>
+<p>To turn on/off viewing the applied forces, navigate to the menu, press Display and click on the second tab.</p>
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT
