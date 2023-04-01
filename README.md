@@ -1,7 +1,7 @@
 ![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)  
 
-[![Build](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml/badge.svg)](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml)
- 
+[![Build](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml/badge.svg?branch=0.1.4)](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml)
+
 # SpaceXpanse Metaverse Simulator
 
 SpaceXpanse is a simulator based on Newtonian mechanics. Its playground
