@@ -1,4 +1,5 @@
-![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)
+![SpaceXpanse logo](./Src/SpaceXpanse/Bitmaps/banner.png)  
+[![Build](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml/badge.svg)](https://github.com/SpaceXpanse/Metaverse/actions/workflows/build.yml)
  
 # SpaceXpanse Metaverse Simulator
 
@@ -92,11 +93,11 @@ by setting the `PlanetTexDir` entry in `SpaceXpanse.cfg`.
 ## Help
 
 Help files are located in the Doc subfolder (if you built them). SpaceXpanse.pdf is the
-main SpaceXpanse user manual.
+main SpaceXpanse user manual. Wiki version of all the help files can be foung here: [SpaceXpanse Metaverse Simulator wiki](https://github.com/SpaceXpanse/Metaverse/wiki).
 
 The in-game help system can be opened via the "Help" button on
 the SpaceXpanse Launchpad dialog, or with Alt-F1 while running
 SpaceXpanse (WIP).
 
 Remaining questions can be posted on the SpaceXpanse user forum at
-[forum.spacexpanse.org](https://forum.spacexpanse.org).
+[SpaceXpanse discussions](https://github.com/orgs/SpaceXpanse/discussions).
