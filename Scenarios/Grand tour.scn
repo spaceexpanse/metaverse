@@ -1,14 +1,14 @@
 BEGIN_HYPERDESC
-<h1>Earth views</h1>
-
-<p>A flyby over some of Earth's surface formations.</p>
+<h1>Our Solar System</h1>
+<p>Sit back and immerse into SpaceXpanse Metaverse by visiting major celestial bodies of our virtual solar system.</p>
+<p>For menu - F4 or move mouse to top of the screen.</p>
+<p>Increase/decrease time warp by pressing "t" and "r" keys for 10x acceleration steps.</p>
+<p>N.B. Please follow the order of the scenarios because they will teach you how to operate.</p>
 END_HYPERDESC
-
 BEGIN_ENVIRONMENT
   System Sol
-  Date MJD 57451.2987058334
-  Script earthview2016
-  Help Default\Earthview2016,Index
+  Date MJD 57492.6690198077
+  Script solsys2016
 END_ENVIRONMENT
 
 BEGIN_FOCUS
@@ -16,9 +16,9 @@ BEGIN_FOCUS
 END_FOCUS
 
 BEGIN_CAMERA
-  TARGET Earth
+  TARGET Mercury
   MODE Extern
-  POS 1039960.410 135.16074 25.725805
+  POS 33.480000 -20.710000 -17.220000
   TRACKMODE TargetRelative
   FOV 50.00
 END_CAMERA
@@ -55,10 +55,10 @@ Glider:ShuttlePB
   XPDR 0
   HOVERHOLD 0 1 0.0000e+000 0.0000e+000
   GEAR 1.0000 0.0000
+  AAP 0:0 0:0 0:0
   PSNGR 2 3 4
   PANELCOL 2
   TANKCONFIG 1
-  AAP 0:0 0:0 0:0
 END
 END_SHIPS
 

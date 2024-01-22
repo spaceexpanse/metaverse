@@ -1,7 +1,8 @@
 BEGIN_HYPERDESC
-<h1>Luna base</h1>
-<p>Launch from the Moon: a glider ready for takeoff from a pad at Lunar Spaceport. Try to get it to Moon's orbit. ;) </p>
-<p>Use F1 to change view, mouse to look around, 0 an . to take off and + to fly forward. The arrows change orientation.</p>
+<h1>Luna base takeoff</h1>
+<p>Take action and launch from the Moon: a glider ready for takeoff from a pad at Luna Spaceport. Try to get it to Moon's orbit. ;) </p>
+<p>Use F1 to toggle view point, Q an A to take off using hover thrust, W and S to control main engine. Arrows to change glider's orientation.
+Scroll to zoom in and out, right mouse button to change view angle.</p>
 <p>For menu - move mouse to top of the screen.</p>
 END_HYPERDESC
 

@@ -1,9 +1,6 @@
-BEGIN_HYPERDESC
-<h1>Playback: Glider in orbit 2</h1>
-<p>Showcasing the Delta-glider animations:</p>
-<p>A DG opens its nosecone, airlocks and top hatch. The radiator is
-deployed, and for good measure, the landing gear lowered.</p>
-END_HYPERDESC
+BEGIN_DESC
+The Space Cruiser in orbit around Earth showing its equipment.
+END_DESC
 
 BEGIN_ENVIRONMENT
   System Sol
@@ -11,11 +8,11 @@ BEGIN_ENVIRONMENT
 END_ENVIRONMENT
 
 BEGIN_FOCUS
-  Ship GL-01
+  Ship SX01
 END_FOCUS
 
 BEGIN_CAMERA
-  TARGET GL-01
+  TARGET SX01
   MODE Extern
   POS 4.00 -169.74 -12.35
   TRACKMODE AbsoluteDirection
@@ -43,7 +40,7 @@ END_PANEL
 
 
 BEGIN_SHIPS
-GL-01:DeltaGlider
+SX01:DG-S
   STATUS Orbiting Earth
   RPOS 4251516.83 3941209.00 -3041215.69
   RVEL 6070.770 -4011.001 3103.239

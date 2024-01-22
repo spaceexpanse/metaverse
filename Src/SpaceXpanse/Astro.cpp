@@ -60,7 +60,7 @@ char *DateStr (double mjd)
 	double ijd, c, e, h;
 	int a, f, wday, mday, mon, year, hour, min, sec;
 
-	h = 24.0 * modf (mjd, &ijd);
+	h = (24.0 * modf (mjd, &ijd)) - 0.017;
 	if (ijd < -100840) {
 		c = ijd + 2401525.0;
 	} else {
@@ -208,7 +208,7 @@ char *SciStr (double f, int precision, char prefix)
 	for (i = 0; i < len; i++) {
 		if (strbuf[i] == 'e') {
 			sscanf(strbuf+i+1, "%d", &e);
-			sprintf (strbuf+i, "·10^%d", e);
+			sprintf (strbuf+i, "ï¿½10^%d", e);
 		}
 	}
 	return strbuf;

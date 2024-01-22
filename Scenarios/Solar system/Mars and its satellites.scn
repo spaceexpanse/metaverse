@@ -1,6 +1,6 @@
 BEGIN_HYPERDESC
 <h1>Mars and its satellites.</h1>
-<p>Increase/decrease the time warp by pressing r and t KBD keys, to 1000x.</p>
+<p>Increase/decrease the time warp by pressing "t" and "r" keys, to 1000x.</p>
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT

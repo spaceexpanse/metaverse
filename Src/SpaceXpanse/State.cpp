@@ -73,13 +73,13 @@ bool State::Read (const char *fname)
 			if (!_stricmp (pc, "END_ENVIRONMENT")) break;
 			if (!_strnicmp (pc, "Date", 4)) {
 				pc = trim_string (pc+4);
-				if (!_strnicmp (pc, "MJD", 3) && sscanf (pc+3, "%lf", &t) == 1)
+/*				if (!_strnicmp (pc, "MJD", 3) && sscanf (pc+3, "%lf", &t) == 1)
 					mjd = mjd0 = t;
 				else if (!_strnicmp (pc, "JD", 2) && sscanf (pc+2, "%lf", &t) == 1)
 					mjd = mjd0 = t-2400000.5;
 				else if (!_strnicmp (pc, "JE", 2) && sscanf (pc+2, "%lf", &t) == 1)
 					mjd = mjd0 = Jepoch2MJD (t);
-			} else if (!_strnicmp (pc, "System", 6)) {
+*/			} else if (!_strnicmp (pc, "System", 6)) {
 				strcpy (solsys, trim_string (pc+6));
 			} else if (!_strnicmp (pc, "Context", 7)) {
 				strcpy (context, trim_string (pc+7));

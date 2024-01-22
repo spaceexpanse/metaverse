@@ -2,7 +2,7 @@ BEGIN_HYPERDESC
 <h1>Jovian sattelites</h1>
 <p>A view of the Jovian system with Jupiter and the four major moons Io, Europa, Ganymede and Callisto.
 <p>SpaceXpanse uses semi-analytic perturbation solutions to provide long-term stability of positions for the Jovian system. 
-Simply turn on the planet labels (F9), switch to 100000x time acceleration by pressing t KBD key, and watch.</p>
+Simply turn on the planet labels (F9), switch to 100000x time acceleration by pressing "t" key, and watch.</p>
 END_HYPERDESC
 
 BEGIN_ENVIRONMENT

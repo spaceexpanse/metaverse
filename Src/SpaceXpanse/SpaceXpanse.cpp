@@ -2459,8 +2459,8 @@ void SpaceXpanse::KbdInputBuffered_OnRunning (char *kstate, DIDEVICEOBJECTDATA *
 		if (key == DIK_LSHIFT || key == DIK_RSHIFT) continue;    // we don't process modifier keys
 
 		// simulation speed control
-		if      (keymap.IsLogicalKey (key, kstate, OAPI_LKEY_IncSimSpeed)) IncWarpFactor ();
-		else if (keymap.IsLogicalKey (key, kstate, OAPI_LKEY_DecSimSpeed)) DecWarpFactor ();
+//		if      (keymap.IsLogicalKey (key, kstate, OAPI_LKEY_IncSimSpeed)) IncWarpFactor ();
+//		else if (keymap.IsLogicalKey (key, kstate, OAPI_LKEY_DecSimSpeed)) DecWarpFactor ();
 
 		if (KEYMOD_CONTROL (kstate)) {    // CTRL-Key combinations
 
